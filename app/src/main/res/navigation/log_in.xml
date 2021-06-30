@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/log_in"
+    app:startDestination="@id/step1Fragment2">
+
+    <fragment
+        android:id="@+id/step1Fragment2"
+        android:name="com.spectrum.spectrum.src.activities.login.fragments.Step1Fragment"
+        android:label="Step1Fragment" >
+        <action
+            android:id="@+id/step1_to_step2"
+            app:destination="@id/step2Fragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/step2Fragment2"
+        android:name="com.spectrum.spectrum.src.activities.login.fragments.Step2Fragment"
+        android:label="Step2Fragment" >
+        <action
+            android:id="@+id/step2_to_step3"
+            app:destination="@id/step3Fragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/step3Fragment2"
+        android:name="com.spectrum.spectrum.src.activities.login.fragments.Step3Fragment"
+        android:label="Step3Fragment" />
+</navigation>
