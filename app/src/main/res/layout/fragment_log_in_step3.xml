@@ -61,20 +61,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text"
+        <com.spectrum.spectrum.src.customs.CustomTextInputLayout
+            android:id="@+id/email_text_input_layout"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/spectrumGray2"
             android:hint="@string/enter_email"
             android:textColorHint="@color/spectrumGray2"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:fontFamily="@font/roboto_medium"
+            app:errorTextColor="@android:color/holo_red_light"
+            app:helperTextTextColor="@color/spectrumBlue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/id_or_email" />
+            app:layout_constraintTop_toBottomOf="@+id/id_or_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/clear"
+                android:fontFamily="@font/roboto_medium"
+                android:inputType="textEmailAddress"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/spectrumGray2"
+                android:textSize="14sp" />
+
+        </com.spectrum.spectrum.src.customs.CustomTextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -82,14 +96,15 @@
         android:id="@+id/next"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@color/spectrumGray1"
         android:enabled="false"
         android:fontFamily="@font/roboto_medium"
-        android:foreground="@android:color/transparent"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="@string/next"
         android:textColor="@android:color/white"
         android:textSize="14sp"
-        app:backgroundTint="@color/spectrumGray1"
+        app:backgroundTint="@color/button_blue_gray"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

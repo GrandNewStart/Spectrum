@@ -62,20 +62,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/id_edit_text"
+        <com.spectrum.spectrum.src.customs.CustomTextInputLayout
+            android:id="@+id/id_text_input_layout"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:backgroundTint="@color/spectrumGray2"
             android:hint="@string/enter_email"
-            android:textColorHint="@color/spectrumGray2"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:fontFamily="@font/roboto_medium"
+            app:errorEnabled="true"
+            app:errorTextColor="@android:color/holo_red_light"
+            app:helperTextTextColor="@color/spectrumBlue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/id_or_email" />
+            app:layout_constraintTop_toBottomOf="@+id/id_or_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/id_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/spectrumGray2"
+                android:textSize="14sp"  />
+
+        </com.spectrum.spectrum.src.customs.CustomTextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -99,33 +113,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pw_edit_text"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:hint="@string/enter_password"
-            android:textColorHint="@color/spectrumGray2"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
-
-        <TextView
-            android:id="@+id/pw_message"
+        <com.spectrum.spectrum.src.customs.CustomTextInputLayout
+            android:id="@+id/password_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="PASSWORD MESSAGE"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="10sp"
+            android:backgroundTint="@color/spectrumGray2"
+            android:hint="@string/enter_password"
+            app:errorEnabled="true"
+            app:errorTextColor="@android:color/holo_red_light"
+            app:helperTextTextColor="@color/spectrumBlue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pw_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pw_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/spectrumGray2"
+                android:textSize="14sp" />
+
+        </com.spectrum.spectrum.src.customs.CustomTextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,13 +156,15 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/log_in_button"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_margin="10dp"
             android:fontFamily="@font/roboto_medium"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:text="@string/log_in"
             android:textColor="@android:color/white"
             android:textSize="14sp"
-            app:cornerRadius="30dp"
+            app:cornerRadius="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

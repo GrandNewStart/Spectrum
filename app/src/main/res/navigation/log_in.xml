@@ -11,7 +11,11 @@
         android:label="Step1Fragment" >
         <action
             android:id="@+id/step1_to_step2"
-            app:destination="@id/step2Fragment2" />
+            app:destination="@id/step2Fragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/step2Fragment2"
@@ -19,7 +23,11 @@
         android:label="Step2Fragment" >
         <action
             android:id="@+id/step2_to_step3"
-            app:destination="@id/step3Fragment2" />
+            app:destination="@id/step3Fragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/step3Fragment2"

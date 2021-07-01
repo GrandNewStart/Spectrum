@@ -6,9 +6,12 @@
     <string name="id_or_email">아이디(이메일)</string>
     <string name="enter_email">이메일 주소를 입력해 주세요</string>
     <string name="next">다음</string>
+    <string name="done">완료</string>
     <string name="agree">동의</string>
     <string name="password">비밀번호</string>
     <string name="enter_password">비밀번호를 입력해 주세요</string>
     <string name="enter_password_again">비밀번호를 한 번 더 입력해 주세요</string>
     <string name="overlap_check">중복확인</string>
+    <string name="nickname">닉네임</string>
+    <string name="enter_nickname">닉네임을 입력해주세요</string>
 </resources>
