@@ -49,7 +49,7 @@ class Step2Fragment: BaseFragment() {
 
             next.isEnabled = false
             next.setOnClickListener {
-                findNavController().navigate(R.id.step2_to_step3)
+                findNavController().navigate(R.id.step2_to_find_password)
             }
 
             emailCheck.setOnClickListener {

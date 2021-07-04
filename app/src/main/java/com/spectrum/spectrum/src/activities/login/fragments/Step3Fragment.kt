@@ -1,87 +1,148 @@
 package com.spectrum.spectrum.src.activities.login.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.lifecycle.MutableLiveData
+import android.widget.*
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.textview.MaterialTextView
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.login.LogInActivity
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.customs.BaseFragment
-import com.spectrum.spectrum.src.customs.CustomTextInputLayout
-import java.util.regex.Pattern
+import com.spectrum.spectrum.src.dialogs.DatePickerDialog
+import java.util.*
 
 class Step3Fragment: BaseFragment() {
-
-    private val mEmailLiveData = MutableLiveData<String?>(null)
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = layoutInflater.inflate(R.layout.fragment_log_in_step3, container, false)
-        initViews(view)
-        initLiveData()
+        val view = inflater.inflate(R.layout.fragment_log_in_step3, container, false)
+        view.apply {
+            // 건너뛰기
+            findViewById<MaterialTextView>(R.id.skip).setOnClickListener {
+                // TODO: to MainActivity
+            }
+            // 연령 설정
+            findViewById<MaterialCardView>(R.id.age_card).apply {
+               setOnClickListener {
+                   DatePickerDialog().apply{
+                       val text = findViewById<MaterialTextView>(R.id.age_text)
+                       onDateSelected = { date ->
+                           (activity as LogInActivity).mAge = date
+                           text.text = "${estimateAge(date)}"
+                           text.setTextColor(resources.getColor(R.color.spectrumGray2, null))
+                       }
+                       onNothingSelected = {
+                           if ((activity as LogInActivity).mAge == null) {
+                               text.text = Constants.select_age
+                               text.setTextColor(resources.getColor(R.color.spectrumSilver3, null))
+                           }
+                       }
+                       show(this@Step3Fragment.parentFragmentManager, null)
+                   }
+               }
+            }
+            // 성별 설정
+            findViewById<RadioGroup>(R.id.sex_radio_group).apply {
+                setOnCheckedChangeListener { group, checkedId ->
+                    if (checkedId == R.id.male)     (activity as LogInActivity).mSex = "M"
+                    if (checkedId == R.id.female)   (activity as LogInActivity).mSex = "F"
+                }
+            }
+            // 직군 설정
+            findViewById<MaterialCardView>(R.id.group_card).setOnClickListener {
+                findNavController().navigate(R.id.step4_to_job_group)
+            }
+            // 학력 설정
+            findViewById<ImageButton>(R.id.academic_plus).apply {
+                setOnClickListener {
+                    findNavController().navigate(R.id.step3_to_education)
+                }
+            }
+            // 경력 설정
+            // 자격/어학 설정
+            // 기타 스펙 설정
+            // 저장
+            findViewById<MaterialButton>(R.id.save).setOnClickListener {
+                Log.d(TAG, "---> AGE: ${(activity as LogInActivity).mAge}")
+                Log.d(TAG, "---> SEX: ${(activity as LogInActivity).mSex}")
+                Log.d(TAG, "---> GROUP1: ${(activity as LogInActivity).mJobGroup1}")
+                Log.d(TAG, "---> GROUP2: ${(activity as LogInActivity).mJobGroup1}")
+            }
+        }
         return view
     }
 
-    private fun initViews(view: View) {
-        view.apply {
-            val back = findViewById<Button>(R.id.back)
-            val email = findViewById<TextInputEditText>(R.id.email_edit_text)
-            val next = findViewById<MaterialButton>(R.id.next)
+    private fun estimateAge(date: String): Int {
+        var result: Int
+        val birthYear = date.substring(0..3).toInt()
+        val birthMonth = date.substring(4..5).toInt()
+        val birthDay = date.substring(6..7).toInt()
+        Calendar.getInstance().apply {
+            val year = get(Calendar.YEAR)
+            val month = get(Calendar.MONTH) + 1
+            val day = get(Calendar.DAY_OF_MONTH)
 
-            back.setOnClickListener { findNavController().popBackStack() }
+            result = year - birthYear
 
-            findViewById<CustomTextInputLayout>(R.id.email_text_input_layout).let { layout ->
-                email.setOnFocusChangeListener { v, hasFocus ->
-                    if (hasFocus) {
-                        layout.hint = null
-                    }
-                    else {
-                        if (email.text.toString().isEmpty()) {
-                            layout.hint = Constants.enter_email
-                        }
-                    }
+            if (month > birthMonth) {
+                return result
+            }
+            if (month == birthMonth) {
+                if (day >= birthDay) {
+                    return result
                 }
-                email.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-                    override fun afterTextChanged(s: Editable?) {
-                        val input = s.toString().trim()
-                        if (validateEmail(input)) {
-                            mEmailLiveData.value = input
-                        }
-                        else {
-                            mEmailLiveData.value = null
-                        }
-                    }
-                })
             }
 
-            next.setOnClickListener { findNavController().navigate(R.id.step1_to_step2) }
+            result -= 1;
+            return result
         }
     }
 
-    private fun initLiveData() {
-        mEmailLiveData.observe(viewLifecycleOwner, { email ->
-            view?.findViewById<MaterialButton>(R.id.next)?.isEnabled = (email != null)
-        })
-    }
+    override fun onResume() {
+        super.onResume()
+        (activity as LogInActivity).apply {
+            view?.apply {
+                findViewById<MaterialTextView>(R.id.age_text).apply {
+                    if (mAge == null) {
+                        text = Constants.select_age
+                        setTextColor(resources.getColor(R.color.spectrumSilver3, null))
+                    }
+                    else {
+                        text = "${estimateAge(mAge!!)}"
+                        setTextColor(resources.getColor(R.color.spectrumGray3, null))
+                    }
+                }
+                findViewById<RadioGroup>(R.id.sex_radio_group).apply {
+                    mSex?.let { sex ->
+                        if (sex == "M") { check(R.id.male) }
+                        if (sex == "F") { check(R.id.female) }
+                    }
+                }
 
-    private fun validateEmail(input: String): Boolean {
-        // TODO: FIX REGEX
-        val regex = "[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"
-        val pattern = Pattern.compile(regex)
-        val matcher = pattern.matcher(input)
-        return matcher.matches()
+                findViewById<MaterialTextView>(R.id.group_text).apply {
+                    if (mJobGroup1 == null) {
+                        text = Constants.select_your_job_group
+                        setTextColor(resources.getColor(R.color.spectrumSilver3, null))
+                    }
+                    else {
+                        setTextColor(resources.getColor(R.color.spectrumGray3, null))
+                        text = if (mJobGroup2 == null) {
+                            mJobGroup1?.name
+                        } else {
+                            "${mJobGroup1?.name}, ${mJobGroup2?.name}"
+                        }
+                    }
+                }
+            }
+        }
     }
-
 }

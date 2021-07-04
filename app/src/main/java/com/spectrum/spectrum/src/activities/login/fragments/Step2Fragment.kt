@@ -2,8 +2,6 @@ package com.spectrum.spectrum.src.activities.login.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,12 +44,12 @@ class Step2Fragment: BaseFragment() {
 
             logIn.setOnClickListener {
                 showKeyboard(this, false)
-                showToast("${id.text.toString()}, ${pw.text.toString()}")
+                findNavController().navigate(R.id.step2_to_step3)
             }
 
             findPassword.setOnClickListener {
                 showKeyboard(this, false)
-                findNavController().navigate(R.id.step2_to_step3)
+                findNavController().navigate(R.id.step2_to_find_password)
             }
 
             signUp.setOnClickListener {

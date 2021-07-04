@@ -8,8 +8,8 @@
 
     <ProgressBar
         android:layout_gravity="center"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:indeterminateDrawable="@drawable/progress_dialog"
         android:indeterminateDuration="1000"/>
 

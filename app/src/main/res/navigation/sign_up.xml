@@ -22,7 +22,7 @@
         android:name="com.spectrum.spectrum.src.activities.signup.fragments.Step2Fragment"
         android:label="Step2Fragment" >
         <action
-            android:id="@+id/step2_to_step3"
+            android:id="@+id/step2_to_find_password"
             app:destination="@id/step3Fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

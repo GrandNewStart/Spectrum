@@ -8,4 +8,28 @@
         <item name="colorAccent">@color/spectrumGray1</item>
     </style>
 
+    <style
+        name="BlueChip"
+        parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_blue_fill</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="chipIconEnabled">false</item>
+        <item name="checkedIconEnabled">false</item>
+        <item name="closeIconEnabled">false</item>
+    </style>
+
+    <style
+        name="GreenChip"
+        parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_green_fill</item>
+        <item name="android:textColor">@color/chip_text</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="chipIconEnabled">false</item>
+        <item name="checkedIconEnabled">false</item>
+        <item name="closeIconEnabled">false</item>
+    </style>
+
 </resources>

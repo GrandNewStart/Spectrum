@@ -3,6 +3,7 @@ package com.spectrum.spectrum.src.config
 import android.app.Application
 import android.util.Log
 import com.spectrum.spectrum.src.config.Constants.APP_TAG
+import com.spectrum.spectrum.src.config.Constants.DENSITY
 import com.spectrum.spectrum.src.config.Constants.SCREEN_HEIGHT
 import com.spectrum.spectrum.src.config.Constants.SCREEN_WIDTH
 import com.spectrum.spectrum.src.config.Constants.STATUS_BAR_HEIGHT
@@ -23,6 +24,8 @@ class GlobalApplication: Application() {
         Log.d(TAG, "---> SCREEN WIDTH: $SCREEN_WIDTH")
         Log.d(TAG, "---> SCREEN HEIGHT: $SCREEN_HEIGHT")
         Log.d(TAG, "---> STATUS BAR HEIGHT: $STATUS_BAR_HEIGHT")
+
+        DENSITY = resources.displayMetrics.density
     }
 
     companion object {

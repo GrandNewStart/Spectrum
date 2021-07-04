@@ -6,6 +6,7 @@ object Constants {
     var SCREEN_WIDTH: Int = 0
     var SCREEN_HEIGHT: Int = 0
     var STATUS_BAR_HEIGHT: Int = 0
+    var DENSITY: Float = 0f
 
     const val enter_email = "이메일을 입력하세요"
     const val password = "비밀번호"
@@ -21,5 +22,8 @@ object Constants {
     const val nickname_possible = "사용 가능한 닉네임입니다"
     const val sign_up_complete = "회원가입이 완료되었습니다"
     const val confirm = "확인"
+    const val select_age = "연령 선택"
+    const val select_your_job_group = "관심 직군을 선택해 주세요"
+    const val under_construction = "준비중인 기능입니다."
 
 }
