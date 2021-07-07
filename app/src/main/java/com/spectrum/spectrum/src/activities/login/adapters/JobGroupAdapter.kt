@@ -9,7 +9,6 @@ import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.login.LogInActivity
 import com.spectrum.spectrum.src.activities.login.fragments.JobGroupFragment
 import com.spectrum.spectrum.src.activities.login.models.JobGroup
 
@@ -28,6 +27,11 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
             mCardView.setCardBackgroundColor(itemView.resources.getColor(R.color.spectrumGreen, null))
             mTextView.setTextColor(itemView.resources.getColor(R.color.white, null))
         }
+        fun makeThirdSelection() {
+            mCardView.strokeColor = itemView.resources.getColor(R.color.spectrumOrange, null)
+            mCardView.setCardBackgroundColor(itemView.resources.getColor(R.color.spectrumOrange, null))
+            mTextView.setTextColor(itemView.resources.getColor(R.color.white, null))
+        }
         fun deselect() {
             mCardView.strokeColor = itemView.resources.getColor(R.color.spectrumGray3, null)
             mCardView.setCardBackgroundColor(itemView.resources.getColor(R.color.clear, null))
@@ -37,6 +41,7 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
 
     private var mFirstItem: JobGroup? = null
     private var mSecondItem: JobGroup? = null
+    private var mThirdItem: JobGroup? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -58,6 +63,10 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                         makeSecondSelection()
                         mSecondItem = item
                     }
+                    3-> {
+                        makeThirdSelection()
+                        mThirdItem = item
+                    }
                 }
                 mCardView.setOnClickListener {
                     when(item.selectIndex) {
@@ -76,29 +85,63 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                                 applyChanges(itemView)
                                 return@setOnClickListener
                             }
+                            if (mThirdItem == null) {
+                                mThirdItem = items[position]
+                                items[position].selectIndex = 3
+                                notifyItemChanged(position)
+                                applyChanges(itemView)
+                                return@setOnClickListener
+                            }
                         }
                         1 -> {
                             items[position].selectIndex = 0
                             mFirstItem = null
-                            applyChanges(itemView)
                             notifyItemChanged(position)
+
                             if (mSecondItem != null) {
                                 for (i in 0 until items.size) {
                                     if (items[i].selectIndex == 2) {
+                                        items[i].selectIndex = 1
                                         mFirstItem = items[i]
                                         mSecondItem = null
-                                        items[i].selectIndex = 1
-                                        applyChanges(itemView)
                                         notifyItemChanged(i)
                                     }
+                                }
+                                if (mThirdItem != null) {
+                                    for (i in 0 until items.size) {
+                                        if (items[i].selectIndex == 3) {
+                                            items[i].selectIndex = 2
+                                            mSecondItem = items[i]
+                                            mThirdItem = null
+                                            notifyItemChanged(i)
+                                        }
+                                    }
+                                    applyChanges(itemView)
                                 }
                             }
                         }
                         2 -> {
                             items[position].selectIndex = 0
                             mSecondItem = null
-                            applyChanges(itemView)
                             notifyItemChanged(position)
+
+                            if (mThirdItem != null) {
+                                for (i in 0 until items.size) {
+                                    if (items[i].selectIndex == 3) {
+                                        items[i].selectIndex = 2
+                                        mSecondItem = items[i]
+                                        mThirdItem = null
+                                        notifyItemChanged(i)
+                                    }
+                                }
+                            }
+                            applyChanges(itemView)
+                        }
+                        3 -> {
+                            items[position].selectIndex = 0
+                            mThirdItem = null
+                            notifyItemChanged(position)
+                            applyChanges(itemView)
                         }
                     }
                 }
@@ -108,9 +151,9 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
 
     private fun applyChanges(itemView: View) {
         val fragment = itemView.findFragment<JobGroupFragment>()
-        val activity = fragment.activity as LogInActivity
-        activity.mJobGroup1 = mFirstItem
-        activity.mJobGroup2 = mSecondItem
+        fragment.mFirstItem = mFirstItem
+        fragment.mSecondItem = mSecondItem
+        fragment.mThirdItem = mThirdItem
     }
 
     override fun getItemCount(): Int = items.size

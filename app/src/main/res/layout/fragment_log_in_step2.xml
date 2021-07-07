@@ -67,8 +67,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/spectrumGray2"
             android:hint="@string/enter_email"
+            android:textColorHint="@color/spectrumGray1"
             app:errorEnabled="true"
             app:errorTextColor="@android:color/holo_red_light"
             app:helperTextTextColor="@color/spectrumBlue"
@@ -86,7 +86,6 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@android:color/black"
-                android:textColorHint="@color/spectrumGray2"
                 android:textSize="14sp"  />
 
         </com.spectrum.spectrum.src.customs.CustomTextInputLayout>

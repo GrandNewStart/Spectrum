@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.login.LogInActivity
 import com.spectrum.spectrum.src.activities.login.adapters.JobGroupAdapter
 import com.spectrum.spectrum.src.activities.login.models.JobGroup
-import com.spectrum.spectrum.src.config.Helpers.dp2px
+import com.spectrum.spectrum.src.config.dp2px
 import com.spectrum.spectrum.src.customs.BaseFragment
 
 class JobGroupFragment: BaseFragment() {
@@ -33,6 +34,9 @@ class JobGroupFragment: BaseFragment() {
         add(JobGroup(11, "특수계층/공공", 0))
         add(JobGroup(12, "기타", 0))
     }
+    var mFirstItem: JobGroup? = null
+    var mSecondItem: JobGroup? = null
+    var mThirdItem: JobGroup? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,11 +45,19 @@ class JobGroupFragment: BaseFragment() {
                 mJobGroup1?.let {
                     if (it.id == item.id) {
                         item.selectIndex = 1
+                        mFirstItem = item
                     }
                 }
                 mJobGroup2?.let {
                     if (it.id == item.id) {
                         item.selectIndex = 2
+                        mSecondItem = item
+                    }
+                }
+                mJobGroup3?.let {
+                    if (it.id == item.id) {
+                        item.selectIndex = 3
+                        mThirdItem = item
                     }
                 }
             }
@@ -59,6 +71,9 @@ class JobGroupFragment: BaseFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_log_in_job_group, container, false)
         view.apply {
+            findViewById<MaterialButton>(R.id.back).setOnClickListener {
+                findNavController().popBackStack()
+            }
             findViewById<RecyclerView>(R.id.groups).apply {
                 layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.HORIZONTAL)
                 addItemDecoration(object : RecyclerView.ItemDecoration() {
@@ -73,6 +88,9 @@ class JobGroupFragment: BaseFragment() {
                 adapter = JobGroupAdapter(mList)
             }
             findViewById<MaterialTextView>(R.id.save).setOnClickListener {
+                (activity as LogInActivity).mJobGroup1 = mFirstItem
+                (activity as LogInActivity).mJobGroup2 = mSecondItem
+                (activity as LogInActivity).mJobGroup3 = mThirdItem
                 findNavController().popBackStack()
             }
         }

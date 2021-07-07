@@ -13,6 +13,7 @@ class CustomTextInputLayout constructor(context: Context, attrs: AttributeSet): 
         errorIconDrawable = null
         isErrorEnabled = true
         isHelperTextEnabled = true
+        setEndIconTintList(null)
     }
 
     fun showClearButton(show: Boolean) {

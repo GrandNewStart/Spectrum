@@ -25,5 +25,7 @@ object Constants {
     const val select_age = "연령 선택"
     const val select_your_job_group = "관심 직군을 선택해 주세요"
     const val under_construction = "준비중인 기능입니다."
+    const val required_academic_information = "학교 구분과 졸업 여부는 필수 항목입니다"
+    const val enter_every_fields = "모든 항목을 입력해주세요"
 
 }

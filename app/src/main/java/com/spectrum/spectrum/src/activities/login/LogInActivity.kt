@@ -4,16 +4,24 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.login.models.CertItem
+import com.spectrum.spectrum.src.activities.login.models.EduItem
+import com.spectrum.spectrum.src.activities.login.models.ExpItem
 import com.spectrum.spectrum.src.activities.login.models.JobGroup
 import com.spectrum.spectrum.src.customs.BaseActivity
 
 class LogInActivity: BaseActivity() {
 
     private lateinit var mNavController: NavController
-    var mAge: String? = null
+    var mAge: Int? = null
     var mSex: String? = null
     var mJobGroup1: JobGroup? = null
     var mJobGroup2: JobGroup? = null
+    var mJobGroup3: JobGroup? = null
+    var mEduItems = ArrayList<EduItem>()
+    var mExpItems = ArrayList<ExpItem>()
+    var mCertItems = ArrayList<CertItem>()
+    var mComments: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -46,25 +46,43 @@
         android:label="Step3Fragment">
         <action
             android:id="@+id/step4_to_job_group"
-            app:destination="@id/jobGroup"
+            app:destination="@id/log_in_job_group"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/step3_to_education"
-            app:destination="@id/education"
+            app:destination="@id/log_in_education"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/step3_to_experience"
+            app:destination="@id/log_in_experience"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/log_in_step3_to_certification"
+            app:destination="@id/log_in_certification" />
     </fragment>
     <fragment
-        android:id="@+id/jobGroup"
+        android:id="@+id/log_in_job_group"
         android:name="com.spectrum.spectrum.src.activities.login.fragments.JobGroupFragment"
         android:label="JobGroupFragment" />
     <fragment
-        android:id="@+id/education"
+        android:id="@+id/log_in_education"
         android:name="com.spectrum.spectrum.src.activities.login.fragments.EducationFragment"
         android:label="EducationFragment" />
+    <fragment
+        android:id="@+id/log_in_experience"
+        android:name="com.spectrum.spectrum.src.activities.login.fragments.ExperienceFragment"
+        android:label="Experience" />
+    <fragment
+        android:id="@+id/log_in_certification"
+        android:name="com.spectrum.spectrum.src.activities.login.fragments.CertFragment"
+        android:label="CertFragment" />
 </navigation>

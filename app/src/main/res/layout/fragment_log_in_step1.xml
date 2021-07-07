@@ -19,43 +19,27 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/log_in"
+        style="@style/RoundedSolidButton"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/spectrumBlue"
-        android:fontFamily="@font/roboto_medium"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         android:text="@string/log_in"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:cornerRadius="25dp"
         app:layout_constraintBottom_toTopOf="@+id/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9"
-        app:rippleColor="@color/clearGray" />
+        app:layout_constraintWidth_percent="0.9" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_up"
+        style="@style/RoundedClearButton"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
-        android:backgroundTint="@color/white"
-        android:fontFamily="@font/roboto_medium"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
         android:text="@string/sign_up"
-        android:textColor="@color/spectrumBlue"
-        android:textSize="16sp"
-        app:cornerRadius="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9"
-        app:rippleColor="@color/clearGray"
-        app:strokeColor="@color/spectrumBlue"
-        app:strokeWidth="2dp" />
+        app:layout_constraintWidth_percent="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

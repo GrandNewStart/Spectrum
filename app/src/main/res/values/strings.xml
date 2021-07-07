@@ -33,4 +33,18 @@
     <string name="specs_placeholder">공모전, 프로젝트 등 자유롭게 적어주세요</string>
     <string name="select_job_group">직군 선택</string>
     <string name="select_group_of_your_specs">회원님 스펙의 직군을 선택해주세요</string>
+    <string name="school_type">학교 구분</string>
+    <string name="graduation_status">졸업 여부</string>
+    <string name="name_of_school">학교명 (선택)</string>
+    <string name="major">전공</string>
+    <string name="grades">학점</string>
+    <string name="delete">삭제</string>
+    <string name="experiences">경력 사항</string>
+    <string name="name_of_company">기업명 (선택)</string>
+    <string name="duty">직무</string>
+    <string name="position">직급</string>
+    <string name="period">기간</string>
+    <string name="name_of_certification_or_exam">자격명 및 시험명</string>
+    <string name="score_or_grade">점수 및 등급</string>
+    <string name="confirm">확인</string>
 </resources>

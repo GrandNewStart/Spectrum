@@ -7,7 +7,6 @@ import com.spectrum.spectrum.src.config.Constants.DENSITY
 import com.spectrum.spectrum.src.config.Constants.SCREEN_HEIGHT
 import com.spectrum.spectrum.src.config.Constants.SCREEN_WIDTH
 import com.spectrum.spectrum.src.config.Constants.STATUS_BAR_HEIGHT
-import com.spectrum.spectrum.src.config.Helpers.sharedPreferences
 
 class GlobalApplication: Application() {
 
