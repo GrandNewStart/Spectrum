@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="java.util.ArrayList"/>
+        <import type="com.spectrum.spectrum.src.models.JobGroup"/>
+        <variable
+            name="fragment"
+            type="com.spectrum.spectrum.src.activities.main.fragments.jobGroup.JobGroupFragment" />
+        <variable
+            name="viewModel"
+            type="com.spectrum.spectrum.src.activities.main.fragments.jobGroup.JobGroupViewModel" />
+        <variable
+            name="jobGroups"
+            type="ArrayList&lt;JobGroup&gt;" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/action_bar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:background="@android:color/transparent"
+                android:foreground="@drawable/icon_back"
+                android:onClick="@{()->viewModel.backButtonAction(fragment)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/clearGray" />
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="@string/select_job_group"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.saveButtonAction(fragment)}"
+                android:text="@string/save"
+                android:textColor="@color/spectrumBlue"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/message_text"
+            style="@style/CustomTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:text="@string/select_your_job_group_of_interest"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/maximum_selection_text"
+            style="@style/CustomTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/maximum_three_selection"
+            android:textColor="@color/spectrumGray2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_text" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/job_group_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            job_group_job_group="@{jobGroups}"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/maximum_selection_text"
+            app:layout_constraintVertical_bias="0.2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

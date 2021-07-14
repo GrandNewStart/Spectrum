@@ -25,8 +25,8 @@ class EduItemAdapter(private val items: ArrayList<EduItem>): RecyclerView.Adapte
                 findViewById<MaterialTextView>(R.id.school).apply {
                     var result = ""
                     item.locale?.let { result += "$it " }
-                    item.school?.let { result += it }
-                    item.level?.let { result += "($it)" }
+                    item.school?.let { result += "$it " }
+                    item.level?.let { result += it }
                     text = result
                 }
                 findViewById<MaterialTextView>(R.id.status).apply {
@@ -37,13 +37,14 @@ class EduItemAdapter(private val items: ArrayList<EduItem>): RecyclerView.Adapte
                     text = item.major
                 }
                 findViewById<MaterialTextView>(R.id.grades).apply {
-                    visibility = if (item.grades == null) View.GONE else View.VISIBLE
-                    text = item.grades
+                    visibility = if (item.grade == null) View.GONE else View.VISIBLE
+                    if (item.gradeSum == null) visibility = View.GONE
+                    text = "${item.grade}/${item.gradeSum}"
                 }
                 findViewById<MaterialTextView>(R.id.delete).setOnClickListener {
                     items.removeAt(position)
                     notifyItemRemoved(position)
-                    notifyItemRangeChanged(position, items.size)
+                    notifyItemRangeChanged(position, items.size-1)
                 }
             }
         }

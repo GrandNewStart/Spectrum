@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="java.util.ArrayList"/>
+        <import type="com.spectrum.spectrum.src.models.Spec"/>
+        <variable
+            name="fragment"
+            type="com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment" />
+        <variable
+            name="title"
+            type="String" />
+        <variable
+            name="date"
+            type="String" />
+        <variable
+            name="commentCount"
+            type="Integer" />
+        <variable
+            name="markCount"
+            type="Integer" />
+        <variable
+            name="specs"
+            type="ArrayList&lt;Spec&gt;" />
+    </data>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            home_to_post="@{fragment}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_double_margin">
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@{title}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/info_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_text">
+
+                <TextView
+                    android:id="@+id/date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_double_margin"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{date}"
+                    android:textColor="@color/spectrumGray2"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/comment_image"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:padding="1dp"
+                    android:src="@drawable/icon_comment" />
+
+                <TextView
+                    android:id="@+id/comment_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_half_margin"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@{commentCount.toString()}"
+                    android:textColor="@color/spectrumGray2"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/mark_image"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:src="@drawable/icon_book_mark" />
+
+                <TextView
+                    android:id="@+id/mark_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_half_margin"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@{markCount.toString()}"
+                    android:textColor="@color/spectrumGray2"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/specs_chip"
+                home_specs="@{specs}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_layout" />
+            
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

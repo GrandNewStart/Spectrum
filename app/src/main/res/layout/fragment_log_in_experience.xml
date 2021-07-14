@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -48,7 +49,7 @@
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:text="@string/save"
-            android:textColor="@color/black"
+            android:textColor="@color/spectrumBlue"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
@@ -117,18 +118,92 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/duty" />
 
-                <EditText
-                    android:id="@+id/period"
-                    style="@style/UnderLineEditText"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/start_date"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/period"
-                    android:inputType="text"
-                    android:lines="1"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:background="@drawable/spinner_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/period_divider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/position">
+
+                    <TextView
+                        android:id="@+id/period_start_text"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:text="@string/start_date"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/period_start_drop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/period_start_drop"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="@dimen/default_margin"
+                        android:backgroundTint="@color/clear"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/period_divider"
+                    style="@style/CustomTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/default_margin"
+                    android:text="."
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/position" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/end_date"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/spinner_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/period_divider"
+                    app:layout_constraintTop_toBottomOf="@+id/position">
+
+                    <TextView
+                        android:id="@+id/period_end_text"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:text="@string/end_date"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/period_end_drop"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/period_end_drop"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="@dimen/default_margin"
+                        android:backgroundTint="@color/clear"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

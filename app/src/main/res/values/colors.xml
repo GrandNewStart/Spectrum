@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="spectrumBlue">#4141FF</color>
+    <color name="spectrumLightBlue">#EEF1FF</color>
     <color name="spectrumGreen">#A7DA53</color>
     <color name="spectrumOrange">#FFA723</color>
     <color name="spectrumSilver1">#F6F6F6</color>

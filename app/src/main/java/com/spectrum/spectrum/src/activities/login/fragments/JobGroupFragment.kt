@@ -14,7 +14,7 @@ import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.login.LogInActivity
 import com.spectrum.spectrum.src.activities.login.adapters.JobGroupAdapter
 import com.spectrum.spectrum.src.activities.login.models.JobGroup
-import com.spectrum.spectrum.src.config.dp2px
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.customs.BaseFragment
 
 class JobGroupFragment: BaseFragment() {

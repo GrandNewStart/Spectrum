@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/step1Fragment"
-        android:name="com.spectrum.spectrum.src.activities.signup.fragments.Step1Fragment"
+        android:name="com.spectrum.spectrum.src.activities.signup.fragments.step1.Step1Fragment"
         android:label="Step1Fragment" >
         <action
             android:id="@+id/step1_to_step2"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/step2Fragment"
-        android:name="com.spectrum.spectrum.src.activities.signup.fragments.Step2Fragment"
+        android:name="com.spectrum.spectrum.src.activities.signup.fragments.step2.Step2Fragment"
         android:label="Step2Fragment" >
         <action
             android:id="@+id/step2_to_find_password"
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/step3Fragment"
-        android:name="com.spectrum.spectrum.src.activities.signup.fragments.Step3Fragment"
+        android:name="com.spectrum.spectrum.src.activities.signup.fragments.step3.Step3Fragment"
         android:label="Step3Fragment" />
 
 </navigation>

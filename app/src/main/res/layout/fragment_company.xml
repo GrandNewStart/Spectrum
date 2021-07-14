@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="java.util.ArrayList"/>
+        <import type="android.view.View.OnFocusChangeListener"/>
+        <import type="com.spectrum.spectrum.src.models.Company"/>
+        <import type="com.spectrum.spectrum.src.models.JobGroup"/>
+        <variable
+            name="fragment"
+            type="com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment" />
+        <variable
+            name="viewModel"
+            type="com.spectrum.spectrum.src.activities.main.fragments.company.CompanyViewModel" />
+        <variable
+            name="searchFocusListener"
+            type="OnFocusChangeListener" />
+        <variable
+            name="myJobGroups"
+            type="ArrayList&lt;JobGroup&gt;" />
+        <variable
+            name="myCompanies"
+            type="ArrayList&lt;Company&gt;" />
+        <variable
+            name="companies"
+            type="ArrayList&lt;Company&gt;" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/app_bar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/app_bar_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageButton
+                android:id="@+id/app_bar_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/default_margin"
+                android:backgroundTint="@color/clear"
+                android:onClick="@{()->viewModel.backButtonAction(fragment, searchEditText)}"
+                android:src="@drawable/icon_logo_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/search_edit_text"
+                setOnFocusChangeListener="@{searchFocusListener}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@drawable/edit_text_search"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="@string/search_hint"
+                android:paddingHorizontal="@dimen/default_margin"
+                android:textColorHint="@color/edit_text_hint_color"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/app_bar_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/app_bar_divider"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/spectrumBlue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/app_bar_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_divider">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/spectrumSilver1"
+                    android:gravity="center_vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/my_duty_recycler_view"
+                        company_job_groups="@{myJobGroups}"
+                        android:layout_marginStart="@dimen/default_double_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_double_margin">
+
+                    <TextView
+                        android:id="@+id/hottest_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginStart="@dimen/default_double_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/my_companies_of_interest"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/see_more_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:fontFamily="@font/roboto_medium"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{()->viewModel.seeAllButtonAction(fragment)}"
+                        android:padding="0dp"
+                        android:stateListAnimator="@null"
+                        android:text="@string/see_more"
+                        android:textColor="@color/spectrumGray1"
+                        app:backgroundTint="@color/clear"
+                        app:icon="@drawable/icon_show_more"
+                        app:iconGravity="end"
+                        app:iconPadding="0dp"
+                        app:iconTint="@color/spectrumGray1"
+                        app:layout_constraintBottom_toBottomOf="@+id/hottest_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/hottest_text" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/hottest_recycler_view"
+                        companies_horizontal="@{myCompanies}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/hottest_text">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_double_margin">
+
+                    <TextView
+                        android:id="@+id/latest_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/default_double_margin"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
+                        android:lines="1"
+                        android:text="@string/companies_of_peoples_interest"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/latest_recycler_view"
+                        companies_vertical="@{companies}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/latest_text" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/create_post_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:onClick="@{()->viewModel.fabAction(fragment)}"
+            app:backgroundTint="@color/spectrumBlue"
+            app:icon="@drawable/icon_edit"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

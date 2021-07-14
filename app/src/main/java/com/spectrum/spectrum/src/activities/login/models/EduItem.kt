@@ -6,5 +6,6 @@ data class EduItem(
     var level: String?,
     var status: String?,
     var major: String?,
-    var grades: String?
+    var grade: Double?,
+    var gradeSum: Double?
 )

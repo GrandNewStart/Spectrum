@@ -47,4 +47,25 @@
     <string name="name_of_certification_or_exam">자격명 및 시험명</string>
     <string name="score_or_grade">점수 및 등급</string>
     <string name="confirm">확인</string>
+    <string name="home">홈</string>
+    <string name="company">기업</string>
+    <string name="notification">알림</string>
+    <string name="my_page">마이페이지</string>
+    <string name="search_hint">관심 있는 분야의 스펙을 찾아보세요</string>
+    <string name="hottest_spectrums">요즘 핫한 스펙트럼</string>
+    <string name="latest_specturms">최근 스펙 이야기</string>
+    <string name="see_accepted_only">합격 스펙만 보기</string>
+    <string name="recent_keywords">최근에 찾은 키워드</string>
+    <string name="delete_all">전체삭제</string>
+    <string name="recently_seen">최근에 봤어요</string>
+    <string name="my_companies_of_interest">내가 관심 있는 기업</string>
+    <string name="companies_of_peoples_interest">다른 사람들이 보고 있어요</string>
+    <string name="see_more">더 보기</string>
+    <string name="select_your_job_group_of_interest">빠른 스펙 비교를 위해<br/>\n회원님이 관심 있는 직군을 선택해주세요.</string>
+    <string name="maximum_three_selection">최대 3개 선택 가능</string>
+    <string name="start_date">입사일</string>
+    <string name="end_date">퇴사일</string>
+    <string name="compare_specs">스펙 비교하기</string>
+    <string name="top_five_responses">스펙트럼의 TOP5 반응</string>
+    <string name="no_response_yet">아직 아무도 의견을 남기지 않았습니다<br/>\n스펙 항목별로 의견을 남겨보세요!</string>
 </resources>

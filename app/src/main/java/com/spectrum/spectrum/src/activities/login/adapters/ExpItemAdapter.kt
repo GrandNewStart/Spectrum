@@ -27,17 +27,20 @@ class ExpItemAdapter(private val items: ArrayList<ExpItem>): RecyclerView.Adapte
                 }
                 findViewById<MaterialTextView>(R.id.duty).apply {
                     var result = ""
-                    item.position?.let { result += "($it) " }
-                    item.duty?.let { result += "- $it" }
+                    item.duty?.let { result += "$it " }
+                    item.position?.let { result += it }
                     text = result
                 }
                 findViewById<MaterialTextView>(R.id.period).apply {
-                    text = item.period ?: ""
+                    var result = ""
+                    item.startDate?.let { result += "$it - " }
+                    item.endDate?.let { result += it }
+                    text = result
                 }
                 findViewById<MaterialTextView>(R.id.delete).setOnClickListener {
                     items.removeAt(position)
                     notifyItemRemoved(position)
-                    notifyItemRangeChanged(position, items.size)
+                    notifyItemRangeChanged(position, items.size-1)
                 }
             }
         }

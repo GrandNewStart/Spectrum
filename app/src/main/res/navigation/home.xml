@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment"
+        android:label="Home" >
+        <action
+            android:id="@+id/home_to_job_group"
+            app:destination="@id/home_job_group"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/home_to_post"
+            app:destination="@id/home_post"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/home_job_group"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.jobGroup.JobGroupFragment"
+        android:label="JobGroup" />
+    <fragment
+        android:id="@+id/home_post"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment"
+        android:label="Post" />
+
+</navigation>

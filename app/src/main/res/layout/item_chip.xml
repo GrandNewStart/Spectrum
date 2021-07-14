@@ -6,16 +6,26 @@
     android:id="@+id/card"
     android:layout_width="wrap_content"
     android:layout_height="50dp"
+    android:background="@drawable/button_ripple"
     app:cardCornerRadius="25dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/spectrumGray3"
     app:strokeWidth="1dp">
 
+    <ImageView
+        android:id="@+id/image"
+        android:visibility="gone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/icon_option"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/default_margin"/>
+
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/roboto_light"
         android:text="CHIP TEXT"
         android:layout_gravity="center"
         android:textColor="@color/spectrumGray3"

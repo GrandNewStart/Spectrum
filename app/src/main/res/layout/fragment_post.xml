@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <import type="java.util.ArrayList"/>
+        <import type="com.spectrum.spectrum.src.models.Evaluation"/>
+        <import type="com.spectrum.spectrum.src.models.EduItem"/>
+        <import type="com.spectrum.spectrum.src.models.ExpItem"/>
+        <import type="com.spectrum.spectrum.src.models.CertItem"/>
+        <variable
+            name="fragment"
+            type="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment" />
+        <variable
+            name="viewModel"
+            type="com.spectrum.spectrum.src.activities.main.fragments.post.PostViewModel" />
+        <variable
+            name="userThumbnail"
+            type="String" />
+        <variable
+            name="userName"
+            type="String" />
+        <variable
+            name="date"
+            type="String" />
+        <variable
+            name="userInfo"
+            type="ArrayList&lt;String&gt;" />
+        <variable
+            name="postTitle"
+            type="String" />
+        <variable
+            name="postContent"
+            type="String" />
+        <variable
+            name="educations"
+            type="ArrayList&lt;EduItem&gt;" />
+        <variable
+            name="experiences"
+            type="ArrayList&lt;ExpItem&gt;" />
+        <variable
+            name="certifications"
+            type="ArrayList&lt;CertItem&gt;" />
+        <variable
+            name="otherSpecs"
+            type="String" />
+        <variable
+            name="topFiveResponses"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
+            name="educationResponseOptions"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
+            name="educationResponses"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
+            name="experienceResponses"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
+            name="certificationResponses"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
+            name="otherSpecsResponses"
+            type="ArrayList&lt;Evaluation&gt;" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/action_bar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@android:color/transparent"
+                android:foreground="@drawable/icon_back"
+                android:onClick="@{()->viewModel.backButtonAction(fragment)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/clearGray" />
+
+            <TextView
+                android:id="@+id/title_text"
+                style="@style/CustomTextView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/compare_specs"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/save_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/default_margin"
+                android:onClick="@{()->viewModel.markButtonAction(fragment)}"
+                android:src="@drawable/icon_book_mark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/action_bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/user_thumbnail_image"
+                        image_url="@{userThumbnail}"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="@dimen/default_margin"
+                        android:background="@color/spectrumSilver3"
+                        android:src="@drawable/icon_person"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:riv_mutate_background="true"
+                        app:riv_oval="true" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@+id/user_thumbnail_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/user_thumbnail_image"
+                        app:layout_constraintTop_toTopOf="@+id/user_thumbnail_image">
+
+                        <TextView
+                            android:id="@+id/user_name_text"
+                            style="@style/CustomTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/default_margin"
+                            android:text="@{userName}" />
+
+                        <TextView
+                            android:id="@+id/date_text"
+                            style="@style/CustomTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/default_margin"
+                            android:text="@{date}"
+                            android:textColor="@color/spectrumGray2"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/user_thumbnail_image">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/user_info_chips"
+                            post_user_info="@{userInfo}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+                    </HorizontalScrollView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/post_title_text"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@{postTitle}"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/post_content_text"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:text="@{postContent}"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/post_title_text" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:cardBackgroundColor="@color/spectrumLightBlue"
+                        app:cardCornerRadius="@dimen/default_corner_radius"
+                        app:cardElevation="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/post_content_text">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/CustomTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/academic_background" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                style="@style/CustomTextView"
+                                post_edu_items="@{educations}"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin" />
+
+                            <TextView
+                                style="@style/CustomTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/experiences" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                style="@style/CustomTextView"
+                                post_exp_items="@{experiences}"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin" />
+
+                            <TextView
+                                style="@style/CustomTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/certificates_and_languages" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                style="@style/CustomTextView"
+                                post_cert_items="@{certifications}"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin" />
+
+                            <TextView
+                                style="@style/CustomTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/other_specs" />
+
+                            <TextView
+                                style="@style/CustomTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/default_margin"
+                                android:text="@{otherSpecs}" />
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin">
+
+                    <TextView
+                        android:id="@+id/top_five_responses_text"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/top_five_responses"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <FrameLayout
+                        android:id="@+id/top_five_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/top_five_responses_text">
+
+                        <TextView
+                            style="@style/CustomTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="5dp"
+                            android:text="@string/no_response_yet"
+                            android:textColor="@color/spectrumGray2"
+                            android:textSize="12sp"
+                            android:visibility="@{topFiveResponses.empty ? View.VISIBLE : View.GONE}" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/top_five_recycler_view"
+                            post_top_five_responses="@{topFiveResponses}"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{topFiveResponses.empty ? View.GONE : View.VISIBLE}" />
+
+                    </FrameLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:background="@color/spectrumSilver2"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/top_five_view" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/education_view"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/academic_background"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/education_chip_recycler_view_1"
+                        post_responses="@{educationResponseOptions}"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginHorizontal="@dimen/default_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/education_view" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/education_chip_recycler_view_2"
+                        post_response_options="@{educationResponses}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginHorizontal="@dimen/default_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/education_chip_recycler_view_1" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:background="@color/spectrumSilver2"
+                        android:layout_marginTop="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/education_chip_recycler_view_2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/experience_view"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/experiences"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/experience_chip_recycler_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/experience_view" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:background="@color/spectrumSilver2"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/experience_chip_recycler_view" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/certification_view"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/certificates_and_languages"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/certification_chip_recycler_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/certification_view" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:background="@color/spectrumSilver2"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/certification_chip_recycler_view" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/other_specs_view"
+                        style="@style/CustomTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/other_specs"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/other_specs_chip_recycler_view"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/other_specs_view" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:background="@color/spectrumSilver2"
+                        android:layout_marginVertical="@dimen/default_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/other_specs_chip_recycler_view" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

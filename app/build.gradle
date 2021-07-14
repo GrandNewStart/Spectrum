@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -26,22 +27,32 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Constraint Layout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
     // Material Design
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
@@ -52,5 +63,25 @@ dependencies {
 
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02")
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // OkHttp
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    // Orhanobut Logger
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.7'
+
+    // Rounded ImageView
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
 }

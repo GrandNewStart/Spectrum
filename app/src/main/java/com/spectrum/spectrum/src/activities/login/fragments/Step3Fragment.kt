@@ -1,5 +1,6 @@
 package com.spectrum.spectrum.src.activities.login.fragments
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -23,12 +24,11 @@ import com.spectrum.spectrum.src.activities.login.adapters.CertItemAdapter
 import com.spectrum.spectrum.src.activities.login.adapters.EduItemAdapter
 import com.spectrum.spectrum.src.activities.login.adapters.ExpItemAdapter
 import com.spectrum.spectrum.src.activities.login.dialogs.AgePickerDialog
+import com.spectrum.spectrum.src.activities.main.MainActivity
 import com.spectrum.spectrum.src.config.Constants
-import com.spectrum.spectrum.src.config.dp2px
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.customs.BaseFragment
 import com.spectrum.spectrum.src.customs.CustomTextInputLayout
-import com.spectrum.spectrum.src.dialogs.DatePickerDialog
-import java.util.*
 
 class Step3Fragment: BaseFragment() {
 
@@ -41,7 +41,8 @@ class Step3Fragment: BaseFragment() {
         view.apply {
             // 건너뛰기
             findViewById<MaterialTextView>(R.id.skip).setOnClickListener {
-                // TODO: to MainActivity
+                activity?.startActivity(Intent(activity, MainActivity::class.java))
+                activity?.finish()
             }
             // 연령 설정
             findViewById<MaterialCardView>(R.id.age_card).apply {

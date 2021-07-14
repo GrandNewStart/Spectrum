@@ -28,10 +28,10 @@ class CertItemAdapter(private val items: ArrayList<CertItem>): RecyclerView.Adap
                 findViewById<MaterialTextView>(R.id.score).apply {
                     text = item.score
                 }
-                setOnClickListener {
+                findViewById<MaterialTextView>(R.id.delete).setOnClickListener {
                     items.removeAt(position)
                     notifyItemRemoved(position)
-                    notifyItemRangeChanged(position, items.size)
+                    notifyItemRangeChanged(position, items.size - 1)
                 }
             }
         }

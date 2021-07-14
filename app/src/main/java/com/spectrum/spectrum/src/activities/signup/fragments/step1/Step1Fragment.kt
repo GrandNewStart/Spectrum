@@ -1,4 +1,4 @@
-package com.spectrum.spectrum.src.activities.signup.fragments
+package com.spectrum.spectrum.src.activities.signup.fragments.step1
 
 import android.os.Bundle
 import android.view.LayoutInflater

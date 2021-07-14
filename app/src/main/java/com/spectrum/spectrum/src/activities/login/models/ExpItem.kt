@@ -4,5 +4,6 @@ data class ExpItem(
     var company: String?,
     var duty: String?,
     var position: String?,
-    var period: String?
+    var startDate: String?,
+    var endDate: String?
 )
