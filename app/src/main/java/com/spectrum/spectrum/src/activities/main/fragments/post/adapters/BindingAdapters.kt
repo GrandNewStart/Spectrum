@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
@@ -23,8 +24,9 @@ object BindingAdapters {
             items?.let { items ->
                 for (i in 0 until items.size) {
                     Chip(chipGroup.context).apply {
-                        setBackgroundResource(if(i==0)R.color.clear else R.color.spectrumSilver3)
-                        setChipStrokeColorResource(R.color.spectrumSilver3)
+                        setChipBackgroundColorResource(if (i==0) R.color.clear else R.color.spectrumSilver2)
+                        setChipStrokeColorResource(R.color.spectrumSilver2)
+                        setChipStrokeWidthResource(R.dimen.default_stroke_width)
                         setTextAppearanceResource(R.style.CustomTextView)
                         text = items[i]
                         addView(this)

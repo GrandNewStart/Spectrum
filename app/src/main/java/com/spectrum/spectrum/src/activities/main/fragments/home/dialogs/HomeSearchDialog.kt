@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment
-import com.spectrum.spectrum.src.activities.main.fragments.home.adapters.PostAdapter
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.models.Post
-import com.spectrum.spectrum.src.models.Spec
+import com.spectrum.spectrum.src.models.Info
 
 class HomeSearchDialog(private val context: Context) {
 
@@ -30,7 +28,13 @@ class HomeSearchDialog(private val context: Context) {
         add("uiux")
     }
     private var mPosts = ArrayList<Post>().apply {
-        val specs = arrayListOf(Spec(0, "취업준비"), Spec(1, "26세"), Spec(2, "여성"), Spec(3, "IT/인터넷"), Spec(4, "디자인"))
+        val specs = arrayListOf(
+            Info(0, "취업준비"),
+            Info(1, "26세"),
+            Info(2, "여성"),
+            Info(3, "IT/인터넷"),
+            Info(4, "디자인")
+        )
         add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
         add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
         add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))

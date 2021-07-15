@@ -3,7 +3,6 @@ package com.spectrum.spectrum.src.activities.main.fragments.home.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.ItemHomePostBinding
@@ -22,7 +21,7 @@ class PostAdapter(private val fragment: HomeFragment,
                 binding.date = date
                 binding.commentCount = commentCount
                 binding.markCount = markCount
-                binding.specs = specs
+                binding.specs = infos
                 binding.fragment = fragment
             }
         }

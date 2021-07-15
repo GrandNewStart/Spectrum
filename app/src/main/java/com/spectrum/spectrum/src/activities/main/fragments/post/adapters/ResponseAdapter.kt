@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.models.Evaluation
 
 class ResponseAdapter(private val items: ArrayList<Evaluation>): RecyclerView.Adapter<ResponseAdapter.ViewHolder>() {

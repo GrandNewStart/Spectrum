@@ -6,5 +6,5 @@ data class Post(
     var date: String,
     var commentCount: Int,
     var markCount: Int,
-    var specs: ArrayList<Spec>
+    var infos: ArrayList<Info>
 )

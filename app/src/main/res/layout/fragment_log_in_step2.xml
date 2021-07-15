@@ -86,7 +86,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"  />
+                android:textSize="14sp" />
 
         </com.spectrum.spectrum.src.customs.CustomTextInputLayout>
 

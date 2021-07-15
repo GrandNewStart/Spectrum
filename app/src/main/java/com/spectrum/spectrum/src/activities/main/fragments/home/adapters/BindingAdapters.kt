@@ -13,7 +13,7 @@ import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment
 import com.spectrum.spectrum.src.models.JobGroup
 import com.spectrum.spectrum.src.models.Post
-import com.spectrum.spectrum.src.models.Spec
+import com.spectrum.spectrum.src.models.Info
 
 object BindingAdapters {
 
@@ -69,12 +69,12 @@ object BindingAdapters {
 
     @BindingAdapter("home_specs")
     @JvmStatic
-    fun bindSpecChips(chipGroup: ChipGroup, specs: ArrayList<Spec>?) {
-        if (specs == null) return
+    fun bindSpecChips(chipGroup: ChipGroup, infos: ArrayList<Info>?) {
+        if (infos == null) return
         chipGroup.apply {
-            for (i in 0 until specs.size) {
+            for (i in 0 until infos.size) {
                 val chip = Chip(chipGroup.context).apply {
-                    text = specs[i].name
+                    text = infos[i].name
                     setChipBackgroundColorResource(if (i == 0) R.color.clear else R.color.spectrumSilver2)
                     setChipStrokeColorResource(R.color.spectrumSilver2)
                     setChipStrokeWidthResource(R.dimen.default_stroke_width)

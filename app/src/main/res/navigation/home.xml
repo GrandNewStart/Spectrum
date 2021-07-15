@@ -24,6 +24,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/home_to_create_post"
+            app:destination="@id/create_post"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/home_job_group"
@@ -33,5 +40,9 @@
         android:id="@+id/home_post"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment"
         android:label="Post" />
+    <fragment
+        android:id="@+id/create_post"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.createPost.CreatePostFragment"
+        android:label="CreatePost" />
 
 </navigation>

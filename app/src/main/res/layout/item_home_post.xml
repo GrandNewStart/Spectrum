@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="java.util.ArrayList"/>
-        <import type="com.spectrum.spectrum.src.models.Spec"/>
+        <import type="com.spectrum.spectrum.src.models.Info"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment" />
@@ -21,7 +21,7 @@
             type="Integer" />
         <variable
             name="specs"
-            type="ArrayList&lt;Spec&gt;" />
+            type="ArrayList&lt;Info&gt;" />
     </data>
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"

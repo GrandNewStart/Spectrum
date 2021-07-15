@@ -177,6 +177,7 @@
                     android:hint="@string/name_of_school"
                     android:inputType="text"
                     android:lines="1"
+                    android:maxLines="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -190,6 +191,7 @@
                     android:hint="@string/major"
                     android:inputType="text"
                     android:lines="1"
+                    android:maxLines="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/school_name_edit_text" />

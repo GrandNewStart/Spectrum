@@ -21,12 +21,20 @@ class PostViewModel: ViewModel() {
     private var mExpItems = ArrayList<ExpItem>()
     private var mCertItems = ArrayList<CertItem>()
     private var mOtherSpecs: String? = null
+
     private var mTopFiveResponses = ArrayList<Evaluation>()
+
     private var mEduResponses = ArrayList<Evaluation>()
     private var mEduResponseOptions = ArrayList<Evaluation>()
+
     private var mExpResponses = ArrayList<Evaluation>()
+    private var mExpResponseOptions = ArrayList<Evaluation>()
+
     private var mCertResponses = ArrayList<Evaluation>()
+    private var mCertResponseOptions = ArrayList<Evaluation>()
+
     private var mOtherResponses = ArrayList<Evaluation>()
+    private var mOtherResponseOptions = ArrayList<Evaluation>()
 
     fun backButtonAction(fragment: PostFragment) {
         fragment.findNavController().popBackStack()
@@ -39,39 +47,78 @@ class PostViewModel: ViewModel() {
     fun bindViews(binding: FragmentPostBinding) {
         binding.apply {
             // TEST CODE START
-            userName = "스펙왕"
-            userThumbnail = "https://lh3.googleusercontent.com/ogw/ADea4I4c2HPqSR5Mw5MPQLKRoqBCVaEWBbmCYFm0phUv=s64-c-mo"
-            date = "06/28 20:25"
-            userInfo = arrayListOf("취업준비", "23세", "여성", "IT/인터넷", "디자인")
-            postTitle = "졸업 전 대기업 인턴"
-            postContent = "UXUI 직무를 희망하는데, \n대기업 인턴하려면 어떤 스펙을 더 쌓아야 할까요?"
-            val edu1 = EduItem("똥통대학교", "수도권", "대학교(4년제)", "재학중", "산업디자인학과", 3.63, 4.5)
-            val edu2 = EduItem("똥통대학교", "수도권", "대학교(4년제)", "재학중", "산업디자인학과", 3.63, 4.5)
-            educations = arrayListOf(edu1, edu2)
-            val exp1 = ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06")
-            val exp2 = ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06")
-            val exp3 = ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06")
-            experiences = arrayListOf(exp1, exp2, exp3)
-            val c1 = CertItem("TOEIC", "910점")
-            val c2 = CertItem("GTQ", "1급")
-            certifications = arrayListOf(c1, c2)
-            otherSpecs = "저는요, 할 줄 아는게 아무것두 없지만 딱 한가지 내세울건 바로 문법 맞추기에오. 띠어쓰기 똑바로 안 하면 갱장히 불 편하구요. 단어도 마춤뻡 틀리면 갱장히 불 편한 사람 이에오."
-            mTopFiveResponses.add(Evaluation(0, "인턴 경험 좋아요", 18))
-            mTopFiveResponses.add(Evaluation(1, "공모전은 어때요?", 13))
-            mTopFiveResponses.add(Evaluation(2, "대외활동은 어때요?", 9))
-            mTopFiveResponses.add(Evaluation(3, "어학 점수 좋아요", 8))
-            mTopFiveResponses.add(Evaluation(4, "직무 자격증 좋아요", 6))
-            topFiveResponses = mTopFiveResponses
-            mEduResponseOptions.add(Evaluation(0, "학점 좋아요", 5))
-            educationResponseOptions = mEduResponseOptions
-            mEduResponses.add(Evaluation(0, "학점 좋아요", 0))
-            mEduResponses.add(Evaluation(1, "학점 보통", 0))
-            mEduResponses.add(Evaluation(2, "학점 UP", 0))
-            educationResponses = mEduResponses
-            experienceResponses = mExpResponses
-            certificationResponses = mCertResponses
-            otherSpecsResponses = mOtherResponses
+                mUserName = "스펙왕"
+                mUserThumbnail = "https://lh3.googleusercontent.com/ogw/ADea4I4c2HPqSR5Mw5MPQLKRoqBCVaEWBbmCYFm0phUv=s64-c-mo"
+                mDate = "06/28 20:25"
+                mUserInfo = arrayListOf("취업준비", "23세", "여성", "IT/인터넷", "디자인")
+                mPostTitle = "졸업 전 대기업 인턴"
+                mPostContent = "UXUI 직무를 희망하는데, \n대기업 인턴하려면 어떤 스펙을 더 쌓아야 할까요?"
+                mUserEduItems = arrayListOf(
+                    EduItem("똥통대학교", "수도권", "대학교(4년제)", "재학중", "산업디자인학과", 3.63, 4.5),
+                    EduItem("똥통대학교", "수도권", "대학교(4년제)", "재학중", "산업디자인학과", 3.63, 4.5))
+                mExpItems = arrayListOf(
+                    ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"),
+                    ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"),
+                    ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"))
+                mCertItems = arrayListOf(
+                    CertItem("TOEIC", "910점"),
+                    CertItem("GTQ", "1급"))
+                mOtherSpecs = "저는요, 할 줄 아는게 아무것두 없지만 딱 한가지 내세울건 바로 문법 맞추기에오. 띠어쓰기 똑바로 안 하면 갱장히 불 편하구요. 단어도 마춤뻡 틀리면 갱장히 불 편한 사람 이에오."
+
+                mTopFiveResponses.add(Evaluation(0, "인턴 경험 좋아요", 18))
+                mTopFiveResponses.add(Evaluation(1, "공모전은 어때요?", 13))
+                mTopFiveResponses.add(Evaluation(2, "대외활동은 어때요?", 9))
+                mTopFiveResponses.add(Evaluation(3, "어학 점수 좋아요", 8))
+                mTopFiveResponses.add(Evaluation(4, "직무 자격증 좋아요", 6))
+
+                mEduResponseOptions.add(Evaluation(0, "학점 좋아요", 5))
+                mEduResponses.add(Evaluation(0, "학점 좋아요", 0))
+                mEduResponses.add(Evaluation(1, "학점 보통", 0))
+                mEduResponses.add(Evaluation(2, "학점 UP", 0))
+
+                mExpResponses.add(Evaluation(0, "인턴 경험 좋아요", 18))
+                mExpResponses.add(Evaluation(1, "인턴 경험 UP", 5))
+                mExpResponseOptions.add(Evaluation(0, "인턴 경험은 어때요?", 0))
+
+                mCertResponses.add(Evaluation(0, "어학 점수 좋아요", 8))
+                mCertResponses.add(Evaluation(1, "직무 자격증 좋아요", 6))
+                mCertResponseOptions.add(Evaluation(0, "어학 점수 UP", 0))
+                mCertResponseOptions.add(Evaluation(1, "직무 자격증은 어때요?", 0))
+                mCertResponseOptions.add(Evaluation(2, "직무 자격증 UP", 0))
+
+                mOtherResponses.add(Evaluation(0, "공모전의 어때요?", 13))
+                mOtherResponses.add(Evaluation(1, "대외활동은 어때요?", 9))
+                mOtherResponseOptions.add(Evaluation(0, "공모전 좋아요", 0))
+                mOtherResponseOptions.add(Evaluation(1, "대외활동은 좋아요", 0))
+                mOtherResponseOptions.add(Evaluation(2, "공모전 UP", 0))
+                mOtherResponseOptions.add(Evaluation(3, "대외활동 UP", 0))
             // TEST CODE END
+
+            userName = mUserName
+            userThumbnail = mUserThumbnail
+            date = mDate
+            userInfo = mUserInfo
+            postTitle = mPostTitle
+            postContent = mPostContent
+
+            educations = mUserEduItems
+            experiences = mExpItems
+            certifications = mCertItems
+            otherSpecs = mOtherSpecs
+
+            topFiveResponses = mTopFiveResponses
+
+            educationResponseOptions = mEduResponseOptions
+            educationResponses = mEduResponses
+
+            experienceResponses = mExpResponses
+            experienceResponseOptions = mExpResponseOptions
+
+            certificationResponses = mCertResponses
+            certificationResponseOptions = mCertResponseOptions
+
+            otherSpecsResponses = mOtherResponses
+            otherSpecResponseOptions = mOtherResponseOptions
         }
     }
 

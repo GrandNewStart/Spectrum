@@ -68,4 +68,11 @@
     <string name="compare_specs">스펙 비교하기</string>
     <string name="top_five_responses">스펙트럼의 TOP5 반응</string>
     <string name="no_response_yet">아직 아무도 의견을 남기지 않았습니다<br/>\n스펙 항목별로 의견을 남겨보세요!</string>
+    <string name="title">제목</string>
+    <string name="my_specs">나의 스펙</string>
+    <string name="spec_list">스펙목록</string>
+    <string name="type_of_spec">스펙 종류</string>
+    <string name="free_text_hint">현재 스펙과 관련하여 고민이나 후기를 적어주세요</string>
+    <string name="write_post">글쓰기</string>
+    <string name="search">검색</string>
 </resources>

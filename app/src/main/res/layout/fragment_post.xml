@@ -54,13 +54,22 @@
             name="educationResponses"
             type="ArrayList&lt;Evaluation&gt;" />
         <variable
+            name="experienceResponseOptions"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
             name="experienceResponses"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
+            name="certificationResponseOptions"
             type="ArrayList&lt;Evaluation&gt;" />
         <variable
             name="certificationResponses"
             type="ArrayList&lt;Evaluation&gt;" />
         <variable
             name="otherSpecsResponses"
+            type="ArrayList&lt;Evaluation&gt;" />
+        <variable
+            name="otherSpecResponseOptions"
             type="ArrayList&lt;Evaluation&gt;" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -127,6 +136,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/app_bar_size"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
@@ -254,6 +264,7 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 style="@style/CustomTextView"
                                 post_edu_items="@{educations}"
+                                android:nestedScrollingEnabled="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/default_margin" />
@@ -271,7 +282,8 @@
                                 post_exp_items="@{experiences}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin" />
+                                android:layout_margin="@dimen/default_margin"
+                                android:nestedScrollingEnabled="false" />
 
                             <TextView
                                 style="@style/CustomTextView"
@@ -286,7 +298,8 @@
                                 post_cert_items="@{certifications}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin" />
+                                android:layout_margin="@dimen/default_margin"
+                                android:nestedScrollingEnabled="false" />
 
                             <TextView
                                 style="@style/CustomTextView"
@@ -351,6 +364,7 @@
                             post_top_five_responses="@{topFiveResponses}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
                             android:visibility="@{topFiveResponses.empty ? View.GONE : View.VISIBLE}" />
 
                     </FrameLayout>
@@ -359,7 +373,7 @@
                         android:layout_width="0dp"
                         android:layout_height="25dp"
                         android:background="@color/spectrumSilver2"
-                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/top_five_view" />
@@ -387,9 +401,9 @@
                         android:id="@+id/education_chip_recycler_view_1"
                         post_responses="@{educationResponseOptions}"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/default_margin"
+                        android:layout_marginVertical="@dimen/default_margin"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/education_view" />
@@ -399,8 +413,8 @@
                         post_response_options="@{educationResponses}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/default_margin"
                         android:layout_marginHorizontal="@dimen/default_margin"
+                        android:layout_marginVertical="@dimen/default_margin"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/education_chip_recycler_view_1" />
@@ -409,7 +423,7 @@
                         android:layout_width="0dp"
                         android:layout_height="25dp"
                         android:background="@color/spectrumSilver2"
-                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_double_margin"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/education_chip_recycler_view_2" />
@@ -434,23 +448,34 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/experience_chip_recycler_view"
+                        android:id="@+id/experience_chip_recycler_view_1"
+                        post_responses="@{experienceResponses}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginHorizontal="@dimen/default_margin"
+                        android:layout_marginVertical="@dimen/default_margin"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/experience_view" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/experience_chip_recycler_view_2"
+                        post_response_options="@{experienceResponseOptions}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/experience_chip_recycler_view_1" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="25dp"
                         android:background="@color/spectrumSilver2"
-                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_double_margin"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/experience_chip_recycler_view" />
+                        app:layout_constraintTop_toBottomOf="@id/experience_chip_recycler_view_2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -472,23 +497,34 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/certification_chip_recycler_view"
+                        android:id="@+id/certification_chip_recycler_view_1"
+                        post_responses="@{certificationResponses}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginHorizontal="@dimen/default_margin"
+                        android:layout_marginVertical="@dimen/default_margin"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/certification_view" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/certification_chip_recycler_view_2"
+                        post_response_options="@{certificationResponseOptions}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/certification_chip_recycler_view_1" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="25dp"
                         android:background="@color/spectrumSilver2"
-                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_double_margin"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/certification_chip_recycler_view" />
+                        app:layout_constraintTop_toBottomOf="@id/certification_chip_recycler_view_2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -510,23 +546,25 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/other_specs_chip_recycler_view"
+                        android:id="@+id/other_specs_chip_recycler_view_1"
+                        post_responses="@{otherSpecsResponses}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/default_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/other_specs_view" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/other_specs_chip_recycler_view_2"
+                        post_response_options="@{otherSpecResponseOptions}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/default_margin"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/other_specs_view" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:background="@color/spectrumSilver2"
-                        android:layout_marginVertical="@dimen/default_margin"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/other_specs_chip_recycler_view" />
+                        app:layout_constraintTop_toBottomOf="@+id/other_specs_chip_recycler_view_1" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
