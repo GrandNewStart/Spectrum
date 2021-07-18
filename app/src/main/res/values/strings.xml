@@ -62,10 +62,10 @@
     <string name="companies_of_peoples_interest">다른 사람들이 보고 있어요</string>
     <string name="see_more">더 보기</string>
     <string name="select_your_job_group_of_interest">빠른 스펙 비교를 위해<br/>\n회원님이 관심 있는 직군을 선택해주세요.</string>
-    <string name="maximum_three_selection">최대 3개 선택 가능</string>
+    <string name="maximum_three_selection">(최대 3개 선택 가능)</string>
     <string name="start_date">입사일</string>
     <string name="end_date">퇴사일</string>
-    <string name="compare_specs">스펙 비교하기</string>
+    <string name="spec_story">스펙 이야기</string>
     <string name="top_five_responses">스펙트럼의 TOP5 반응</string>
     <string name="no_response_yet">아직 아무도 의견을 남기지 않았습니다<br/>\n스펙 항목별로 의견을 남겨보세요!</string>
     <string name="title">제목</string>
@@ -75,4 +75,9 @@
     <string name="free_text_hint">현재 스펙과 관련하여 고민이나 후기를 적어주세요</string>
     <string name="write_post">글쓰기</string>
     <string name="search">검색</string>
+    <string name="add">추가</string>
+    <string name="you_can_edit_specs_later">스펙 선택 후 추가 수정 가능합니다</string>
+    <string name="edit_spec">스펙 수정</string>
+    <string name="edit_spec_message">연령, 성별, 직군은 필수입력항목입니다</string>
+    <string name="overwrite_changes_to_current_spec">수정 사항을 나의 기존 스펙에 반영</string>
 </resources>

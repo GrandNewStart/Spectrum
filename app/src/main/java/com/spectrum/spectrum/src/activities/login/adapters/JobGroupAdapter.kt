@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.login.fragments.JobGroupFragment
-import com.spectrum.spectrum.src.activities.login.models.JobGroup
+import com.spectrum.spectrum.src.models.JobGroup
 
 class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adapter<JobGroupAdapter.ViewHolder>() {
 
@@ -39,9 +37,9 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
         }
     }
 
-    private var mFirstItem: JobGroup? = null
-    private var mSecondItem: JobGroup? = null
-    private var mThirdItem: JobGroup? = null
+    var mFirstItem: JobGroup? = null
+    var mSecondItem: JobGroup? = null
+    var mThirdItem: JobGroup? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -75,21 +73,18 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                                 mFirstItem = items[position]
                                 items[position].selectIndex = 1
                                 notifyItemChanged(position)
-                                applyChanges(itemView)
                                 return@setOnClickListener
                             }
                             if (mSecondItem == null) {
                                 mSecondItem = items[position]
                                 items[position].selectIndex = 2
                                 notifyItemChanged(position)
-                                applyChanges(itemView)
                                 return@setOnClickListener
                             }
                             if (mThirdItem == null) {
                                 mThirdItem = items[position]
                                 items[position].selectIndex = 3
                                 notifyItemChanged(position)
-                                applyChanges(itemView)
                                 return@setOnClickListener
                             }
                         }
@@ -116,7 +111,6 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                                             notifyItemChanged(i)
                                         }
                                     }
-                                    applyChanges(itemView)
                                 }
                             }
                         }
@@ -135,25 +129,16 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                                     }
                                 }
                             }
-                            applyChanges(itemView)
                         }
                         3 -> {
                             items[position].selectIndex = 0
                             mThirdItem = null
                             notifyItemChanged(position)
-                            applyChanges(itemView)
                         }
                     }
                 }
             }
         }
-    }
-
-    private fun applyChanges(itemView: View) {
-        val fragment = itemView.findFragment<JobGroupFragment>()
-        fragment.mFirstItem = mFirstItem
-        fragment.mSecondItem = mSecondItem
-        fragment.mThirdItem = mThirdItem
     }
 
     override fun getItemCount(): Int = items.size

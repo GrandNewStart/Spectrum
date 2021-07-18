@@ -11,6 +11,7 @@ import com.spectrum.spectrum.src.models.ExpItem
 
 class PostViewModel: ViewModel() {
 
+    var mIsDataLoaded = false
     private var mUserName: String? = null
     private var mUserThumbnail: String? = null
     private var mDate: String? = null
@@ -45,6 +46,37 @@ class PostViewModel: ViewModel() {
     }
 
     fun bindViews(binding: FragmentPostBinding) {
+        if (mIsDataLoaded) {
+            binding.apply {
+                userName = mUserName
+                userThumbnail = mUserThumbnail
+                date = mDate
+                userInfo = mUserInfo
+                postTitle = mPostTitle
+                postContent = mPostContent
+
+                educations = mUserEduItems
+                experiences = mExpItems
+                certifications = mCertItems
+                otherSpecs = mOtherSpecs
+
+                topFiveResponses = mTopFiveResponses
+
+                educationResponseOptions = mEduResponseOptions
+                educationResponses = mEduResponses
+
+                experienceResponses = mExpResponses
+                experienceResponseOptions = mExpResponseOptions
+
+                certificationResponses = mCertResponses
+                certificationResponseOptions = mCertResponseOptions
+
+                otherSpecsResponses = mOtherResponses
+                otherSpecResponseOptions = mOtherResponseOptions
+            }
+            return
+        }
+        mIsDataLoaded = true
         binding.apply {
             // TEST CODE START
                 mUserName = "스펙왕"
@@ -92,33 +124,33 @@ class PostViewModel: ViewModel() {
                 mOtherResponseOptions.add(Evaluation(1, "대외활동은 좋아요", 0))
                 mOtherResponseOptions.add(Evaluation(2, "공모전 UP", 0))
                 mOtherResponseOptions.add(Evaluation(3, "대외활동 UP", 0))
+
+                userName = mUserName
+                userThumbnail = mUserThumbnail
+                date = mDate
+                userInfo = mUserInfo
+                postTitle = mPostTitle
+                postContent = mPostContent
+
+                educations = mUserEduItems
+                experiences = mExpItems
+                certifications = mCertItems
+                otherSpecs = mOtherSpecs
+
+                topFiveResponses = mTopFiveResponses
+
+                educationResponseOptions = mEduResponseOptions
+                educationResponses = mEduResponses
+
+                experienceResponses = mExpResponses
+                experienceResponseOptions = mExpResponseOptions
+
+                certificationResponses = mCertResponses
+                certificationResponseOptions = mCertResponseOptions
+
+                otherSpecsResponses = mOtherResponses
+                otherSpecResponseOptions = mOtherResponseOptions
             // TEST CODE END
-
-            userName = mUserName
-            userThumbnail = mUserThumbnail
-            date = mDate
-            userInfo = mUserInfo
-            postTitle = mPostTitle
-            postContent = mPostContent
-
-            educations = mUserEduItems
-            experiences = mExpItems
-            certifications = mCertItems
-            otherSpecs = mOtherSpecs
-
-            topFiveResponses = mTopFiveResponses
-
-            educationResponseOptions = mEduResponseOptions
-            educationResponses = mEduResponses
-
-            experienceResponses = mExpResponses
-            experienceResponseOptions = mExpResponseOptions
-
-            certificationResponses = mCertResponses
-            certificationResponseOptions = mCertResponseOptions
-
-            otherSpecsResponses = mOtherResponses
-            otherSpecResponseOptions = mOtherResponseOptions
         }
     }
 

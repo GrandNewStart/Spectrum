@@ -1,5 +1,6 @@
 package com.spectrum.spectrum.src.config
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.util.Log
 import com.orhanobut.logger.Logger
@@ -10,6 +11,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 object Helpers {
@@ -46,6 +49,34 @@ object Helpers {
     fun dp2px(dp: Int): Int {
         val px = dp * DENSITY
         return px.toInt()
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun formatDate(year: Int, month: Int, day: Int): String {
+        val formatter = SimpleDateFormat("yyyy.MM.dd")
+        val date = Date(year-1900, month, day)
+        return formatter.format(date)
+    }
+
+    fun compareDates(startDate: String?, endDate: String?): Boolean {
+        if (startDate == null) return false
+        if (endDate == null) return false
+
+        val startYear = startDate.substring(0..3).toInt()
+        val endYear = endDate.substring(0..3).toInt()
+        if (startYear > endYear) return false
+        if (startYear < endYear) return true
+
+        val startMonth = startDate.substring(5..6).toInt()
+        val endMonth = endDate.substring(5..6).toInt()
+        if (startMonth > endMonth) return false
+        if (startMonth < endMonth) return true
+
+        val startDay = startDate.substring(8..9).toInt()
+        val endDay = endDate.substring(8..9).toInt()
+        if (startDay > endDay) return false
+
+        return true
     }
 
 }

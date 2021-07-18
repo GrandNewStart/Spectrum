@@ -17,7 +17,7 @@
             name="markCount"
             type="Integer" />
         <variable
-            name="specs"
+            name="infos"
             type="ArrayList&lt;Info&gt;" />
     </data>
     <com.google.android.material.card.MaterialCardView
@@ -103,7 +103,6 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/specs_chip"
-                home_specs="@{specs}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"

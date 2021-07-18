@@ -41,5 +41,11 @@ object Constants {
     const val unavailable_nickname = "이미 존재하는 닉네임입니다"
     const val grade = "학점"
     const val period_error = "입사일은 퇴사일 보다 빨라야 합니다"
+    const val free_form_text = "자유글"
+    const val free_form_text_hint = "현재 스펙과 관련하여 고민이나 후기를 적어주세요"
+    const val free_consults = "자유 고민"
+    const val free_consults_hint = "현재 스펙과 관련하여 고민과 질문을 적어주세요"
+    const val free_reviews = "자유 후기"
+    const val free_reviews_hint = "자유롭게 취업 후기를 적어주세요"
 
 }

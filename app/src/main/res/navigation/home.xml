@@ -4,19 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/home_fragment">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/home_fragment"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment"
         android:label="Home" >
-        <action
-            android:id="@+id/home_to_job_group"
-            app:destination="@id/home_job_group"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/home_to_post"
             app:destination="@id/home_post"
@@ -33,16 +26,26 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/home_job_group"
-        android:name="com.spectrum.spectrum.src.activities.main.fragments.jobGroup.JobGroupFragment"
-        android:label="JobGroup" />
-    <fragment
         android:id="@+id/home_post"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment"
         android:label="Post" />
     <fragment
         android:id="@+id/create_post"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.createPost.CreatePostFragment"
-        android:label="CreatePost" />
+        android:label="CreatePost" >
+        <action
+            android:id="@+id/create_post_to_edit_fragment"
+            app:destination="@id/edit_spec"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/edit_spec"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.editSpec.EditSpecFragment"
+        android:label="EditSpec" />
+
 
 </navigation>

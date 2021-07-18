@@ -2,6 +2,7 @@ package com.spectrum.spectrum.src.models
 
 data class Spec(
     var id: String,
+    var userName: String,
     var title: String,
     var update: String,
     var userInfo: ArrayList<Info>,

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="com.spectrum.spectrum.src.models.Spec"/>
+        <import type="java.util.ArrayList"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.createPost.CreatePostFragment" />
@@ -11,8 +12,8 @@
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.createPost.CreatePostViewModel" />
         <variable
-            name="selectedSpec"
-            type="Spec" />
+            name="spec"
+            type="com.spectrum.spectrum.src.models.Spec" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,16 +22,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/action_bar"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/action_bar_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" >
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/back_button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/default_margin"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="16dp"
                 android:background="@android:color/transparent"
                 android:foreground="@drawable/icon_close"
                 android:onClick="@{()->viewModel.backButtonAction(fragment)}"
@@ -42,22 +43,26 @@
 
             <TextView
                 android:id="@+id/title_text"
-                style="@style/CustomTextView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:text="@string/write_post"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/save_button"
-                style="@style/CustomTextView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/default_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.doneButtonAction(fragment)}"
                 android:text="@string/done"
@@ -87,7 +92,7 @@
                 <EditText
                     android:id="@+id/title_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/app_bar_size"
+                    android:layout_height="48dp"
                     android:background="@color/spectrumLightBlue"
                     android:fontFamily="@font/roboto_medium"
                     android:hint="@string/title"
@@ -97,7 +102,7 @@
                     android:maxLines="1"
                     android:paddingHorizontal="@dimen/default_margin"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/spectrumGray1"
+                    android:textColorHint="#666970"
                     android:textSize="16sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,85 +110,114 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_margin">
 
-                    <TextView
-                        android:id="@+id/my_spec_text"
-                        style="@style/CustomTextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:text="@string/my_specs"
-                        app:layout_constraintEnd_toStartOf="@+id/my_spec_list_text"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/my_spec_list_text"
-                        style="@style/CustomTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:background="@drawable/edit_text_underline"
-                        android:text="@string/spec_list"
-                        android:textColor="@color/spectrumGray1"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/spec_card_view"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:cardElevation="5dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginVertical="24dp"
+                        android:onClick="@{()->viewModel.proceedToEditSpec(fragment)}"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="10dp"
-                        android:layout_marginVertical="@dimen/default_double_margin"
-                        android:layout_marginHorizontal="@dimen/default_margin"
+                        app:cardElevation="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/my_spec_text">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/default_margin">
+                            android:padding="24dp">
 
                             <TextView
-                                android:id="@+id/spec_name_text"
-                                style="@style/CustomTextView"
-                                android:layout_width="0dp"
+                                android:id="@+id/your_spec_text"
+                                my_spec="@{spec}"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="@{selectedSpec.title}"
-                                android:textSize="18sp"
-                                app:layout_constraintEnd_toEndOf="parent"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="스펙왕 님의 스펙"
+                                android:textColor="@color/black"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/update_time_text"
-                                style="@style/CustomTextView"
-                                android:layout_width="0dp"
+                                my_spec="@{spec}"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
-                                android:text="@{selectedSpec.update}"
-                                android:textColor="@color/spectrumGray1"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="06/28 20:25 업데이트됨"
+                                android:textColor="#666970"
                                 android:textSize="12sp"
-                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/spec_name_text" />
+                                app:layout_constraintTop_toBottomOf="@+id/your_spec_text" />
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/user_info_recycler_view"
-                                create_post_user_info="@{selectedSpec.userInfo}"
+                            <HorizontalScrollView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
+                                android:layout_marginTop="8dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/update_time_text" />
+                                app:layout_constraintTop_toBottomOf="@+id/update_time_text">
+
+                                <com.google.android.material.chip.ChipGroup
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <com.google.android.material.chip.Chip
+                                        android:id="@+id/chip_1"
+                                        my_spec="@{spec}"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="24dp"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:text="23세"
+                                        android:textColor="#45474B"
+                                        android:textSize="12sp"
+                                        app:chipBackgroundColor="#EAEAEA"
+                                        app:chipMinTouchTargetSize="0dp"/>
+
+                                    <com.google.android.material.chip.Chip
+                                        android:id="@+id/chip_2"
+                                        my_spec="@{spec}"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="24dp"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:text="여성"
+                                        android:textColor="#45474B"
+                                        android:textSize="12sp"
+                                        app:chipBackgroundColor="#EAEAEA"
+                                        app:chipMinTouchTargetSize="0dp" />
+
+                                    <com.google.android.material.chip.Chip
+                                        android:id="@+id/chip_3"
+                                        my_spec="@{spec}"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="24dp"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:text="IT/인터넷"
+                                        android:textColor="#45474B"
+                                        android:textSize="12sp"
+                                        app:chipBackgroundColor="#EAEAEA"
+                                        app:chipMinTouchTargetSize="0dp"/>
+
+                                    <com.google.android.material.chip.Chip
+                                        android:id="@+id/chip_4"
+                                        my_spec="@{spec}"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="24dp"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:text="디자인"
+                                        android:textColor="#45474B"
+                                        android:textSize="12sp"
+                                        app:chipBackgroundColor="#EAEAEA"
+                                        app:chipMinTouchTargetSize="0dp"/>
+
+                                </com.google.android.material.chip.ChipGroup>
+
+                            </HorizontalScrollView>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -193,7 +227,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:background="@color/spectrumSilver2"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -202,44 +236,52 @@
 
                     <TextView
                         android:id="@+id/spec_type_text"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_double_margin"
-                        android:fontFamily="@font/roboto_bold"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/roboto_medium"
                         android:text="@string/type_of_spec"
-                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Spinner
-                        android:id="@+id/spec_type_spinner"
+                        android:id="@+id/type_spinner"
+                        create_post_content_title="@{contentTypeText}"
+                        create_post_content_view="@{contentEditText}"
+                        create_post_sub_spinner="@{subTypeSpinner}"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_margin="@dimen/default_double_margin"
+                        android:layout_height="36dp"
+                        android:layout_marginVertical="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="12dp"
                         android:foreground="@drawable/spinner_background"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/post_type_spinner"
+                        app:layout_constraintEnd_toStartOf="@+id/sub_type_spinner"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/spec_type_text" />
 
                     <Spinner
-                        android:id="@+id/post_type_spinner"
+                        android:id="@+id/sub_type_spinner"
                         android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_margin="@dimen/default_double_margin"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginVertical="24dp"
                         android:foreground="@drawable/spinner_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/spec_type_spinner"
+                        app:layout_constraintStart_toEndOf="@id/type_spinner"
                         app:layout_constraintTop_toBottomOf="@+id/spec_type_text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:background="@color/spectrumSilver2"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -248,11 +290,12 @@
                     android:layout_marginBottom="100dp">
 
                     <TextView
-                        android:id="@+id/free_form_text"
+                        android:id="@+id/content_type_text"
                         style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_double_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="@string/type_of_spec"
                         android:textSize="18sp"
@@ -261,21 +304,22 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
+                        android:id="@+id/content_edit_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:minHeight="250dp"
+                        android:layout_margin="16dp"
                         android:background="@drawable/spinner_background"
-                        android:layout_margin="@dimen/default_double_margin"
-                        android:hint="@string/free_text_hint"
-                        android:gravity="start"
-                        android:padding="@dimen/default_margin"
-                        android:textSize="14sp"
-                        android:textColorHint="@color/spectrumGray1"
                         android:fontFamily="@font/roboto_medium"
+                        android:gravity="start"
+                        android:hint="@string/free_text_hint"
+                        android:minHeight="250dp"
+                        android:padding="16dp"
+                        android:textColorHint="#666970"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/free_form_text" />
+                        app:layout_constraintTop_toBottomOf="@+id/content_type_text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

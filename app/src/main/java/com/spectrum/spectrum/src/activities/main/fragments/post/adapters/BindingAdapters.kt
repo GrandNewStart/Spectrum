@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.models.CertItem
 import com.spectrum.spectrum.src.models.EduItem
 import com.spectrum.spectrum.src.models.Evaluation
@@ -43,6 +44,13 @@ object BindingAdapters {
             items?.let { items ->
                 if (layoutManager == null) {
                     layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
+                    addItemDecoration(object : RecyclerView.ItemDecoration() {
+                        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                            super.getItemOffsets(outRect, view, parent, state)
+                            val pos = parent.getChildLayoutPosition(view)
+                            if (pos != 0) outRect.top += dp2px(4)
+                        }
+                    })
                 }
                 if (adapter == null) {
                     adapter = EduItemAdapter(items)
@@ -60,6 +68,13 @@ object BindingAdapters {
             items?.let { items ->
                 if (layoutManager == null) {
                     layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
+                    addItemDecoration(object : RecyclerView.ItemDecoration() {
+                        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                            super.getItemOffsets(outRect, view, parent, state)
+                            val pos = parent.getChildLayoutPosition(view)
+                            if (pos != 0) outRect.top += dp2px(4)
+                        }
+                    })
                 }
                 if (adapter == null) {
                     adapter = ExpItemAdapter(items)
@@ -77,6 +92,13 @@ object BindingAdapters {
             items?.let { items ->
                 if (layoutManager == null) {
                     layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
+                    addItemDecoration(object : RecyclerView.ItemDecoration() {
+                        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                            super.getItemOffsets(outRect, view, parent, state)
+                            val pos = parent.getChildLayoutPosition(view)
+                            if (pos != 0) outRect.top += dp2px(4)
+                        }
+                    })
                 }
                 if (adapter == null) {
                     adapter = CertItemAdapter(items)
@@ -97,9 +119,9 @@ object BindingAdapters {
                     addItemDecoration(object : RecyclerView.ItemDecoration(){
                         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                             super.getItemOffsets(outRect, view, parent, state)
-                            val spacing = resources.getDimensionPixelSize(R.dimen.default_margin)
-                            outRect.bottom += spacing
-                            outRect.top += spacing
+                            val pos = parent.getChildLayoutPosition(view)
+                            if (pos == 0) return
+                            outRect.top += dp2px(12)
                         }
                     })
                 }

@@ -3,7 +3,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,19 +18,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="16dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/show_us_your_spec"
                     android:textColor="@color/black"
@@ -44,10 +42,11 @@
                     android:id="@+id/skip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/edit_text_underline"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/skip"
-                    android:textColor="@color/black"
+                    android:textColor="#666970"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -55,29 +54,29 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="1dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/specs_can_always_be_edited"
-                    android:textColor="@color/spectrumGray1"
+                    android:textColor="#666970"
                     android:textSize="14sp"
-                    android:layout_marginHorizontal="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/skip"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/title" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:paddingHorizontal="10dp">
+                android:layout_marginTop="32dp"
+                android:paddingHorizontal="16dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/age_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/age"
                     android:textColor="@color/black"
@@ -100,8 +99,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/age_card"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="16dp"
                     android:backgroundTint="@color/clear"
                     android:stateListAnimator="@null"
                     app:cardCornerRadius="5dp"
@@ -150,7 +149,7 @@
                     android:id="@+id/age_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/age_unit"
                     android:textColor="@color/black"
@@ -165,22 +164,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/spectrumSilver3"
-                android:layout_marginVertical="20dp"/>
+                android:layout_marginVertical="24dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="16dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/sex_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/sex"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -200,7 +198,7 @@
                     android:id="@+id/sex_radio_group"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -210,7 +208,7 @@
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/male"
                         android:layout_width="100dp"
-                        android:layout_height="50dp"
+                        android:layout_height="24dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/male"
                         android:textAlignment="textStart"
@@ -221,7 +219,7 @@
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/female"
                         android:layout_width="100dp"
-                        android:layout_height="50dp"
+                        android:layout_height="24dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/female"
                         android:textAlignment="textStart"
@@ -237,21 +235,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/spectrumSilver3"
-                android:layout_marginVertical="20dp"/>
+                android:layout_marginVertical="24dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/group_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/job_group"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -270,8 +268,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/group_card"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="16dp"
                     android:backgroundTint="@color/clear"
                     android:stateListAnimator="@null"
                     app:cardCornerRadius="5dp"
@@ -294,7 +292,7 @@
                             android:gravity="center_vertical"
                             android:paddingStart="10dp"
                             android:text="@string/select_your_job_group"
-                            android:textColor="@color/spectrumSilver3"
+                            android:textColor="#666970"
                             android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/group_arrow"
@@ -315,17 +313,44 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/group_chips"
+                <HorizontalScrollView
+                    android:id="@+id/group_chip_scroll_view"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
-                    android:nestedScrollingEnabled="true"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/group_card" />
+                    app:layout_constraintTop_toBottomOf="@id/group_card">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            app:closeIconEnabled="true"
+                            style="@style/BlueChip"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            app:closeIconEnabled="true"
+                            style="@style/GreenChip"/>
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            app:closeIconEnabled="true"
+                            style="@style/OrangeChip"/>
+
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -333,22 +358,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/spectrumSilver3"
-                android:layout_marginVertical="20dp"/>
+                android:layout_marginVertical="24dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:paddingHorizontal="16dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/academic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/academic_background"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -356,7 +380,8 @@
                     android:id="@+id/academic_recycler_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -364,9 +389,8 @@
 
                 <ImageButton
                     android:id="@+id/academic_plus"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:backgroundTint="@color/clear"
                     android:src="@drawable/icon_plus_circle"
                     app:layout_constraintBottom_toBottomOf="@+id/academic"
@@ -384,17 +408,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:paddingHorizontal="16dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/experiences"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/work_histories"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -402,7 +425,8 @@
                     android:id="@+id/experience_recycler_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -410,9 +434,8 @@
 
                 <ImageButton
                     android:id="@+id/experiences_plus"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:backgroundTint="@color/clear"
                     android:src="@drawable/icon_plus_circle"
                     app:layout_constraintBottom_toBottomOf="@+id/experiences"
@@ -425,12 +448,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/spectrumSilver3"
-                android:layout_marginVertical="20dp"/>
+                android:layout_marginVertical="24dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:paddingHorizontal="16dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/certification_text"
@@ -439,8 +462,7 @@
                     android:text="@string/certificates_and_languages"
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_medium"
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
+                    android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -448,7 +470,8 @@
                     android:id="@+id/certification_recycler_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -456,9 +479,8 @@
 
                 <ImageButton
                     android:id="@+id/certification_plus"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:backgroundTint="@color/clear"
                     android:src="@drawable/icon_plus_circle"
                     app:layout_constraintBottom_toBottomOf="@+id/certification_text"
@@ -471,12 +493,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/spectrumSilver3"
-                android:layout_marginVertical="20dp"/>
+                android:layout_marginVertical="24dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:paddingHorizontal="16dp"
                 android:layout_marginBottom="50dp">
 
                 <com.google.android.material.textview.MaterialTextView
@@ -486,8 +508,7 @@
                     android:text="@string/other_specs"
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_medium"
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
+                    android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
 
@@ -495,12 +516,12 @@
                     android:id="@+id/others_text_input_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="10dp"
+                    android:layout_height="218dp"
+                    android:layout_marginTop="16dp"
                     android:backgroundTint="@color/spectrumSilver3"
+                    android:hint="@string/specs_placeholder"
                     app:boxStrokeColor="@color/spectrumSilver3"
                     app:boxStrokeWidth="1dp"
-                    android:hint="@string/specs_placeholder"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -513,7 +534,6 @@
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="start"
                         android:inputType="textMultiLine"
-                        android:maxLines="10"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 

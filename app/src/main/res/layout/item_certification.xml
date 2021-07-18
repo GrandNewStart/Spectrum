@@ -16,7 +16,7 @@
         android:layout_margin="10dp">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/name"
+            android:id="@+id/name_text"
             style="@style/CustomTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/score"
+            android:id="@+id/score_text"
             style="@style/CustomTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -36,12 +36,12 @@
             android:text="SCORE"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/delete"
-            app:layout_constraintStart_toEndOf="@id/name"
+            app:layout_constraintEnd_toStartOf="@+id/delete_text"
+            app:layout_constraintStart_toEndOf="@id/name_text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/delete"
+            android:id="@+id/delete_text"
             style="@style/CustomTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -19,7 +19,7 @@ class PostFragment: BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mBinding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_post, container, false)
         mBinding.apply {
             lifecycleOwner = this@PostFragment

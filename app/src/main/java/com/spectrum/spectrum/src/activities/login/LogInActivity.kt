@@ -29,15 +29,6 @@ import org.json.JSONObject
 class LogInActivity: BaseActivity() {
 
     private lateinit var mNavController: NavController
-    var mAge: Int? = null
-    var mSex: String? = null
-    var mJobGroup1: JobGroup? = null
-    var mJobGroup2: JobGroup? = null
-    var mJobGroup3: JobGroup? = null
-    var mEduItems = ArrayList<EduItem>()
-    var mExpItems = ArrayList<ExpItem>()
-    var mCertItems = ArrayList<CertItem>()
-    var mComments: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,23 +1,35 @@
 package com.spectrum.spectrum.src.activities.main.fragments.home
 
-import android.view.View
 import android.widget.EditText
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.FragmentHomeBinding
 import com.spectrum.spectrum.src.models.Post
 import com.spectrum.spectrum.src.models.Info
-import com.spectrum.spectrum.src.config.Constants
+import com.spectrum.spectrum.src.models.JobGroup
 
 class HomeViewModel: ViewModel() {
 
+    var mIsDataLoaded = false
     private var mHottestPosts = ArrayList<Post>()
     private var mLatestPosts = ArrayList<Post>()
-    val mSearchHasFocusLiveData = MutableLiveData<Boolean>()
+    var mJobGroup1: JobGroup? = null
+    var mJobGroup2: JobGroup? = null
+    var mJobGroup3: JobGroup? = null
 
     fun bindViews(binding: FragmentHomeBinding) {
+        if (mIsDataLoaded)  {
+            binding.apply {
+                jobGroup1 = mJobGroup1
+                jobGroup2 = mJobGroup2
+                jobGroup3 = mJobGroup3
+                hottest = mHottestPosts
+                latest = mLatestPosts
+            }
+            return
+        }
+        mIsDataLoaded = true
         binding.apply {
             // TEST CODE START
                 mHottestPosts.apply {
@@ -48,11 +60,12 @@ class HomeViewModel: ViewModel() {
                     add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
                     add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
                 }
-            // TEST CODE END
-
-            searchFocusListener = View.OnFocusChangeListener{ _, hasFocus -> mSearchHasFocusLiveData.value = hasFocus }
+            jobGroup1 = mJobGroup1
+            jobGroup2 = mJobGroup2
+            jobGroup3 = mJobGroup3
             hottest = mHottestPosts
             latest = mLatestPosts
+            // TEST CODE END
         }
     }
 
@@ -65,6 +78,10 @@ class HomeViewModel: ViewModel() {
 
     fun fabAction(fragment: HomeFragment) {
         fragment.findNavController().navigate(R.id.home_to_create_post)
+    }
+
+    fun proceedToPost(fragment: HomeFragment, id: String) {
+        fragment.findNavController().navigate(R.id.home_to_post)
     }
 
     companion object {

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="dialog"
+            type="com.spectrum.spectrum.src.dialogs.ExperienceDialog" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/icon_back"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="@color/clearGray" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="@string/experiences"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/save_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:onClick="@{()->dialog.saveButtonAction()}"
+            android:text="@string/save"
+            android:textColor="@color/spectrumBlue"
+            android:textSize="14sp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <EditText
+                        android:id="@+id/company_edit_text"
+                        experience_dialog="@{dialog}"
+                        style="@style/UnderLineEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:hint="@string/name_of_company"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/duty_edit_text"
+                        experience_dialog="@{dialog}"
+                        style="@style/UnderLineEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:hint="@string/duty"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/company_edit_text" />
+
+
+                    <EditText
+                        android:id="@+id/position_edit_text"
+                        experience_dialog="@{dialog}"
+                        style="@style/UnderLineEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:hint="@string/position"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/duty_edit_text" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/start_date_view"
+                        experience_dialog="@{dialog}"
+                        experience_start_text="@{periodStartText}"
+                        experience_end_text="@{null}"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/spinner_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/period_divider"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/position_edit_text">
+
+                        <TextView
+                            android:id="@+id/period_start_text"
+                            style="@style/CustomTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@string/start_date"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/period_start_drop"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/period_start_drop"
+                            experience_dialog="@{dialog}"
+                            experience_start_text="@{periodStartText}"
+                            experience_end_text="@{null}"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_margin="@dimen/default_margin"
+                            android:backgroundTint="@color/clear"
+                            android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/period_divider"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/position_edit_text" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/end_date_view"
+                        experience_dialog="@{dialog}"
+                        experience_start_text="@{null}"
+                        experience_end_text="@{periodEndText}"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/spinner_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/period_divider"
+                        app:layout_constraintTop_toBottomOf="@+id/position_edit_text">
+
+                        <TextView
+                            android:id="@+id/period_end_text"
+                            style="@style/CustomTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:text="@string/end_date"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/period_end_drop"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/period_end_drop"
+                            experience_dialog="@{dialog}"
+                            experience_start_text="@{null}"
+                            experience_end_text="@{periodEndText}"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_margin="@dimen/default_margin"
+                            android:backgroundTint="@color/clear"
+                            android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

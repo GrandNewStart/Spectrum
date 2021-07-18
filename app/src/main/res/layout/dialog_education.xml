@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="dialog"
+            type="com.spectrum.spectrum.src.dialogs.EducationDialog" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/icon_back"
+            android:onClick="@{()->dialog.dismiss()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="@color/clearGray" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="@string/academic_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:onClick="@{()->dialog.saveButtonAction()}"
+            android:text="@string/save"
+            android:textColor="@color/spectrumBlue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/locale_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="36dp">
+
+                    <Spinner
+                        android:id="@+id/locale_spinner"
+                        education_dialog="@{dialog}"
+                        education_dialog_grade_text="@{gradeText}"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/spinner_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/locale_drop"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/clear"
+                        android:foreground="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/locale_spinner"
+                        app:layout_constraintEnd_toEndOf="@+id/locale_spinner"
+                        app:layout_constraintTop_toTopOf="@+id/locale_spinner"
+                        app:rippleColor="@color/clearGray" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginHorizontal="16dp">
+
+                    <Spinner
+                        android:id="@+id/school_spinner"
+                        education_dialog="@{dialog}"
+                        education_dialog_grade_text="@{gradeText}"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/spinner_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/school_drop"
+                        android:layout_marginEnd="8dp"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@color/clear"
+                        android:foreground="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/school_spinner"
+                        app:layout_constraintEnd_toEndOf="@+id/school_spinner"
+                        app:layout_constraintTop_toTopOf="@+id/school_spinner"
+                        app:rippleColor="@color/clearGray" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginHorizontal="16dp">
+
+                    <Spinner
+                        android:id="@+id/graduation_spinner"
+                        education_dialog="@{dialog}"
+                        education_dialog_grade_text="@{gradeText}"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/spinner_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/graduation_drop"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/clear"
+                        android:foreground="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/graduation_spinner"
+                        app:layout_constraintEnd_toEndOf="@+id/graduation_spinner"
+                        app:layout_constraintTop_toTopOf="@+id/graduation_spinner"
+                        app:rippleColor="@color/clearGray" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp">
+
+                    <EditText
+                        android:id="@+id/school_name_edit_text"
+                        style="@style/UnderLineEditText"
+                        education_dialog="@{dialog}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:hint="@string/name_of_school"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/major_edit_text"
+                        style="@style/UnderLineEditText"
+                        education_dialog="@{dialog}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:hint="@string/major"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/school_name_edit_text" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/grade_spinner"
+                        education_dialog="@{dialog}"
+                        education_dialog_grade_text="@{gradeText}"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="9dp"
+                        android:background="@drawable/spinner_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/grade_divider"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/major_edit_text">
+
+                        <TextView
+                            android:id="@+id/grade_text"
+                            style="@style/CustomTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/default_margin"
+                            android:text="@string/grades"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/grade_drop"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@color/clear"
+                        android:foreground="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/grade_spinner"
+                        app:layout_constraintEnd_toEndOf="@+id/grade_spinner"
+                        app:layout_constraintTop_toTopOf="@+id/grade_spinner"
+                        app:rippleColor="@color/clearGray" />
+
+                    <TextView
+                        android:id="@+id/grade_divider"
+                        style="@style/CustomTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/"
+                        app:layout_constraintBottom_toBottomOf="@+id/grade_spinner"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/grade_spinner" />
+
+                    <Spinner
+                        android:id="@+id/grade_sum_spinner"
+                        education_dialog="@{dialog}"
+                        education_dialog_grade_text="@{gradeText}"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginStart="9dp"
+                        android:background="@drawable/spinner_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/grade_divider"
+                        app:layout_constraintTop_toBottomOf="@+id/major_edit_text" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/grade_sum_drop"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/clear"
+                        android:foreground="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/grade_sum_spinner"
+                        app:layout_constraintEnd_toEndOf="@+id/grade_sum_spinner"
+                        app:layout_constraintTop_toTopOf="@+id/grade_sum_spinner"
+                        app:rippleColor="@color/clearGray" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

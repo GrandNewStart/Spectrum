@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.ActivityMainBinding
-import com.spectrum.spectrum.src.activities.main.fragments.home.dialogs.HomeSearchDialog
 import com.spectrum.spectrum.src.customs.BaseActivity
 import com.spectrum.spectrum.src.models.JobGroup
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +18,7 @@ class MainActivity: BaseActivity() {
     private lateinit var mBinding: ActivityMainBinding
     private val mViewModel by viewModels<MainViewModel>()
     private lateinit var navController: NavController
+
     var mJobGroup1: JobGroup? = null
     var mJobGroup2: JobGroup? = null
     var mJobGroup3: JobGroup? = null

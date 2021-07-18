@@ -76,67 +76,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/action_bar"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:foreground="@drawable/icon_back"
+            android:onClick="@{()->viewModel.backButtonAction(fragment)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rippleColor="@color/clearGray" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:text="@string/spec_story"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/back_button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/default_margin"
-                android:background="@android:color/transparent"
-                android:foreground="@drawable/icon_back"
-                android:onClick="@{()->viewModel.backButtonAction(fragment)}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:rippleColor="@color/clearGray" />
-
-            <TextView
-                android:id="@+id/title_text"
-                style="@style/CustomTextView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:text="@string/compare_specs"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/save_button"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/default_margin"
-                android:onClick="@{()->viewModel.markButtonAction(fragment)}"
-                android:src="@drawable/icon_book_mark"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/save_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="@{()->viewModel.markButtonAction(fragment)}"
+            android:src="@drawable/icon_book_mark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/action_bar">
+            app:layout_constraintTop_toBottomOf="@+id/title_text">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/app_bar_size"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical">
 
@@ -147,9 +137,9 @@
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/user_thumbnail_image"
                         image_url="@{userThumbnail}"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="16dp"
                         android:background="@color/spectrumSilver3"
                         android:src="@drawable/icon_person"
                         app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +150,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_marginHorizontal="8dp"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="@+id/user_thumbnail_image"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -169,40 +159,102 @@
 
                         <TextView
                             android:id="@+id/user_name_text"
-                            style="@style/CustomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/default_margin"
-                            android:text="@{userName}" />
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="스펙왕"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/date_text"
-                            style="@style/CustomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/default_margin"
-                            android:text="@{date}"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="06/28 20:25"
                             android:textColor="@color/spectrumGray2"
                             android:textSize="12sp" />
 
                     </LinearLayout>
 
-                    <HorizontalScrollView
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_height="32dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/user_thumbnail_image">
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/user_info_chips"
-                            post_user_info="@{userInfo}"
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_1"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center"
+                            android:text="취업준비"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="@color/clear"
+                            app:chipMinTouchTargetSize="0dp"
+                            app:chipStrokeColor="#EAEAEA"
+                            app:chipStrokeWidth="1dp" />
 
-                    </HorizontalScrollView>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="7dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center"
+                            android:text="23세"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#EAEAEA"
+                            app:chipMinTouchTargetSize="0dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="7dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center"
+                            android:text="여성"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#EAEAEA"
+                            app:chipMinTouchTargetSize="0dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="7dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center"
+                            android:text="IT/인터넷"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#EAEAEA"
+                            app:chipMinTouchTargetSize="0dp" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="7dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center"
+                            android:text="디자인"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            app:chipBackgroundColor="#EAEAEA"
+                            app:chipMinTouchTargetSize="0dp" />
+
+                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -212,12 +264,13 @@
 
                     <TextView
                         android:id="@+id/post_title_text"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@{postTitle}"
+                        android:text="졸업 전 대기업 인턴"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -225,11 +278,14 @@
 
                     <TextView
                         android:id="@+id/post_content_text"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:text="@{postContent}"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:lineSpacingExtra="4dp"
+                        android:text="UXUI 직무를 희망하는데,\n대기업 인턴하려면 어떤 스펙을 더 쌓아야 할까요?"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -238,7 +294,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_margin="16dp"
                         app:cardBackgroundColor="@color/spectrumLightBlue"
                         app:cardCornerRadius="@dimen/default_corner_radius"
                         app:cardElevation="0dp"
@@ -250,71 +306,79 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/default_margin"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="12dp"
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/CustomTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="@string/academic_background" />
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/academic_background"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                style="@style/CustomTextView"
                                 post_edu_items="@{educations}"
-                                android:nestedScrollingEnabled="false"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin" />
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="16dp"
+                                android:nestedScrollingEnabled="false" />
 
                             <TextView
-                                style="@style/CustomTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="@string/experiences" />
+                                android:layout_marginTop="24dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/experiences"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                style="@style/CustomTextView"
                                 post_exp_items="@{experiences}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="16dp"
                                 android:nestedScrollingEnabled="false" />
 
                             <TextView
-                                style="@style/CustomTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="@string/certificates_and_languages" />
+                                android:layout_marginTop="24dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/certificates_and_languages"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                style="@style/CustomTextView"
                                 post_cert_items="@{certifications}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
+                                android:layout_marginHorizontal="8dp"
+                                android:layout_marginTop="16dp"
                                 android:nestedScrollingEnabled="false" />
 
                             <TextView
-                                style="@style/CustomTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="@string/other_specs" />
+                                android:layout_marginTop="24dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/other_specs"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
 
                             <TextView
-                                style="@style/CustomTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/default_margin"
-                                android:text="@{otherSpecs}" />
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="없음"
+                                android:textColor="#45474B"
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -324,18 +388,18 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/top_five_responses_text"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:fontFamily="@font/roboto_bold"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="32dp"
+                        android:fontFamily="@font/roboto_regular"
                         android:text="@string/top_five_responses"
-                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -344,7 +408,8 @@
                         android:id="@+id/top_five_view"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/top_five_responses_text">
@@ -371,9 +436,9 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:background="@color/spectrumSilver2"
-                        android:layout_marginTop="@dimen/default_margin"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="24dp"
+                        android:background="#F6F6F6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/top_five_view" />
@@ -386,13 +451,14 @@
 
                     <TextView
                         android:id="@+id/education_view"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
-                        android:fontFamily="@font/roboto_bold"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/roboto_regular"
                         android:text="@string/academic_background"
-                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -402,8 +468,8 @@
                         post_responses="@{educationResponseOptions}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/default_margin"
-                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/education_view" />
@@ -413,17 +479,18 @@
                         post_response_options="@{educationResponses}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/default_margin"
-                        android:layout_marginVertical="@dimen/default_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="28dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/education_chip_recycler_view_1" />
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:background="@color/spectrumSilver2"
+                        android:layout_height="10dp"
                         android:layout_marginTop="@dimen/default_double_margin"
+                        android:background="#F6F6F6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/education_chip_recycler_view_2" />
@@ -436,13 +503,13 @@
 
                     <TextView
                         android:id="@+id/experience_view"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/default_margin"
-                        android:fontFamily="@font/roboto_bold"
+                        android:fontFamily="@font/roboto_regular"
                         android:text="@string/experiences"
-                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -470,9 +537,9 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:background="@color/spectrumSilver2"
-                        android:layout_marginTop="@dimen/default_double_margin"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="24dp"
+                        android:background="#F6F6F6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/experience_chip_recycler_view_2" />
@@ -485,13 +552,13 @@
 
                     <TextView
                         android:id="@+id/certification_view"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/default_margin"
-                        android:fontFamily="@font/roboto_bold"
+                        android:fontFamily="@font/roboto_regular"
                         android:text="@string/certificates_and_languages"
-                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -519,9 +586,9 @@
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="25dp"
-                        android:background="@color/spectrumSilver2"
-                        android:layout_marginTop="@dimen/default_double_margin"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="24dp"
+                        android:background="#F6F6F6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/certification_chip_recycler_view_2" />
@@ -534,13 +601,13 @@
 
                     <TextView
                         android:id="@+id/other_specs_view"
-                        style="@style/CustomTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/default_margin"
-                        android:fontFamily="@font/roboto_bold"
+                        android:fontFamily="@font/roboto_regular"
                         android:text="@string/other_specs"
-                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -561,10 +628,18 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/default_margin"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/other_specs_chip_recycler_view_1" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="24dp"
+                        android:background="#F6F6F6"
+                        app:layout_constraintTop_toBottomOf="@+id/other_specs_chip_recycler_view_2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

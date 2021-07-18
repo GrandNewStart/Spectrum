@@ -12,8 +12,8 @@ import com.spectrum.spectrum.src.models.JobGroup
 
 class HomeFragment: BaseFragment() {
 
-    private lateinit var mBinding: FragmentHomeBinding
-    private val mViewModel by viewModels<HomeViewModel>()
+    lateinit var mBinding: FragmentHomeBinding
+    val mViewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,16 +27,6 @@ class HomeFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-            mSearchHasFocusLiveData.observe(viewLifecycleOwner, { hasFocus ->
-                if (hasFocus) {
-                    mBinding.appBarButton.setImageResource(R.drawable.icon_back)
-                }
-                else {
-                    mBinding.appBarButton.setImageResource(R.drawable.icon_logo_small)
-                    mBinding.searchEditText.clearFocus()
-                    showKeyboard(mBinding.root, false)
-                }
-            })
             bindViews(mBinding)
         }
         return mBinding.root
