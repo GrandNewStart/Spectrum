@@ -12,6 +12,7 @@ import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.config.Constants
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.config.Helpers.formatDate
 import com.spectrum.spectrum.src.models.JobGroup
 import org.w3c.dom.Text
@@ -23,6 +24,7 @@ object BindingAdapters {
     @JvmStatic
     fun bindChipGroup(chipGroup: ChipGroup, items: ArrayList<JobGroup>?, dialog: JobGroupDialog) {
         chipGroup.apply {
+            setChipSpacing(0)
             items?.forEach {
                 val chip = Chip(context).apply {
                     text = it.name

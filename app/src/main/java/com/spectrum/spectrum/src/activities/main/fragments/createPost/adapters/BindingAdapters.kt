@@ -42,8 +42,8 @@ object BindingAdapters {
                 when (position) {
                     0 -> { items = arrayListOf("주제") }
                     1 -> { items = arrayListOf("주제", "자유고민") }
-                    2 -> { items = arrayListOf("주제", "자유고민") }
-                    3 -> { items = arrayListOf("주제", "자유고민", "최종합격") }
+                    2 -> { items = arrayListOf("주제", "자유고민", "자유후기") }
+                    3 -> { items = arrayListOf("주제", "자유후기") }
                 }
                 subSpinner.adapter = ArrayAdapter(spinner.context, android.R.layout.simple_dropdown_item_1line, items)
             }

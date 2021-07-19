@@ -3,11 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/company"
-    app:startDestination="@id/companyFragment">
+    app:startDestination="@id/company_fragment">
 
     <fragment
-        android:id="@+id/companyFragment"
+        android:id="@+id/company_fragment"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment"
-        android:label="Company" />
+        android:label="Company" >
+        <action
+            android:id="@+id/company_to_company_info"
+            app:destination="@id/company_info_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/company_info_fragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoFragment"
+        android:label="CompanyInfo" />
 
 </navigation>

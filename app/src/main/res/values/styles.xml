@@ -19,8 +19,8 @@
     </style>
 
     <style name="ChipText">
-        <item name="fontFamily">@font/roboto_regular</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/spectrumGray3</item>
         <item name="android:textSize">12sp</item>
     </style>
 
@@ -136,6 +136,21 @@
         <item name="android:textSize">12sp</item>
         <item name="chipMinHeight">36dp</item>
         <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="DefaultChip"
+        parent="Widget.MaterialComponents.Chip.Choice"/>
+
+    <style name="ResponseChip"
+        parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/clear_light_blue</item>
+        <item name="android:textColor">@color/silver_gray</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/silver_light_blue</item>
+        <item name="chipMinHeight">36dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
     </style>
 
     <style name="DialogSlideAnimation">

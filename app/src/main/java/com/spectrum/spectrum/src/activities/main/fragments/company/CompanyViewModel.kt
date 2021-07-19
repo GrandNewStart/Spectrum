@@ -8,6 +8,7 @@ import com.spectrum.spectrum.databinding.FragmentCompanyBinding
 import com.spectrum.spectrum.src.models.Company
 import com.spectrum.spectrum.src.models.Duty
 import com.spectrum.spectrum.src.config.Constants
+import com.spectrum.spectrum.src.models.Industry
 import com.spectrum.spectrum.src.models.JobGroup
 
 class CompanyViewModel: ViewModel() {
@@ -16,34 +17,33 @@ class CompanyViewModel: ViewModel() {
         mSearchHasFocusLiveData.value = hasFocus
     }
     val mSearchHasFocusLiveData = MutableLiveData<Boolean>()
-    private var mMyJobGroups = ArrayList<JobGroup>().apply {
-        add(JobGroup(0,  "프론트엔드"))
-        add(JobGroup(1,  "UI/UX"))
-        add(JobGroup(2, "아무거나"))
+    private var mIndustries = ArrayList<Industry>().apply {
+        add(Industry(-1,  "전체"))
+        add(Industry(0,  "서비스업"))
+        add(Industry(1,  "금융/은행업"))
+        add(Industry(2, "IT/정보통신업"))
     }
     private var mMyCompanies = ArrayList<Company>().apply {
-        val duties = arrayListOf(Duty(0, 0, "프론트엔드"), Duty(1, 0, "UI/UX"), Duty(2, 0, "아무거나"),)
-        add(Company("카카오", 20, duties))
-        add(Company("카카오", 20, duties))
-        add(Company("카카오", 20, duties))
-        add(Company("카카오", 20, duties))
-        add(Company("카카오", 20, duties))
+        add(Company("카카오", "IT/정보통신업", 20))
+        add(Company("카카오", "IT/정보통신업", 20))
+        add(Company("카카오", "IT/정보통신업", 20))
+        add(Company("카카오", "IT/정보통신업", 20))
+        add(Company("카카오", "IT/정보통신업", 20))
     }
-    private var mcompanies = ArrayList<Company>().apply {
-        val duties = arrayListOf(Duty(0, 0, "프론트엔드"), Duty(1, 0, "UI/UX"), Duty(2, 0, "아무거나"),)
-        add(Company("카카오 모빌리티", 20, duties))
-        add(Company("우아한 형제들", 20, duties))
-        add(Company("네이버", 20, duties))
-        add(Company("당근마켓", 20, duties))
-        add(Company("정승 네트워크", 20, duties))
+    private var mCompanies = ArrayList<Company>().apply {
+        add(Company("구글 코리아", "IT/정보통신업", 20))
+        add(Company("네이버웹툰컴퍼니",  "IT/정보통신업", 20))
+        add(Company("네이버", "IT/정보통신업", 20))
+        add(Company("당근마켓", "IT/정보통신업", 20))
+        add(Company("정승 네트워크", "IT/정보통신업", 20))
     }
 
     fun bindViews(binding: FragmentCompanyBinding) {
         binding.apply {
             searchFocusListener = mSearchFocusChangeListener
-            myJobGroups = mMyJobGroups
+            industries = mIndustries
             myCompanies = mMyCompanies
-            companies = mcompanies
+            companies = mCompanies
         }
     }
 

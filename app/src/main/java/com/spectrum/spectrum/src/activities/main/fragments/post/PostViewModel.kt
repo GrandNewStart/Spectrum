@@ -1,5 +1,6 @@
 package com.spectrum.spectrum.src.activities.main.fragments.post
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.databinding.FragmentPostBinding
@@ -24,18 +25,15 @@ class PostViewModel: ViewModel() {
     private var mOtherSpecs: String? = null
 
     private var mTopFiveResponses = ArrayList<Evaluation>()
-
     private var mEduResponses = ArrayList<Evaluation>()
-    private var mEduResponseOptions = ArrayList<Evaluation>()
-
     private var mExpResponses = ArrayList<Evaluation>()
-    private var mExpResponseOptions = ArrayList<Evaluation>()
-
     private var mCertResponses = ArrayList<Evaluation>()
-    private var mCertResponseOptions = ArrayList<Evaluation>()
-
     private var mOtherResponses = ArrayList<Evaluation>()
-    private var mOtherResponseOptions = ArrayList<Evaluation>()
+
+    var mEduResponse: Evaluation? = null
+    var mExpResponse: Evaluation? = null
+    var mCertResponse: Evaluation? = null
+    var mOtherResponse: Evaluation? = null
 
     fun backButtonAction(fragment: PostFragment) {
         fragment.findNavController().popBackStack()
@@ -43,6 +41,14 @@ class PostViewModel: ViewModel() {
 
     fun markButtonAction(fragment: PostFragment) {
         fragment.showToast(Constants.under_construction)
+    }
+
+    fun leaveResponseAction(fragment: PostFragment) {
+        Log.d(TAG, "--- LEAVE MY RESPONSE ---")
+        Log.d(TAG, "    EDU: ${mEduResponse?.name}")
+        Log.d(TAG, "    EXP: ${mExpResponse?.name}")
+        Log.d(TAG, "    CERT: ${mCertResponse?.name}")
+        Log.d(TAG, "    OTHER: ${mOtherResponse?.name}")
     }
 
     fun bindViews(binding: FragmentPostBinding) {
@@ -62,17 +68,13 @@ class PostViewModel: ViewModel() {
 
                 topFiveResponses = mTopFiveResponses
 
-                educationResponseOptions = mEduResponseOptions
                 educationResponses = mEduResponses
 
                 experienceResponses = mExpResponses
-                experienceResponseOptions = mExpResponseOptions
 
                 certificationResponses = mCertResponses
-                certificationResponseOptions = mCertResponseOptions
 
                 otherSpecsResponses = mOtherResponses
-                otherSpecResponseOptions = mOtherResponseOptions
             }
             return
         }
@@ -103,27 +105,27 @@ class PostViewModel: ViewModel() {
                 mTopFiveResponses.add(Evaluation(3, "어학 점수 좋아요", 8))
                 mTopFiveResponses.add(Evaluation(4, "직무 자격증 좋아요", 6))
 
-                mEduResponseOptions.add(Evaluation(0, "학점 좋아요", 5))
+                mEduResponses.add(Evaluation(0, "학점 좋아요", 5))
                 mEduResponses.add(Evaluation(0, "학점 좋아요", 0))
                 mEduResponses.add(Evaluation(1, "학점 보통", 0))
                 mEduResponses.add(Evaluation(2, "학점 UP", 0))
 
                 mExpResponses.add(Evaluation(0, "인턴 경험 좋아요", 18))
                 mExpResponses.add(Evaluation(1, "인턴 경험 UP", 5))
-                mExpResponseOptions.add(Evaluation(0, "인턴 경험은 어때요?", 0))
+                mExpResponses.add(Evaluation(0, "인턴 경험은 어때요?", 0))
 
                 mCertResponses.add(Evaluation(0, "어학 점수 좋아요", 8))
                 mCertResponses.add(Evaluation(1, "직무 자격증 좋아요", 6))
-                mCertResponseOptions.add(Evaluation(0, "어학 점수 UP", 0))
-                mCertResponseOptions.add(Evaluation(1, "직무 자격증은 어때요?", 0))
-                mCertResponseOptions.add(Evaluation(2, "직무 자격증 UP", 0))
+                mCertResponses.add(Evaluation(0, "어학 점수 UP", 0))
+                mCertResponses.add(Evaluation(1, "직무 자격증은 어때요?", 0))
+                mCertResponses.add(Evaluation(2, "직무 자격증 UP", 0))
 
                 mOtherResponses.add(Evaluation(0, "공모전의 어때요?", 13))
                 mOtherResponses.add(Evaluation(1, "대외활동은 어때요?", 9))
-                mOtherResponseOptions.add(Evaluation(0, "공모전 좋아요", 0))
-                mOtherResponseOptions.add(Evaluation(1, "대외활동은 좋아요", 0))
-                mOtherResponseOptions.add(Evaluation(2, "공모전 UP", 0))
-                mOtherResponseOptions.add(Evaluation(3, "대외활동 UP", 0))
+                mOtherResponses.add(Evaluation(0, "공모전 좋아요", 0))
+                mOtherResponses.add(Evaluation(1, "대외활동은 좋아요", 0))
+                mOtherResponses.add(Evaluation(2, "공모전 UP", 0))
+                mOtherResponses.add(Evaluation(3, "대외활동 UP", 0))
 
                 userName = mUserName
                 userThumbnail = mUserThumbnail
@@ -139,19 +141,19 @@ class PostViewModel: ViewModel() {
 
                 topFiveResponses = mTopFiveResponses
 
-                educationResponseOptions = mEduResponseOptions
                 educationResponses = mEduResponses
 
                 experienceResponses = mExpResponses
-                experienceResponseOptions = mExpResponseOptions
 
                 certificationResponses = mCertResponses
-                certificationResponseOptions = mCertResponseOptions
 
                 otherSpecsResponses = mOtherResponses
-                otherSpecResponseOptions = mOtherResponseOptions
             // TEST CODE END
         }
+    }
+
+    companion object {
+        val TAG = PostViewModel::class.java.simpleName.toString()
     }
 
 }

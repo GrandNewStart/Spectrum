@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.button.MaterialButton
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.login.adapters.JobGroupAdapter
+import com.spectrum.spectrum.src.activities.main.fragments.home.adapters.JobGroupAdapter
 import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.models.JobGroup
 

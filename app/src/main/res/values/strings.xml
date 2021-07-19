@@ -79,5 +79,10 @@
     <string name="you_can_edit_specs_later">스펙 선택 후 추가 수정 가능합니다</string>
     <string name="edit_spec">스펙 수정</string>
     <string name="edit_spec_message">연령, 성별, 직군은 필수입력항목입니다</string>
+    <string name="company_info">기업정보</string>
     <string name="overwrite_changes_to_current_spec">수정 사항을 나의 기존 스펙에 반영</string>
+    <string name="register_to_favortie_companies">관심기업 등록</string>
+    <string name="spec_analysis">스펙트럼 분석</string>
+    <string name="see_more_specs_of_this_company">이 기업의 또 다른<br/>\n스펙트럼을 만나보세요</string>
+    <string name="leave_responses">의견 남기기</string>
 </resources>

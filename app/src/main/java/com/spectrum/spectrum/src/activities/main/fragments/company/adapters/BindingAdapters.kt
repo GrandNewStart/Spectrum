@@ -9,33 +9,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.main.fragments.company.adapters.MyJobGroupAdapter
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.models.Company
 import com.spectrum.spectrum.src.models.Duty
+import com.spectrum.spectrum.src.models.Industry
 import com.spectrum.spectrum.src.models.JobGroup
 
 object BindingAdapters {
 
     @BindingAdapter("companies_vertical")
     @JvmStatic
-    fun bindCompaniesVertical(recyclerView: RecyclerView, companies: ArrayList<Company>?) {
-        if (companies == null) return
+    fun bindCompaniesVertical(recyclerView: RecyclerView, items: ArrayList<Company>?) {
+        val companies = items ?: ArrayList()
         recyclerView.apply {
             if (layoutManager == null) {
                 layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
                 addItemDecoration(object : RecyclerView.ItemDecoration() {
                     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                         super.getItemOffsets(outRect, view, parent, state)
-                        val spacing = resources.getDimensionPixelSize(R.dimen.default_margin)
-                        outRect.top += spacing
-                        outRect.bottom += spacing
-                        outRect.left += spacing
-                        outRect.right += spacing
+                        val pos = parent.getChildLayoutPosition(view)
+                        if (pos == 0) outRect.top += dp2px(24)
+                        outRect.bottom += dp2px(24)
+                        outRect.left += dp2px(16)
+                        outRect.right += dp2px(16)
                     }
                 })
             }
             if (adapter == null) {
-                adapter = CompanyAdapter(companies, CompanyAdapter.VERTICAL)
+                adapter = CompanyVerticalAdapter(companies)
                 return
             }
             adapter?.notifyDataSetChanged()
@@ -44,68 +45,49 @@ object BindingAdapters {
 
     @BindingAdapter("companies_horizontal")
     @JvmStatic
-    fun bindCompaniesHorizontal(recyclerView: RecyclerView, companies: ArrayList<Company>?) {
-        if (companies == null) return
+    fun bindCompaniesHorizontal(recyclerView: RecyclerView, items: ArrayList<Company>?) {
+        val companies = items ?: ArrayList()
         recyclerView.apply {
             if (layoutManager == null) {
                 layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
                 addItemDecoration(object : RecyclerView.ItemDecoration() {
                     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                         super.getItemOffsets(outRect, view, parent, state)
-                        val spacing = resources.getDimensionPixelSize(R.dimen.default_double_margin)
-                        outRect.top += spacing
-                        outRect.bottom += spacing
-                        outRect.left += spacing
+                        val pos = parent.getChildLayoutPosition(view)
+                        if (pos == 0) outRect.left += dp2px(16)
+                        outRect.top += dp2px(24)
+                        outRect.bottom += dp2px(24)
+                        outRect.right += dp2px(16)
                     }
                 })
                 PagerSnapHelper().attachToRecyclerView(this)
             }
             if (adapter == null) {
-                adapter = CompanyAdapter(companies, CompanyAdapter.HORIZONTAL)
+                adapter = CompanyHorizontalAdapter(companies)
                 return
             }
             adapter?.notifyDataSetChanged()
         }
     }
 
-    @BindingAdapter("company_duties")
+    @BindingAdapter("company_industry_chips")
     @JvmStatic
-    fun bindDutyChipGroup(chipGroup: ChipGroup, duties: ArrayList<Duty>?) {
-        if (duties == null) return
-        chipGroup.apply {
-            for (i in 0 until duties.size) {
-                Chip(chipGroup.context).apply {
-                    setChipStrokeWidthResource(R.dimen.default_stroke_width)
-                    setChipStrokeColorResource(R.color.spectrumSilver3)
-                    setChipBackgroundColorResource(if (i == 0) R.color.clear else R.color.spectrumSilver3)
-                    setTextAppearance(R.style.ChipText)
-                    text = duties[i].name
-                    addView(this)
-                }
-            }
-        }
-    }
-
-    @BindingAdapter("company_job_groups")
-    @JvmStatic
-    fun bindDutyChips(recyclerView: RecyclerView, duties: ArrayList<JobGroup>?) {
-        if (duties == null) return
+    fun bindIndustryChipGroup(recyclerView: RecyclerView, items: ArrayList<Industry>?) {
         recyclerView.apply {
             if (layoutManager == null) {
-                layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                addItemDecoration(object : RecyclerView.ItemDecoration(){
                     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                         super.getItemOffsets(outRect, view, parent, state)
-                        val spacing = recyclerView.resources.getDimensionPixelSize(R.dimen.default_half_margin)
-                        outRect.left += spacing
-                        outRect.right += spacing
-                        outRect.top += spacing/2
-                        outRect.bottom += spacing/2
+                        outRect.left += dp2px(4)
+                        outRect.right += dp2px(4)
+                        outRect.top += dp2px(8)
+                        outRect.bottom += dp2px(8)
                     }
                 })
             }
             if (adapter == null) {
-                adapter = MyJobGroupAdapter(duties)
+                adapter = IndustryAdapter(items ?: arrayListOf())
                 return
             }
             adapter?.notifyDataSetChanged()

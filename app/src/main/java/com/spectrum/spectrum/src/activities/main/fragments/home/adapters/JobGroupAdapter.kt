@@ -1,4 +1,4 @@
-package com.spectrum.spectrum.src.activities.login.adapters
+package com.spectrum.spectrum.src.activities.main.fragments.home.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
