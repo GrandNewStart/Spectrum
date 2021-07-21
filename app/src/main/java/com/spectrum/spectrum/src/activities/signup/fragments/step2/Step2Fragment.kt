@@ -195,6 +195,10 @@ class Step2Fragment: BaseFragment() {
                 mBinding.next.isEnabled = (mEmailLiveData.value != null)
             }
         })
+        // TEST CODE START
+//        val bundle = bundleOf("email" to "hbjw123@naver.com", "password" to "ilikeit0801!")
+//        findNavController().navigate(R.id.step2_to_find_password, bundle)
+        // TEST CODE END
         return mBinding.root
     }
 
@@ -233,8 +237,8 @@ class Step2Fragment: BaseFragment() {
         lifecycleScope.launch {
             try {
                 retrofit.create(SignUpApi::class.java).checkEmail(email).apply {
-                    Log.d(TAG,"---> $this")
                     if (isSuccess) {
+                        Log.d(TAG, "---> CHECK EMAIL SUCCESS")
                         mEmailLiveData.value = email
                         showToast(Constants.valid_email)
                         return@launch

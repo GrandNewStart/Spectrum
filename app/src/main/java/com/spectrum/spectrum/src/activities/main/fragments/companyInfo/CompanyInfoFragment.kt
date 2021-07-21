@@ -23,7 +23,7 @@ class CompanyInfoFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-
+            bindViews(mBinding)
         }
         return mBinding.root
     }

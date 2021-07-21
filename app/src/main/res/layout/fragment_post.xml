@@ -6,9 +6,9 @@
         <import type="android.view.View"/>
         <import type="java.util.ArrayList"/>
         <import type="com.spectrum.spectrum.src.models.Evaluation"/>
-        <import type="com.spectrum.spectrum.src.models.EduItem"/>
-        <import type="com.spectrum.spectrum.src.models.ExpItem"/>
-        <import type="com.spectrum.spectrum.src.models.CertItem"/>
+        <import type="com.spectrum.spectrum.src.models.Education"/>
+        <import type="com.spectrum.spectrum.src.models.Experience"/>
+        <import type="com.spectrum.spectrum.src.models.License"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment" />
@@ -35,13 +35,13 @@
             type="String" />
         <variable
             name="educations"
-            type="ArrayList&lt;EduItem&gt;" />
+            type="ArrayList&lt;Education&gt;" />
         <variable
             name="experiences"
-            type="ArrayList&lt;ExpItem&gt;" />
+            type="ArrayList&lt;Experience&gt;" />
         <variable
             name="certifications"
-            type="ArrayList&lt;CertItem&gt;" />
+            type="ArrayList&lt;License&gt;" />
         <variable
             name="otherSpecs"
             type="String" />
@@ -497,7 +497,8 @@
                         android:id="@+id/experience_view"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/experiences"
                         android:textColor="@color/black"
@@ -538,7 +539,8 @@
                         android:id="@+id/certification_view"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/certificates_and_languages"
                         android:textColor="@color/black"
@@ -578,7 +580,8 @@
                         android:id="@+id/other_specs_view"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/default_margin"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/other_specs"
                         android:textColor="@color/black"

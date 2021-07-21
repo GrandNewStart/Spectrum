@@ -1,16 +1,19 @@
 package com.spectrum.spectrum.src.activities.main.fragments.home.adapters
 
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.findFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.ItemPostHorizontalBinding
 import com.spectrum.spectrum.databinding.ItemPostVerticalBinding
 import com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment
 import com.spectrum.spectrum.src.activities.main.fragments.home.HomeViewModel
+import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.models.Post
 
 class PostVerticalAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<PostVerticalAdapter.ViewHolder>() {
@@ -25,6 +28,15 @@ class PostVerticalAdapter(private val items: ArrayList<Post>): RecyclerView.Adap
         recyclerView.apply {
             mFragment = findFragment()
             mViewModel = mFragment.mViewModel
+
+            layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    val hSpacing = Helpers.dp2px(24)
+                    outRect.bottom += hSpacing
+                }
+            })
         }
     }
 

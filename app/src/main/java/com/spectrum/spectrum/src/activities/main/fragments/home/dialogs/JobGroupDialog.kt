@@ -5,36 +5,31 @@ import android.content.Context
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.button.MaterialButton
+import com.google.gson.annotations.SerializedName
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.main.fragments.home.adapters.JobGroupAdapter
+import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.models.JobGroup
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.http.GET
+import java.lang.Exception
 
 
 class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
 
-    private var mItems = ArrayList<JobGroup>().apply {
-        add(JobGroup(0, "경영/사무", 0))
-        add(JobGroup(1, "영업/고객상담", 0))
-        add(JobGroup(2, "IT/인터넷", 0))
-        add(JobGroup(3, "디자인", 0))
-        add(JobGroup(4, "서비스", 0))
-        add(JobGroup(5, "의료", 0))
-        add(JobGroup(6, "생산/제조", 0))
-        add(JobGroup(7, "건설", 0))
-        add(JobGroup(8, "유통/무역", 0))
-        add(JobGroup(9, "미디어", 0))
-        add(JobGroup(10, "교육", 0))
-        add(JobGroup(11, "특수계층/공공", 0))
-        add(JobGroup(12, "기타", 0))
-    }
+    private var mItems = ArrayList<JobGroup>()
     private var mOnSaveListener: (first: JobGroup?, second: JobGroup?, third: JobGroup?)->Unit = { _, _, _->}
     private var mFirstItem: JobGroup? = null
     private var mSecondItem: JobGroup? = null
@@ -56,19 +51,7 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
         }
         findViewById<MaterialButton>(R.id.back_button).setOnClickListener { dismiss() }
         findViewById<TextView>(R.id.save_text).setOnClickListener { saveButtonAction() }
-        findViewById<RecyclerView>(R.id.job_group_recycler_view).apply {
-            layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.HORIZONTAL)
-            addItemDecoration(object : RecyclerView.ItemDecoration() {
-                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                    super.getItemOffsets(outRect, view, parent, state)
-                    outRect.right = Helpers.dp2px(4)
-                    outRect.left = Helpers.dp2px(4)
-                    outRect.top = Helpers.dp2px(4)
-                    outRect.bottom = Helpers.dp2px(4)
-                }
-            })
-            adapter = JobGroupAdapter(mItems)
-        }
+        getJobGroups()
     }
 
     fun saveButtonAction() {
@@ -87,25 +70,71 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
     }
 
     fun setPreSelectedItems(first: JobGroup?, second: JobGroup?, third: JobGroup?): JobGroupDialog {
-        for (i in 0 until mItems.size) {
-            first?.let {
-                if (it.id == mItems[i].id) {
-                    mItems[i].selectIndex = 1
-                }
-            }
-            second?.let {
-                if (it.id == mItems[i].id) {
-                    mItems[i].selectIndex = 2
-                }
-            }
-            third?.let {
-                if (it.id == mItems[i].id) {
-                    mItems[i].selectIndex = 3
-                }
-            }
-        }
-        findViewById<RecyclerView>(R.id.job_group_recycler_view)?.adapter?.notifyDataSetChanged()
+        mFirstItem = first
+        mSecondItem = second
+        mThirdItem = third
         return this
     }
 
+    private fun getJobGroups() {
+        try {
+            CoroutineScope(Dispatchers.Main).launch {
+                Helpers.retrofit.create(JobGroupApi::class.java).getJobGroups().apply {
+                    if (isSuccess) {
+                        Log.d(TAG, "---> JOB GROUP FETCH SUCCESS")
+                        mItems = result.jobGroupList
+                        mItems.removeAt(0)
+                        for (i in 0 until mItems.size) {
+                            mFirstItem?.let {
+                                if (it.id == mItems[i].id) {
+                                    mItems[i].selectIndex = 1
+                                }
+                            }
+                            mSecondItem?.let {
+                                if (it.id == mItems[i].id) {
+                                    mItems[i].selectIndex = 2
+                                }
+                            }
+                            mThirdItem?.let {
+                                if (it.id == mItems[i].id) {
+                                    mItems[i].selectIndex = 3
+                                }
+                            }
+                        }
+                        findViewById<RecyclerView>(R.id.job_group_recycler_view).apply {
+                            adapter = JobGroupAdapter(mItems)
+                        }
+                        return@launch
+                    }
+                    Log.e(TAG, "---> JOB GROUP FETCH FAILURE: $message")
+                    Toast.makeText(context, Constants.request_failed, Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
+            }
+        }
+        catch (e: Exception) {
+            Log.e(TAG, "---> JOB GROUP FETCH FAILURE: $e")
+            Toast.makeText(context, Constants.request_failed, Toast.LENGTH_SHORT).show()
+            dismiss()
+        }
+    }
+
+    companion object {
+        val TAG = JobGroupDialog::class.java.simpleName
+    }
+
+}
+
+interface JobGroupApi {
+    @GET("/app/datas/jobgroup")
+    suspend fun getJobGroups(): JobGroupResponse
+}
+
+data class JobGroupResponse(
+    var isSuccess: Boolean,
+    var code: Int,
+    var message: String,
+    var result: Result
+) {
+    data class Result(var jobGroupList: ArrayList<JobGroup>)
 }

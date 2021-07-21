@@ -1,7 +1,6 @@
 package com.spectrum.spectrum.src.activities.login.fragments
 
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.ObservableArrayList
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -19,14 +17,13 @@ import com.google.android.material.textview.MaterialTextView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.login.dialogs.JobGroupDialog
 import com.spectrum.spectrum.src.adapters.CertItemAdapter
-import com.spectrum.spectrum.src.adapters.EduItemAdapter
+import com.spectrum.spectrum.src.adapters.EducationAdapter
 import com.spectrum.spectrum.src.adapters.ExpItemAdapter
-import com.spectrum.spectrum.src.models.CertItem
-import com.spectrum.spectrum.src.models.EduItem
-import com.spectrum.spectrum.src.models.ExpItem
+import com.spectrum.spectrum.src.models.License
+import com.spectrum.spectrum.src.models.Education
+import com.spectrum.spectrum.src.models.Experience
 import com.spectrum.spectrum.src.models.JobGroup
 import com.spectrum.spectrum.src.activities.main.MainActivity
-import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.customs.BaseFragment
 import com.spectrum.spectrum.src.customs.CustomTextInputLayout
 import com.spectrum.spectrum.src.dialogs.*
@@ -38,9 +35,9 @@ class Step3Fragment: BaseFragment() {
     private var mJobGroup1: JobGroup? = null
     private var mJobGroup2: JobGroup? = null
     private var mJobGroup3: JobGroup? = null
-    private var mEduItems = ObservableArrayList<EduItem>()
-    private var mExpItems = ObservableArrayList<ExpItem>()
-    private var mCertItems = ObservableArrayList<CertItem>()
+    private var mEduItems = ObservableArrayList<Education>()
+    private var mExpItems = ObservableArrayList<Experience>()
+    private var mCertItems = ObservableArrayList<License>()
     private var mComments: String? = null
 
     override fun onCreateView(
@@ -144,15 +141,7 @@ class Step3Fragment: BaseFragment() {
                     }.show()
             }
             findViewById<RecyclerView>(R.id.academic_recycler_view).apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                adapter = EduItemAdapter(mEduItems)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        outRect.top = dp2px(4)
-                        outRect.bottom = dp2px(4)
-                    }
-                })
+                adapter = EducationAdapter(mEduItems)
             }
             // 경력 설정
             findViewById<ImageButton>(R.id.experiences_plus).setOnClickListener {
@@ -166,15 +155,7 @@ class Step3Fragment: BaseFragment() {
                     }.show()
             }
             findViewById<RecyclerView>(R.id.experience_recycler_view).apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = ExpItemAdapter(mExpItems)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        outRect.top = dp2px(4)
-                        outRect.bottom = dp2px(4)
-                    }
-                })
             }
             // 자격/어학 설정
             findViewById<ImageButton>(R.id.certification_plus).setOnClickListener {
@@ -188,15 +169,7 @@ class Step3Fragment: BaseFragment() {
                     }.show()
             }
             findViewById<RecyclerView>(R.id.certification_recycler_view).apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = CertItemAdapter(mCertItems)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        outRect.top = dp2px(4)
-                        outRect.bottom = dp2px(4)
-                    }
-                })
             }
             // 기타 스펙 설정
             findViewById<CustomTextInputLayout>(R.id.others_text_input_layout).apply {
@@ -217,11 +190,11 @@ class Step3Fragment: BaseFragment() {
                 Log.d(TAG, "---> GROUP2: ${mJobGroup2?.name}")
                 Log.d(TAG, "---> GROUP3: ${mJobGroup3?.name}")
                 Log.d(TAG, "---> EDUCATIONS(${mEduItems.size})")
-                for (item in mEduItems) { Log.d(TAG, "      ㄴ: ${item.school}") }
+                for (item in mEduItems) { Log.d(TAG, "      ㄴ: ${item.schoolName}") }
                 Log.d(TAG, "---> EXPERIENCES(${mExpItems.size})")
-                for (item in mExpItems) { Log.d(TAG, "      ㄴ: ${item.company}") }
+                for (item in mExpItems) { Log.d(TAG, "      ㄴ: ${item.companyName}") }
                 Log.d(TAG, "---> CERTIFICATIONS(${mCertItems.size})")
-                for (item in mCertItems) { Log.d(TAG, "      ㄴ: ${item.name}") }
+                for (item in mCertItems) { Log.d(TAG, "      ㄴ: ${item.certification}") }
                 Log.d(TAG, "---> COMMENTS: $mComments")
             }
         }

@@ -98,6 +98,7 @@
                     android:hint="@string/title"
                     android:imeActionLabel="@string/done"
                     android:imeOptions="actionDone"
+                    android:inputType="text"
                     android:lines="1"
                     android:maxLines="1"
                     android:paddingHorizontal="@dimen/default_margin"

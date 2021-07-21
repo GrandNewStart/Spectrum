@@ -7,7 +7,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/button_ripple"
-    app:cardCornerRadius="25dp"
+    app:cardCornerRadius="24dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/spectrumGray3"
     app:strokeWidth="1dp">

@@ -1,13 +1,16 @@
 package com.spectrum.spectrum.src.activities.main.fragments.home.adapters
 
 import android.content.Context
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.models.JobGroup
 
@@ -42,10 +45,24 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
     var mSecondItem: JobGroup? = null
     var mThirdItem: JobGroup? = null
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                super.getItemOffsets(outRect, view, parent, state)
+                outRect.right = dp2px(8)
+                outRect.left = dp2px(8)
+                outRect.top = dp2px(8)
+                outRect.bottom = dp2px(8)
+            }
+        })
+        recyclerView.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.HORIZONTAL)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_chip, parent, false)
-        view.layoutParams.height = dp2px(36)
+        view.layoutParams.height = dp2px(48)
         return ViewHolder(view)
     }
 

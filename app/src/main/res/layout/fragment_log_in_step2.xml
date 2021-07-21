@@ -5,59 +5,49 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/action_bar"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/close_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:foreground="@drawable/icon_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@color/clearGray" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="@string/log_in"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/close"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:background="@android:color/transparent"
-            android:foreground="@drawable/icon_close"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:rippleColor="@color/clearGray" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center"
-            android:text="@string/log_in"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/id_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/action_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_text">
 
         <TextView
             android:id="@+id/id_or_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/id_or_email"
-            android:textColor="@android:color/black"
+            android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +56,8 @@
             android:id="@+id/id_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
             android:hint="@string/enter_email"
             android:textColorHint="@color/spectrumGray1"
             app:errorEnabled="true"
@@ -104,7 +95,8 @@
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/password"
             android:textColor="@android:color/black"
@@ -116,7 +108,8 @@
             android:id="@+id/password_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
             android:backgroundTint="@color/spectrumGray2"
             android:hint="@string/enter_password"
             app:errorEnabled="true"
@@ -131,7 +124,7 @@
                 android:id="@+id/pw_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@android:color/transparent"
+                android:backgroundTint="@color/clear"
                 android:fontFamily="@font/roboto_medium"
                 android:inputType="textPassword"
                 android:maxLines="1"
@@ -155,8 +148,9 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/log_in_button"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
             android:fontFamily="@font/roboto_medium"
             android:insetTop="0dp"
             android:insetBottom="0dp"

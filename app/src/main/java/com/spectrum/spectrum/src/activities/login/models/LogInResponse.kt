@@ -8,6 +8,7 @@ data class LogInResponse(
 ) {
     data class Result(
         var jwt: String,
-        var userIdx: Int
+        var userIdx: Int,
+        var hasSpec: String
     )
 }

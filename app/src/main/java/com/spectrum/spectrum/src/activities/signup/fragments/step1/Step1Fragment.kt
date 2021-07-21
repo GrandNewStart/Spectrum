@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import android.widget.Button
 import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
@@ -24,13 +25,20 @@ class Step1Fragment: BaseFragment() {
 
     private fun initViews(view: View) {
         view.apply {
-            findViewById<Button>(R.id.close).setOnClickListener {
+            findViewById<Button>(R.id.close_button).setOnClickListener {
                 activity?.finish()
             }
-            findViewById<MaterialButton>(R.id.agree).setOnClickListener {
+            findViewById<MaterialButton>(R.id.agree_button).setOnClickListener {
                 findNavController().navigate(R.id.step1_to_step2)
             }
+            findViewById<WebView>(R.id.web_view).apply {
+                loadUrl(privacy_page)
+            }
         }
+    }
+
+    companion object {
+        const val privacy_page = "http://spectrum-app.shop:9000/docs.html"
     }
 
 }

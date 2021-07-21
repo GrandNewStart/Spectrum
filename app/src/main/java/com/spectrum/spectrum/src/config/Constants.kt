@@ -7,13 +7,14 @@ object Constants {
     var SCREEN_HEIGHT: Int = 0
     var STATUS_BAR_HEIGHT: Int = 0
     var DENSITY: Float = 0f
-    var BASE_URL = "http://spectrum-app.shop"
+    var BASE_URL = "http://spectrum-app.shop:9000"
     var TOKEN = "spectrum_token"
     var USER_INDEX = "user_index"
     var USER_NAME = "user_name"
     var USER_EMAIL = "user_email"
     var MEDIA_TYPE_JSON = "application/json;charset=UTF-8"
 
+    const val press_back_one_more = "뒤로가기 한번 더 누르면 종료"
     const val request_failed = "요청을 처리하지 못했습니다"
     const val enter_email = "이메일을 입력하세요"
     const val password = "비밀번호"
@@ -47,5 +48,6 @@ object Constants {
     const val free_consults_hint = "현재 스펙과 관련하여 고민과 질문을 적어주세요"
     const val free_reviews = "자유 후기"
     const val free_reviews_hint = "자유롭게 취업 후기를 적어주세요"
+    const val spec_of = "님의 스펙"
 
 }

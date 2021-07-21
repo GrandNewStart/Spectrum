@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.databinding.FragmentPostBinding
 import com.spectrum.spectrum.src.config.Constants
-import com.spectrum.spectrum.src.models.CertItem
-import com.spectrum.spectrum.src.models.EduItem
+import com.spectrum.spectrum.src.models.License
+import com.spectrum.spectrum.src.models.Education
 import com.spectrum.spectrum.src.models.Evaluation
-import com.spectrum.spectrum.src.models.ExpItem
+import com.spectrum.spectrum.src.models.Experience
 
 class PostViewModel: ViewModel() {
 
@@ -19,9 +19,9 @@ class PostViewModel: ViewModel() {
     private var mUserInfo = ArrayList<String>()
     private var mPostTitle: String? = null
     private var mPostContent: String? = null
-    private var mUserEduItems = ArrayList<EduItem>()
-    private var mExpItems = ArrayList<ExpItem>()
-    private var mCertItems = ArrayList<CertItem>()
+    private var mUserEduItems = ArrayList<Education>()
+    private var mExpItems = ArrayList<Experience>()
+    private var mCertItems = ArrayList<License>()
     private var mOtherSpecs: String? = null
 
     private var mTopFiveResponses = ArrayList<Evaluation>()
@@ -88,15 +88,15 @@ class PostViewModel: ViewModel() {
                 mPostTitle = "졸업 전 대기업 인턴"
                 mPostContent = "UXUI 직무를 희망하는데, \n대기업 인턴하려면 어떤 스펙을 더 쌓아야 할까요?"
                 mUserEduItems = arrayListOf(
-                    EduItem("똥통대학교", "수도권", "대학교(4년제)", "재학중", "산업디자인학과", 3.63, 4.5),
-                    EduItem("똥통대학교", "수도권", "대학교(4년제)", "재학중", "산업디자인학과", 3.63, 4.5))
+                    Education(null, null, null, "똥통대학교", "산업디자인학과", 3.63),
+                    Education(null, null, null, "똥통대학교", "산업디자인학과", 3.63))
                 mExpItems = arrayListOf(
-                    ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"),
-                    ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"),
-                    ExpItem("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"))
+                    Experience("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"),
+                    Experience("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"),
+                    Experience("정승네트워크", "UIUX 디자이너", "인턴", "2021.03.03", "2021.06.06"))
                 mCertItems = arrayListOf(
-                    CertItem("TOEIC", "910점"),
-                    CertItem("GTQ", "1급"))
+                    License("TOEIC", "910점"),
+                    License("GTQ", "1급"))
                 mOtherSpecs = "저는요, 할 줄 아는게 아무것두 없지만 딱 한가지 내세울건 바로 문법 맞추기에오. 띠어쓰기 똑바로 안 하면 갱장히 불 편하구요. 단어도 마춤뻡 틀리면 갱장히 불 편한 사람 이에오."
 
                 mTopFiveResponses.add(Evaluation(0, "인턴 경험 좋아요", 18))

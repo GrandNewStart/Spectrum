@@ -42,20 +42,6 @@ object BindingAdapters {
     @JvmStatic
     fun bindHottestPosts(recyclerView: RecyclerView, posts: ArrayList<Post>?) {
         recyclerView.apply {
-            if (layoutManager == null) {
-                layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        val pos = parent.getChildAdapterPosition(view)
-                        outRect.left += if (pos == 0) dp2px(15) else dp2px(24)
-                        posts?.let {
-                            if (pos == it.size-1) { outRect.right += dp2px(24) }
-                        }
-                    }
-                })
-                PagerSnapHelper().attachToRecyclerView(recyclerView)
-            }
             if (adapter == null) {
                 posts?.let { adapter = PostHorizontalAdapter(it) }
                 return@apply
@@ -68,16 +54,6 @@ object BindingAdapters {
     @JvmStatic
     fun bindLatestPosts(recyclerView: RecyclerView, posts: ArrayList<Post>?) {
         recyclerView.apply {
-            if (layoutManager == null) {
-                layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        val hSpacing = dp2px(24)
-                        outRect.bottom += hSpacing
-                    }
-                })
-            }
             if (adapter == null) {
                 posts?.let { adapter = PostVerticalAdapter(it) }
                 return@apply

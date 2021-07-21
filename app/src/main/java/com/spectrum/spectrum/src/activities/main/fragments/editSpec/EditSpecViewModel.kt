@@ -4,38 +4,37 @@ import android.util.Log
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.FragmentEditSpecBinding
+import com.spectrum.spectrum.src.customs.CircleView
 import com.spectrum.spectrum.src.dialogs.*
-import com.spectrum.spectrum.src.models.CertItem
-import com.spectrum.spectrum.src.models.EduItem
-import com.spectrum.spectrum.src.models.ExpItem
-import com.spectrum.spectrum.src.models.JobGroup
+import com.spectrum.spectrum.src.models.*
 
 class EditSpecViewModel: ViewModel() {
 
     var mAge: Int? = null
-    var mSex: String? = null
+    var mSex: Int? = null
     var mJobGroup1: JobGroup? = null
     var mJobGroup2: JobGroup? = null
-    var mEduItems = ObservableArrayList<EduItem>()
-    var mExpItems = ObservableArrayList<ExpItem>()
-    var mCertItems = ObservableArrayList<CertItem>()
+    var mEduItems = ObservableArrayList<Education>()
+    var mExpItems = ObservableArrayList<Experience>()
+    var mCertItems = ObservableArrayList<License>()
     var mComments: String? = null
 
     fun bindViews(binding: FragmentEditSpecBinding) {
         binding.apply {
             // TEST CODE START
                 mAge = 30
-                mSex = "F"
-                mJobGroup1 = JobGroup(0, "IT/인터넷")
-                mJobGroup2 = JobGroup(1, "디자인")
-                mEduItems.add(EduItem("무슨학교", "수도권", "대학교(4년제)", "졸업", "무슨전공", 4.0, 4.3))
-                mEduItems.add(EduItem("무슨학교", "수도권", "대학교(4년제)", "졸업", "무슨전공", 4.0, 4.3))
-                mExpItems.add(ExpItem("무슨기업", "무슨직무", "무슨직급", "2000.01.01", "2005.01.01"))
-                mExpItems.add(ExpItem("무슨기업", "무슨직무", "무슨직급", "2000.01.01", "2005.01.01"))
-                mCertItems.add(CertItem("무슨시험", "몇급몇점"))
-                mCertItems.add(CertItem("무슨시험", "몇급몇점"))
-                mCertItems.add(CertItem("무슨시험", "몇급몇점"))
+                mSex = 1
+                mJobGroup1 = JobGroup(3, "IT/인터넷")
+                mJobGroup2 = JobGroup(4, "디자인")
+                mEduItems.add(Education(Location(1, "수도권"), Graduate(2, "재학중"), Degree(4, "대학교(4년제)"), "무슨학교", "무슨전공", 4.0))
+                mEduItems.add(Education(Location(1, "수도권"), Graduate(2, "재학중"), Degree(4, "대학교(4년제)"), "무슨학교", "무슨전공", 4.0))
+                mExpItems.add(Experience("무슨기업", "무슨직무", "무슨직급", "2000.01.01", "2005.01.01"))
+                mExpItems.add(Experience("무슨기업", "무슨직무", "무슨직급", "2000.01.01", "2005.01.01"))
+                mCertItems.add(License("무슨시험", "몇급몇점"))
+                mCertItems.add(License("무슨시험", "몇급몇점"))
+                mCertItems.add(License("무슨시험", "몇급몇점"))
                 mComments = "어려서부터 우리집은 가난했었고 남들 다 하는 외식 한번 한적이 없었고 일터 나가신 어머니 집에 없으면 언제나 혼자서 끓여먹었던 라면..."
                 age = mAge
                 sex = mSex
@@ -57,15 +56,15 @@ class EditSpecViewModel: ViewModel() {
     fun saveButtonAction(fragment: EditSpecFragment) {
         Log.d(TAG, "--- TRYING TO SAVE USER SPEC ---")
         Log.d(TAG, "    ---> AGE: $mAge")
-        Log.d(TAG, "    ---> SEX: $mSex")
+        Log.d(TAG, "    ---> SEX: ${if (mSex == 0) "M" else "F" }")
         Log.d(TAG, "    ---> JOB 1: ${mJobGroup1?.name}")
         Log.d(TAG, "    ---> JOB 2: ${mJobGroup2?.name}")
         Log.d(TAG, "    ---> ED")
-        mEduItems.forEach { Log.d(TAG, "       -> ${it.level}") }
+        mEduItems.forEach { Log.d(TAG, "       -> ${it.degree}") }
         Log.d(TAG, "    ---> EX")
-        mExpItems.forEach { Log.d(TAG, "       -> ${it.company}") }
+        mExpItems.forEach { Log.d(TAG, "       -> ${it.companyName}") }
         Log.d(TAG, "    ---> CERT")
-        mCertItems.forEach { Log.d(TAG, "       -> ${it.name}") }
+        mCertItems.forEach { Log.d(TAG, "       -> ${it.certification}") }
         Log.d(TAG, "---> COMMENTS: $mComments")
     }
 
@@ -79,6 +78,7 @@ class EditSpecViewModel: ViewModel() {
 
     fun showJobGroup(fragment: EditSpecFragment) {
         JobGroupDialog(fragment.requireContext())
+            .setPreselectedItems(mJobGroup1, mJobGroup2)
             .setOnSaveListener { first, second ->
                 val groups = ArrayList<JobGroup>()
                 first?.let {

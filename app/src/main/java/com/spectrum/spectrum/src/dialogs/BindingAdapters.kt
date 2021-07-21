@@ -12,15 +12,13 @@ import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.config.Constants
-import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.config.Helpers.formatDate
 import com.spectrum.spectrum.src.models.JobGroup
-import org.w3c.dom.Text
 
 object BindingAdapters {
 
     // JOB GROUP DIALOG
-    @BindingAdapter("dialog_job_group_items", "dialog_job_group")
+    @BindingAdapter("dialog_job_group_items", "dialog_job_group", requireAll = true)
     @JvmStatic
     fun bindChipGroup(chipGroup: ChipGroup, items: ArrayList<JobGroup>?, dialog: JobGroupDialog) {
         chipGroup.apply {
@@ -30,6 +28,7 @@ object BindingAdapters {
                     text = it.name
                     val drawable = ChipDrawable.createFromAttributes(context, null, 0, R.style.CustomChip)
                     setChipDrawable(drawable)
+                    if (it.selectIndex != 0) { isChecked = true }
                     setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
                             if (dialog.mFirstItem == null) {
@@ -72,17 +71,16 @@ object BindingAdapters {
             when (spinner.id) {
                 R.id.locale_spinner -> {
                     spinner.apply {
-                        adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, mLocales)
+                        val items = ArrayList<String>().apply {
+                            mLocations.forEach { add(it.data) }
+                        }
+                        adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, items)
                         onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                                if (position == dialog.mLocales.size - 1 || position == 0) {
-                                    mLocale = null
-                                    return
-                                }
-                                mLocale = mLocales[position]
+                                mLocation = mLocations[position]
                             }
                             override fun onNothingSelected(parent: AdapterView<*>?) {
-                                mLocale = null
+                                mLocation = null
                             }
                         }
                         setSelection(0)
@@ -90,17 +88,16 @@ object BindingAdapters {
                 }
                 R.id.school_spinner -> {
                     spinner.apply {
-                        adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, mLevels)
+                        val items = ArrayList<String>().apply {
+                            mDegrees.forEach { add(it.data) }
+                        }
+                        adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, items)
                         onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                                if (position == 0) {
-                                    mEduLevel = null
-                                    return
-                                }
-                                mEduLevel = mLevels[position]
+                                mDegree = mDegrees[position]
                             }
                             override fun onNothingSelected(parent: AdapterView<*>?) {
-                                mEduLevel = null
+                                mDegree = null
                             }
                         }
                         setSelection(0)
@@ -108,17 +105,16 @@ object BindingAdapters {
                 }
                 R.id.graduation_spinner -> {
                     spinner.apply {
-                        adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, mGradStats)
+                        val items = ArrayList<String>().apply {
+                            mGraduates.forEach { add(it.data) }
+                        }
+                        adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, items)
                         onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                                if (position == 0) {
-                                    mGradStat = null
-                                    return
-                                }
-                                mGradStat = dialog.mGradStats[position]
+                                mGraduate = mGraduates[position]
                             }
                             override fun onNothingSelected(parent: AdapterView<*>?) {
-                                mGradStat = null
+                                mGraduate = null
                             }
                         }
                         setSelection(0)

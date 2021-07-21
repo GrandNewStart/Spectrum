@@ -1,6 +1,7 @@
 package com.spectrum.spectrum.src.activities.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -9,19 +10,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.ActivityMainBinding
+import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.customs.BaseActivity
 import com.spectrum.spectrum.src.models.JobGroup
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity: BaseActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
-    private val mViewModel by viewModels<MainViewModel>()
+    private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
-
-    var mJobGroup1: JobGroup? = null
-    var mJobGroup2: JobGroup? = null
-    var mJobGroup3: JobGroup? = null
+    private var mBackPressCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +32,34 @@ class MainActivity: BaseActivity() {
         mBinding.apply {
             lifecycleOwner = this@MainActivity
             activity = this@MainActivity
-            viewModel = mViewModel
 
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
+            navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
             navController = navHostFragment.findNavController()
             bottomNav.setupWithNavController(navController)
         }
     }
 
+    override fun onBackPressed() {
+        if (navHostFragment.childFragmentManager.backStackEntryCount == 0) {
+            if (mBackPressCount == 0) {
+                startBackPressCountTimer()
+                mBackPressCount++
+                showToast(Constants.press_back_one_more)
+            }
+            else {
+                finish()
+            }
+        }
+        else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun startBackPressCountTimer() {
+        CoroutineScope(Dispatchers.Default).launch {
+            delay(1000)
+            mBackPressCount = 0
+        }
+    }
 
 }

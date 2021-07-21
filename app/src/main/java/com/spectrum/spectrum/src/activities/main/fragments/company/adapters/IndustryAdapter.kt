@@ -1,15 +1,18 @@
 package com.spectrum.spectrum.src.activities.main.fragments.company.adapters
 
+import android.graphics.Rect
 import android.graphics.drawable.ColorStateListDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.findFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment
+import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.models.Industry
 
 class IndustryAdapter(private val items: ArrayList<Industry>): RecyclerView.Adapter<IndustryAdapter.ViewHolder>() {
@@ -24,6 +27,18 @@ class IndustryAdapter(private val items: ArrayList<Industry>): RecyclerView.Adap
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            addItemDecoration(object : RecyclerView.ItemDecoration(){
+                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    outRect.left = Helpers.dp2px(4)
+                    outRect.right = Helpers.dp2px(4)
+                    outRect.top = Helpers.dp2px(8)
+                    outRect.bottom = Helpers.dp2px(8)
+                }
+            })
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -4,9 +4,6 @@
         <variable
             name="activity"
             type="com.spectrum.spectrum.src.activities.main.MainActivity" />
-        <variable
-            name="viewModel"
-            type="com.spectrum.spectrum.src.activities.main.MainViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

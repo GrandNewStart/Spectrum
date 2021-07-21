@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.login.LogInActivity
 import com.spectrum.spectrum.src.activities.signup.SignUpActivity
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.customs.BaseFragment
@@ -30,7 +31,7 @@ class Step2Fragment: BaseFragment() {
 
     private fun initViews(view: View) {
         view.apply {
-            val close = findViewById<Button>(R.id.close)
+            val close = findViewById<Button>(R.id.close_button)
             val logIn = findViewById<MaterialButton>(R.id.log_in_button)
             val findPassword = findViewById<TextView>(R.id.find_password)
             val signUp = findViewById<TextView>(R.id.sign_up)
@@ -44,7 +45,9 @@ class Step2Fragment: BaseFragment() {
 
             logIn.setOnClickListener {
                 showKeyboard(this, false)
-                findNavController().navigate(R.id.step2_to_step3)
+                val email = id.text.toString().trim()
+                val password = pw.text.toString().trim()
+                (activity as LogInActivity).logIn(email, password)
             }
 
             findPassword.setOnClickListener {
@@ -56,11 +59,12 @@ class Step2Fragment: BaseFragment() {
                 showKeyboard(this, false)
                 activity?.apply {
                     startActivity(Intent(this, SignUpActivity::class.java))
+                    finish()
                 }
             }
 
             findViewById<CustomTextInputLayout>(R.id.id_text_input_layout).let { layout ->
-                id.setOnFocusChangeListener { v, hasFocus ->
+                id.setOnFocusChangeListener { _, hasFocus ->
                     if (hasFocus) {
                         layout.showClearButton(true)
                         layout.hint = null
@@ -75,7 +79,7 @@ class Step2Fragment: BaseFragment() {
             }
 
             findViewById<CustomTextInputLayout>(R.id.password_text_input_layout).let { layout ->
-                pw.setOnFocusChangeListener { v, hasFocus ->
+                pw.setOnFocusChangeListener { _, hasFocus ->
                     if (hasFocus) {
                         layout.showClearButton(true)
                         layout.hint = null

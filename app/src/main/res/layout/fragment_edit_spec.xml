@@ -6,9 +6,9 @@
         <import type="java.util.ArrayList"/>
         <import type="android.view.View"/>
         <import type="com.spectrum.spectrum.src.models.JobGroup"/>
-        <import type="com.spectrum.spectrum.src.models.EduItem"/>
-        <import type="com.spectrum.spectrum.src.models.ExpItem"/>
-        <import type="com.spectrum.spectrum.src.models.CertItem"/>
+        <import type="com.spectrum.spectrum.src.models.Education"/>
+        <import type="com.spectrum.spectrum.src.models.Experience"/>
+        <import type="com.spectrum.spectrum.src.models.License"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.editSpec.EditSpecFragment" />
@@ -20,7 +20,7 @@
             type="Integer" />
         <variable
             name="sex"
-            type="String" />
+            type="Integer" />
         <variable
             name="jobGroup1"
             type="JobGroup" />
@@ -29,13 +29,13 @@
             type="JobGroup" />
         <variable
             name="eduItems"
-            type="ObservableArrayList&lt;EduItem&gt;" />
+            type="ObservableArrayList&lt;Education&gt;" />
         <variable
             name="expItems"
-            type="ObservableArrayList&lt;ExpItem&gt;" />
+            type="ObservableArrayList&lt;Experience&gt;" />
         <variable
             name="certItems"
-            type="ObservableArrayList&lt;CertItem&gt;" />
+            type="ObservableArrayList&lt;License&gt;" />
         <variable
             name="comments"
             type="String" />

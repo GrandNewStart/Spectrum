@@ -27,7 +27,7 @@ class CreatePostViewModel: ViewModel() {
             viewModel = this@CreatePostViewModel
 
             // TEST CODE START
-             mMySpec = Spec("DUMMY_ID", "이예영", "UIUX 인턴 준비 스펙", "06/28 20:25 업데이트됨",
+             mMySpec = Spec("DUMMY_ID", "이예영", "06/28 20:25 업데이트됨",
                 arrayListOf(
                     Info(0, "23세"),
                     Info(1, "여성"),

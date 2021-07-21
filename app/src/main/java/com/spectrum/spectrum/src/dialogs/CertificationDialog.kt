@@ -12,12 +12,12 @@ import androidx.databinding.DataBindingUtil
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.DialogCerificationBinding
 import com.spectrum.spectrum.src.config.Constants
-import com.spectrum.spectrum.src.models.CertItem
+import com.spectrum.spectrum.src.models.License
 
 class CertificationDialog(context: Context): Dialog(context, R.style.AppTheme) {
 
     private lateinit var mBinding: DialogCerificationBinding
-    private var onSaveListener: (item: CertItem)->Unit = {}
+    private var onSaveListener: (item: License)->Unit = {}
     var mName: String? = null
     var mScore: String? = null
 
@@ -45,11 +45,11 @@ class CertificationDialog(context: Context): Dialog(context, R.style.AppTheme) {
             Toast.makeText(context, Constants.enter_every_fields, Toast.LENGTH_SHORT).show()
             return
         }
-        onSaveListener(CertItem(mName, mScore))
+        onSaveListener(License(mName, mScore))
         dismiss()
     }
 
-    fun setOnSaveListener(onSaveListener: (item: CertItem)->Unit): CertificationDialog {
+    fun setOnSaveListener(onSaveListener: (item: License)->Unit): CertificationDialog {
         this.onSaveListener = onSaveListener
         return this
     }

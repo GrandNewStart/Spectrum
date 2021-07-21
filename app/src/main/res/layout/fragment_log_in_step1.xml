@@ -21,25 +21,25 @@
         android:id="@+id/log_in"
         style="@style/RoundedSolidButton"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/log_in"
         app:layout_constraintBottom_toTopOf="@+id/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_up"
         style="@style/RoundedClearButton"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

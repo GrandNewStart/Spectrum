@@ -18,6 +18,7 @@ import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.FragmentSignUpStep3Binding
 import com.spectrum.spectrum.src.activities.login.LogInActivity
 import com.spectrum.spectrum.src.activities.signup.interfaces.SignUpApi
+import com.spectrum.spectrum.src.activities.splash.SplashActivity
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Constants.MEDIA_TYPE_JSON
 import com.spectrum.spectrum.src.config.Constants.TOKEN
@@ -27,6 +28,7 @@ import com.spectrum.spectrum.src.config.Constants.request_failed
 import com.spectrum.spectrum.src.config.Helpers.retrofit
 import com.spectrum.spectrum.src.config.Helpers.sharedPreferences
 import com.spectrum.spectrum.src.customs.BaseFragment
+import kotlinx.android.synthetic.main.fragment_log_in_step2.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -81,6 +83,10 @@ class Step3Fragment: BaseFragment() {
             mEmail = it.getString("email")
             mPassword = it.getString("password")
         }
+
+        // TEST CODE START
+//        autoLogIn()
+        // TEST CODE END
     }
 
     override fun onCreateView(
@@ -133,19 +139,27 @@ class Step3Fragment: BaseFragment() {
             .setPositiveButton(Constants.confirm) { dialog, _ ->
                 dialog.dismiss()
                 autoLogIn()
-                activity?.finish()
             }
             .setOnDismissListener {
                 autoLogIn()
-                activity?.finish()
             }
             .create()
             .show()
     }
 
     private fun autoLogIn() {
-        val bundle = bundleOf("email" to mEmail, "password" to mPassword)
-        activity?.startActivity(Intent(activity, LogInActivity::class.java), bundle)
+//        val intent = Intent(activity, LogInActivity::class.java).apply {
+//            putExtra("email", mEmail)
+//            putExtra("password", mPassword)
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        }
+//        activity?.startActivity(intent)
+//        activity?.finish()
+        val intent = Intent(activity, SplashActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        activity?.startActivity(intent)
+        activity?.finish()
     }
 
     private fun checkNickname(nickname: String?) {
@@ -180,6 +194,10 @@ class Step3Fragment: BaseFragment() {
             lifecycleScope.launch {
                 retrofit.create(SignUpApi::class.java).signUp(body).apply {
                     if (isSuccess) {
+                        Log.d(TAG, "---> SIGN UP SUCCESS")
+                        Log.d(TAG, "    ---> JWT: ${result.jwt}")
+                        Log.d(TAG, "    ---> IDX: ${result.userIdx}")
+                        Log.d(TAG, "    ---> EMAIL: $mEmail")
                         sharedPreferences.edit().apply {
                             putString(TOKEN, result.jwt)
                             putString(USER_EMAIL, mEmail)

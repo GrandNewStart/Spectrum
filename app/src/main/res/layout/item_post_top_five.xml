@@ -20,10 +20,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:layout_height="36dp"
         android:layout_marginStart="12dp"
         app:cardBackgroundColor="@color/clear"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="18dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rank_text"
@@ -45,7 +45,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:text="RESPONSE TEXT"
                 android:textColor="#45474B"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/count_text"
@@ -55,7 +55,7 @@
                 android:layout_marginStart="4dp"
                 android:text="00"
                 android:textColor="@color/spectrumBlue"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 

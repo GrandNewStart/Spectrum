@@ -31,8 +31,8 @@ object Helpers {
     private var httpClient = OkHttpClient.Builder()
         .readTimeout(3000, TimeUnit.MILLISECONDS)
         .connectTimeout(3000, TimeUnit.MILLISECONDS)
-        .addNetworkInterceptor(loggingInterceptor)
         .addNetworkInterceptor(RequestInterceptor(MEDIA_TYPE_JSON))
+        .addNetworkInterceptor(loggingInterceptor)
         .build()
 
     var retrofit: Retrofit = Retrofit.Builder()

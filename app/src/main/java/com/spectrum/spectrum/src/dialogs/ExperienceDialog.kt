@@ -13,12 +13,12 @@ import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.DialogExperienceBinding
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers.compareDates
-import com.spectrum.spectrum.src.models.ExpItem
+import com.spectrum.spectrum.src.models.Experience
 
 class ExperienceDialog(context: Context): Dialog(context, R.style.AppTheme) {
 
     private lateinit var mBinding: DialogExperienceBinding
-    private var onSaveListener: (expItem: ExpItem)->Unit = {}
+    private var onSaveListener: (experience: Experience)->Unit = {}
     var mCompany: String? = null
     var mDuty: String? = null
     var mPosition: String? = null
@@ -57,10 +57,10 @@ class ExperienceDialog(context: Context): Dialog(context, R.style.AppTheme) {
             return
         }
 
-        val item = ExpItem(null ,null, null, null, null)
-        mCompany?.let { item.company = it }
-        mDuty?.let { item.duty = it }
-        mPosition?.let { item.position = it }
+        val item = Experience(null ,null, null, null, null)
+        mCompany?.let { item.companyName = it }
+        mDuty?.let { item.jobGroup = it }
+        mPosition?.let { item.jobPosition = it }
         mStartDate?.let { item.startDate = it }
         mEndDate?.let { item.endDate = it }
         onSaveListener(item)
@@ -68,7 +68,7 @@ class ExperienceDialog(context: Context): Dialog(context, R.style.AppTheme) {
         dismiss()
     }
 
-    fun setOnSaveListener(onSaveListener: (expItem: ExpItem)->Unit): ExperienceDialog {
+    fun setOnSaveListener(onSaveListener: (experience: Experience)->Unit): ExperienceDialog {
         this.onSaveListener = onSaveListener
         return this
     }

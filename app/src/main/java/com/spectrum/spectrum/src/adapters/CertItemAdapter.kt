@@ -1,16 +1,19 @@
 package com.spectrum.spectrum.src.adapters
 
 import android.content.Context
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ObservableArrayList
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.models.CertItem
+import com.spectrum.spectrum.src.config.Helpers
+import com.spectrum.spectrum.src.models.License
 
-class CertItemAdapter(private val items: ObservableArrayList<CertItem>): RecyclerView.Adapter<CertItemAdapter.ViewHolder>() {
+class CertItemAdapter(private val items: ObservableArrayList<License>): RecyclerView.Adapter<CertItemAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
@@ -19,6 +22,16 @@ class CertItemAdapter(private val items: ObservableArrayList<CertItem>): Recycle
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         mRecyclerView = recyclerView
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    outRect.top = Helpers.dp2px(4)
+                    outRect.bottom = Helpers.dp2px(4)
+                }
+            })
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +44,7 @@ class CertItemAdapter(private val items: ObservableArrayList<CertItem>): Recycle
         holder.itemView.apply {
             items[position].let { item ->
                 findViewById<MaterialTextView>(R.id.name_text).apply {
-                    text = item.name
+                    text = item.certification
                 }
                 findViewById<MaterialTextView>(R.id.score_text).apply {
                     text = item.score
