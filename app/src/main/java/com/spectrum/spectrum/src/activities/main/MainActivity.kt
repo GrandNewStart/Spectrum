@@ -1,5 +1,6 @@
 package com.spectrum.spectrum.src.activities.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -37,6 +38,7 @@ class MainActivity: BaseActivity() {
             navController = navHostFragment.findNavController()
             bottomNav.setupWithNavController(navController)
         }
+        showConstructionSign()
     }
 
     override fun onBackPressed() {
@@ -60,6 +62,14 @@ class MainActivity: BaseActivity() {
             delay(1000)
             mBackPressCount = 0
         }
+    }
+
+    private fun showConstructionSign() {
+        AlertDialog.Builder(this)
+            .setMessage("스펙트럼은 현재 개발 중인 앱입니다.\n빠른 시일내에 완성하여 보여드릴께요!")
+            .setPositiveButton("닫기", null)
+            .create()
+            .show()
     }
 
 }

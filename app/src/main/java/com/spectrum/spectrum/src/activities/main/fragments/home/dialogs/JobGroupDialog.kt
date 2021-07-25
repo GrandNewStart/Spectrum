@@ -2,23 +2,24 @@ package com.spectrum.spectrum.src.activities.main.fragments.home.dialogs
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.children
+import androidx.core.view.forEach
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.button.MaterialButton
-import com.google.gson.annotations.SerializedName
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.main.fragments.home.adapters.JobGroupAdapter
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.models.JobGroup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,14 +27,13 @@ import kotlinx.coroutines.launch
 import retrofit2.http.GET
 import java.lang.Exception
 
-
 class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
 
     private var mItems = ArrayList<JobGroup>()
-    private var mOnSaveListener: (first: JobGroup?, second: JobGroup?, third: JobGroup?)->Unit = { _, _, _->}
+    private var mOnSaveListener: (first: JobGroup?, second: JobGroup?)->Unit = { _,_->}
     private var mFirstItem: JobGroup? = null
     private var mSecondItem: JobGroup? = null
-    private var mThirdItem: JobGroup? = null
+    private lateinit var mChipGroup: ChipGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,30 +49,25 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
             }
             setGravity(Gravity.END)
         }
+        mChipGroup = findViewById(R.id.chip_group)
         findViewById<MaterialButton>(R.id.back_button).setOnClickListener { dismiss() }
         findViewById<TextView>(R.id.save_text).setOnClickListener { saveButtonAction() }
         getJobGroups()
     }
 
     fun saveButtonAction() {
-        findViewById<RecyclerView>(R.id.job_group_recycler_view)?.apply {
-            mFirstItem = (adapter as JobGroupAdapter).mFirstItem
-            mSecondItem = (adapter as JobGroupAdapter).mSecondItem
-            mThirdItem = (adapter as JobGroupAdapter).mThirdItem
-            mOnSaveListener(mFirstItem, mSecondItem, mThirdItem)
-            dismiss()
-        }
+        mOnSaveListener(mFirstItem, mSecondItem)
+        dismiss()
     }
 
-    fun setOnSaveListener(onSaveListener: (first: JobGroup?, second: JobGroup?, third: JobGroup?)->Unit): JobGroupDialog {
+    fun setOnSaveListener(onSaveListener: (first: JobGroup?, second: JobGroup?)->Unit): JobGroupDialog {
         this.mOnSaveListener = onSaveListener
         return this
     }
 
-    fun setPreSelectedItems(first: JobGroup?, second: JobGroup?, third: JobGroup?): JobGroupDialog {
-        mFirstItem = first
+    fun setPreSelectedItems(first: JobGroup?, second: JobGroup?): JobGroupDialog {
+        mFirstItem = first 
         mSecondItem = second
-        mThirdItem = third
         return this
     }
 
@@ -87,23 +82,18 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
                         for (i in 0 until mItems.size) {
                             mFirstItem?.let {
                                 if (it.id == mItems[i].id) {
+                                    Log.d(TAG,"---> FIRST: ${it.name}")
                                     mItems[i].selectIndex = 1
                                 }
                             }
                             mSecondItem?.let {
                                 if (it.id == mItems[i].id) {
+                                    Log.d(TAG,"---> SECOND: ${it.name}")
                                     mItems[i].selectIndex = 2
                                 }
                             }
-                            mThirdItem?.let {
-                                if (it.id == mItems[i].id) {
-                                    mItems[i].selectIndex = 3
-                                }
-                            }
                         }
-                        findViewById<RecyclerView>(R.id.job_group_recycler_view).apply {
-                            adapter = JobGroupAdapter(mItems)
-                        }
+                        initChipGroup(mChipGroup)
                         return@launch
                     }
                     Log.e(TAG, "---> JOB GROUP FETCH FAILURE: $message")
@@ -116,6 +106,80 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
             Log.e(TAG, "---> JOB GROUP FETCH FAILURE: $e")
             Toast.makeText(context, Constants.request_failed, Toast.LENGTH_SHORT).show()
             dismiss()
+        }
+    }
+
+    private fun initChipGroup(chipGroup: ChipGroup) {
+        chipGroup.apply {
+            mItems.forEach { group ->
+                Chip(context).apply {
+                    text = group.name
+                    chipSpacingVertical = dp2px(16)
+                    chipSpacingHorizontal = dp2px(8)
+                    setEnsureMinTouchTargetSize(false)
+                    setChipBackgroundColorResource(R.color.clear)
+                    setChipStrokeColorResource(R.color.spectrumGray1)
+                    setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                    setTextAppearance(R.style.CustomTextView)
+                    chipMinHeight = dp2px(32).toFloat()
+                    setOnClickListener {
+                        if (group.selectIndex == 0) {
+                            if (mFirstItem == null) {
+                                group.selectIndex = 1
+                                mFirstItem = group
+                                bindChipGroup(chipGroup)
+                                return@setOnClickListener
+                            }
+                            if (mSecondItem == null) {
+                                group.selectIndex = 2
+                                mSecondItem = group
+                                bindChipGroup(chipGroup)
+                                return@setOnClickListener
+                            }
+                        }
+                        if (group.selectIndex == 1) {
+                            group.selectIndex = 0
+                            mFirstItem = mSecondItem
+                            mSecondItem = null
+                            mFirstItem?.selectIndex = 1
+                            bindChipGroup(chipGroup)
+                            return@setOnClickListener
+                        }
+                        if (group.selectIndex == 2) {
+                            group.selectIndex = 0
+                            mSecondItem = null
+                            bindChipGroup(chipGroup)
+                            return@setOnClickListener
+                        }
+                    }
+                    addView(this)
+                }
+            }
+            bindChipGroup(this)
+        }
+    }
+
+    private fun bindChipGroup(chipGroup: ChipGroup) {
+        chipGroup.apply {
+            for (i in 0 until mItems.size) {
+                val item = mItems[i]
+                val chip = getChildAt(i) as Chip
+                if (item.selectIndex == 0) {
+                    chip.setChipBackgroundColorResource(R.color.clear)
+                    chip.setTextColor(resources.getColor(R.color.spectrumGray1, null))
+                    chip.setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                }
+                if (item.selectIndex == 1) {
+                    chip.setChipBackgroundColorResource(R.color.spectrumBlue)
+                    chip.setTextColor(resources.getColor(R.color.white, null))
+                    chip.chipStrokeWidth = 0f
+                }
+                if (item.selectIndex == 2) {
+                    chip.setChipBackgroundColorResource(R.color.spectrumGreen)
+                    chip.setTextColor(resources.getColor(R.color.white, null))
+                    chip.chipStrokeWidth = 0f
+                }
+            }
         }
     }
 

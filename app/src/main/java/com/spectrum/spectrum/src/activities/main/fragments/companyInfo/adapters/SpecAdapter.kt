@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.spectrum.spectrum.R
@@ -47,6 +48,7 @@ class SpecAdapter(private val items: ArrayList<Spec>): RecyclerView.Adapter<Spec
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mBinding.spec = items[position]
+        mBinding.fragment = mRecyclerView?.findFragment()
     }
 
     override fun getItemCount(): Int = items.size

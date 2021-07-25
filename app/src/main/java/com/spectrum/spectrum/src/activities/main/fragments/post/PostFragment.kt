@@ -6,14 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.FragmentPostBinding
 import com.spectrum.spectrum.src.customs.BaseFragment
 
 class PostFragment: BaseFragment() {
 
-    private lateinit var mBinding: FragmentPostBinding
-    private val mViewModel by viewModels<PostViewModel>()
+    lateinit var mBinding: FragmentPostBinding
+    val mViewModel by viewModels<PostViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.apply {
+            mViewModel.mPostId = getInt("id")
+        }
+        if (mViewModel.mPostId == null) {
+            findNavController().popBackStack()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +38,7 @@ class PostFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-            bindViews(mBinding)
+            bindViews(this@PostFragment)
         }
         return mBinding.root
     }

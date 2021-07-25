@@ -17,7 +17,7 @@
         android:visibility="gone"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/icon_option"
+        android:src="@drawable/icon_filter"
         android:layout_gravity="center"
         android:layout_marginHorizontal="@dimen/default_margin"/>
 

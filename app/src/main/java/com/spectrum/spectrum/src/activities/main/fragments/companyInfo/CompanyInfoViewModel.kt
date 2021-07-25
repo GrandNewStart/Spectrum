@@ -1,52 +1,82 @@
 package com.spectrum.spectrum.src.activities.main.fragments.companyInfo
 
-import android.util.AttributeSet
+import android.annotation.SuppressLint
+import android.graphics.Typeface
+import android.os.Build
+import android.text.Spannable
+import android.text.Spanned
+import android.text.SpannedString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.text.style.TypefaceSpan
 import android.util.Log
-import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.view.View
+import androidx.core.text.toSpannable
+import androidx.core.text.toSpanned
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.databinding.FragmentCompanyInfoBinding
-import com.spectrum.spectrum.src.config.Helpers.dp2px
-import com.spectrum.spectrum.src.customs.CircleView
+import com.spectrum.spectrum.src.activities.main.fragments.companyInfo.dialogs.SubmitSpecDialog
+import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.models.Analysis
 import com.spectrum.spectrum.src.models.Info
 import com.spectrum.spectrum.src.models.Spec
 
+@SuppressLint("StaticFieldLeak")
 class CompanyInfoViewModel: ViewModel() {
 
+    var view: View? = null
+    private var mIsDataLoaded = false
     private var mAnalysis = ArrayList<Analysis>()
     private var mSpecs = ArrayList<Spec>()
 
-    fun bindViews(binding: FragmentCompanyInfoBinding) {
-        binding.apply {
-            // TEST CODE START
-                mAnalysis.add(Analysis(0, "3.79", "학점", 94))
-                mAnalysis.add(Analysis(0, "수도권(4년제)", "학력", 88))
-                mAnalysis.add(Analysis(0, "1.2회", "경력", 23))
-                mAnalysis.add(Analysis(0, "1.9개", "자격증", 57))
-                mAnalysis.add(Analysis(0, "870점", "토익", 73))
-                for (i in 0 until mAnalysis.size) {
-                    createCircle(this, mAnalysis[i], i)
+    fun bindViews(fragment: CompanyInfoFragment) {
+        fragment.mBinding.apply {
+            if (mAnalysis.size > 0) analysis1 = mAnalysis[0]
+            if (mAnalysis.size > 1) analysis2 = mAnalysis[1]
+            if (mAnalysis.size > 2) analysis3 = mAnalysis[2]
+            if (mAnalysis.size > 3) analysis4 = mAnalysis[3]
+            specs = mSpecs
+
+            if (!mIsDataLoaded) {
+                mIsDataLoaded = true
+                // TEST CODE START
+                    mAnalysis.add(Analysis(0, "3.79", "학점", 94))
+                    mAnalysis.add(Analysis(0, "수도권(4년제)", "학력", 88))
+                    mAnalysis.add(Analysis(0, "1.2회", "경력", 23))
+                    mAnalysis.add(Analysis(0, "1.9개", "자격증", 57))
+                    mAnalysis.add(Analysis(0, "870점", "토익", 73))
+                    val spec = Spec("", "https://lh3.googleusercontent.com/a-/AOh14Gh3kcrod_xVhGf7kUci563N0l7mAcWJv1EeBigXng=s288-p-rw-no","스펙왕", "06/28 20:25 업데이트됨",
+                        arrayListOf(Info(0, "23세"), Info(0, "여성"), Info(0, "IT/인터넷"), Info(0, "디자인")),
+                        arrayListOf(),
+                        arrayListOf(),
+                        arrayListOf(),
+                        ""
+                    )
+                    mSpecs.add(spec)
+                    mSpecs.add(spec)
+                    mSpecs.add(spec)
+                    mSpecs.add(spec)
+                    mSpecs.add(spec)
+                    mSpecs.add(spec)
+                    mSpecs.add(spec)
+                    mSpecs.add(spec)
+                    if (mAnalysis.size > 0) analysis1 = mAnalysis[0]
+                    if (mAnalysis.size > 1) analysis2 = mAnalysis[1]
+                    if (mAnalysis.size > 2) analysis3 = mAnalysis[2]
+                    if (mAnalysis.size > 3) analysis4 = mAnalysis[3]
+                    specs = mSpecs
+                // TEST CODE END
+                (blurringText.text.toSpannable()).apply {
+                    val blue = blurringText.resources.getColor(R.color.spectrumBlue, null)
+                    val font = Typeface.createFromAsset(fragment.resources.assets, "roboto_bold.ttf")
+                    setSpan(ForegroundColorSpan(blue), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        setSpan(TypefaceSpan(font), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    }
+                    blurringText.text = this
                 }
-                val spec = Spec("", "스펙왕", "06/28 20:25 업데이트됨",
-                    arrayListOf(Info(0, "23세"), Info(0, "여성"), Info(0, "IT/인터넷"), Info(0, "디자인")),
-                    arrayListOf(),
-                    arrayListOf(),
-                    arrayListOf(),
-                    ""
-                )
-                mSpecs.add(spec)
-                mSpecs.add(spec)
-                mSpecs.add(spec)
-                mSpecs.add(spec)
-                mSpecs.add(spec)
-                mSpecs.add(spec)
-                mSpecs.add(spec)
-                mSpecs.add(spec)
-                specs = mSpecs
-            // TEST CODE END
+            }
         }
     }
 
@@ -54,57 +84,22 @@ class CompanyInfoViewModel: ViewModel() {
         fragment.findNavController().popBackStack()
     }
 
-    private fun createCircle(binding: FragmentCompanyInfoBinding, analysis: Analysis, index: Int) {
-        binding.apply {
-            CircleView(root.context).apply {
-                val p = analysis.percent
-                var fontSize = 0
-                val params = ConstraintLayout.LayoutParams(dp2px(80+p), dp2px(80+p))
-                when(p) {
-                    in 0..25 -> { fontSize = 14 }
-                    in 25..50 -> { fontSize = 16 }
-                    in 50..75 -> { fontSize = 18 }
-                    in 75..100 -> { fontSize = 20 }
-                }
-                when(index) {
-                    0 -> {
-                        params.leftToLeft = R.id.graph_view
-                        params.topToTop = R.id.graph_view
-                        params.topMargin = dp2px(16)
-                        params.marginStart = dp2px(16)
-                    }
-                    1 -> {
-                        params.leftToLeft = R.id.graph_view
-                        params.bottomToBottom = R.id.graph_view
-                        params.bottomMargin = dp2px(16)
-                        params.marginStart = dp2px(16)
-                    }
-                    2 -> {
-                        params.leftToLeft = R.id.graph_view
-                        params.rightToRight = R.id.graph_view
-                        params.topToTop = R.id.graph_view
-                        params.bottomToBottom = R.id.graph_view
-                    }
-                    3 -> {
-                        params.rightToRight = R.id.graph_view
-                        params.topToTop = R.id.graph_view
-                        params.topMargin = dp2px(16)
-                        params.marginEnd = dp2px(16)
-                    }
-                    4 -> {
-                        params.rightToRight = R.id.graph_view
-                        params.bottomToBottom = R.id.graph_view
-                        params.bottomMargin = dp2px(16)
-                        params.marginEnd = dp2px(16)
-                    }
-                }
-                layoutParams = params
-                setText1(analysis.data, dp2px(fontSize).toFloat())
-                setText2(analysis.type, dp2px(fontSize-2).toFloat())
-                setText3("$p%가 보유", dp2px(fontSize-2).toFloat())
-                graphView.addView(this)
+    fun favoriteButtonAction(fragment: CompanyInfoFragment) {
+        SubmitSpecDialog(fragment.requireContext())
+            .setOnDoneListener { didEnter ->
+                fragment.showToast(Constants.spec_updated)
+                fragment.mBinding.isFavorite = true
+                // TODO: SPEC SUBMISSION API
             }
-        }
+            .show()
+    }
+
+    fun proceedToSpec(fragment: CompanyInfoFragment) {
+        fragment.findNavController().navigate(R.id.company_info_to_spec)
+    }
+
+    companion object {
+        val TAG = CompanyInfoViewModel::class.java.toString()
     }
 
 }

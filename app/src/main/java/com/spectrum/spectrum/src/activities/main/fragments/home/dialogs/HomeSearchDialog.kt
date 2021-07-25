@@ -35,11 +35,11 @@ class HomeSearchDialog(private val context: Context) {
             Info(3, "IT/인터넷"),
             Info(4, "디자인")
         )
-        add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
-        add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
-        add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
-        add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
-        add(Post("", "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
+        add(Post(0, "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
+        add(Post(0, "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
+        add(Post(0, "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
+        add(Post(0, "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
+        add(Post(0, "졸업 전 대기업 인턴", "06/25 16:25", 12, 0, specs))
     }
 
     init {

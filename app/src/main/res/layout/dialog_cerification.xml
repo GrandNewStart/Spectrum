@@ -3,7 +3,7 @@
     <data>
         <variable
             name="dialog"
-            type="com.spectrum.spectrum.src.dialogs.CertificationDialog" />
+            type="com.spectrum.spectrum.src.dialogs.LicenseDialog" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

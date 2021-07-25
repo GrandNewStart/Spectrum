@@ -11,31 +11,34 @@
         android:name="com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment"
         android:label="Home" >
         <action
-            android:id="@+id/home_to_post"
-            app:destination="@id/home_post"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
             android:id="@+id/home_to_create_post"
             app:destination="@id/create_post"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/home_to_post"
+            app:destination="@id/post"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-    <fragment
-        android:id="@+id/home_post"
-        android:name="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment"
-        android:label="Post" />
     <fragment
         android:id="@+id/create_post"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.createPost.CreatePostFragment"
         android:label="CreatePost" >
         <action
-            android:id="@+id/create_post_to_edit_fragment"
+            android:id="@+id/create_post_to_edit_spec"
             app:destination="@id/edit_spec"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/create_post_to_create_spec"
+            app:destination="@id/create_spec"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -46,6 +49,10 @@
         android:id="@+id/edit_spec"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.editSpec.EditSpecFragment"
         android:label="EditSpec" />
-
+    <include app:graph="@navigation/post" />
+    <fragment
+        android:id="@+id/create_spec"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.createSpec.CreateSpecFragment"
+        android:label="CreateSpec" />
 
 </navigation>

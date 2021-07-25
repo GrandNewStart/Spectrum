@@ -209,6 +209,7 @@
                         android:id="@+id/male"
                         android:layout_width="100dp"
                         android:layout_height="24dp"
+                        android:buttonTint="@color/spectrumBlue"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/male"
                         android:textAlignment="textStart"
@@ -220,6 +221,7 @@
                         android:id="@+id/female"
                         android:layout_width="100dp"
                         android:layout_height="24dp"
+                        android:buttonTint="@color/spectrumBlue"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/female"
                         android:textAlignment="textStart"
@@ -313,44 +315,15 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <HorizontalScrollView
-                    android:id="@+id/group_chip_scroll_view"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/job_group_chip_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/group_card">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="36dp"
-                            app:closeIconEnabled="true"
-                            style="@style/BlueChip"/>
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="36dp"
-                            app:closeIconEnabled="true"
-                            style="@style/GreenChip"/>
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="36dp"
-                            app:closeIconEnabled="true"
-                            style="@style/OrangeChip"/>
-
-                    </com.google.android.material.chip.ChipGroup>
-
-                </HorizontalScrollView>
+                    app:layout_constraintTop_toBottomOf="@id/group_card"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

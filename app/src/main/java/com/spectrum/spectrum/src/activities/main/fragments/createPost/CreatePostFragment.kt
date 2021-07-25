@@ -1,6 +1,7 @@
 package com.spectrum.spectrum.src.activities.main.fragments.createPost
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +13,8 @@ import com.spectrum.spectrum.src.customs.BaseFragment
 
 class CreatePostFragment: BaseFragment() {
 
-    private val mViewModel by viewModels<CreatePostViewModel>()
-    private lateinit var mBinding: FragmentCreatePostBinding
+    val mViewModel by viewModels<CreatePostViewModel>()
+    lateinit var mBinding: FragmentCreatePostBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,9 +25,10 @@ class CreatePostFragment: BaseFragment() {
         mBinding.apply {
             lifecycleOwner = this@CreatePostFragment
             fragment = this@CreatePostFragment
+            viewModel = mViewModel
         }
         mViewModel.apply {
-            bindViews(mBinding)
+            bindViews(this@CreatePostFragment)
         }
         return mBinding.root
     }

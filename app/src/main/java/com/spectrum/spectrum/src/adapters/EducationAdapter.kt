@@ -35,8 +35,8 @@ class EducationAdapter(private val items: ObservableArrayList<Education>): Recyc
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                     super.getItemOffsets(outRect, view, parent, state)
-                    outRect.top = dp2px(4)
-                    outRect.bottom = dp2px(4)
+                    outRect.top = dp2px(2)
+                    outRect.bottom = dp2px(2)
                 }
             })
         }
@@ -56,7 +56,7 @@ class EducationAdapter(private val items: ObservableArrayList<Education>): Recyc
                 var degree = ""
                 val school = item.schoolName ?: ""
                 item.location?.let{ if (it.id != 0) location = it.data + " " }
-                item.degree?.let{ if (it.id != 0) degree = it.data }
+                item.degree?.let{ if (it.id != 0) { it.data?.let { degree = "$it " } } }
                 val result = location + degree + school
                 text = result
             }
@@ -74,9 +74,9 @@ class EducationAdapter(private val items: ObservableArrayList<Education>): Recyc
                 text = item.grade.toString()
             }
             delete.setOnClickListener {
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, items.size - 1)
                 items.removeAt(position)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, items.size)
                 mRecyclerView?.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
             }
         }

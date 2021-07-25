@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="androidx.databinding.ObservableArrayList"/>
@@ -28,16 +29,19 @@
             name="jobGroup2"
             type="JobGroup" />
         <variable
-            name="eduItems"
+            name="jobGroup3"
+            type="JobGroup" />
+        <variable
+            name="educations"
             type="ObservableArrayList&lt;Education&gt;" />
         <variable
-            name="expItems"
+            name="experiences"
             type="ObservableArrayList&lt;Experience&gt;" />
         <variable
-            name="certItems"
+            name="licenses"
             type="ObservableArrayList&lt;License&gt;" />
         <variable
-            name="comments"
+            name="otherSpecs"
             type="String" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,7 +96,6 @@
                 android:gravity="center"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -375,41 +378,17 @@
 
                     </com.google.android.material.card.MaterialCardView>
 
-                    <LinearLayout
+                    <com.google.android.material.chip.ChipGroup
                         android:id="@+id/group_chips"
-                        android:orientation="horizontal"
+                        edit_spec_job_group_1="@{jobGroup1}"
+                        edit_spec_job_group_2="@{jobGroup2}"
+                        edit_spec_job_group_3="@{jobGroup3}"
+                        edit_spec_fragment="@{fragment}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/group_card">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_1"
-                            style="@style/OutlineChip"
-                            edit_spec_job_group_1="@{jobGroup1}"
-                            edit_spec_fragment="@{fragment}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="24dp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/spectrumBlue"
-                            android:visibility="@{jobGroup1 == null ? View.GONE : View.VISIBLE}"
-                            app:chipStrokeColor="@color/spectrumBlue" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_2"
-                            style="@style/OutlineChip"
-                            edit_spec_job_group_2="@{jobGroup2}"
-                            edit_spec_fragment="@{fragment}"
-                            android:layout_width="wrap_content"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/spectrumBlue"
-                            android:visibility="@{jobGroup2 == null ? View.GONE : View.VISIBLE}"
-                            app:chipStrokeColor="@color/spectrumBlue" />
-
-                    </LinearLayout>
+                        app:layout_constraintTop_toBottomOf="@id/group_card"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -425,7 +404,7 @@
                     android:paddingHorizontal="16dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/academic"
+                        android:id="@+id/education_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
@@ -436,8 +415,8 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/academic_recycler_view"
-                        edit_spec_edu_items="@{eduItems}"
+                        android:id="@+id/education_recycler_view"
+                        edit_spec_educations="@{educations}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -445,18 +424,18 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/academic" />
+                        app:layout_constraintTop_toBottomOf="@+id/education_text" />
 
                     <ImageButton
-                        android:id="@+id/academic_plus"
+                        android:id="@+id/education_plus"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:backgroundTint="@color/clear"
                         android:onClick="@{()->viewModel.showEducationDialog(fragment)}"
                         android:src="@drawable/icon_plus_circle"
-                        app:layout_constraintBottom_toBottomOf="@+id/academic"
+                        app:layout_constraintBottom_toBottomOf="@+id/education_text"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/academic" />
+                        app:layout_constraintTop_toTopOf="@+id/education_text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -472,7 +451,7 @@
                     android:paddingHorizontal="16dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/experiences"
+                        android:id="@+id/experiences_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
@@ -484,7 +463,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/experience_recycler_view"
-                        edit_spec_exp_items="@{expItems}"
+                        edit_spec_experiences="@{experiences}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -492,7 +471,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/experiences" />
+                        app:layout_constraintTop_toBottomOf="@+id/experiences_text" />
 
                     <ImageButton
                         android:id="@+id/experiences_plus"
@@ -501,7 +480,7 @@
                         android:backgroundTint="@color/clear"
                         android:onClick="@{()->viewModel.showExperienceDialog(fragment)}"
                         android:src="@drawable/icon_plus_circle"
-                        app:layout_constraintBottom_toBottomOf="@+id/experiences"
+                        app:layout_constraintBottom_toBottomOf="@+id/experiences_text"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -519,7 +498,7 @@
                     android:paddingHorizontal="16dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/certification_text"
+                        android:id="@+id/license_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
@@ -530,8 +509,8 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/certification_recycler_view"
-                        edit_spec_cert_items="@{certItems}"
+                        android:id="@+id/license_recycler_view"
+                        edit_spec_licenses="@{licenses}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -539,7 +518,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/certification_text" />
+                        app:layout_constraintTop_toBottomOf="@+id/license_text" />
 
                     <ImageButton
                         android:id="@+id/certification_plus"
@@ -548,9 +527,9 @@
                         android:backgroundTint="@color/clear"
                         android:onClick="@{()->viewModel.showCertificationDialog(fragment)}"
                         android:src="@drawable/icon_plus_circle"
-                        app:layout_constraintBottom_toBottomOf="@+id/certification_text"
+                        app:layout_constraintBottom_toBottomOf="@+id/license_text"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/license_text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -601,43 +580,11 @@
                             android:gravity="start"
                             android:inputType="textMultiLine"
                             android:maxLines="10"
-                            android:text="@{comments}"
+                            android:text="@{otherSpecs}"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
                     </com.spectrum.spectrum.src.customs.CustomTextInputLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <CheckBox
-                        android:id="@+id/checkbox"
-                        edit_spec_fragment="@{fragment}"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="68dp"
-                        android:button="@drawable/checkbox"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/checkbox_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/overwrite_changes_to_current_spec"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/checkbox"
-                        app:layout_constraintStart_toEndOf="@+id/checkbox"
-                        app:layout_constraintTop_toTopOf="@+id/checkbox" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

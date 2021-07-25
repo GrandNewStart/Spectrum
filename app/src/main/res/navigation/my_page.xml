@@ -8,5 +8,17 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.myPage.MyPageFragment"
-        android:label="MyPage" />
+        android:label="MyPage" >
+        <action
+            android:id="@+id/my_page_to_edit_spec"
+            app:destination="@id/editSpecFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/editSpecFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.editSpec.EditSpecFragment"
+        android:label="EditSpec" />
 </navigation>

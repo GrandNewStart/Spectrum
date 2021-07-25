@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="androidx.databinding.ObservableArrayList"/>
+        <import type="java.util.ArrayList"/>
+        <import type="android.view.View"/>
+        <import type="com.spectrum.spectrum.src.models.JobGroup"/>
+        <import type="com.spectrum.spectrum.src.models.Education"/>
+        <import type="com.spectrum.spectrum.src.models.Experience"/>
+        <import type="com.spectrum.spectrum.src.models.License"/>
+        <variable
+            name="fragment"
+            type="com.spectrum.spectrum.src.activities.main.fragments.createSpec.CreateSpecFragment" />
+        <variable
+            name="viewModel"
+            type="com.spectrum.spectrum.src.activities.main.fragments.createSpec.CreateSpecViewModel" />
+        <variable
+            name="age"
+            type="Integer" />
+        <variable
+            name="sex"
+            type="Integer" />
+        <variable
+            name="jobGroup1"
+            type="JobGroup" />
+        <variable
+            name="jobGroup2"
+            type="JobGroup" />
+        <variable
+            name="jobGroup3"
+            type="JobGroup" />
+        <variable
+            name="educations"
+            type="ObservableArrayList&lt;Education&gt;" />
+        <variable
+            name="experiences"
+            type="ObservableArrayList&lt;Experience&gt;" />
+        <variable
+            name="licenses"
+            type="ObservableArrayList&lt;License&gt;" />
+        <variable
+            name="otherSpecs"
+            type="String" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/action_bar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/action_bar_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="16dp"
+                android:background="@android:color/transparent"
+                android:foreground="@drawable/icon_back"
+                android:onClick="@{()->viewModel.backButtonAction(fragment)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="@color/clearGray" />
+
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="@string/edit_spec"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{()->viewModel.saveButtonAction(fragment)}"
+                android:text="@string/save"
+                android:textColor="@color/spectrumBlue"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/action_bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/message_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:text="@string/edit_spec_message"
+                    android:textColor="#666970"
+                    android:textSize="14sp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/age_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/age"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/age_required"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="*"
+                        android:textColor="@color/spectrumBlue"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@id/age_title"
+                        app:layout_constraintTop_toTopOf="@id/age_title" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/age_card"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/clear"
+                        android:stateListAnimator="@null"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/age_title"
+                        app:layout_constraintWidth_percent="0.4"
+                        app:strokeColor="@color/spectrumSilver3"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:onClick="@{()->viewModel.showAgePickerDialog(fragment)}">
+
+                            <TextView
+                                android:id="@+id/age_text"
+                                create_spec_age="@{age}"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="center_vertical|start"
+                                android:paddingStart="10dp"
+                                android:text="@string/select_age"
+                                android:textColor="@color/spectrumSilver3"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/imageView"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="5dp"
+                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/age_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/age_unit"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/age_card"
+                        app:layout_constraintStart_toEndOf="@id/age_card"
+                        app:layout_constraintTop_toTopOf="@id/age_card" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="@color/spectrumSilver3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/sex_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/sex"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/sex_required"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="*"
+                        android:textColor="@color/spectrumBlue"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@id/sex_title"
+                        app:layout_constraintTop_toTopOf="@id/sex_title" />
+
+                    <RadioGroup
+                        android:id="@+id/sex_radio_group"
+                        create_spec_sex="@{sex}"
+                        create_spec_male="@{maleButton}"
+                        create_spec_female="@{femaleButton}"
+                        create_spec_view_model="@{viewModel}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/sex_title">
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/male_button"
+                            android:layout_width="100dp"
+                            android:layout_height="24dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/male"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:buttonTint="@color/spectrumSilver3" />
+
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/female_button"
+                            android:layout_width="100dp"
+                            android:layout_height="24dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/female"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:buttonTint="@color/spectrumSilver3" />
+
+                    </RadioGroup>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="@color/spectrumSilver3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/group_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/job_group"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/group_required"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="*"
+                        android:textColor="@color/spectrumBlue"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@id/group_title"
+                        app:layout_constraintTop_toTopOf="@id/group_title" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/group_card"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/clear"
+                        android:stateListAnimator="@null"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/group_title"
+                        app:strokeColor="@color/spectrumSilver3"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:onClick="@{()->viewModel.showJobGroup(fragment)}">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/group_text"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="center_vertical"
+                                android:paddingStart="10dp"
+                                android:text="@string/select_your_job_group"
+                                android:textColor="#666970"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/group_arrow"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/group_arrow"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="5dp"
+                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/group_chips"
+                        create_spec_job_group_1="@{jobGroup1}"
+                        create_spec_job_group_2="@{jobGroup2}"
+                        create_spec_job_group_3="@{jobGroup3}"
+                        create_spec_fragment="@{fragment}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/group_card"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="@color/spectrumSilver3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/education_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/academic_background"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/education_recycler_view"
+                        create_spec_educations="@{educations}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/education_text" />
+
+                    <ImageButton
+                        android:id="@+id/education_plus"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:backgroundTint="@color/clear"
+                        android:onClick="@{()->viewModel.showEducationDialog(fragment)}"
+                        android:src="@drawable/icon_plus_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/education_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/education_text" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="20dp"
+                    android:background="@color/spectrumSilver3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/experiences_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/work_histories"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/experience_recycler_view"
+                        create_spec_experiences="@{experiences}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/experiences_text" />
+
+                    <ImageButton
+                        android:id="@+id/experiences_plus"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:backgroundTint="@color/clear"
+                        android:onClick="@{()->viewModel.showExperienceDialog(fragment)}"
+                        android:src="@drawable/icon_plus_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/experiences_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="@color/spectrumSilver3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/license_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/certificates_and_languages"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/license_recycler_view"
+                        create_spec_licenses="@{licenses}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/license_text" />
+
+                    <ImageButton
+                        android:id="@+id/certification_plus"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:backgroundTint="@color/clear"
+                        android:onClick="@{()->viewModel.showLicenseDialog(fragment)}"
+                        android:src="@drawable/icon_plus_circle"
+                        app:layout_constraintBottom_toBottomOf="@+id/license_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/license_text" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="@color/spectrumSilver3" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:paddingHorizontal="16dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/others"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/other_specs"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.spectrum.spectrum.src.customs.CustomTextInputLayout
+                        android:id="@+id/others_text_input_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="@color/spectrumSilver3"
+                        android:hint="@string/specs_placeholder"
+                        app:boxStrokeColor="@color/spectrumSilver3"
+                        app:boxStrokeWidth="1dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/others">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/others_edit_text"
+                            create_spec_fragment="@{fragment}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="start"
+                            android:inputType="textMultiLine"
+                            android:maxLines="10"
+                            android:text="@{otherSpecs}"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </com.spectrum.spectrum.src.customs.CustomTextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

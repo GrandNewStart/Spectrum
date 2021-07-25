@@ -12,6 +12,7 @@ import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.config.Constants
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.config.Helpers.formatDate
 import com.spectrum.spectrum.src.models.JobGroup
 
@@ -22,12 +23,13 @@ object BindingAdapters {
     @JvmStatic
     fun bindChipGroup(chipGroup: ChipGroup, items: ArrayList<JobGroup>?, dialog: JobGroupDialog) {
         chipGroup.apply {
-            setChipSpacing(0)
+            setChipSpacing(dp2px(16))
             items?.forEach {
                 val chip = Chip(context).apply {
                     text = it.name
                     val drawable = ChipDrawable.createFromAttributes(context, null, 0, R.style.CustomChip)
                     setChipDrawable(drawable)
+                    setEnsureMinTouchTargetSize(false)
                     if (it.selectIndex != 0) { isChecked = true }
                     setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
@@ -39,9 +41,19 @@ object BindingAdapters {
                                 dialog.mSecondItem = it
                                 return@setOnCheckedChangeListener
                             }
+                            if (dialog.mThirdItem == null) {
+                                dialog.mThirdItem = it
+                                return@setOnCheckedChangeListener
+                            }
                             setChecked(false)
                         }
                         else {
+                            dialog.mThirdItem?.apply {
+                                if (id == it.id) {
+                                    dialog.mThirdItem = null
+                                    return@setOnCheckedChangeListener
+                                }
+                            }
                             dialog.mSecondItem?.apply {
                                 if (id == it.id) {
                                     dialog.mSecondItem = null
@@ -72,7 +84,7 @@ object BindingAdapters {
                 R.id.locale_spinner -> {
                     spinner.apply {
                         val items = ArrayList<String>().apply {
-                            mLocations.forEach { add(it.data) }
+                            mLocations.forEach { location -> location.data?.let { name -> add(name) } }
                         }
                         adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, items)
                         onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -89,7 +101,7 @@ object BindingAdapters {
                 R.id.school_spinner -> {
                     spinner.apply {
                         val items = ArrayList<String>().apply {
-                            mDegrees.forEach { add(it.data) }
+                            mDegrees.forEach { degree -> degree.data?.let { name -> add(name) } }
                         }
                         adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, items)
                         onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -106,7 +118,7 @@ object BindingAdapters {
                 R.id.graduation_spinner -> {
                     spinner.apply {
                         val items = ArrayList<String>().apply {
-                            mGraduates.forEach { add(it.data) }
+                            mGraduates.forEach { graduate -> graduate.data?.let { name -> add(name) } }
                         }
                         adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, items)
                         onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -267,7 +279,7 @@ object BindingAdapters {
     // CERTIFICATION DIALOG
     @BindingAdapter("certification_dialog")
     @JvmStatic
-    fun bindCertificationEditText(editText: EditText, dialog: CertificationDialog) {
+    fun bindCertificationEditText(editText: EditText, dialog: LicenseDialog) {
         editText.apply { dialog.apply {
             addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

@@ -25,7 +25,7 @@ class HomeFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-            bindViews(mBinding)
+            bindViews(this@HomeFragment)
         }
         return mBinding.root
     }

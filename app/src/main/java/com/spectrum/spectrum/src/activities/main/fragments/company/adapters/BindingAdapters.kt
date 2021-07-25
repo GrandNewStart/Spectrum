@@ -13,7 +13,7 @@ object BindingAdapters {
         val companies = items ?: ArrayList()
         recyclerView.apply {
             if (adapter == null) {
-                adapter = CompanyVerticalAdapter(companies)
+                adapter = CompanyAdapter(companies, CompanyAdapter.VERTICAL)
                 return
             }
             adapter?.notifyDataSetChanged()
@@ -26,7 +26,7 @@ object BindingAdapters {
         val companies = items ?: ArrayList()
         recyclerView.apply {
             if (adapter == null) {
-                adapter = CompanyHorizontalAdapter(companies)
+                adapter = CompanyAdapter(companies, CompanyAdapter.HORIZONTAL)
                 return
             }
             adapter?.notifyDataSetChanged()

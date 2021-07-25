@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
         <import type="java.util.ArrayList"/>
         <import type="com.spectrum.spectrum.src.models.Evaluation"/>
-        <import type="com.spectrum.spectrum.src.models.Education"/>
-        <import type="com.spectrum.spectrum.src.models.Experience"/>
-        <import type="com.spectrum.spectrum.src.models.License"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.post.models.Education"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.post.models.Experience"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.post.models.License"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment" />
         <variable
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.post.PostViewModel" />
+        <variable
+            name="isMine"
+            type="Boolean" />
         <variable
             name="userThumbnail"
             type="String" />
@@ -40,7 +43,7 @@
             name="experiences"
             type="ArrayList&lt;Experience&gt;" />
         <variable
-            name="certifications"
+            name="licenses"
             type="ArrayList&lt;License&gt;" />
         <variable
             name="otherSpecs"
@@ -105,13 +108,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/save_button"
+            android:id="@+id/trailing_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
-            android:onClick="@{()->viewModel.markButtonAction(fragment)}"
-            android:src="@drawable/icon_book_mark"
+            android:onClick="@{()->viewModel.trailingButtonAction(fragment)}"
+            android:src="@{isMine ? @drawable/icon_menu : @drawable/icon_book_mark}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -141,8 +144,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="16dp"
-                        android:background="@color/spectrumSilver3"
-                        android:src="@drawable/icon_person"
+                        android:src="@drawable/icon_profile"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:riv_mutate_background="true"
@@ -160,6 +162,7 @@
 
                         <TextView
                             android:id="@+id/user_name_text"
+                            post_texts="@{userName}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -169,6 +172,7 @@
 
                         <TextView
                             android:id="@+id/date_text"
+                            post_texts="@{date}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
@@ -178,84 +182,18 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/post_user_info_chip_group"
+                        post_user_info="@{userInfo}"
                         android:layout_width="0dp"
                         android:layout_height="32dp"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
-                        android:orientation="horizontal"
+                        app:chipSpacing="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/user_thumbnail_image">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:fontFamily="@font/roboto_regular"
-                            android:gravity="center"
-                            android:text="취업준비"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            app:chipBackgroundColor="@color/clear"
-                            app:chipMinTouchTargetSize="0dp"
-                            app:chipStrokeColor="#EAEAEA"
-                            app:chipStrokeWidth="1dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="7dp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:gravity="center"
-                            android:text="23세"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            app:chipBackgroundColor="#EAEAEA"
-                            app:chipMinTouchTargetSize="0dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="7dp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:gravity="center"
-                            android:text="여성"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            app:chipBackgroundColor="#EAEAEA"
-                            app:chipMinTouchTargetSize="0dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="7dp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:gravity="center"
-                            android:text="IT/인터넷"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            app:chipBackgroundColor="#EAEAEA"
-                            app:chipMinTouchTargetSize="0dp" />
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="7dp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:gravity="center"
-                            android:text="디자인"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            app:chipBackgroundColor="#EAEAEA"
-                            app:chipMinTouchTargetSize="0dp" />
-
-                    </LinearLayout>
+                        app:layout_constraintTop_toBottomOf="@+id/user_thumbnail_image" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -265,6 +203,7 @@
 
                     <TextView
                         android:id="@+id/post_title_text"
+                        post_texts="@{postTitle}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -279,6 +218,7 @@
 
                     <TextView
                         android:id="@+id/post_content_text"
+                        post_texts="@{postContent}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -292,13 +232,12 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/post_title_text" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        app:cardBackgroundColor="@color/spectrumLightBlue"
-                        app:cardCornerRadius="@dimen/default_corner_radius"
-                        app:cardElevation="0dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
+                        android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -307,75 +246,89 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginTop="12dp"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="64dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginEnd="24dp"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/academic_background"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textColor="@color/spectrumSilver3"
+                                android:textSize="14sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                post_edu_items="@{educations}"
+                                post_educations="@{educations}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="8dp"
-                                android:layout_marginTop="16dp"
                                 android:nestedScrollingEnabled="false" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="16dp">
+
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="64dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="24dp"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/experiences"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textColor="@color/spectrumSilver3"
+                                android:textSize="14sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                post_exp_items="@{experiences}"
+                                post_experiences="@{experiences}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="8dp"
-                                android:layout_marginTop="16dp"
                                 android:nestedScrollingEnabled="false" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="16dp">
+
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="64dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="24dp"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/certificates_and_languages"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textColor="@color/spectrumSilver3"
+                                android:textSize="14sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
-                                post_cert_items="@{certifications}"
+                                post_licenses="@{licenses}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="8dp"
-                                android:layout_marginTop="16dp"
                                 android:nestedScrollingEnabled="false" />
 
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="16dp">
+
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="64dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="24dp"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/other_specs"
-                                android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textColor="@color/spectrumSilver3"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginBottom="12dp"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="없음"
                                 android:textColor="#45474B"
@@ -383,7 +336,7 @@
 
                         </LinearLayout>
 
-                    </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

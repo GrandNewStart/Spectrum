@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="java.util.ArrayList"/>
-        <import type="com.spectrum.spectrum.src.models.Post"/>
-        <import type="com.spectrum.spectrum.src.models.JobGroup"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.home.models.Post"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.home.models.JobGroup"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment" />
@@ -17,12 +17,6 @@
         <variable
             name="jobGroup2"
             type="JobGroup" />
-        <variable
-            name="jobGroup3"
-            type="JobGroup" />
-        <variable
-            name="myGroups"
-            type="ArrayList&lt;JobGroup&gt;" />
         <variable
             name="hottest"
             type="ArrayList&lt;Post&gt;" />
@@ -102,10 +96,10 @@
             app:layout_constraintTop_toBottomOf="@+id/app_bar_divider">
 
             <com.google.android.material.card.MaterialCardView
-                home_fragment="@{fragment}"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/clear"
+                android:onClick="@{()->viewModel.showJobGroupDialog(fragment)}"
                 app:cardBackgroundColor="@color/clear"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
@@ -119,9 +113,24 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="12dp"
                     android:layout_marginVertical="2dp"
-                    android:src="@drawable/icon_option"/>
+                    android:src="@drawable/icon_filter"/>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/all_chip"
+                android:onClick="@{()->viewModel.showAllResults(fragment)}"
+                android:text="@string/all"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                app:chipMinTouchTargetSize="0dp"
+                app:chipBackgroundColor="@color/spectrumGray1"
+                app:chipStrokeColor="@color/spectrumGray1"
+                app:chipStrokeWidth="1dp"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_1"
@@ -139,18 +148,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_3"
-                style="@style/OrangeChip"
-                home_job_group="@{jobGroup3}"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp" />
-
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
+            home_fragment="@{fragment}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/app_bar_size"
@@ -186,7 +188,6 @@
                         home_posts_horizontal="@{hottest}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:nestedScrollingEnabled="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -232,11 +233,12 @@
                         android:id="@+id/filer_switch"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_marginTop="28dp"
                         android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/latest_text"
+                        android:thumb="@drawable/switch_thumb"
+                        app:layout_constraintBottom_toBottomOf="@+id/filter_text"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/filter_text"
+                        app:track="@drawable/switch_track" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/latest_recycler_view"

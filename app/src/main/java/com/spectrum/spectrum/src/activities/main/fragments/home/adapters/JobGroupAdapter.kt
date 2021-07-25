@@ -1,6 +1,5 @@
 package com.spectrum.spectrum.src.activities.main.fragments.home.adapters
 
-import android.content.Context
 import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.models.JobGroup
 
@@ -29,11 +27,6 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
             mCardView.setCardBackgroundColor(itemView.resources.getColor(R.color.spectrumGreen, null))
             mTextView.setTextColor(itemView.resources.getColor(R.color.white, null))
         }
-        fun makeThirdSelection() {
-            mCardView.strokeColor = itemView.resources.getColor(R.color.spectrumOrange, null)
-            mCardView.setCardBackgroundColor(itemView.resources.getColor(R.color.spectrumOrange, null))
-            mTextView.setTextColor(itemView.resources.getColor(R.color.white, null))
-        }
         fun deselect() {
             mCardView.strokeColor = itemView.resources.getColor(R.color.spectrumGray3, null)
             mCardView.setCardBackgroundColor(itemView.resources.getColor(R.color.clear, null))
@@ -43,7 +36,6 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
 
     var mFirstItem: JobGroup? = null
     var mSecondItem: JobGroup? = null
-    var mThirdItem: JobGroup? = null
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -80,10 +72,6 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                         makeSecondSelection()
                         mSecondItem = item
                     }
-                    3-> {
-                        makeThirdSelection()
-                        mThirdItem = item
-                    }
                 }
                 mCardView.setOnClickListener {
                     when(item.selectIndex) {
@@ -100,18 +88,11 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                                 notifyItemChanged(position)
                                 return@setOnClickListener
                             }
-                            if (mThirdItem == null) {
-                                mThirdItem = items[position]
-                                items[position].selectIndex = 3
-                                notifyItemChanged(position)
-                                return@setOnClickListener
-                            }
                         }
                         1 -> {
                             items[position].selectIndex = 0
                             mFirstItem = null
                             notifyItemChanged(position)
-
                             if (mSecondItem != null) {
                                 for (i in 0 until items.size) {
                                     if (items[i].selectIndex == 2) {
@@ -121,37 +102,11 @@ class JobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adap
                                         notifyItemChanged(i)
                                     }
                                 }
-                                if (mThirdItem != null) {
-                                    for (i in 0 until items.size) {
-                                        if (items[i].selectIndex == 3) {
-                                            items[i].selectIndex = 2
-                                            mSecondItem = items[i]
-                                            mThirdItem = null
-                                            notifyItemChanged(i)
-                                        }
-                                    }
-                                }
                             }
                         }
                         2 -> {
                             items[position].selectIndex = 0
                             mSecondItem = null
-                            notifyItemChanged(position)
-
-                            if (mThirdItem != null) {
-                                for (i in 0 until items.size) {
-                                    if (items[i].selectIndex == 3) {
-                                        items[i].selectIndex = 2
-                                        mSecondItem = items[i]
-                                        mThirdItem = null
-                                        notifyItemChanged(i)
-                                    }
-                                }
-                            }
-                        }
-                        3 -> {
-                            items[position].selectIndex = 0
-                            mThirdItem = null
                             notifyItemChanged(position)
                         }
                     }

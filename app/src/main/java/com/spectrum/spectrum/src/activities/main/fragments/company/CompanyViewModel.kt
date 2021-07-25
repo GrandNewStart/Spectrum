@@ -6,10 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.spectrum.spectrum.databinding.FragmentCompanyBinding
 import com.spectrum.spectrum.src.models.Company
-import com.spectrum.spectrum.src.models.Duty
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.models.Industry
-import com.spectrum.spectrum.src.models.JobGroup
 
 class CompanyViewModel: ViewModel() {
 
@@ -55,10 +53,6 @@ class CompanyViewModel: ViewModel() {
     }
 
     fun seeAllButtonAction(fragment: CompanyFragment) {
-        fragment.showToast(Constants.under_construction)
-    }
-
-    fun fabAction(fragment: CompanyFragment) {
         fragment.showToast(Constants.under_construction)
     }
 

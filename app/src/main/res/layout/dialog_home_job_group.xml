@@ -79,16 +79,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/maximum_three_selection"
+                android:text="@string/maximum_two_selection"
                 android:textColor="@color/spectrumGray2"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/message_text" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/job_group_recycler_view"
-                android:layout_width="wrap_content"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="36dp"
                 android:layout_marginVertical="72dp"

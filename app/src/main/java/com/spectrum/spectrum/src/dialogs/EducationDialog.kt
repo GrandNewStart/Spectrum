@@ -103,7 +103,7 @@ class EducationDialog(context: Context): Dialog(context, R.style.AppTheme) {
     }
 
     companion object {
-        val TAG = EducationDialog::class.java.simpleName
+        val TAG = EducationDialog::class.java.simpleName.toString()
     }
 
 }

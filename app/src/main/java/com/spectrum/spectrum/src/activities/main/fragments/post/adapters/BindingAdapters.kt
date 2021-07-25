@@ -4,6 +4,7 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -12,20 +13,67 @@ import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.main.fragments.post.PostViewModel
-import com.spectrum.spectrum.src.models.License
-import com.spectrum.spectrum.src.models.Education
+import com.spectrum.spectrum.src.activities.main.fragments.post.models.Education
+import com.spectrum.spectrum.src.activities.main.fragments.post.models.Experience
+import com.spectrum.spectrum.src.activities.main.fragments.post.models.License
 import com.spectrum.spectrum.src.models.Evaluation
-import com.spectrum.spectrum.src.models.Experience
 
 object BindingAdapters {
 
-    @BindingAdapter("post_edu_items")
+    @BindingAdapter("post_texts")
+    @JvmStatic
+    fun bindTextViews(textView: TextView, text: String?) {
+        textView.text = text
+    }
+
+    @BindingAdapter("post_user_info")
+    @JvmStatic
+    fun bindUserInfoChipGroup(chipGroup: ChipGroup, items: ArrayList<String>?) {
+        val userInfo = items ?: arrayListOf()
+        chipGroup.apply {
+            for (i in 0 until userInfo.size) {
+                val info = userInfo[i]
+                if (i == 0) {
+                    Chip(context).apply {
+                        setEnsureMinTouchTargetSize(false)
+                        setTextAppearance(R.style.ChipText)
+                        setChipBackgroundColorResource(R.color.clear)
+                        setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                        if (info == "R") {
+                            text = "취업준비"
+                            setChipStrokeColorResource(R.color.spectrumSilver2)
+                        }
+                        if (info == "N") {
+                            text = "n차합격"
+                            setChipStrokeColorResource(R.color.spectrumLightBlue)
+                        }
+                        if (info == "F") {
+                            text = "최종합격"
+                            setChipStrokeColorResource(R.color.spectrumBlue)
+                        }
+                        addView(this)
+                    }
+                }
+                else {
+                    Chip(context).apply {
+                        text = info
+                        setEnsureMinTouchTargetSize(false)
+                        setTextAppearance(R.style.ChipText)
+                        setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        addView(this)
+                    }
+                }
+            }
+        }
+    }
+
+    @BindingAdapter("post_educations")
     @JvmStatic
     fun bindEducationList(recyclerView: RecyclerView, items: ArrayList<Education>?) {
         recyclerView.apply {
             items?.let { items ->
                 if (adapter == null) {
-                    adapter = EduItemAdapter(items)
+                    adapter = EducationAdapter(items)
                     return@apply
                 }
                 adapter?.notifyDataSetChanged()
@@ -33,13 +81,13 @@ object BindingAdapters {
         }
     }
 
-    @BindingAdapter("post_exp_items")
+    @BindingAdapter("post_experiences")
     @JvmStatic
     fun bindExperienceList(recyclerView: RecyclerView, items: ArrayList<Experience>?) {
         recyclerView.apply {
             items?.let { items ->
                 if (adapter == null) {
-                    adapter = ExpItemAdapter(items)
+                    adapter = ExperienceAdapter(items)
                     return@apply
                 }
                 adapter?.notifyDataSetChanged()
@@ -47,13 +95,13 @@ object BindingAdapters {
         }
     }
 
-    @BindingAdapter("post_cert_items")
+    @BindingAdapter("post_licenses")
     @JvmStatic
     fun bindCertificationList(recyclerView: RecyclerView, items: ArrayList<License>?) {
         recyclerView.apply {
             items?.let { items ->
                 if (adapter == null) {
-                    adapter = CertItemAdapter(items)
+                    adapter = LicenseAdapter(items)
                     return@apply
                 }
                 adapter?.notifyDataSetChanged()

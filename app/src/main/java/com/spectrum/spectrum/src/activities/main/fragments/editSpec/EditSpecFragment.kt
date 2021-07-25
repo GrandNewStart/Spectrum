@@ -27,7 +27,7 @@ class EditSpecFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-            bindViews(mBinding)
+            bindViews(this@EditSpecFragment)
         }
         return mBinding.root
     }

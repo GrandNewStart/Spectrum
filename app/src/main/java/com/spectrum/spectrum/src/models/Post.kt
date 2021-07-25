@@ -1,7 +1,7 @@
 package com.spectrum.spectrum.src.models
 
 data class Post(
-    var id: String,
+    var id: Int,
     var title: String,
     var date: String,
     var commentCount: Int,

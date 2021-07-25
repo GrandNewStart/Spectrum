@@ -5,16 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.findFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment
-import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers.dp2px
-import com.spectrum.spectrum.src.models.Duty
 import com.spectrum.spectrum.src.models.JobGroup
 
 class MyJobGroupAdapter(private val items: ArrayList<JobGroup>): RecyclerView.Adapter<MyJobGroupAdapter.ViewHolder>() {

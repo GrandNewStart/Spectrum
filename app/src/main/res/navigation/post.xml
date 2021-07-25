@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/post"
+    app:startDestination="@id/postFragment">
+
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment"
+        android:label="Post" >
+        <action
+            android:id="@+id/post_to_edit_post"
+            app:destination="@id/editPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPostFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.editpost.EditPostFragment"
+        android:label="EditPostFragment" >
+        <action
+            android:id="@+id/edit_post_to_edit_spec"
+            app:destination="@id/editSpecFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/edit_post_to_create_spec"
+            app:destination="@id/createSpecFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/editSpecFragment2"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.editSpec.EditSpecFragment"
+        android:label="EditSpec" />
+    <fragment
+        android:id="@+id/createSpecFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.createSpec.CreateSpecFragment"
+        android:label="CreateSpecFragment" />
+</navigation>

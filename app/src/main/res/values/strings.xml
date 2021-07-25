@@ -62,6 +62,7 @@
     <string name="companies_of_peoples_interest">다른 사람들이 보고 있어요</string>
     <string name="see_more">더 보기</string>
     <string name="select_your_job_group_of_interest">빠른 스펙 비교를 위해<br/>\n회원님이 관심 있는 직군을 선택해주세요.</string>
+    <string name="maximum_two_selection">(최대 2개 선택 가능)</string>
     <string name="maximum_three_selection">(최대 3개 선택 가능)</string>
     <string name="start_date">입사일</string>
     <string name="end_date">퇴사일</string>
@@ -74,6 +75,7 @@
     <string name="type_of_spec">스펙 종류</string>
     <string name="free_text_hint">현재 스펙과 관련하여 고민이나 후기를 적어주세요</string>
     <string name="write_post">글쓰기</string>
+    <string name="edit_post">글수정</string>
     <string name="search">검색</string>
     <string name="add">추가</string>
     <string name="you_can_edit_specs_later">스펙 선택 후 추가 수정 가능합니다</string>
@@ -81,8 +83,24 @@
     <string name="edit_spec_message">연령, 성별, 직군은 필수입력항목입니다</string>
     <string name="company_info">기업정보</string>
     <string name="overwrite_changes_to_current_spec">수정 사항을 나의 기존 스펙에 반영</string>
-    <string name="register_to_favortie_companies">관심기업 등록</string>
+    <string name="register_to_favorite_companies">관심기업 등록</string>
     <string name="spec_analysis">스펙트럼 분석</string>
     <string name="see_more_specs_of_this_company">이 기업의 또 다른<br/>\n스펙트럼을 만나보세요</string>
     <string name="leave_responses">의견 남기기</string>
+    <string name="see_spec">스펙 둘러보기</string>
+    <string name="add_spec">스펙 추가하기</string>
+    <string name="all">전체</string>
+    <string name="add_your_spec_to_create_post">스펙 추가를 통해<br/>\n고민 글, 취업 후기 작성이 가능합니다.</string>
+    <string name="add_to_interest_to_see_details">관심기업 등록을 통해<br/>\n이 기업을 준비하고 있거나 합격한<br/>\n스펙 및 분석 내용을 살펴보실 수 있습니다.</string>
+    <string name="spec_submission_notice">이 스펙은 관심 등록한 기업의 스펙 분석 데이터로 사용됩니다.<br/>\n등록을 통해 다른 사용자들과 스펙을 비교해보세요!</string>
+    <string name="did_you_make_it">혹시 기업에 합격하셨나요?</string>
+    <string name="activity_info">활동 정보</string>
+    <string name="my_posts">작성한 글</string>
+    <string name="my_evaluations">의견 낸 글</string>
+    <string name="interests">관심 있어요</string>
+    <string name="scraps">스크랩</string>
+    <string name="company_of_interest"> 관심 기업</string>
+    <string name="etc">기타</string>
+    <string name="app_configurations">앱 설정</string>
+    <string name="edit_profile">프로필 수정</string>
 </resources>

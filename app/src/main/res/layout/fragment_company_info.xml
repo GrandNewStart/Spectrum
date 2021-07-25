@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="android.view.View"/>
         <import type="java.util.ArrayList"/>
         <import type="com.spectrum.spectrum.src.models.Spec"/>
+        <import type="com.spectrum.spectrum.src.models.Analysis"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoFragment" />
@@ -12,13 +14,28 @@
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoViewModel" />
         <variable
+            name="isFavorite"
+            type="Boolean" />
+        <variable
+            name="analysis1"
+            type="Analysis" />
+        <variable
+            name="analysis2"
+            type="Analysis" />
+        <variable
+            name="analysis3"
+            type="Analysis" />
+        <variable
+            name="analysis4"
+            type="Analysis" />
+        <variable
             name="specs"
             type="ArrayList&lt;Spec&gt;" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="#F9F9FB">
+        android:background="#F9F9FB">
 
         <ImageButton
             android:layout_width="24dp"
@@ -49,8 +66,9 @@
             android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/icon_heart_empty"
             android:backgroundTint="@color/clear"
+            android:onClick="@{()->viewModel.favoriteButtonAction(fragment)}"
+            android:src="@{isFavorite ? @drawable/icon_heart_fill : @drawable/icon_heart_empty}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -141,7 +159,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="@string/register_to_favortie_companies"
+                                android:text="@string/register_to_favorite_companies"
                                 android:textColor="#666970"
                                 android:textSize="10sp" />
 
@@ -153,86 +171,193 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/white">
-
-                    <TextView
-                        android:id="@+id/analysis_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/spec_analysis"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginStart="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/graph_view"
+                        android:id="@+id/constraintLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/analysis_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="24dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/spec_analysis"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/graph_view"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/analysis_text">
+
+                            <com.spectrum.spectrum.src.customs.CircleView
+                                android:id="@+id/circle_1"
+                                company_info_analysis="@{analysis1}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="8dp"
+                                app:layout_constraintBottom_toTopOf="@+id/h_guide"
+                                app:layout_constraintDimensionRatio="1:1"
+                                app:layout_constraintEnd_toStartOf="@+id/v_guide" />
+
+                            <com.spectrum.spectrum.src.customs.CircleView
+                                android:id="@+id/circle_2"
+                                company_info_analysis="@{analysis2}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="8dp"
+                                app:layout_constraintBottom_toTopOf="@+id/h_guide"
+                                app:layout_constraintDimensionRatio="1:1"
+                                app:layout_constraintStart_toStartOf="@+id/v_guide" />
+
+                            <com.spectrum.spectrum.src.customs.CircleView
+                                android:id="@+id/circle_3"
+                                company_info_analysis="@{analysis3}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                app:layout_constraintDimensionRatio="1:1"
+                                app:layout_constraintEnd_toStartOf="@+id/v_guide"
+                                app:layout_constraintTop_toTopOf="@+id/h_guide" />
+
+                            <com.spectrum.spectrum.src.customs.CircleView
+                                android:id="@+id/circle_4"
+                                company_info_analysis="@{analysis4}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="8dp"
+                                app:layout_constraintDimensionRatio="1:1"
+                                app:layout_constraintStart_toStartOf="@+id/v_guide"
+                                app:layout_constraintTop_toTopOf="@+id/h_guide" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/h_guide"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                app:layout_constraintGuide_percent="0.5" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/v_guide"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent="0.5" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                        <TextView
+                            android:id="@+id/see_more_specs_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="24dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/see_more_specs_of_this_company"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            style="@style/CustomTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:text="@string/see_accepted_only"
+                            android:textColor="#666970"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/see_more_specs_text"
+                            app:layout_constraintEnd_toStartOf="@+id/filter_switch"
+                            app:layout_constraintTop_toTopOf="@+id/see_more_specs_text" />
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/filter_switch"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:thumb="@drawable/switch_thumb"
+                            app:layout_constraintBottom_toBottomOf="@+id/see_more_specs_text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/see_more_specs_text"
+                            app:track="@drawable/switch_track" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            company_info_specs="@{specs}"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="24dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/see_more_specs_text" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.github.mmin18.widget.RealtimeBlurView
+                        android:id="@+id/blurring_view"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:layout_constraintDimensionRatio="1:1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/analysis_text"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/see_more_specs_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/see_more_specs_of_this_company"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        style="@style/CustomTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="@string/see_accepted_only"
-                        android:textColor="#666970"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/see_more_specs_text"
-                        app:layout_constraintEnd_toStartOf="@+id/filter_switch"
-                        app:layout_constraintTop_toTopOf="@+id/see_more_specs_text" />
-
-                    <com.google.android.material.switchmaterial.SwitchMaterial
-                        android:id="@+id/filter_switch"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/see_more_specs_text"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/see_more_specs_text" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        company_info_specs="@{specs}"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="24dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:visibility="@{isFavorite ? View.GONE : View.VISIBLE}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/see_more_specs_text" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:realtimeBlurRadius="20dp"
+                        app:realtimeOverlayColor="#1AFFFFFF" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/blurring_text"
+            style="@style/CustomTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/add_to_interest_to_see_details"
+            android:visibility="@{isFavorite ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

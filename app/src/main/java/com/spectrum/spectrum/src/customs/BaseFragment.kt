@@ -16,6 +16,10 @@ open class BaseFragment: Fragment() {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
+    fun showProgressDialog(show: Boolean) {
+        (activity as BaseActivity).showProgressDialog(show)
+    }
+
     fun showKeyboard(view: View, show: Boolean) {
         val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         if (show) imm.showSoftInput(view, 0)

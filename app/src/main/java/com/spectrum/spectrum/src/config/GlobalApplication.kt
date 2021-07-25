@@ -29,7 +29,7 @@ class GlobalApplication: Application() {
     }
 
     companion object {
-        val TAG = GlobalApplication::class.java.simpleName
+        val TAG = GlobalApplication::class.java.simpleName.toString()
     }
 
 }

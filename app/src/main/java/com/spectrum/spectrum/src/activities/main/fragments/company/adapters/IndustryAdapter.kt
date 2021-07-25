@@ -1,17 +1,14 @@
 package com.spectrum.spectrum.src.activities.main.fragments.company.adapters
 
 import android.graphics.Rect
-import android.graphics.drawable.ColorStateListDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment
 import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.models.Industry
 
@@ -39,6 +36,7 @@ class IndustryAdapter(private val items: ArrayList<Industry>): RecyclerView.Adap
                 }
             })
         }
+        items[0].isSelected = true
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -63,42 +61,11 @@ class IndustryAdapter(private val items: ArrayList<Industry>): RecyclerView.Adap
             cardView.setCardBackgroundColor(if (item.isSelected) blue else clear)
 
             itemView.setOnClickListener {
-                if (position == 0) {
-                    for (i in 1 until items.size) {
-                        items[i].isSelected = true
-                        notifyItemChanged(i)
-                    }
-                    onAllSelected()
-                }
-                else {
-                    items[position].isSelected = !item.isSelected
-                    notifyItemChanged(position)
-                    if (items[position].isSelected){ onItemSelected(position) } else { onItemDeselected(position) }
+                for (i in 0 until items.size) {
+                    items[i].isSelected = (i == position)
+                    notifyItemChanged(i)
                 }
             }
-        }
-    }
-
-    private fun onItemSelected(position: Int) {
-        val fragment = recyclerView?.findFragment<CompanyFragment>()
-        val item = items[position]
-        fragment?.apply {
-            showToast("${item.name} SELECT")
-        }
-    }
-
-    private fun onItemDeselected(position: Int) {
-        val fragment = recyclerView?.findFragment<CompanyFragment>()
-        val item = items[position]
-        fragment?.apply {
-            showToast("${item.name} DESELECT")
-        }
-    }
-
-    private fun onAllSelected() {
-        val fragment = recyclerView?.findFragment<CompanyFragment>()
-        fragment?.apply {
-            showToast("ALL SELECTED")
         }
     }
 

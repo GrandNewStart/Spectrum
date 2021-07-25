@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="fragment"
+            type="com.spectrum.spectrum.src.activities.main.fragments.myPage.MyPageFragment" />
+        <variable
+            name="viewModel"
+            type="com.spectrum.spectrum.src.activities.main.fragments.myPage.MyPageViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/user_image"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginVertical="32dp"
+                        android:layout_marginStart="16dp"
+                        android:backgroundTint="@color/spectrumGray1"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
+                        android:src="@drawable/icon_person"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:riv_oval="true" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/user_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/user_image"
+                        app:layout_constraintTop_toTopOf="@+id/user_image">
+
+                        <com.google.android.material.button.MaterialButton
+                            style="?android:attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:backgroundTint="@color/clear"
+                            android:fontFamily="@font/roboto_medium"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:onClick="@{()->viewModel.showEditProfileDialog(fragment)}"
+                            android:padding="0dp"
+                            android:text="킹오브더스펙"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:icon="@drawable/icon_chevron_right"
+                            app:iconGravity="textEnd"
+                            app:iconPadding="0dp"
+                            app:iconSize="24dp"
+                            app:iconTint="@color/spectrumSilver3" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="abc@gmail.com"
+                            android:textColor="@color/spectrumBlue"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#F6F6F6" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/activity_info"
+                        android:textColor="#A7A1A1"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="@color/clear"
+                        android:elevation="0dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{()->viewModel.showMySpecDialog(fragment)}"
+                        android:padding="0dp"
+                        android:text="@string/my_specs"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="@color/clear"
+                        android:elevation="0dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{()->viewModel.showMyPostsDialog(fragment)}"
+                        android:padding="0dp"
+                        android:text="@string/my_posts"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:backgroundTint="@color/clear"
+                        android:elevation="0dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{()->viewModel.showMyEvaluationsDialog(fragment)}"
+                        android:padding="0dp"
+                        android:text="@string/my_evaluations"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#F6F6F6"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/interests"
+                        android:textColor="#A7A1A1"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="@color/clear"
+                        android:elevation="0dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{()->viewModel.showMyScrapsDialog(fragment)}"
+                        android:padding="0dp"
+                        android:text="@string/scraps"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:backgroundTint="@color/clear"
+                        android:elevation="0dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{()->viewModel.showMyCompanies(fragment)}"
+                        android:padding="0dp"
+                        android:text="@string/company_of_interest"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#F6F6F6"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/etc"
+                        android:textColor="#A7A1A1"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="4dp"
+                        android:backgroundTint="@color/clear"
+                        android:elevation="0dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:onClick="@{()->viewModel.proceedToAppConfiguration(fragment)}"
+                        android:padding="0dp"
+                        android:text="@string/app_configurations"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

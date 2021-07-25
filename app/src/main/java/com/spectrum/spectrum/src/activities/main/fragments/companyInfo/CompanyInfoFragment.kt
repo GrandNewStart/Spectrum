@@ -15,7 +15,9 @@ class CompanyInfoFragment: BaseFragment() {
     lateinit var mBinding: FragmentCompanyInfoBinding
     val mViewModel by viewModels<CompanyInfoViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        mViewModel.view?.let { return it }
+
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_company_info, container, false)
         mBinding.apply {
             lifecycleOwner = this@CompanyInfoFragment
@@ -23,7 +25,8 @@ class CompanyInfoFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-            bindViews(mBinding)
+            bindViews(this@CompanyInfoFragment)
+            view = mBinding.root
         }
         return mBinding.root
     }

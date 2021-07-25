@@ -11,7 +11,7 @@ interface LogInApi {
     @POST("/app/users/auth")
     suspend fun logIn(@Body body: RequestBody): LogInResponse
 
-    @POST("/specs")
+    @POST("/app/specs")
     suspend fun updateSpecs(@Body body: RequestBody): BaseResponse
 
 }

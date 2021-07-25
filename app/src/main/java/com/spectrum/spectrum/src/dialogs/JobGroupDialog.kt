@@ -8,16 +8,13 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.DialogJobGroupBinding
-import com.spectrum.spectrum.src.activities.login.adapters.JobGroupAdapter
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers.retrofit
 import com.spectrum.spectrum.src.models.JobGroup
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import retrofit2.http.GET
 import java.lang.Exception
@@ -26,11 +23,10 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
 
     private lateinit var mBinding: DialogJobGroupBinding
     private var mItems = ArrayList<JobGroup>()
-    private var onSaveListener: (first: JobGroup?, second: JobGroup?)->Unit = {_,_->}
+    private var onSaveListener: (first: JobGroup?, second: JobGroup?, third: JobGroup?)->Unit = {_,_,_->}
     var mFirstItem: JobGroup? = null
     var mSecondItem: JobGroup? = null
-
-    init { getJobGroups() }
+    var mThirdItem: JobGroup? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,21 +48,23 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
             setGravity(Gravity.END)
         }
         setContentView(mBinding.root)
+        getJobGroups()
     }
 
     fun saveButtonAction() {
-        onSaveListener(mFirstItem, mSecondItem)
+        onSaveListener(mFirstItem, mSecondItem, mThirdItem)
         dismiss()
     }
 
-    fun setOnSaveListener(onSaveListener: (first: JobGroup?, second: JobGroup?)->Unit): JobGroupDialog {
+    fun setOnSaveListener(onSaveListener: (first: JobGroup?, second: JobGroup?, third: JobGroup?)->Unit): JobGroupDialog {
         this.onSaveListener = onSaveListener
         return this
     }
 
-    fun setPreselectedItems(first: JobGroup?, second: JobGroup?): JobGroupDialog {
+    fun setPreselectedItems(first: JobGroup?, second: JobGroup?, third: JobGroup?): JobGroupDialog {
         mFirstItem = first
         mSecondItem = second
+        mThirdItem = third
         return this
     }
 
@@ -89,8 +87,13 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
                                     mItems[i].selectIndex = 2
                                 }
                             }
+                            mThirdItem?.let {
+                                if (it.id == mItems[i].id) {
+                                    mItems[i].selectIndex = 3
+                                }
+                            }
                         }
-                        mBinding.groups = mItems
+                        mBinding?.groups = mItems
                         return@launch
                     }
                     Log.e(TAG, "---> JOB GROUP FETCH FAILURE: $message")
@@ -107,7 +110,7 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
     }
 
     companion object {
-        val TAG = JobGroupDialog::class.java.simpleName.toString()
+        val TAG = JobGroupDialog::class.java.simpleName
     }
 
 }
