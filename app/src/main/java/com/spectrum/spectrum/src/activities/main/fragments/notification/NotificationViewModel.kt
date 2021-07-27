@@ -21,6 +21,7 @@ class NotificationViewModel: ViewModel() {
                 mNotifications.add(Notification(null, null, "작성한 글", "스펙짱 님이 의견을 남기셨습니다.", false))
                 mNotifications.add(Notification(null, null, "관심 기업", "스펙트럼 분석이 업3데이트 되었습니다.", false))
                 mNotifications.add(Notification(null, null, "작성한 글", "스펙고수 님이 의견을 남기셨습니다.", false))
+                mIsDataLoaded = true
             }
         // TEST CODE END
         fragment.mBinding.apply {

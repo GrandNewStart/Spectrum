@@ -81,7 +81,7 @@
                     android:text="@string/select_your_job_group_of_interest"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -103,15 +103,14 @@
                     android:id="@+id/chip_group"
                     dialog_job_group_items="@{groups}"
                     dialog_job_group="@{dialog}"
-                    android:layout_width="0dp"
+                    app:chipSpacing="16dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="36dp"
+                    android:paddingHorizontal="36dp"
                     android:layout_marginTop="72dp"
-                    app:chipSpacingVertical="0dp"
-                    app:chipSpacingHorizontal="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/select_three_text" />
+                    app:layout_constraintTop_toBottomOf="@+id/select_three_text"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

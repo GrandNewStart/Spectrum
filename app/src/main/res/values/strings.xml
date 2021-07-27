@@ -28,7 +28,7 @@
     <string name="select_your_job_group">관심 직군을 선택해 주세요</string>
     <string name="academic_background">학력 사항</string>
     <string name="work_histories">경력 사항</string>
-    <string name="certificates_and_languages">자격/어학 사항</string>
+    <string name="certificates_and_languages">자격/<br/>\n어학 사항</string>
     <string name="other_specs">기타 스펙</string>
     <string name="specs_placeholder">공모전, 프로젝트 등 자유롭게 적어주세요</string>
     <string name="select_job_group">직군 선택</string>

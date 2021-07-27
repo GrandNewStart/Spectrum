@@ -2,9 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.mySpec.models.Spec"/>
         <variable
-            name="dialog"
-            type="com.spectrum.spectrum.src.activities.main.fragments.myPage.dialogs.MySpecDialog" />
+            name="fragment"
+            type="com.spectrum.spectrum.src.activities.main.fragments.mySpec.MySpecFragment" />
+        <variable
+            name="viewModel"
+            type="com.spectrum.spectrum.src.activities.main.fragments.mySpec.MySpecViewModel" />
+        <variable
+            name="spec"
+            type="Spec" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,9 +25,9 @@
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:onClick="@{()->dialog.dismiss()}"
+            android:onClick="@{()->viewModel.backButtonAction(fragment)}"
             android:backgroundTint="@color/clear"
-            android:src="@drawable/icon_close"
+            android:src="@drawable/icon_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,19 +39,20 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/my_specs"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/menu_button"
+            my_spec_spec="@{spec}"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/clear"
-            android:onClick="@{()->dialog.menuButtonAction()}"
+            android:onClick="@{()->viewModel.menuButtonAction(fragment)}"
             android:src="@drawable/icon_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -68,6 +76,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/my_spec_card_view"
+                    my_spec_spec="@{spec}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -81,6 +90,7 @@
 
                         <TextView
                             android:id="@+id/your_spec_text"
+                            my_spec_spec="@{spec}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -91,6 +101,7 @@
 
                         <TextView
                             android:id="@+id/update_time_text"
+                            my_spec_spec="@{spec}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -103,6 +114,7 @@
 
                         <com.google.android.material.chip.ChipGroup
                             android:id="@+id/user_info_chip_group"
+                            my_spec_spec="@{spec}"
                             app:chipSpacing="8dp"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -124,6 +136,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/no_spec_view"
+            my_spec_spec="@{spec}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -146,7 +159,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_spec_button"
                 style="@style/RoundedSolidButton"
-                android:onClick="@{()->dialog.proceedToEditSpec()}"
+                android:onClick="@{()->viewModel.proceedToCreateSpec(fragment)}"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="32dp"

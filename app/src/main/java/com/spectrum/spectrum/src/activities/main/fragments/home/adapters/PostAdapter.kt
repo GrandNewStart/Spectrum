@@ -36,8 +36,8 @@ class PostAdapter(private val items: ArrayList<Post>, private val dir: Int = 0):
                         super.getItemOffsets(outRect, view, parent, state)
                         val pos = parent.getChildAdapterPosition(view)
                         outRect.left = if (pos == 0) dp2px(15) else dp2px(24)
-                        outRect.top = dp2px(24)
-                        outRect.bottom = dp2px(24)
+                        outRect.top = dp2px(12)
+                        outRect.bottom = dp2px(16)
                         items.let {
                             if (pos == it.size-1) { outRect.right = dp2px(24) }
                         }
@@ -50,8 +50,9 @@ class PostAdapter(private val items: ArrayList<Post>, private val dir: Int = 0):
                 addItemDecoration(object : RecyclerView.ItemDecoration() {
                     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                         super.getItemOffsets(outRect, view, parent, state)
-                        val vSpacing = dp2px(24)
+                        val vSpacing = dp2px(12)
                         val hSpacing = dp2px(16)
+                        outRect.top = vSpacing
                         outRect.bottom = vSpacing
                         outRect.left = hSpacing
                         outRect.right = hSpacing

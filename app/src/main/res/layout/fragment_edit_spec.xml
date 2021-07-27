@@ -274,22 +274,23 @@
                             android:layout_width="100dp"
                             android:layout_height="24dp"
                             android:fontFamily="@font/roboto_medium"
+                            android:paddingStart="8dp"
                             android:text="@string/male"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            app:buttonTint="@color/spectrumSilver3" />
+                            android:textSize="14sp" />
 
                         <com.google.android.material.radiobutton.MaterialRadioButton
                             android:id="@+id/female_button"
                             android:layout_width="100dp"
                             android:layout_height="24dp"
+                            android:button="@drawable/radio_button"
                             android:fontFamily="@font/roboto_medium"
+                            android:paddingStart="8dp"
                             android:text="@string/female"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            app:buttonTint="@color/spectrumSilver3" />
+                            android:textSize="14sp" />
 
                     </RadioGroup>
 

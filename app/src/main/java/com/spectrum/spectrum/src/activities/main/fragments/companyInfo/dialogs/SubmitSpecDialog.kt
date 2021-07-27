@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
@@ -54,14 +53,14 @@ class SubmitSpecDialog(context: Context): Dialog(context, R.style.AppTheme) {
                     mBinding.userInfoChipGroup.apply {
                         Chip(context).apply {
                             text = "${result.age}세"
-                            setTextAppearance(R.style.ChipText)
+                            setTextAppearance(R.style.ChipTextSmall)
                             setChipBackgroundColorResource(R.color.spectrumSilver2)
                             setEnsureMinTouchTargetSize(false)
                             addView(this)
                         }
                         Chip(context).apply {
                             text = result.sex
-                            setTextAppearance(R.style.ChipText)
+                            setTextAppearance(R.style.ChipTextSmall)
                             setChipBackgroundColorResource(R.color.spectrumSilver2)
                             setEnsureMinTouchTargetSize(false)
                             addView(this)
@@ -69,7 +68,7 @@ class SubmitSpecDialog(context: Context): Dialog(context, R.style.AppTheme) {
                         result.jobGroups.forEach {
                             Chip(context).apply {
                                 text = it.name
-                                setTextAppearance(R.style.ChipText)
+                                setTextAppearance(R.style.ChipTextSmall)
                                 setChipBackgroundColorResource(R.color.spectrumSilver2)
                                 setEnsureMinTouchTargetSize(false)
                                 addView(this)

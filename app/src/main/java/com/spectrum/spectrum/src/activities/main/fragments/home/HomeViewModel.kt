@@ -12,6 +12,7 @@ import com.spectrum.spectrum.src.activities.main.fragments.home.adapters.PostAda
 import com.spectrum.spectrum.src.activities.main.fragments.home.dialogs.JobGroupDialog
 import com.spectrum.spectrum.src.activities.main.fragments.home.interfaces.HomeApi
 import com.spectrum.spectrum.src.activities.main.fragments.home.models.JobGroup
+import com.spectrum.spectrum.src.activities.main.fragments.home.models.PageResponse
 import com.spectrum.spectrum.src.activities.main.fragments.home.models.Post
 import com.spectrum.spectrum.src.config.Constants.request_failed
 import com.spectrum.spectrum.src.config.Helpers.retrofit
@@ -23,13 +24,16 @@ import org.greenrobot.eventbus.ThreadMode
 
 class HomeViewModel: ViewModel() {
 
+    // Api
     private val mService = retrofit.create(HomeApi::class.java)
 
+    // Data
     var mIsDataLoaded = false
     var mDataEnded = false
     var mIsLoading = false
     var mPostId: Int? = null
-    private var mPage = 1
+    private var mShouldRefresh = false
+    private var mPage = 0
     private var mHottestPosts = ArrayList<Post>()
     private var mLatestPosts = ArrayList<Post>()
     var mJobGroup1: JobGroup? = null
@@ -45,6 +49,11 @@ class HomeViewModel: ViewModel() {
     }
 
     fun bindViews(fragment: HomeFragment) {
+        if (mShouldRefresh) {
+            refresh(fragment)
+            mShouldRefresh = false
+        }
+
         fragment.mBinding.apply {
             jobGroup1 = mJobGroup1
             jobGroup2 = mJobGroup2
@@ -56,6 +65,7 @@ class HomeViewModel: ViewModel() {
                 mPostId = null
             }
         }
+
         if (!mIsDataLoaded) {
             mIsDataLoaded = true
             getHomePage(fragment)
@@ -74,44 +84,25 @@ class HomeViewModel: ViewModel() {
         var job2: com.spectrum.spectrum.src.models.JobGroup? = null
 
         mJobGroup1?.let {
-            job1 = com.spectrum.spectrum.src.models.JobGroup(0, it.data)
+            job1 = com.spectrum.spectrum.src.models.JobGroup(it.id, it.data)
         }
         mJobGroup2?.let {
-            job2 = com.spectrum.spectrum.src.models.JobGroup(0, it.data)
+            job2 = com.spectrum.spectrum.src.models.JobGroup(it.id, it.data)
         }
 
         JobGroupDialog(fragment.requireContext())
             .setPreSelectedItems(job1, job2)
             .setOnSaveListener{ first, second ->
-                first?.let { mJobGroup1 = JobGroup("", it.name) }
-                second?.let { mJobGroup2 = JobGroup("", it.name) }
+                mJobGroup1 = null
+                mJobGroup2 = null
+                first?.let { mJobGroup1 = JobGroup(it.id, it.name) }
+                second?.let { mJobGroup2 = JobGroup(it.id, it.name) }
                 fragment.mBinding.apply {
                     jobGroup1 = mJobGroup1
                     jobGroup2 = mJobGroup2
-                    if (first == null && second == null) {
-                        allChip.setChipBackgroundColorResource(R.color.spectrumGray2)
-                        allChip.setTextColor(Color.WHITE)
-                    }
-                    else {
-                        allChip.setChipBackgroundColorResource(R.color.clear)
-                        allChip.setTextColor(Color.BLACK)
-                    }
                 }
+                refresh(fragment)
             }.show()
-    }
-
-    fun showAllResults(fragment: HomeFragment) {
-        if (mJobGroup1 == null && mJobGroup2 == null) return
-        mJobGroup1 = null
-        mJobGroup2 = null
-        fragment.mBinding.apply {
-            jobGroup1 = mJobGroup1
-            jobGroup2 = mJobGroup2
-            allChip.apply {
-                setChipBackgroundColorResource(R.color.spectrumGray2)
-                setTextColor(Color.WHITE)
-            }
-        }
     }
 
     fun fabAction(fragment: HomeFragment) {
@@ -122,18 +113,61 @@ class HomeViewModel: ViewModel() {
         fragment.findNavController().navigate(R.id.home_to_post, bundleOf("id" to id))
     }
 
+    private fun refresh(fragment: HomeFragment) {
+        mPage = 0
+        mDataEnded = false
+        mHottestPosts.clear()
+        mLatestPosts.clear()
+        fragment.mBinding.hottest = mHottestPosts
+        fragment.mBinding.latest = mLatestPosts
+        getHomePage(fragment)
+    }
+
     fun getHomePage(fragment: HomeFragment) {
         if (mIsLoading) return
         if (mDataEnded) return
 
         fragment.showProgressDialog(true)
         mIsLoading = true
+
         viewModelScope.launch {
+            mJobGroup1?.let { first -> mJobGroup2?.let { second ->
+                mService.getHomePage(mPage, first.id, second.id).apply {
+                    fragment.showProgressDialog(false)
+                    mIsLoading = false
+                    if (isSuccess) {
+                        Log.d(TAG, "---> HOME PAGE LOAD(${first.id},${second.id}) SUCCESS($mPage)")
+                        mPage++
+                        mDataEnded = result.isEmpty()
+                        (fragment.mBinding.latestRecyclerView.adapter as PostAdapter).addItems(result)
+                        return@launch
+                    }
+                    Log.d(TAG, "---> HOME PAGE LOAD(${first.id},${second.id}) FAILURE: $message")
+                    fragment.showToast(request_failed)
+                    return@launch
+                }
+            }}
+            mJobGroup1?.let { first ->
+                mService.getHomePage(mPage, first.id).apply {
+                    fragment.showProgressDialog(false)
+                    mIsLoading = false
+                    if (isSuccess) {
+                        Log.d(TAG, "---> HOME PAGE LOAD(${first.id}) SUCCESS($mPage)")
+                        mPage++
+                        mDataEnded = result.isEmpty()
+                        (fragment.mBinding.latestRecyclerView.adapter as PostAdapter).addItems(result)
+                        return@launch
+                    }
+                    Log.d(TAG, "---> HOME PAGE LOAD(${first.id}) FAILURE: $message")
+                    fragment.showToast(request_failed)
+                    return@launch
+                }
+            }
             mService.getHomePage(mPage).apply {
                 fragment.showProgressDialog(false)
                 mIsLoading = false
                 if (isSuccess) {
-                    Log.d(TAG, "---> HOME PAGE LOAD($mPage) SUCCESSS")
+                    Log.d(TAG, "---> HOME PAGE LOAD SUCCESS($mPage)")
                     mPage++
                     mDataEnded = result.isEmpty()
                     (fragment.mBinding.latestRecyclerView.adapter as PostAdapter).addItems(result)
@@ -141,6 +175,7 @@ class HomeViewModel: ViewModel() {
                 }
                 Log.d(TAG, "---> HOME PAGE LOAD FAILURE: $message")
                 fragment.showToast(request_failed)
+                return@launch
             }
         }
     }
@@ -148,6 +183,7 @@ class HomeViewModel: ViewModel() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun receivePostEvent(event: PostEvent) {
         mPostId = event.id
+        mShouldRefresh = true
     }
 
     companion object {

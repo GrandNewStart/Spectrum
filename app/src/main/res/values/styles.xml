@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/spectrumGray1</item>
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="radioButtonStyle">@style/CustomRadioButton</item>
+        <item name="android:textViewStyle">@style/CustomTextView</item>
     </style>
 
     <style name="BottomSheetDialog"
@@ -32,7 +34,13 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="ChipText">
+    <style name="ChipTextSmall">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/spectrumGray3</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="ChipTextBig">
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:textColor">@color/spectrumGray3</item>
         <item name="android:textSize">12sp</item>
@@ -148,7 +156,7 @@
         <item name="chipStrokeWidth">1dp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">12sp</item>
-        <item name="chipMinHeight">36dp</item>
+        <item name="chipMinHeight">28dp</item>
         <item name="fontFamily">@font/roboto_medium</item>
     </style>
 
@@ -170,6 +178,12 @@
         <item name="chipStrokeColor">@color/silver_light_blue</item>
         <item name="chipMinHeight">36dp</item>
         <item name="chipMinTouchTargetSize">0dp</item>
+    </style>
+
+    <style name="CustomRadioButton"
+        parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/radio_button</item>
+        <item name="buttonTint">@color/radio_button_color</item>
     </style>
 
     <style name="DialogSlideAnimation">

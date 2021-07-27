@@ -77,7 +77,7 @@
                 android:gravity="center"
                 android:text="@string/edit_spec"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
                 android:onClick="@{()->viewModel.saveButtonAction(fragment)}"
                 android:text="@string/save"
                 android:textColor="@color/spectrumBlue"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:gravity="center"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -274,22 +274,22 @@
                             android:layout_width="100dp"
                             android:layout_height="24dp"
                             android:fontFamily="@font/roboto_medium"
+                            android:paddingStart="8dp"
                             android:text="@string/male"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            app:buttonTint="@color/spectrumSilver3" />
+                            android:textSize="14sp"/>
 
                         <com.google.android.material.radiobutton.MaterialRadioButton
                             android:id="@+id/female_button"
                             android:layout_width="100dp"
                             android:layout_height="24dp"
                             android:fontFamily="@font/roboto_medium"
+                            android:paddingStart="8dp"
                             android:text="@string/female"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="14sp"
-                            app:buttonTint="@color/spectrumSilver3" />
+                            android:textSize="14sp" />
 
                     </RadioGroup>
 

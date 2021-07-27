@@ -49,7 +49,7 @@ object CommonBindingAdapters {
                             text = it.name
                             setEnsureMinTouchTargetSize(false)
                             setChipBackgroundColorResource(R.color.spectrumSilver2)
-                            setTextAppearance(R.style.ChipText)
+                            setTextAppearance(R.style.ChipTextSmall)
                             addView(this)
                         }
                     }

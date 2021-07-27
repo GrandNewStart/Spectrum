@@ -79,7 +79,7 @@ object BindingAdapters {
             setChipBackgroundColorResource(R.color.clear)
             setChipStrokeColorResource(R.color.spectrumBlue)
             setChipStrokeWidthResource(R.dimen.default_stroke_width)
-            setTextAppearance(R.style.ChipText)
+            setTextAppearance(R.style.ChipTextSmall)
             setTextColor(resources.getColor(R.color.spectrumBlue, null))
             setCloseIconResource(R.drawable.icon_close)
             setCloseIconTintResource(R.color.spectrumBlue)

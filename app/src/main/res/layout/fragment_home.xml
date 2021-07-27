@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="java.util.ArrayList"/>
@@ -90,14 +91,14 @@
             android:nestedScrollingEnabled="true"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_bar_divider">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="28dp"
                 android:backgroundTint="@color/clear"
                 android:onClick="@{()->viewModel.showJobGroupDialog(fragment)}"
                 app:cardBackgroundColor="@color/clear"
@@ -108,8 +109,8 @@
                 app:strokeWidth="1dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="12dp"
                     android:layout_marginVertical="2dp"
@@ -119,34 +120,40 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/all_chip"
-                android:onClick="@{()->viewModel.showAllResults(fragment)}"
+                home_job_group_1="@{jobGroup1}"
+                home_job_group_2="@{jobGroup2}"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:clickable="false"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/all"
                 android:textColor="@color/white"
-                android:textSize="14sp"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                app:chipMinTouchTargetSize="0dp"
+                android:textSize="12sp"
                 app:chipBackgroundColor="@color/spectrumGray1"
+                app:chipMinTouchTargetSize="0dp"
                 app:chipStrokeColor="@color/spectrumGray1"
-                app:chipStrokeWidth="1dp"/>
+                app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_1"
                 style="@style/BlueChip"
-                home_job_group="@{jobGroup1}"
+                home_job_group_1="@{jobGroup1}"
+                home_job_group_2="@{jobGroup2}"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp" />
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:clickable="false" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_2"
                 style="@style/GreenChip"
-                home_job_group="@{jobGroup2}"
+                home_job_group_1="@{jobGroup1}"
+                home_job_group_2="@{jobGroup2}"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp" />
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:clickable="false" />
 
         </LinearLayout>
 
@@ -168,7 +175,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/spectrumLightBlue">
+                    android:background="@drawable/gradation">
 
                     <TextView
                         android:id="@+id/hottest_text"
@@ -176,10 +183,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="28dp"
-                        android:fontFamily="@font/roboto_regular"
                         android:text="@string/hottest_spectrums"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -188,6 +194,8 @@
                         home_posts_horizontal="@{hottest}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:nestedScrollingEnabled="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -211,7 +219,7 @@
                         android:lines="1"
                         android:text="@string/latest_specturms"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -245,7 +253,7 @@
                         home_posts_vertical="@{latest}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="12dp"
                         android:layout_marginBottom="56dp"
                         android:nestedScrollingEnabled="false"
                         app:layout_constraintBottom_toBottomOf="parent"

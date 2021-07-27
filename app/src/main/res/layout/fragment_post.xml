@@ -102,7 +102,7 @@
             android:gravity="center"
             android:text="@string/spec_story"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -165,20 +165,18 @@
                             post_texts="@{userName}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
                             android:text="스펙왕"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/date_text"
                             post_texts="@{date}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/roboto_regular"
                             android:text="06/28 20:25"
                             android:textColor="@color/spectrumGray2"
-                            android:textSize="12sp" />
+                            android:textSize="10sp" />
 
                     </LinearLayout>
 
@@ -186,7 +184,7 @@
                         android:id="@+id/post_user_info_chip_group"
                         post_user_info="@{userInfo}"
                         android:layout_width="0dp"
-                        android:layout_height="32dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         app:chipSpacing="8dp"
@@ -210,8 +208,7 @@
                         android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="졸업 전 대기업 인턴"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -224,10 +221,9 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/roboto_regular"
-                        android:lineSpacingExtra="4dp"
+                        android:lineSpacingExtra="2dp"
                         android:text="UXUI 직무를 희망하는데,\n대기업 인턴하려면 어떤 스펙을 더 쌓아야 할까요?"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/post_title_text" />
@@ -236,7 +232,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="32dp"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -255,7 +251,7 @@
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/academic_background"
                                 android:textColor="@color/spectrumSilver3"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 post_educations="@{educations}"
@@ -269,7 +265,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginTop="16dp">
+                            android:layout_marginTop="32dp">
 
                             <TextView
                                 android:layout_width="64dp"
@@ -278,7 +274,7 @@
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/experiences"
                                 android:textColor="@color/spectrumSilver3"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 post_experiences="@{experiences}"
@@ -292,7 +288,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginTop="16dp">
+                            android:layout_marginTop="32dp">
 
                             <TextView
                                 android:layout_width="64dp"
@@ -301,7 +297,7 @@
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/certificates_and_languages"
                                 android:textColor="@color/spectrumSilver3"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 post_licenses="@{licenses}"
@@ -315,7 +311,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:layout_marginTop="16dp">
+                            android:layout_marginTop="32dp">
 
                             <TextView
                                 android:layout_width="64dp"
@@ -324,7 +320,7 @@
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="@string/other_specs"
                                 android:textColor="@color/spectrumSilver3"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -332,7 +328,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="없음"
                                 android:textColor="#45474B"
-                                android:textSize="14sp" />
+                                android:textSize="12sp" />
 
                         </LinearLayout>
 
@@ -352,7 +348,6 @@
                         android:layout_marginTop="32dp"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/top_five_responses"
-                        android:textColor="@color/black"
                         android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

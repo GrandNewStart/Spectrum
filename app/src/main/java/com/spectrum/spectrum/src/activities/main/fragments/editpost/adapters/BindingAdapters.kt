@@ -1,6 +1,5 @@
 package com.spectrum.spectrum.src.activities.main.fragments.editpost.adapters
 
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.databinding.BindingAdapter
@@ -40,14 +39,14 @@ object BindingAdapters {
                         chip.text = t
                         chip.setEnsureMinTouchTargetSize(false)
                         chip.setChipBackgroundColorResource(R.color.spectrumSilver2)
-                        chip.setTextAppearance(R.style.ChipText)
+                        chip.setTextAppearance(R.style.ChipTextSmall)
                         group.addView(chip)
                     }
                     Chip(group.context).let { chip ->
                         chip.text = spec.sex
                         chip.setEnsureMinTouchTargetSize(false)
                         chip.setChipBackgroundColorResource(R.color.spectrumSilver2)
-                        chip.setTextAppearance(R.style.ChipText)
+                        chip.setTextAppearance(R.style.ChipTextSmall)
                         group.addView(chip)
                     }
                     spec.jobGroups.forEach {
@@ -55,7 +54,7 @@ object BindingAdapters {
                             chip.text = it.name
                             chip.setEnsureMinTouchTargetSize(false)
                             chip.setChipBackgroundColorResource(R.color.spectrumSilver2)
-                            chip.setTextAppearance(R.style.ChipText)
+                            chip.setTextAppearance(R.style.ChipTextSmall)
                             group.addView(chip)
                         }
                     }

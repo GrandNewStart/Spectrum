@@ -76,24 +76,7 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
                         Log.d(TAG, "---> JOB GROUP FETCH SUCCESS")
                         mItems = result.jobGroupList
                         mItems.removeAt(0)
-                        for (i in 0 until mItems.size) {
-                            mFirstItem?.let {
-                                if (it.id == mItems[i].id) {
-                                    mItems[i].selectIndex = 1
-                                }
-                            }
-                            mSecondItem?.let {
-                                if (it.id == mItems[i].id) {
-                                    mItems[i].selectIndex = 2
-                                }
-                            }
-                            mThirdItem?.let {
-                                if (it.id == mItems[i].id) {
-                                    mItems[i].selectIndex = 3
-                                }
-                            }
-                        }
-                        mBinding?.groups = mItems
+                        mBinding.groups = mItems
                         return@launch
                     }
                     Log.e(TAG, "---> JOB GROUP FETCH FAILURE: $message")

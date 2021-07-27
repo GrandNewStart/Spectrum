@@ -23,54 +23,96 @@ object BindingAdapters {
     @JvmStatic
     fun bindChipGroup(chipGroup: ChipGroup, items: ArrayList<JobGroup>?, dialog: JobGroupDialog) {
         chipGroup.apply {
-            setChipSpacing(dp2px(16))
-            items?.forEach {
+            items?.forEach { group ->
                 val chip = Chip(context).apply {
-                    text = it.name
-                    val drawable = ChipDrawable.createFromAttributes(context, null, 0, R.style.CustomChip)
-                    setChipDrawable(drawable)
+                    text = group.name
+                    setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                    setChipStrokeColorResource(R.color.spectrumSilver2)
+                    setChipBackgroundColorResource(R.color.clear)
+                    setTextAppearance(R.style.ChipTextBig)
                     setEnsureMinTouchTargetSize(false)
-                    if (it.selectIndex != 0) { isChecked = true }
-                    setOnCheckedChangeListener { _, isChecked ->
-                        if (isChecked) {
-                            if (dialog.mFirstItem == null) {
-                                dialog.mFirstItem = it
-                                return@setOnCheckedChangeListener
-                            }
-                            if (dialog.mSecondItem == null) {
-                                dialog.mSecondItem = it
-                                return@setOnCheckedChangeListener
-                            }
-                            if (dialog.mThirdItem == null) {
-                                dialog.mThirdItem = it
-                                return@setOnCheckedChangeListener
-                            }
-                            setChecked(false)
-                        }
-                        else {
-                            dialog.mThirdItem?.apply {
-                                if (id == it.id) {
-                                    dialog.mThirdItem = null
-                                    return@setOnCheckedChangeListener
+                    setOnClickListener {
+                        dialog.apply {
+                            when(group.id) {
+                                mFirstItem?.id -> {
+                                    if (mSecondItem == null) {
+                                        mFirstItem = null
+                                        resetChipGroup(chipGroup, dialog, items)
+                                        return@setOnClickListener
+                                    }
+                                    if (mThirdItem == null) {
+                                        mFirstItem = mSecondItem
+                                        mThirdItem = null
+                                        resetChipGroup(chipGroup, dialog, items)
+                                        return@setOnClickListener
+                                    }
+                                    mFirstItem = mSecondItem
+                                    mSecondItem = mThirdItem
+                                    mThirdItem = null
+                                    resetChipGroup(chipGroup, dialog, items)
+                                    return@setOnClickListener
                                 }
-                            }
-                            dialog.mSecondItem?.apply {
-                                if (id == it.id) {
-                                    dialog.mSecondItem = null
-                                    return@setOnCheckedChangeListener
+                                mSecondItem?.id -> {
+                                    if (mThirdItem == null) {
+                                        mSecondItem = null
+                                        resetChipGroup(chipGroup, dialog, items)
+                                        return@setOnClickListener
+                                    }
+                                    mSecondItem = mThirdItem
+                                    mThirdItem = null
+                                    resetChipGroup(chipGroup, dialog, items)
+                                    return@setOnClickListener
                                 }
-                            }
-                            dialog.mFirstItem?.apply {
-                                if (id == it.id) {
-                                    dialog.mFirstItem = dialog.mSecondItem
-                                    dialog.mSecondItem = null
-                                    return@setOnCheckedChangeListener
+                                mThirdItem?.id -> {
+                                    mThirdItem = null
+                                    resetChipGroup(chipGroup, dialog, items)
+                                    return@setOnClickListener
+                                }
+                                else -> {
+                                    if (mThirdItem == null) {
+                                        mThirdItem = group
+                                        resetChipGroup(chipGroup, dialog, items)
+                                        return@setOnClickListener
+                                    }
+                                    if (mSecondItem == null) {
+                                        mSecondItem = group
+                                        resetChipGroup(chipGroup, dialog, items)
+                                        return@setOnClickListener
+                                    }
+                                    if (mFirstItem == null) {
+                                        mFirstItem = group
+                                        resetChipGroup(chipGroup, dialog, items)
+                                        return@setOnClickListener
+                                    }
                                 }
                             }
                         }
                     }
                 }
                 addView(chip)
+            }
+            resetChipGroup(chipGroup, dialog, items ?: arrayListOf())
+        }
+    }
+
+    private fun resetChipGroup(chipGroup: ChipGroup, dialog: JobGroupDialog, items: ArrayList<JobGroup>) {
+        chipGroup.apply {
+            for (i in 0 until items.size) {
+                val item = items[i]
+                val chip = chipGroup.getChildAt(i) as Chip
+                when(item.id) {
+                    dialog.mFirstItem?.id,
+                    dialog.mSecondItem?.id,
+                    dialog.mThirdItem?.id -> {
+                        chip.chipStrokeWidth = 0f
+                        chip.setChipBackgroundColorResource(R.color.spectrumLightBlue)
+                    }
+                    else -> {
+                        chip.setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                        chip.setChipStrokeColorResource(R.color.spectrumSilver2)
+                        chip.setChipBackgroundColorResource(R.color.clear)
+                    }
+                }
             }
         }
     }

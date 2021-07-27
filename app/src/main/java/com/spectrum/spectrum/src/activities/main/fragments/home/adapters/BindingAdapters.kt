@@ -1,5 +1,6 @@
 package com.spectrum.spectrum.src.activities.main.fragments.home.adapters
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -60,13 +61,26 @@ object BindingAdapters {
         }
     }
 
-    @BindingAdapter("home_job_group")
+    @BindingAdapter("home_job_group_1", "home_job_group_2")
     @JvmStatic
-    fun bindChip(chip: Chip, jobGroup: JobGroup?) {
+    fun bindChip(chip: Chip, jobGroup1: JobGroup?, jobGroup2: JobGroup?) {
         chip.apply {
-            visibility = if (jobGroup == null) View.GONE else View.VISIBLE
-            jobGroup?.let {
-                chip.text = it.data
+            when(id) {
+                R.id.all_chip -> {
+                    visibility = if (jobGroup1 == null && jobGroup2 == null) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+                }
+                R.id.chip_1 -> {
+                    visibility = if (jobGroup1 == null) View.GONE else View.VISIBLE
+                    jobGroup1?.let { text = it.data }
+                }
+                R.id.chip_2 -> {
+                    visibility = if (jobGroup2 == null) View.GONE else View.VISIBLE
+                    jobGroup2?.let { text = it.data }
+                }
             }
         }
     }
@@ -83,6 +97,7 @@ object BindingAdapters {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @BindingAdapter("home_post_item")
     @JvmStatic
     fun bindPostHorizontal(view: View, post: Post) {
@@ -94,12 +109,44 @@ object BindingAdapters {
             R.id.chip_group -> {
                 (view as ChipGroup).apply {
                     removeAllViews()
+                    Chip(context).apply{
+                        text = post.jobStatus
+                        setEnsureMinTouchTargetSize(false)
+                        setTextAppearance(R.style.ChipTextSmall)
+                        setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                        setChipBackgroundColorResource(R.color.clear)
+                        setChipStrokeColorResource(R.color.spectrumSilver2)
+                        isClickable = false
+                        if (post.jobStatus == "n차합격" || post.jobStatus == "최종합격") {
+                            setChipBackgroundColorResource(R.color.clear)
+                            setChipStrokeColorResource(R.color.spectrumBlue)
+                            setTextColor(resources.getColor(R.color.spectrumBlue, null))
+                        }
+                        addView(this)
+                    }
+                    Chip(context).apply{
+                        text = "${post.age}세"
+                        setEnsureMinTouchTargetSize(false)
+                        setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        setTextAppearance(R.style.ChipTextSmall)
+                        isClickable = false
+                        addView(this)
+                    }
+                    Chip(context).apply{
+                        text = post.sex
+                        setEnsureMinTouchTargetSize(false)
+                        setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        setTextAppearance(R.style.ChipTextSmall)
+                        isClickable = false
+                        addView(this)
+                    }
                     post.jobGroupList.forEach {
                         Chip(context).apply {
                             text = it.data
                             setEnsureMinTouchTargetSize(false)
                             setChipBackgroundColorResource(R.color.spectrumSilver2)
-                            setTextAppearance(R.style.ChipText)
+                            setTextAppearance(R.style.ChipTextSmall)
+                            isClickable = false
                             addView(this)
                         }
                     }

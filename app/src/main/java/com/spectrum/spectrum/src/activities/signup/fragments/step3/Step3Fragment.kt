@@ -64,8 +64,6 @@ class Step3Fragment: BaseFragment() {
             mBinding.nicknameTextInputLayout.let { layout ->
                 if (validateNickname(s.toString())) {
                     layout.error = null
-                    layout.helperText = Constants.nickname_possible
-                    layout.setDone(true)
                 }
                 else {
                     layout.error = Constants.nickname_error
@@ -83,10 +81,7 @@ class Step3Fragment: BaseFragment() {
             mEmail = it.getString("email")
             mPassword = it.getString("password")
         }
-
-        // TEST CODE START
-//        autoLogIn()
-        // TEST CODE END
+        autoLogIn()
     }
 
     override fun onCreateView(
@@ -148,14 +143,9 @@ class Step3Fragment: BaseFragment() {
     }
 
     private fun autoLogIn() {
-//        val intent = Intent(activity, LogInActivity::class.java).apply {
-//            putExtra("email", mEmail)
-//            putExtra("password", mPassword)
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        }
-//        activity?.startActivity(intent)
-//        activity?.finish()
-        val intent = Intent(activity, SplashActivity::class.java).apply {
+        val intent = Intent(activity, LogInActivity::class.java).apply {
+            putExtra("email", mEmail)
+            putExtra("password", mPassword)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         activity?.startActivity(intent)
@@ -164,21 +154,17 @@ class Step3Fragment: BaseFragment() {
 
     private fun checkNickname(nickname: String?) {
         if (nickname == null) return
-        try {
-            lifecycleScope.launch {
-                retrofit.create(SignUpApi::class.java).checkNickname(nickname).apply {
-                    if (isSuccess) {
-                        showToast(Constants.available_nickname)
-                        mNicknameLiveData.value = nickname
-                        return@launch
-                    }
+        lifecycleScope.launch {
+            retrofit.create(SignUpApi::class.java).checkNickname(nickname).apply {
+                if (isSuccess) {
                     showToast(Constants.available_nickname)
+                    mNicknameLiveData.value = nickname
+                    mBinding.nicknameTextInputLayout.helperText = Constants.nickname_possible
+                    mBinding.nicknameTextInputLayout.setDone(true)
+                    return@launch
                 }
+                showToast(Constants.unavailable_nickname)
             }
-        }
-        catch (e: Exception) {
-            Log.e(TAG, "---> NICKNAME CHECK FAILURE: $e")
-            showToast(Constants.request_failed)
         }
     }
 

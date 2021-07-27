@@ -1,0 +1,101 @@
+package com.spectrum.spectrum.src.activities.main.fragments.myEvaluation.adapters
+
+import android.annotation.SuppressLint
+import android.graphics.Rect
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.findFragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
+import com.spectrum.spectrum.R
+import com.spectrum.spectrum.databinding.ItemMyEvaluationPostBinding
+import com.spectrum.spectrum.src.activities.main.fragments.myEvaluation.MyEvaluationFragment
+import com.spectrum.spectrum.src.activities.main.fragments.myEvaluation.models.Post
+import com.spectrum.spectrum.src.config.Helpers.dp2px
+
+class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+
+    inner class ViewHolder(private val binding: ItemMyEvaluationPostBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
+        fun bindViews(post: Post) {
+            binding.apply {
+                titleText.text = post.title
+                updateTimeText.text = post.createdAt
+                responseCountText.text = "0"
+                markCountText.text = "0"
+                chipGroup.apply {
+                    Chip(context).apply {
+                        text = "${post.age}세"
+                        setEnsureMinTouchTargetSize(false)
+                        setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        setTextAppearance(R.style.ChipTextSmall)
+                        isClickable = false
+                        addView(this)
+                    }
+                    Chip(context).apply {
+                        text = post.sex
+                        setEnsureMinTouchTargetSize(false)
+                        setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        setTextAppearance(R.style.ChipTextSmall)
+                        isClickable = false
+                        addView(this)
+                    }
+                    post.jobGroupList.forEach {
+                        Chip(context).apply {
+                            text = it.data
+                            setEnsureMinTouchTargetSize(false)
+                            setChipBackgroundColorResource(R.color.spectrumSilver2)
+                            setTextAppearance(R.style.ChipTextSmall)
+                            isClickable = false
+                            addView(this)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private lateinit var mBinding: ItemMyEvaluationPostBinding
+    private lateinit var mRecyclerView: RecyclerView
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        mRecyclerView = recyclerView
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(object : RecyclerView.ItemDecoration(){
+                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    outRect.left = dp2px(16)
+                    outRect.right = dp2px(16)
+                    outRect.top = dp2px(12)
+                    outRect.bottom = dp2px(12)
+                }
+            })
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.item_my_evaluation_post, parent, false)
+        mBinding.fragment = mRecyclerView.findFragment()
+        return ViewHolder(mBinding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bindViews(items[position])
+    }
+
+    override fun getItemCount(): Int = items.size
+
+    fun proceedToPost(fragment: MyEvaluationFragment, position: Int) {
+        val id = items[position].id
+        fragment.findNavController().navigate(R.id.my_evaluation_to_post, bundleOf("id" to id))
+    }
+
+}

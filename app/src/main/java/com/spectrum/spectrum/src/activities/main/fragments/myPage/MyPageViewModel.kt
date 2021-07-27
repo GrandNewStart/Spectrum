@@ -1,8 +1,9 @@
 package com.spectrum.spectrum.src.activities.main.fragments.myPage
 
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
+import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.main.fragments.myPage.dialogs.EditProfileDialog
-import com.spectrum.spectrum.src.activities.main.fragments.myPage.dialogs.MySpecDialog
 import com.spectrum.spectrum.src.config.Constants
 
 class MyPageViewModel: ViewModel() {
@@ -11,28 +12,26 @@ class MyPageViewModel: ViewModel() {
         EditProfileDialog(fragment.requireContext()).show()
     }
 
-    fun showMySpecDialog(fragment: MyPageFragment) {
-        MySpecDialog(fragment).show()
+    fun proceedToMySpec(fragment: MyPageFragment) {
+        fragment.findNavController().navigate(R.id.my_page_to_my_spec)
     }
 
-    fun showMyPostsDialog(fragment: MyPageFragment) {
-        fragment.showToast(Constants.under_construction)
+    fun proceedToMyPost(fragment: MyPageFragment) {
+        fragment.findNavController().navigate(R.id.my_page_to_my_post)
     }
 
-    fun showMyEvaluationsDialog(fragment: MyPageFragment) {
-        fragment.showToast(Constants.under_construction)
+    fun proceedToMyEvaluation(fragment: MyPageFragment) {
+        fragment.findNavController().navigate(R.id.my_page_to_my_evaluation)
     }
 
-    fun showMyScrapsDialog(fragment: MyPageFragment) {
-        fragment.showToast(Constants.under_construction)
+    fun proceedToMyScrap(fragment: MyPageFragment) {
+        fragment.findNavController().navigate(R.id.my_page_to_my_scrap)
     }
 
-    fun showMyCompanies(fragment: MyPageFragment) {
-        fragment.showToast(Constants.under_construction)
+    fun proceedToMyCompany(fragment: MyPageFragment) {
+        fragment.findNavController().navigate(R.id.my_page_to_my_company)
     }
 
-    fun proceedToAppConfiguration(fragment: MyPageFragment) {
-        fragment.showToast(Constants.under_construction)
-    }
+    fun proceedToAppConfiguration(fragment: MyPageFragment) {}
 
 }

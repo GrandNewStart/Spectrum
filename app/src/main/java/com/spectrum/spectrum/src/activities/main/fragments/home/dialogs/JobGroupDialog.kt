@@ -9,14 +9,10 @@ import android.view.Gravity
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.children
-import androidx.core.view.forEach
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.src.activities.main.fragments.home.adapters.JobGroupAdapter
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers
 import com.spectrum.spectrum.src.config.Helpers.dp2px
@@ -79,20 +75,6 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
                         Log.d(TAG, "---> JOB GROUP FETCH SUCCESS")
                         mItems = result.jobGroupList
                         mItems.removeAt(0)
-                        for (i in 0 until mItems.size) {
-                            mFirstItem?.let {
-                                if (it.id == mItems[i].id) {
-                                    Log.d(TAG,"---> FIRST: ${it.name}")
-                                    mItems[i].selectIndex = 1
-                                }
-                            }
-                            mSecondItem?.let {
-                                if (it.id == mItems[i].id) {
-                                    Log.d(TAG,"---> SECOND: ${it.name}")
-                                    mItems[i].selectIndex = 2
-                                }
-                            }
-                        }
                         initChipGroup(mChipGroup)
                         return@launch
                     }
@@ -114,42 +96,42 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
             mItems.forEach { group ->
                 Chip(context).apply {
                     text = group.name
-                    chipSpacingVertical = dp2px(16)
-                    chipSpacingHorizontal = dp2px(8)
                     setEnsureMinTouchTargetSize(false)
                     setChipBackgroundColorResource(R.color.clear)
                     setChipStrokeColorResource(R.color.spectrumGray1)
                     setChipStrokeWidthResource(R.dimen.default_stroke_width)
-                    setTextAppearance(R.style.CustomTextView)
-                    chipMinHeight = dp2px(32).toFloat()
+                    setTextAppearance(R.style.ChipTextBig)
+                    chipMinHeight = dp2px(28).toFloat()
                     setOnClickListener {
-                        if (group.selectIndex == 0) {
-                            if (mFirstItem == null) {
-                                group.selectIndex = 1
-                                mFirstItem = group
+                        when (group.id) {
+                            mFirstItem?.id -> {
+                                if (mSecondItem == null) {
+                                    mFirstItem = null
+                                    bindChipGroup(chipGroup)
+                                    return@setOnClickListener
+                                }
+                                mFirstItem = mSecondItem
+                                mSecondItem = null
                                 bindChipGroup(chipGroup)
                                 return@setOnClickListener
                             }
-                            if (mSecondItem == null) {
-                                group.selectIndex = 2
-                                mSecondItem = group
+                            mSecondItem?.id -> {
+                                mSecondItem = null
                                 bindChipGroup(chipGroup)
                                 return@setOnClickListener
                             }
-                        }
-                        if (group.selectIndex == 1) {
-                            group.selectIndex = 0
-                            mFirstItem = mSecondItem
-                            mSecondItem = null
-                            mFirstItem?.selectIndex = 1
-                            bindChipGroup(chipGroup)
-                            return@setOnClickListener
-                        }
-                        if (group.selectIndex == 2) {
-                            group.selectIndex = 0
-                            mSecondItem = null
-                            bindChipGroup(chipGroup)
-                            return@setOnClickListener
+                            else -> {
+                                if (mFirstItem == null) {
+                                    mFirstItem = group
+                                    bindChipGroup(chipGroup)
+                                    return@setOnClickListener
+                                }
+                                if (mSecondItem == null) {
+                                    mSecondItem = group
+                                    bindChipGroup(chipGroup)
+                                    return@setOnClickListener
+                                }
+                            }
                         }
                     }
                     addView(this)
@@ -164,27 +146,29 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
             for (i in 0 until mItems.size) {
                 val item = mItems[i]
                 val chip = getChildAt(i) as Chip
-                if (item.selectIndex == 0) {
-                    chip.setChipBackgroundColorResource(R.color.clear)
-                    chip.setTextColor(resources.getColor(R.color.spectrumGray1, null))
-                    chip.setChipStrokeWidthResource(R.dimen.default_stroke_width)
-                }
-                if (item.selectIndex == 1) {
-                    chip.setChipBackgroundColorResource(R.color.spectrumBlue)
-                    chip.setTextColor(resources.getColor(R.color.white, null))
-                    chip.chipStrokeWidth = 0f
-                }
-                if (item.selectIndex == 2) {
-                    chip.setChipBackgroundColorResource(R.color.spectrumGreen)
-                    chip.setTextColor(resources.getColor(R.color.white, null))
-                    chip.chipStrokeWidth = 0f
+                when (item.id) {
+                    mFirstItem?.id -> {
+                        chip.setChipBackgroundColorResource(R.color.spectrumBlue)
+                        chip.setTextColor(resources.getColor(R.color.white, null))
+                        chip.chipStrokeWidth = 0f
+                    }
+                    mSecondItem?.id -> {
+                        chip.setChipBackgroundColorResource(R.color.spectrumGreen)
+                        chip.setTextColor(resources.getColor(R.color.white, null))
+                        chip.chipStrokeWidth = 0f
+                    }
+                    else -> {
+                        chip.setChipBackgroundColorResource(R.color.clear)
+                        chip.setTextColor(resources.getColor(R.color.spectrumGray1, null))
+                        chip.setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                    }
                 }
             }
         }
     }
 
     companion object {
-        val TAG = JobGroupDialog::class.java.simpleName
+        val TAG = JobGroupDialog::class.java.simpleName.toString()
     }
 
 }

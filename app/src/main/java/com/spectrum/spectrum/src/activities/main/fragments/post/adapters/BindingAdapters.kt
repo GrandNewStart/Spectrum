@@ -36,9 +36,10 @@ object BindingAdapters {
                 if (i == 0) {
                     Chip(context).apply {
                         setEnsureMinTouchTargetSize(false)
-                        setTextAppearance(R.style.ChipText)
+                        setTextAppearance(R.style.ChipTextSmall)
                         setChipBackgroundColorResource(R.color.clear)
                         setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                        isClickable = false
                         if (info == "R") {
                             text = "취업준비"
                             setChipStrokeColorResource(R.color.spectrumSilver2)
@@ -58,8 +59,9 @@ object BindingAdapters {
                     Chip(context).apply {
                         text = info
                         setEnsureMinTouchTargetSize(false)
-                        setTextAppearance(R.style.ChipText)
+                        setTextAppearance(R.style.ChipTextSmall)
                         setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        isClickable = false
                         addView(this)
                     }
                 }

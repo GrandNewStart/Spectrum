@@ -10,15 +10,107 @@
         android:name="com.spectrum.spectrum.src.activities.main.fragments.myPage.MyPageFragment"
         android:label="MyPage" >
         <action
-            android:id="@+id/my_page_to_edit_spec"
+            android:id="@+id/my_page_to_my_post"
+            app:destination="@id/myPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/my_page_to_my_evaluation"
+            app:destination="@id/myEvaluationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/my_page_to_my_spec"
+            app:destination="@id/mySpecFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/my_page_to_my_scrap"
+            app:destination="@id/myScrapFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/my_page_to_my_company"
+            app:destination="@id/myCompanyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/editSpecFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.editSpec.EditSpecFragment"
+        android:label="EditSpec" />
+    <fragment
+        android:id="@+id/myPostFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.myPost.MyPostFragment"
+        android:label="MyPost" >
+        <action
+            android:id="@+id/my_post_to_post"
+            app:destination="@id/post"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <include app:graph="@navigation/post" />
+    <fragment
+        android:id="@+id/myEvaluationFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.myEvaluation.MyEvaluationFragment"
+        android:label="MyEvaluation" >
+        <action
+            android:id="@+id/my_evaluation_to_post"
+            app:destination="@id/post"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/mySpecFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.mySpec.MySpecFragment"
+        android:label="MySpec" >
+        <action
+            android:id="@+id/my_spec_to_edit_spec"
             app:destination="@id/editSpecFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/my_spec_to_create_spec"
+            app:destination="@id/createSpecFragment2"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/editSpecFragment"
-        android:name="com.spectrum.spectrum.src.activities.main.fragments.editSpec.EditSpecFragment"
-        android:label="EditSpec" />
+        android:id="@+id/createSpecFragment2"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.createSpec.CreateSpecFragment"
+        android:label="CreateSpecFragment" />
+    <fragment
+        android:id="@+id/myScrapFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.myScrap.MyScrapFragment"
+        android:label="myScrap" >
+        <action
+            android:id="@+id/my_scrap_to_post"
+            app:destination="@id/post"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/myCompanyFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.myCompany.MyCompanyFragment"
+        android:label="MyCompany" />
 </navigation>
