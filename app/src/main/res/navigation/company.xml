@@ -10,28 +10,22 @@
         android:name="com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment"
         android:label="Company" >
         <action
-            android:id="@+id/company_to_company_info"
-            app:destination="@id/company_info_fragment"
+            android:id="@+id/company_to_search"
+            app:destination="@id/search"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/company_info_fragment"
-        android:name="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoFragment"
-        android:label="CompanyInfo" >
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/company_info_to_spec"
-            app:destination="@id/spec_fragment"
+            android:id="@+id/company_to_company_info"
+            app:destination="@id/company_info"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
-    <fragment
-        android:id="@+id/spec_fragment"
-        android:name="com.spectrum.spectrum.src.activities.main.fragments.spec.SpecFragment"
-        android:label="Spec" />
+
+    <include app:graph="@navigation/search" />
+    <include app:graph="@navigation/company_info" />
 
 </navigation>

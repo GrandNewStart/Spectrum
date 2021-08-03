@@ -2,6 +2,9 @@ package com.spectrum.spectrum.src.activities.main.fragments.myCompany.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Rect
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +26,13 @@ class CompanyAdapter(private val items: ArrayList<Company>): RecyclerView.Adapte
             binding.apply {
                 titleText.text = company.name
                 groupText.text = company.jobGroup
-                specCountText.text = "${company.specCount}개의 스펙"
+                val countText = company.specCount.toString()
+                val countTextWithSuffix = "${countText}개의 스펙"
+                val spannable = SpannableString(countTextWithSuffix).apply {
+                    val blue = specCountText.resources.getColor(R.color.spectrumBlue, null)
+                    setSpan(ForegroundColorSpan(blue), 0, countText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                }
+                specCountText.text = spannable
             }
         }
     }

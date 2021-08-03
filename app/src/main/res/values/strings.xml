@@ -3,6 +3,11 @@
     <string name="log_in">로그인</string>
     <string name="sign_up">회원가입</string>
     <string name="find_password">비밀번호 찾기</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="auth_code">인증번호</string>
+    <string name="enter_auth_code">이메일로 전송된 숫자 6자리를 입력해 주세요</string>
+    <string name="enter_new_password">변경할 비밀번호를 입력해 주세요</string>
+    <string name="enter_new_password_again">비밀번호를 한 번 더 입력해 주세요</string>
     <string name="id_or_email">아이디(이메일)</string>
     <string name="enter_email">이메일 주소를 입력해 주세요</string>
     <string name="next">다음</string>
@@ -28,7 +33,7 @@
     <string name="select_your_job_group">관심 직군을 선택해 주세요</string>
     <string name="academic_background">학력 사항</string>
     <string name="work_histories">경력 사항</string>
-    <string name="certificates_and_languages">자격/<br/>\n어학 사항</string>
+    <string name="certificates_and_languages">자격/어학 사항</string>
     <string name="other_specs">기타 스펙</string>
     <string name="specs_placeholder">공모전, 프로젝트 등 자유롭게 적어주세요</string>
     <string name="select_job_group">직군 선택</string>
@@ -51,10 +56,11 @@
     <string name="company">기업</string>
     <string name="notification">알림</string>
     <string name="my_page">마이페이지</string>
-    <string name="search_hint">관심 있는 분야의 스펙을 찾아보세요</string>
+    <string name="search_hint">관심 분야의 스펙이나 기업을 찾아보세요</string>
     <string name="hottest_spectrums">요즘 핫한 스펙트럼</string>
     <string name="latest_specturms">최근 스펙 이야기</string>
-    <string name="see_accepted_only">합격 스펙만 보기</string>
+    <string name="see_accepted_only">합격후기만 보기</string>
+    <string name="see_accepted_spec_only">합격스펙만 보기</string>
     <string name="recent_keywords">최근에 찾은 키워드</string>
     <string name="delete_all">전체삭제</string>
     <string name="recently_seen">최근에 봤어요</string>
@@ -72,6 +78,7 @@
     <string name="title">제목</string>
     <string name="my_specs">나의 스펙</string>
     <string name="spec_list">스펙목록</string>
+    <string name="select_spec">스펙 선택</string>
     <string name="type_of_spec">스펙 종류</string>
     <string name="free_text_hint">현재 스펙과 관련하여 고민이나 후기를 적어주세요</string>
     <string name="write_post">글쓰기</string>
@@ -80,6 +87,7 @@
     <string name="add">추가</string>
     <string name="you_can_edit_specs_later">스펙 선택 후 추가 수정 가능합니다</string>
     <string name="edit_spec">스펙 수정</string>
+    <string name="create_spec">스펙 등록</string>
     <string name="edit_spec_message">연령, 성별, 직군은 필수입력항목입니다</string>
     <string name="company_info">기업정보</string>
     <string name="overwrite_changes_to_current_spec">수정 사항을 나의 기존 스펙에 반영</string>
@@ -103,4 +111,14 @@
     <string name="etc">기타</string>
     <string name="app_configurations">앱 설정</string>
     <string name="edit_profile">프로필 수정</string>
+    <string name="app_settings">앱 설정</string>
+    <string name="log_out">로그아웃</string>
+    <string name="sign_out">회원 탈퇴</string>
+    <string name="no_items">없음</string>
+    <string name="no_search_items">검색 결과가 없습니다</string>
+    <string name="not_enough_comments">아직 의견이 부족합니다</string>
+    <string name="not_enough_data_wait_please">아직 충분한 데이터가 쌓이지 않았습니다.<br/>\n조금만 기다려 주세요!</string>
+    <string name="add_spec_to_see_spec_analysis">
+        스펙 추가를 통해<br/>\n스펙 분석 데이터 열람이 가능합니다.
+    </string>
 </resources>

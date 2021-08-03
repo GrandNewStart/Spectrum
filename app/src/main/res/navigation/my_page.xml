@@ -44,6 +44,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/my_page_to_settings"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/editSpecFragment"
@@ -64,7 +71,7 @@
     <include app:graph="@navigation/post" />
     <fragment
         android:id="@+id/myEvaluationFragment"
-        android:name="com.spectrum.spectrum.src.activities.main.fragments.myEvaluation.MyEvaluationFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.myComment.MyCommentFragment"
         android:label="MyEvaluation" >
         <action
             android:id="@+id/my_evaluation_to_post"
@@ -112,5 +119,18 @@
     <fragment
         android:id="@+id/myCompanyFragment"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.myCompany.MyCompanyFragment"
-        android:label="MyCompany" />
+        android:label="MyCompany" >
+        <action
+            android:id="@+id/my_company_to_company_info"
+            app:destination="@id/company_info"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.settings.SettingsFragment"
+        android:label="Settings" />
+    <include app:graph="@navigation/company_info" />
 </navigation>

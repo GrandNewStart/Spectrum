@@ -32,6 +32,12 @@ class MyPageViewModel: ViewModel() {
         fragment.findNavController().navigate(R.id.my_page_to_my_company)
     }
 
-    fun proceedToAppConfiguration(fragment: MyPageFragment) {}
+    fun proceedToAppConfiguration(fragment: MyPageFragment) {
+        fragment.findNavController().navigate(R.id.my_page_to_settings)
+    }
+
+    private fun getUserInfo(fragment: MyPageFragment) {
+
+    }
 
 }

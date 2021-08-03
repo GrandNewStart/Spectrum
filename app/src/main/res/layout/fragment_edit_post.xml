@@ -145,7 +145,7 @@
                                 android:layout_marginTop="8dp"
                                 android:fontFamily="@font/roboto_medium"
                                 android:text="06/28 20:25 업데이트됨"
-                                android:textColor="#666970"
+                                android:textColor="@color/spectrumGray1"
                                 android:textSize="12sp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/your_spec_text" />
@@ -210,8 +210,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/spectrumSilver2"/>
+                    android:layout_height="0.5dp"
+                    android:background="@color/spectrumSilver3"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -242,7 +242,6 @@
                         android:layout_marginVertical="24dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="12dp"
-                        android:foreground="@drawable/spinner_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/sub_type_spinner"
                         app:layout_constraintStart_toStartOf="parent"
@@ -255,7 +254,6 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginStart="12dp"
                         android:layout_marginVertical="24dp"
-                        android:foreground="@drawable/spinner_background"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/type_spinner"
@@ -265,8 +263,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/spectrumSilver2"/>
+                    android:layout_height="0.5dp"
+                    android:background="@color/spectrumSilver3"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -293,13 +291,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"
-                        android:background="@drawable/spinner_background"
+                        android:background="@drawable/outline_box"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="start"
                         android:hint="@string/free_text_hint"
+                        android:lineSpacingExtra="4dp"
                         android:minHeight="250dp"
                         android:padding="16dp"
-                        android:textColorHint="#666970"
+                        android:textColorHint="@color/spectrumGray1"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

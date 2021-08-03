@@ -14,6 +14,9 @@
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoViewModel" />
         <variable
+            name="companyName"
+            type="String" />
+        <variable
             name="isFavorite"
             type="Boolean" />
         <variable
@@ -35,7 +38,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F9F9FB">
+        android:background="@color/spectrumSilver4">
 
         <ImageButton
             android:layout_width="24dp"
@@ -62,23 +65,31 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
+            android:id="@+id/favorite_button"
+            company_info_is_favorite="@{isFavorite}"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/clear"
             android:onClick="@{()->viewModel.favoriteButtonAction(fragment)}"
-            android:src="@{isFavorite ? @drawable/icon_heart_fill : @drawable/icon_heart_empty}"
+            android:src="@drawable/icon_heart_empty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_view"
+            company_info_company_name="@{companyName}"
+            company_info_title_text="@{titleText}"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_text">
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,8 +99,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:layout_marginHorizontal="16dp">
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="28dp">
 
                     <TextView
                         android:id="@+id/name_text"
@@ -106,11 +117,11 @@
                         android:id="@+id/industry_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="IT/정보통신업"
                         android:textColor="#666970"
                         android:textSize="12sp"
-                        android:layout_marginTop="16dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/name_text" />
 
@@ -118,54 +129,26 @@
                         android:id="@+id/spec_count_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="235개의 스펙트럼이 쌓였습니다."
                         android:textColor="#666970"
                         android:textSize="12sp"
-                        android:layout_marginTop="2dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/industry_text" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/favorite_card_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/favorite_image"
+                        company_info_is_favorite="@{isFavorite}"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="4dp"
                         android:layout_marginStart="4dp"
-                        app:cardBackgroundColor="@color/clear"
-                        app:cardCornerRadius="15dp"
-                        app:cardElevation="0dp"
+                        android:src="@drawable/icon_favorite_unselected"
                         app:layout_constraintBottom_toBottomOf="@+id/name_text"
+                        app:layout_constraintDimensionRatio="15:4"
                         app:layout_constraintStart_toEndOf="@+id/name_text"
-                        app:layout_constraintTop_toTopOf="@+id/name_text"
-                        app:strokeColor="#C5C7CC"
-                        app:strokeWidth="1dp">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:paddingVertical="4dp"
-                            android:paddingHorizontal="6dp">
-
-                            <ImageView
-                                android:id="@+id/tiny_heart"
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
-                                android:src="@drawable/icon_heart_empty"
-                                app:tint="@color/spectrumBlue" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_medium"
-                                android:text="@string/register_to_favorite_companies"
-                                android:textColor="#666970"
-                                android:textSize="10sp" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
+                        app:layout_constraintTop_toTopOf="@+id/name_text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -206,63 +189,74 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/analysis_text">
 
-                            <com.spectrum.spectrum.src.customs.CircleView
-                                android:id="@+id/circle_1"
-                                company_info_analysis="@{analysis1}"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                app:layout_constraintBottom_toTopOf="@+id/h_guide"
-                                app:layout_constraintDimensionRatio="1:1"
-                                app:layout_constraintEnd_toStartOf="@+id/v_guide" />
+<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+<!--                                android:id="@+id/circle_1"-->
+<!--                                company_info_analysis="@{analysis1}"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginEnd="8dp"-->
+<!--                                android:layout_marginBottom="8dp"-->
+<!--                                app:layout_constraintBottom_toTopOf="@+id/h_guide"-->
+<!--                                app:layout_constraintDimensionRatio="1:1"-->
+<!--                                app:layout_constraintEnd_toStartOf="@+id/v_guide" />-->
 
-                            <com.spectrum.spectrum.src.customs.CircleView
-                                android:id="@+id/circle_2"
-                                company_info_analysis="@{analysis2}"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginBottom="8dp"
-                                app:layout_constraintBottom_toTopOf="@+id/h_guide"
-                                app:layout_constraintDimensionRatio="1:1"
-                                app:layout_constraintStart_toStartOf="@+id/v_guide" />
+<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+<!--                                android:id="@+id/circle_2"-->
+<!--                                company_info_analysis="@{analysis2}"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginStart="8dp"-->
+<!--                                android:layout_marginBottom="8dp"-->
+<!--                                app:layout_constraintBottom_toTopOf="@+id/h_guide"-->
+<!--                                app:layout_constraintDimensionRatio="1:1"-->
+<!--                                app:layout_constraintStart_toStartOf="@+id/v_guide" />-->
 
-                            <com.spectrum.spectrum.src.customs.CircleView
-                                android:id="@+id/circle_3"
-                                company_info_analysis="@{analysis3}"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
-                                app:layout_constraintDimensionRatio="1:1"
-                                app:layout_constraintEnd_toStartOf="@+id/v_guide"
-                                app:layout_constraintTop_toTopOf="@+id/h_guide" />
+<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+<!--                                android:id="@+id/circle_3"-->
+<!--                                company_info_analysis="@{analysis3}"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                android:layout_marginEnd="8dp"-->
+<!--                                app:layout_constraintDimensionRatio="1:1"-->
+<!--                                app:layout_constraintEnd_toStartOf="@+id/v_guide"-->
+<!--                                app:layout_constraintTop_toTopOf="@+id/h_guide" />-->
 
-                            <com.spectrum.spectrum.src.customs.CircleView
-                                android:id="@+id/circle_4"
-                                company_info_analysis="@{analysis4}"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="8dp"
-                                app:layout_constraintDimensionRatio="1:1"
-                                app:layout_constraintStart_toStartOf="@+id/v_guide"
-                                app:layout_constraintTop_toTopOf="@+id/h_guide" />
+<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+<!--                                android:id="@+id/circle_4"-->
+<!--                                company_info_analysis="@{analysis4}"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginStart="8dp"-->
+<!--                                android:layout_marginTop="8dp"-->
+<!--                                app:layout_constraintDimensionRatio="1:1"-->
+<!--                                app:layout_constraintStart_toStartOf="@+id/v_guide"-->
+<!--                                app:layout_constraintTop_toTopOf="@+id/h_guide" />-->
 
-                            <androidx.constraintlayout.widget.Guideline
-                                android:id="@+id/h_guide"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                app:layout_constraintGuide_percent="0.5" />
+<!--                            <androidx.constraintlayout.widget.Guideline-->
+<!--                                android:id="@+id/h_guide"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:orientation="horizontal"-->
+<!--                                app:layout_constraintGuide_percent="0.5" />-->
 
-                            <androidx.constraintlayout.widget.Guideline
-                                android:id="@+id/v_guide"
+<!--                            <androidx.constraintlayout.widget.Guideline-->
+<!--                                android:id="@+id/v_guide"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:orientation="vertical"-->
+<!--                                app:layout_constraintGuide_percent="0.5" />-->
+
+                            <TextView
+                                android:id="@+id/not_yet_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                app:layout_constraintGuide_percent="0.5" />
+                                android:gravity="center"
+                                android:text="@string/not_enough_data_wait_please"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -294,7 +288,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="4dp"
-                            android:text="@string/see_accepted_only"
+                            android:text="@string/see_accepted_spec_only"
                             android:textColor="#666970"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@+id/see_more_specs_text"

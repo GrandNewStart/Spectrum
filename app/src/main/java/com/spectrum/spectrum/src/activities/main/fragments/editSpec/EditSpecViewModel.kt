@@ -33,9 +33,7 @@ class EditSpecViewModel: ViewModel() {
     var mIsDataLoaded = false
     var mAge: Int? = null
     var mSex: Int? = null
-    var mJobGroup1: JobGroup? = null
-    var mJobGroup2: JobGroup? = null
-    var mJobGroup3: JobGroup? = null
+    var mJobGroup: JobGroup? = null
     var mEducations = ObservableArrayList<Education>()
     var mExperiences = ObservableArrayList<Experience>()
     var mLicenses = ObservableArrayList<License>()
@@ -45,8 +43,7 @@ class EditSpecViewModel: ViewModel() {
         fragment.mBinding.apply {
             age = mAge
             sex = mSex
-            jobGroup1 = mJobGroup1
-            jobGroup2 = mJobGroup2
+            jobGroup = mJobGroup
             educations = mEducations
             experiences = mExperiences
             licenses = mLicenses
@@ -64,14 +61,12 @@ class EditSpecViewModel: ViewModel() {
     }
 
     fun saveButtonAction(fragment: EditSpecFragment) {
-        if (mAge == null || mSex == null || mJobGroup1 == null) {
+        if (mAge == null || mSex == null || mJobGroup == null) {
             fragment.showToast(Constants.enter_required_fields)
             return
         }
         val jobGroupList = ArrayList<Int>().apply {
-            mJobGroup1?.let { add(it.id) }
-            mJobGroup2?.let { add(it.id) }
-            mJobGroup3?.let { add(it.id) }
+            mJobGroup?.let { add(it.id) }
         }
         val educationList = ArrayList<Education>().apply {
             mEducations.forEach { add(it) }
@@ -95,31 +90,12 @@ class EditSpecViewModel: ViewModel() {
 
     fun showJobGroup(fragment: EditSpecFragment) {
         var firstItem: JobGroup? = null
-        var secondItem: JobGroup? = null
-        var thirdItem: JobGroup? = null
-
-        mJobGroup1?.let { firstItem = JobGroup(it.id, it.name) }
-        mJobGroup2?.let { secondItem = JobGroup(it.id, it.name) }
-        mJobGroup3?.let { thirdItem = JobGroup(it.id, it.name) }
-
+        mJobGroup?.let { firstItem = JobGroup(it.id, it.name) }
         JobGroupDialog(fragment.requireContext())
-            .setPreselectedItems(firstItem, secondItem, thirdItem)
-            .setOnSaveListener { first, second, third ->
-                first?.let {
-                    mJobGroup1 = JobGroup(it.id, it.name)
-                    mJobGroup2 = null
-                    mJobGroup3 = null
-                }
-                second?.let {
-                    mJobGroup2 = JobGroup(it.id, it.name)
-                    mJobGroup3 = null
-                }
-                third?.let {
-                    mJobGroup3 = JobGroup(it.id, it.name)
-                }
-                fragment.mBinding.jobGroup1 = mJobGroup1
-                fragment.mBinding.jobGroup2 = mJobGroup2
-                fragment.mBinding.jobGroup3 = mJobGroup3
+            .setPreselectedItem(firstItem)
+            .setOnSaveListener { item ->
+                mJobGroup = item
+                fragment.mBinding.jobGroup = mJobGroup
             }
             .show()
     }
@@ -159,9 +135,7 @@ class EditSpecViewModel: ViewModel() {
                         mAge = result.age
                         mSex = if (result.sex == "남자") 0 else 1
                         result.jobGroups?.let {
-                            if (it.size > 0) { mJobGroup1 = JobGroup(it[0].id, it[0].name) }
-                            if (it.size > 1) { mJobGroup2 = JobGroup(it[1].id, it[1].name) }
-                            if (it.size > 2) { mJobGroup3 = JobGroup(it[2].id, it[2].name) }
+                            if (it.size > 0) { mJobGroup = JobGroup(it[0].id, it[0].name) }
                         }
                         mEducations.clear()
                         result.educations?.forEach {
@@ -184,9 +158,7 @@ class EditSpecViewModel: ViewModel() {
                         fragment.mBinding.apply {
                             age = mAge
                             sex = mSex
-                            jobGroup1 = mJobGroup1
-                            jobGroup2 = mJobGroup2
-                            jobGroup3 = mJobGroup3
+                            jobGroup = mJobGroup
                             otherSpecs = mOtherSpecs
                         }
                     }

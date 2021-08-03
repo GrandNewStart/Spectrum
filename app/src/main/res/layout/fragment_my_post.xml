@@ -2,17 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="java.util.ArrayList"/>
-        <import type="com.spectrum.spectrum.src.activities.main.fragments.myPost.models.Post"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.myPost.MyPostFragment" />
         <variable
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.myPost.MyPostViewModel" />
-        <variable
-            name="posts"
-            type="ArrayList&lt;Post&gt;" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

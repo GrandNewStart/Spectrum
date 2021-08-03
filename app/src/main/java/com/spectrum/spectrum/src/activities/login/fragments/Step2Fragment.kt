@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.login.LogInActivity
+import com.spectrum.spectrum.src.activities.password.PasswordActivity
 import com.spectrum.spectrum.src.activities.signup.SignUpActivity
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.customs.BaseFragment
@@ -52,14 +53,16 @@ class Step2Fragment: BaseFragment() {
 
             findPassword.setOnClickListener {
                 showKeyboard(this, false)
-                findNavController().navigate(R.id.step2_to_find_password)
+                activity?.apply {
+                    val intent = Intent(this, PasswordActivity::class.java)
+                    startActivity(intent)
+                }
             }
 
             signUp.setOnClickListener {
                 showKeyboard(this, false)
                 activity?.apply {
                     startActivity(Intent(this, SignUpActivity::class.java))
-                    finish()
                 }
             }
 

@@ -15,7 +15,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->adapter.proceedToPost(fragment, post.id)}"
+        android:onClick="@{()->adapter.proceedToPost(fragment, post)}"
         app:cardCornerRadius="16dp"
         app:cardElevation="5dp">
 
@@ -53,8 +53,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="06/07 16:25"
-                    android:textColor="@color/spectrumGray2"
-                    android:textSize="10dp" />
+                    android:textColor="@color/spectrumGray1"
+                    android:textSize="10dp"
+                    app:fontFamily="@font/roboto_thin" />
 
                 <ImageView
                     android:id="@+id/comment_image"
@@ -76,7 +77,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_marginStart="8dp"
-                    android:src="@drawable/icon_book_mark" />
+                    android:src="@drawable/icon_mark_unselected" />
 
                 <TextView
                     android:id="@+id/mark_count_text"

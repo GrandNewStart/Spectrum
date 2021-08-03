@@ -22,7 +22,7 @@ object BindingAdapters {
                view.visibility = if (spec == null) View.VISIBLE else View.GONE
            }
            R.id.your_spec_text -> {
-               val text = "${spec?.username} 님의 스펙"
+               val text = "${spec?.username}님의 스펙"
                (view as TextView).text = text
            }
            R.id.update_time_text -> {
@@ -71,20 +71,20 @@ object BindingAdapters {
         val statusList = arrayListOf("종류", "취업준비", "n차합격", "최종합격")
         val categoryList = arrayListOf("주제", "자유고민", "자유후기")
 
-        statusSpinner.adapter = ArrayAdapter(statusSpinner.context, android.R.layout.simple_dropdown_item_1line, statusList)
-        categorySpinner.adapter = ArrayAdapter(categorySpinner.context, android.R.layout.simple_dropdown_item_1line, categoryList)
+        statusSpinner.adapter = ArrayAdapter(statusSpinner.context, R.layout.item_spinner, statusList)
+        categorySpinner.adapter = ArrayAdapter(categorySpinner.context, R.layout.item_spinner, categoryList)
         textView.text = Constants.free_form_text
 
         statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 var items = ArrayList<String>()
                 when (position) {
-                    0 -> { items = arrayListOf("주제") }
+                    0 -> { items = arrayListOf("주제")}
                     1 -> { items = arrayListOf("주제", "자유고민") }
                     2 -> { items = arrayListOf("주제", "자유고민", "자유후기") }
                     3 -> { items = arrayListOf("주제", "자유후기") }
                 }
-                categorySpinner.adapter = ArrayAdapter(statusSpinner.context, android.R.layout.simple_dropdown_item_1line, items)
+                categorySpinner.adapter = ArrayAdapter(statusSpinner.context, R.layout.item_spinner, items)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
@@ -97,8 +97,14 @@ object BindingAdapters {
                         editText.hint = Constants.free_form_text_hint
                     }
                     1 -> {
-                        textView.text = Constants.free_consults
-                        editText.hint = Constants.free_consults_hint
+                        if (statusSpinner.selectedItemPosition == 3) {
+                            textView.text = Constants.free_reviews
+                            editText.hint = Constants.free_reviews_hint
+                        }
+                        else {
+                            textView.text = Constants.free_advices
+                            editText.hint = Constants.free_advices_hint
+                        }
                     }
                     2 -> {
                         textView.text = Constants.free_reviews

@@ -81,7 +81,6 @@ class Step3Fragment: BaseFragment() {
             mEmail = it.getString("email")
             mPassword = it.getString("password")
         }
-        autoLogIn()
     }
 
     override fun onCreateView(
@@ -164,6 +163,9 @@ class Step3Fragment: BaseFragment() {
                     return@launch
                 }
                 showToast(Constants.unavailable_nickname)
+                mNicknameLiveData.value = null
+                mBinding.nicknameTextInputLayout.error = Constants.nickname_exists
+                mBinding.nicknameTextInputLayout.setDone(false)
             }
         }
     }

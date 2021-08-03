@@ -1,10 +1,11 @@
 package com.spectrum.spectrum.src.activities.main.fragments.post.interfaces
 
 import com.spectrum.spectrum.src.activities.main.fragments.post.models.DeletePostResponse
+import com.spectrum.spectrum.src.activities.main.fragments.post.models.GetCommentResponse
 import com.spectrum.spectrum.src.activities.main.fragments.post.models.PostResponse
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Path
+import com.spectrum.spectrum.src.customs.BaseResponse
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 interface PostApi {
 
@@ -13,5 +14,11 @@ interface PostApi {
 
     @PATCH("app/posts/{id}")
     suspend fun deleteMyPosts(@Path("id") id: Int): DeletePostResponse
+
+    @GET("/app/comments/{id}")
+    suspend fun getComments(@Path("id") id: Int): GetCommentResponse
+
+    @POST("/app/comments/{id}")
+    suspend fun postComment(@Path("id") id: Int, @Body body: RequestBody): BaseResponse
 
 }

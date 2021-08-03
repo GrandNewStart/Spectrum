@@ -24,6 +24,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/home_to_search"
+            app:destination="@id/search"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/create_post"
@@ -54,5 +61,6 @@
         android:id="@+id/create_spec"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.createSpec.CreateSpecFragment"
         android:label="CreateSpec" />
+    <include app:graph="@navigation/search" />
 
 </navigation>

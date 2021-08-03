@@ -25,6 +25,7 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
         @SuppressLint("SetTextI18n")
         fun bindViews(post: Post) {
             binding.apply {
+                this.post = post
                 titleText.text = post.title
                 updateTimeText.text = post.createdAt
                 responseCountText.text = "0"
@@ -34,10 +35,10 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
                         text = post.jobStatus
                         setEnsureMinTouchTargetSize(false)
                         setChipBackgroundColorResource(R.color.clear)
-                        setTextAppearance(R.style.ChipTextSmall)
+                        setTextAppearance(R.style.ChipTextBig)
                         setTextColor(resources.getColor(R.color.spectrumBlue, null))
                         setChipStrokeColorResource(R.color.spectrumBlue)
-                        setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                        setChipStrokeWidthResource(R.dimen.thin_stroke_width)
                         if (post.jobStatus == "취업준비") {
                             setTextColor(resources.getColor(R.color.black, null))
                             setChipStrokeColorResource(R.color.spectrumSilver2)
@@ -49,7 +50,7 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
                         text = "${post.age}세"
                         setEnsureMinTouchTargetSize(false)
                         setChipBackgroundColorResource(R.color.spectrumSilver2)
-                        setTextAppearance(R.style.ChipTextSmall)
+                        setTextAppearance(R.style.ChipTextBig)
                         isClickable = false
                         addView(this)
                     }
@@ -57,19 +58,17 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
                         text = post.sex
                         setEnsureMinTouchTargetSize(false)
                         setChipBackgroundColorResource(R.color.spectrumSilver2)
-                        setTextAppearance(R.style.ChipTextSmall)
+                        setTextAppearance(R.style.ChipTextBig)
                         isClickable = false
                         addView(this)
                     }
-                    post.jobGroupList.forEach {
-                        Chip(context).apply {
-                            text = it.data
-                            setEnsureMinTouchTargetSize(false)
-                            setChipBackgroundColorResource(R.color.spectrumSilver2)
-                            setTextAppearance(R.style.ChipTextSmall)
-                            isClickable = false
-                            addView(this)
-                        }
+                    Chip(context).apply {
+                        text = post.jobGroupList[0].data
+                        setEnsureMinTouchTargetSize(false)
+                        setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        setTextAppearance(R.style.ChipTextBig)
+                        isClickable = false
+                        addView(this)
                     }
                 }
             }
@@ -100,6 +99,7 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
         val inflater = LayoutInflater.from(parent.context)
         mBinding = DataBindingUtil.inflate(inflater, R.layout.item_my_scrap_post, parent, false)
         mBinding.fragment = mRecyclerView.findFragment()
+        mBinding.adapter = this
         return ViewHolder(mBinding)
     }
 
@@ -109,9 +109,8 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
 
     override fun getItemCount(): Int = items.size
 
-    fun proceedToPost(fragment: MyScrapFragment, position: Int) {
-        val id = items[position].id
-        fragment.findNavController().navigate(R.id.my_scrap_to_post, bundleOf("id" to id))
+    fun proceedToPost(fragment: MyScrapFragment, post: Post) {
+        fragment.findNavController().navigate(R.id.my_scrap_to_post, bundleOf("id" to post.id))
     }
 
 }

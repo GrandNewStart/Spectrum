@@ -2,7 +2,10 @@ package com.spectrum.spectrum.src.activities.main.fragments.home.adapters
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,24 +16,47 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.main.MainActivity
 import com.spectrum.spectrum.src.activities.main.fragments.home.HomeFragment
 import com.spectrum.spectrum.src.activities.main.fragments.home.models.JobGroup
 import com.spectrum.spectrum.src.activities.main.fragments.home.models.Post
+import com.spectrum.spectrum.src.config.Helpers.dp2px
 
 object BindingAdapters {
 
-    @BindingAdapter("home_logo_button")
+    @BindingAdapter("home_logo_button", "home_fragment", requireAll = true)
     @JvmStatic
-    fun bindSearchEditText(editText: EditText, button: ImageButton) {
-        editText.setOnFocusChangeListener { v, hasFocus ->
+    fun bindSearchEditText(editText: EditText, button: ImageButton, fragment: HomeFragment) {
+        editText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 button.setImageResource(R.drawable.icon_back)
+                (fragment.activity as MainActivity).showSearchDialog()
             }
             else {
                 button.setImageResource(R.drawable.icon_logo_small)
+                fragment.showKeyboard(editText, false)
+                (fragment.activity as MainActivity).hideSearchDialog()
+            }
+        }
+        editText.setOnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_SEARCH) {
+                val keyword = editText.text.toString().trim()
+                if (keyword.isNotEmpty()) {
+                    fragment.mViewModel.proceedToSearch(fragment, keyword)
+                    editText.clearFocus()
+                }
+                true
+            }
+            else false
+        }
+        editText.setOnKeyListener { _, id, _ ->
+            if (id == KeyEvent.KEYCODE_BACK && editText.hasFocus()) {
                 editText.clearFocus()
-                val imm = editText.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(v.windowToken, 0)
+                editText.text = null
+                true
+            }
+            else {
+                false
             }
         }
     }
@@ -112,10 +138,10 @@ object BindingAdapters {
                     Chip(context).apply{
                         text = post.jobStatus
                         setEnsureMinTouchTargetSize(false)
-                        setTextAppearance(R.style.ChipTextSmall)
-                        setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                        setTextAppearance(R.style.ChipTextBig)
+                        setChipStrokeWidthResource(R.dimen.thin_stroke_width)
                         setChipBackgroundColorResource(R.color.clear)
-                        setChipStrokeColorResource(R.color.spectrumSilver2)
+                        setChipStrokeColorResource(R.color.spectrumSilver3)
                         isClickable = false
                         if (post.jobStatus == "n차합격" || post.jobStatus == "최종합격") {
                             setChipBackgroundColorResource(R.color.clear)
@@ -128,7 +154,7 @@ object BindingAdapters {
                         text = "${post.age}세"
                         setEnsureMinTouchTargetSize(false)
                         setChipBackgroundColorResource(R.color.spectrumSilver2)
-                        setTextAppearance(R.style.ChipTextSmall)
+                        setTextAppearance(R.style.ChipTextBig)
                         isClickable = false
                         addView(this)
                     }
@@ -136,19 +162,17 @@ object BindingAdapters {
                         text = post.sex
                         setEnsureMinTouchTargetSize(false)
                         setChipBackgroundColorResource(R.color.spectrumSilver2)
-                        setTextAppearance(R.style.ChipTextSmall)
+                        setTextAppearance(R.style.ChipTextBig)
                         isClickable = false
                         addView(this)
                     }
-                    post.jobGroupList.forEach {
-                        Chip(context).apply {
-                            text = it.data
-                            setEnsureMinTouchTargetSize(false)
-                            setChipBackgroundColorResource(R.color.spectrumSilver2)
-                            setTextAppearance(R.style.ChipTextSmall)
-                            isClickable = false
-                            addView(this)
-                        }
+                    Chip(context).apply {
+                        text = post.jobGroupList[0].data
+                        setEnsureMinTouchTargetSize(false)
+                        setChipBackgroundColorResource(R.color.spectrumSilver2)
+                        setTextAppearance(R.style.ChipTextBig)
+                        isClickable = false
+                        addView(this)
                     }
                 }
             }

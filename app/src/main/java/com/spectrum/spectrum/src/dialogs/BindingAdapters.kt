@@ -6,13 +6,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.*
+import androidx.core.view.children
 import androidx.databinding.BindingAdapter
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.config.Constants
-import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.config.Helpers.formatDate
 import com.spectrum.spectrum.src.models.JobGroup
 
@@ -23,73 +22,28 @@ object BindingAdapters {
     @JvmStatic
     fun bindChipGroup(chipGroup: ChipGroup, items: ArrayList<JobGroup>?, dialog: JobGroupDialog) {
         chipGroup.apply {
-            items?.forEach { group ->
-                val chip = Chip(context).apply {
-                    text = group.name
-                    setChipStrokeWidthResource(R.dimen.default_stroke_width)
-                    setChipStrokeColorResource(R.color.spectrumSilver2)
+            items?.forEach { item ->
+                Chip(context).apply {
+                    text = item.name
+                    setChipStrokeWidthResource(R.dimen.thin_stroke_width)
+                    setChipStrokeColorResource(R.color.spectrumSilver3)
                     setChipBackgroundColorResource(R.color.clear)
                     setTextAppearance(R.style.ChipTextBig)
                     setEnsureMinTouchTargetSize(false)
                     setOnClickListener {
-                        dialog.apply {
-                            when(group.id) {
-                                mFirstItem?.id -> {
-                                    if (mSecondItem == null) {
-                                        mFirstItem = null
-                                        resetChipGroup(chipGroup, dialog, items)
-                                        return@setOnClickListener
-                                    }
-                                    if (mThirdItem == null) {
-                                        mFirstItem = mSecondItem
-                                        mThirdItem = null
-                                        resetChipGroup(chipGroup, dialog, items)
-                                        return@setOnClickListener
-                                    }
-                                    mFirstItem = mSecondItem
-                                    mSecondItem = mThirdItem
-                                    mThirdItem = null
-                                    resetChipGroup(chipGroup, dialog, items)
-                                    return@setOnClickListener
-                                }
-                                mSecondItem?.id -> {
-                                    if (mThirdItem == null) {
-                                        mSecondItem = null
-                                        resetChipGroup(chipGroup, dialog, items)
-                                        return@setOnClickListener
-                                    }
-                                    mSecondItem = mThirdItem
-                                    mThirdItem = null
-                                    resetChipGroup(chipGroup, dialog, items)
-                                    return@setOnClickListener
-                                }
-                                mThirdItem?.id -> {
-                                    mThirdItem = null
-                                    resetChipGroup(chipGroup, dialog, items)
-                                    return@setOnClickListener
-                                }
-                                else -> {
-                                    if (mThirdItem == null) {
-                                        mThirdItem = group
-                                        resetChipGroup(chipGroup, dialog, items)
-                                        return@setOnClickListener
-                                    }
-                                    if (mSecondItem == null) {
-                                        mSecondItem = group
-                                        resetChipGroup(chipGroup, dialog, items)
-                                        return@setOnClickListener
-                                    }
-                                    if (mFirstItem == null) {
-                                        mFirstItem = group
-                                        resetChipGroup(chipGroup, dialog, items)
-                                        return@setOnClickListener
-                                    }
-                                }
+                        children.forEach {
+                            (it as Chip).apply {
+                                setChipStrokeWidthResource(R.dimen.thin_stroke_width)
+                                setChipStrokeColorResource(R.color.spectrumSilver3)
+                                setChipBackgroundColorResource(R.color.clear)
                             }
                         }
+                        chipStrokeWidth = 0f
+                        setChipBackgroundColorResource(R.color.spectrumLightBlue)
+                        dialog.mSelectedItem = item
                     }
+                    addView(this)
                 }
-                addView(chip)
             }
             resetChipGroup(chipGroup, dialog, items ?: arrayListOf())
         }
@@ -101,15 +55,13 @@ object BindingAdapters {
                 val item = items[i]
                 val chip = chipGroup.getChildAt(i) as Chip
                 when(item.id) {
-                    dialog.mFirstItem?.id,
-                    dialog.mSecondItem?.id,
-                    dialog.mThirdItem?.id -> {
+                    dialog.mSelectedItem?.id-> {
                         chip.chipStrokeWidth = 0f
                         chip.setChipBackgroundColorResource(R.color.spectrumLightBlue)
                     }
                     else -> {
-                        chip.setChipStrokeWidthResource(R.dimen.default_stroke_width)
-                        chip.setChipStrokeColorResource(R.color.spectrumSilver2)
+                        chip.setChipStrokeWidthResource(R.dimen.thin_stroke_width)
+                        chip.setChipStrokeColorResource(R.color.spectrumSilver3)
                         chip.setChipBackgroundColorResource(R.color.clear)
                     }
                 }

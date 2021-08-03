@@ -39,7 +39,7 @@
             android:gravity="center"
             android:text="@string/sign_up"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +48,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text">
@@ -91,7 +92,7 @@
                     android:id="@+id/nickname_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@android:color/transparent"
+                    android:background="@drawable/edit_text_underline"
                     android:fontFamily="@font/roboto_medium"
                     android:inputType="text"
                     android:maxLength="10"
@@ -106,24 +107,20 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nickname_check_button"
-                style="?attr/materialButtonOutlinedStyle"
+                style="@style/RoundedClearButton"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/roboto_medium"
-                android:lines="1"
                 android:onClick="@{()->fragment.nickNameCheckButtonAction()}"
                 android:text="@string/overlap_check"
-                android:textColor="@color/spectrumBlue"
                 android:textSize="14sp"
-                app:cornerRadius="25dp"
                 app:layout_constraintBottom_toBottomOf="@+id/nickname_text_input_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/nickname_text_input_layout"
                 app:layout_constraintWidth_percent="0.25"
                 app:rippleColor="@color/clearGray"
                 app:strokeColor="@color/spectrumBlue"
-                app:strokeWidth="2dp" />
+                app:strokeWidth="1dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

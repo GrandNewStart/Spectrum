@@ -5,7 +5,7 @@
     <data>
         <import type="android.view.View"/>
         <import type="java.util.ArrayList"/>
-        <import type="com.spectrum.spectrum.src.models.Evaluation"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.post.models.Comment"/>
         <import type="com.spectrum.spectrum.src.activities.main.fragments.post.models.Education"/>
         <import type="com.spectrum.spectrum.src.activities.main.fragments.post.models.Experience"/>
         <import type="com.spectrum.spectrum.src.activities.main.fragments.post.models.License"/>
@@ -49,32 +49,32 @@
             name="otherSpecs"
             type="String" />
         <variable
-            name="topFiveResponses"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="topFiveComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="educationResponseOptions"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="nonZeroEducationComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="educationResponses"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="zeroEducationComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="experienceResponseOptions"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="nonZeroExperienceComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="experienceResponses"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="zeroExperienceComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="certificationResponseOptions"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="nonZeroLicenseComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="certificationResponses"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="zeroLicenseComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="otherSpecsResponses"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="nonZeroOtherSpecsComments"
+            type="ArrayList&lt;Comment&gt;" />
         <variable
-            name="otherSpecResponseOptions"
-            type="ArrayList&lt;Evaluation&gt;" />
+            name="zeroOtherSpecsComments"
+            type="ArrayList&lt;Comment&gt;" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -114,7 +114,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:onClick="@{()->viewModel.trailingButtonAction(fragment)}"
-            android:src="@{isMine ? @drawable/icon_menu : @drawable/icon_book_mark}"
+            android:src="@{isMine ? @drawable/icon_menu : @drawable/icon_mark_unselected}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -123,6 +123,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
+            android:layout_marginBottom="@dimen/app_bar_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,10 +174,10 @@
                             post_texts="@{date}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
                             android:text="06/28 20:25"
                             android:textColor="@color/spectrumGray2"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"
+                            app:fontFamily="@font/roboto_thin" />
 
                     </LinearLayout>
 
@@ -187,17 +188,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
-                        app:chipSpacing="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:chipSpacing="6.5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/user_thumbnail_image" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/post_title_text"
@@ -209,9 +203,12 @@
                         android:fontFamily="@font/roboto_bold"
                         android:text="졸업 전 대기업 인턴"
                         android:textSize="16sp"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:ellipsize="end"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/post_user_info_chip_group" />
 
                     <TextView
                         android:id="@+id/post_content_text"
@@ -220,24 +217,32 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="24dp"
                         android:fontFamily="@font/roboto_regular"
                         android:lineSpacingExtra="2dp"
                         android:text="UXUI 직무를 희망하는데,\n대기업 인턴하려면 어떤 스펙을 더 쌓아야 할까요?"
                         android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/post_title_text" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/post_content_text">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -254,10 +259,20 @@
                                 android:textSize="12sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/education_recycler_view"
                                 post_educations="@{educations}"
+                                post_no_education_text="@{noEducationText}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:nestedScrollingEnabled="false" />
+
+                            <TextView
+                                android:id="@+id/no_education_text"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/no_items"
+                                android:textSize="12sp"/>
 
                         </LinearLayout>
 
@@ -277,10 +292,20 @@
                                 android:textSize="12sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/experience_recycler_view"
                                 post_experiences="@{experiences}"
+                                post_no_experience_text="@{noExperienceText}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:nestedScrollingEnabled="false" />
+
+                            <TextView
+                                android:id="@+id/no_experience_text"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/no_items"
+                                android:textSize="12sp"/>
 
                         </LinearLayout>
 
@@ -295,15 +320,25 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="24dp"
                                 android:fontFamily="@font/roboto_medium"
-                                android:text="@string/certificates_and_languages"
+                                android:text="자격/\n어학 사항"
                                 android:textColor="@color/spectrumSilver3"
                                 android:textSize="12sp" />
 
                             <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/license_recycler_view"
                                 post_licenses="@{licenses}"
+                                post_no_license_text="@{noLicenseText}"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:nestedScrollingEnabled="false" />
+
+                            <TextView
+                                android:id="@+id/no_license_text"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/no_items"
+                                android:textSize="12sp"/>
 
                         </LinearLayout>
 
@@ -325,6 +360,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                post_texts="@{otherSpecs}"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="없음"
                                 android:textColor="#45474B"
@@ -335,6 +371,12 @@
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#F6F6F6"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -364,6 +406,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/top_five_responses_text">
 
                         <TextView
+                            android:id="@+id/no_top_five_text"
                             style="@style/CustomTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -371,121 +414,145 @@
                             android:text="@string/no_response_yet"
                             android:textColor="@color/spectrumGray2"
                             android:textSize="12sp"
-                            android:visibility="@{topFiveResponses.empty ? View.VISIBLE : View.GONE}" />
+                            android:visibility="@{topFiveComments.empty ? View.VISIBLE : View.GONE}" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/top_five_recycler_view"
-                            post_top_five_responses="@{topFiveResponses}"
+                            post_no_top_five_text="@{noTopFiveText}"
+                            post_top_five_responses="@{topFiveComments}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"
-                            android:visibility="@{topFiveResponses.empty ? View.GONE : View.VISIBLE}" />
+                            android:visibility="@{topFiveComments.empty ? View.GONE : View.VISIBLE}" />
 
                     </FrameLayout>
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="24dp"
-                        android:background="#F6F6F6"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/top_five_view" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="10dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#F6F6F6"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="true">
 
                     <TextView
                         android:id="@+id/education_view"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="24dp"
+                        android:animateLayoutChanges="true"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/academic_background"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="14sp" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/edu_response_chip_group"
-                        post_responses="@{educationResponses}"
+                        android:id="@+id/edu_non_zero_comment_chip_group"
+                        post_zero_chip_group="@{eduZeroCommentChipGroup}"
+                        post_expand_button="@{eduExpandButton}"
+                        post_non_zero="@{nonZeroEducationComments}"
+                        post_zero="@{zeroEducationComments}"
                         post_view_model="@{viewModel}"
-                        post_post_button="@{postResponsesButton}"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/education_view" />
+                        android:layout_marginTop="16dp"/>
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="10dp"
-                        android:background="#F6F6F6"
-                        android:layout_marginTop="28dp"
-                        app:layout_constraintTop_toBottomOf="@+id/edu_response_chip_group"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/edu_zero_comment_chip_group"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageButton
+                        android:id="@+id/edu_expand_button"
+                        post_chip_group_to_expand="@{eduZeroCommentChipGroup}"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/clear"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="10dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#F6F6F6"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="true">
 
                     <TextView
                         android:id="@+id/experience_view"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/experiences"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="14sp" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/exp_response_chip_group"
-                        post_responses="@{experienceResponses}"
+                        android:id="@+id/exp_non_zero_comment_chip_group"
+                        post_zero_chip_group="@{expZeroCommentChipGroup}"
+                        post_expand_button="@{expExpandButton}"
+                        post_non_zero="@{nonZeroExperienceComments}"
+                        post_zero="@{zeroExperienceComments}"
                         post_view_model="@{viewModel}"
-                        post_post_button="@{postResponsesButton}"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/experience_view" />
+                        android:layout_marginTop="16dp" />
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="24dp"
-                        android:background="#F6F6F6"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/exp_response_chip_group" />
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/exp_zero_comment_chip_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:visibility="gone" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageButton
+                        android:id="@+id/exp_expand_button"
+                        post_chip_group_to_expand="@{expZeroCommentChipGroup}"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/clear"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="10dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#F6F6F6"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="true">
 
                     <TextView
                         android:id="@+id/certification_view"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="24dp"
@@ -498,68 +565,93 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/cert_response_chip_group"
-                        post_responses="@{certificationResponses}"
+                        android:id="@+id/lic_non_zero_comment_chip_group"
+                        post_zero_chip_group="@{licZeroCommentChipGroup}"
+                        post_expand_button="@{licExpandButton}"
+                        post_non_zero="@{nonZeroLicenseComments}"
+                        post_zero="@{zeroLicenseComments}"
                         post_view_model="@{viewModel}"
-                        post_post_button="@{postResponsesButton}"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/certification_view" />
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="24dp"
-                        android:background="#F6F6F6"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cert_response_chip_group" />
+                        android:layout_marginTop="16dp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/lic_zero_comment_chip_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:visibility="gone" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                    <ImageButton
+                        android:id="@+id/lic_expand_button"
+                        post_chip_group_to_expand="@{licZeroCommentChipGroup}"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/clear"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+                </LinearLayout>
+
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="10dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#F6F6F6"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:animateLayoutChanges="true">
 
                     <TextView
                         android:id="@+id/other_specs_view"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="24dp"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/other_specs"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textSize="14sp" />
 
                     <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/other_response_chip_group"
-                        post_responses="@{otherSpecsResponses}"
+                        android:id="@+id/others_non_zero_comment_chip_group"
+                        post_zero_chip_group="@{othersZeroCommentChipGroup}"
+                        post_expand_button="@{othersExpandButton}"
+                        post_non_zero="@{nonZeroOtherSpecsComments}"
+                        post_zero="@{zeroOtherSpecsComments}"
                         post_view_model="@{viewModel}"
-                        post_post_button="@{postResponsesButton}"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/other_specs_view" />
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="10dp"
-                        android:layout_marginTop="24dp"
-                        android:background="#F6F6F6"
-                        app:layout_constraintTop_toBottomOf="@+id/other_response_chip_group"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        android:layout_marginTop="16dp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/others_zero_comment_chip_group"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp" />
+
+                    <ImageButton
+                        android:id="@+id/others_expand_button"
+                        post_chip_group_to_expand="@{othersZeroCommentChipGroup}"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_horizontal"
+                        android:backgroundTint="@color/clear"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#F6F6F6"/>
 
             </LinearLayout>
 

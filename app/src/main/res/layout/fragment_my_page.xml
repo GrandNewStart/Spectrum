@@ -32,14 +32,12 @@
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/user_image"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginVertical="32dp"
                         android:layout_marginStart="16dp"
                         android:backgroundTint="@color/spectrumGray1"
-                        android:scaleX="0.5"
-                        android:scaleY="0.5"
-                        android:src="@drawable/icon_person"
+                        android:src="@drawable/icon_profile"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -48,9 +46,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:orientation="vertical"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginHorizontal="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/user_image"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/user_image"
@@ -112,7 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="24dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:backgroundTint="@color/clear"
                         android:elevation="0dp"
                         android:fontFamily="@font/roboto_medium"
@@ -164,11 +161,6 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="#F6F6F6"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -189,7 +181,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="24dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:backgroundTint="@color/clear"
                         android:elevation="0dp"
                         android:fontFamily="@font/roboto_medium"
@@ -223,11 +215,6 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="#F6F6F6"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,7 +235,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="24dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="16dp"
                         android:backgroundTint="@color/clear"
                         android:elevation="0dp"

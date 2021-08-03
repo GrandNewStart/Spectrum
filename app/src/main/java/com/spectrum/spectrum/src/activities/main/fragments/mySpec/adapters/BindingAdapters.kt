@@ -39,14 +39,14 @@ object BindingAdapters {
                             text = "${age}세"
                             setEnsureMinTouchTargetSize(false)
                             setChipBackgroundColorResource(R.color.spectrumSilver2)
-                            setTextAppearance(R.style.ChipTextSmall)
+                            setTextAppearance(R.style.ChipTextBig)
                             addView(this)
                         }
                         Chip(context).apply {
                             text = sex
                             setEnsureMinTouchTargetSize(false)
                             setChipBackgroundColorResource(R.color.spectrumSilver2)
-                            setTextAppearance(R.style.ChipTextSmall)
+                            setTextAppearance(R.style.ChipTextBig)
                             addView(this)
                         }
                         jobGroups?.forEach {
@@ -54,7 +54,7 @@ object BindingAdapters {
                                 text = it.name
                                 setEnsureMinTouchTargetSize(false)
                                 setChipBackgroundColorResource(R.color.spectrumSilver2)
-                                setTextAppearance(R.style.ChipTextSmall)
+                                setTextAppearance(R.style.ChipTextBig)
                                 addView(this)
                             }
                         }

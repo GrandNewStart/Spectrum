@@ -11,7 +11,4 @@ interface MyPageApi {
     @GET("/app/specs")
     suspend fun getMySpec(): SpecResponse
 
-    @PATCH("app/specs")
-    suspend fun deleteMySpec(): BaseResponse
-
 }

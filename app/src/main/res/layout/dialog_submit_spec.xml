@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="@string/spec_list"
+            android:text="@string/select_spec"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,88 +51,99 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="vertical"
                 android:layout_marginTop="28dp"
-                android:paddingHorizontal="16dp">
+                android:clipToPadding="false"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/CustomTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
                     android:text="@string/spec_submission_notice"
                     android:textColor="@color/spectrumGray1"
                     android:textSize="14sp" />
 
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
+                    android:id="@+id/spec_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                    android:orientation="vertical">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="24dp">
+                        android:layout_marginTop="24dp"
+                        android:layout_marginHorizontal="16dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp">
 
-                        <TextView
-                            android:id="@+id/your_spec_text"
-                            android:layout_width="wrap_content"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="스펙왕 님의 스펙"
-                            android:textColor="@color/black"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:padding="24dp">
 
-                        <TextView
-                            android:id="@+id/update_time_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/roboto_medium"
-                            android:text="06/28 20:25 업데이트됨"
-                            android:textColor="#666970"
-                            android:textSize="12sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/your_spec_text" />
+                            <TextView
+                                android:id="@+id/your_spec_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="스펙왕 님의 스펙"
+                                android:textColor="@color/black"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/user_info_chip_group"
-                            app:chipSpacing="8dp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            app:chipSpacingHorizontal="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/update_time_text"/>
+                            <TextView
+                                android:id="@+id/update_time_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="06/28 20:25 업데이트됨"
+                                android:textColor="@color/spectrumGray1"
+                                android:textSize="12sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/your_spec_text" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/user_info_chip_group"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                app:chipSpacing="8dp"
+                                app:chipSpacingHorizontal="8dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/update_time_text" />
 
-                </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="24dp">
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <CheckBox
-                        android:id="@+id/check_box"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:button="@drawable/checkbox" />
-
-                    <TextView
-                        style="@style/CustomTextView"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="@string/did_you_make_it"
-                        android:textSize="14sp"/>
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/check_box"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:button="@drawable/checkbox"
+                            android:buttonTint="@color/color_checkbox" />
+
+                        <TextView
+                            style="@style/CustomTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/did_you_make_it"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -139,8 +151,48 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_spec_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text">
+
+            <TextView
+                android:id="@+id/add_spec_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/add_spec_to_see_spec_analysis"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.45" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_spec_button"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{()->dialog.addSpecButton()}"
+                android:stateListAnimator="@null"
+                android:text="@string/add_spec"
+                android:textSize="12sp"
+                app:cornerRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_spec_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/save"
+            android:id="@+id/done_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/button_blue_gray"

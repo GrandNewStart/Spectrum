@@ -5,14 +5,14 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.spectrum.spectrum"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 1
-        versionName "0.1"
+        versionCode 4
+        versionName "0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,6 +25,7 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         dataBinding true
     }
 
@@ -71,7 +72,7 @@ dependencies {
     // OkHttp
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
-    // Orhanobut Logger
+    // Logger
     implementation 'com.orhanobut:logger:2.2.0'
 
     // Gson
@@ -90,4 +91,6 @@ dependencies {
     // Event
     implementation 'org.greenrobot:eventbus:3.2.0'
 
+    // Expandable Layout
+    implementation "com.github.skydoves:expandablelayout:1.0.7"
 }

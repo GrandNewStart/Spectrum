@@ -36,7 +36,7 @@ class LicenseAdapter(private val items: ObservableArrayList<License>): RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.item_certification, parent, false)
+        val view = inflater.inflate(R.layout.item_license, parent, false)
         return ViewHolder(view)
     }
 

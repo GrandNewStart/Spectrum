@@ -10,6 +10,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="radioButtonStyle">@style/CustomRadioButton</item>
         <item name="android:textViewStyle">@style/CustomTextView</item>
+        <item name="android:spinnerStyle">@style/CustomSpinner</item>
     </style>
 
     <style name="BottomSheetDialog"
@@ -31,6 +32,7 @@
         parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">16sp</item>
         <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -62,12 +64,13 @@
     <style
         name="RoundedClearButton"
         parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="backgroundTint">@color/white</item>
         <item name="strokeWidth">2dp</item>
         <item name="strokeColor">@color/button_blue_gray</item>
         <item name="rippleColor">@color/clearGray</item>
         <item name="android:textColor">@color/button_blue_gray</item>
-        <item name="cornerRadius">25dp</item>
+        <item name="cornerRadius">24dp</item>
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lines">1</item>
@@ -78,10 +81,11 @@
     <style
         name="RoundedSolidButton"
         parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:stateListAnimator">@null</item>
         <item name="backgroundTint">@color/button_blue_gray</item>
         <item name="rippleColor">@color/clearGray</item>
         <item name="android:textColor">@color/white</item>
-        <item name="cornerRadius">25dp</item>
+        <item name="cornerRadius">24dp</item>
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lines">1</item>
@@ -168,16 +172,15 @@
         <item name="fontFamily">@font/roboto_medium</item>
     </style>
 
-    <style name="ResponseChip"
+    <style name="CommentChip"
         parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/clear_light_blue</item>
         <item name="android:textColor">@color/silver_gray</item>
         <item name="android:textSize">12sp</item>
-        <item name="fontFamily">@font/roboto_medium</item>
-        <item name="chipStrokeWidth">1dp</item>
+        <item name="fontFamily">@font/roboto_medium</item>"
+        <item name="chipStrokeWidth">0.5dp</item>
         <item name="chipStrokeColor">@color/silver_light_blue</item>
-        <item name="chipMinHeight">36dp</item>
-        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
     </style>
 
     <style name="CustomRadioButton"
@@ -189,6 +192,12 @@
     <style name="DialogSlideAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
         <item name="android:windowExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <style
+        name="CustomSpinner"
+        parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner</item>
     </style>
 
 </resources>

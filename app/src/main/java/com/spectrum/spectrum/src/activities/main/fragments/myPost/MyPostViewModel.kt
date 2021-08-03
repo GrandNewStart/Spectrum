@@ -32,13 +32,15 @@ class MyPostViewModel: ViewModel() {
         viewModelScope.launch {
             // TEST CODE START
                 val jobGroups = arrayListOf(JobGroup(0, "서비스"), JobGroup(0, "교육"), JobGroup(0, "특수계층/공공"))
-                val post1 = Post(0, "내 스펙 좀 보소", "0000.00.00 00:00", "취업준비", 25, "여성", jobGroups)
-                val post2 = Post(0, "내 스펙 좀 보소", "0000.00.00 00:00", "n차합격", 25, "여성", jobGroups)
+                val post1 = Post(211, "내 스펙 좀 보소", "0000.00.00 00:00", "취업준비", 25, "여성", jobGroups)
+                val post2 = Post(210, "내 스펙 좀 보소", "0000.00.00 00:00", "n차합격", 25, "여성", jobGroups)
                 mPosts.add(post1)
                 mPosts.add(post2)
                 mPosts.add(post1)
                 mPosts.add(post2)
-                fragment.mBinding.posts = mPosts
+                fragment.mBinding.postRecyclerView.adapter?.apply {
+                    for (i in 0 until mPosts.size) { notifyItemInserted(i) }
+                }
             // TEST CODE END
         }
     }

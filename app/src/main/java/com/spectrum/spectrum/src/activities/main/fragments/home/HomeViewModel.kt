@@ -1,6 +1,5 @@
 package com.spectrum.spectrum.src.activities.main.fragments.home
 
-import android.graphics.Color
 import android.util.Log
 import android.widget.EditText
 import androidx.core.os.bundleOf
@@ -8,15 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.main.MainActivity
 import com.spectrum.spectrum.src.activities.main.fragments.home.adapters.PostAdapter
 import com.spectrum.spectrum.src.activities.main.fragments.home.dialogs.JobGroupDialog
 import com.spectrum.spectrum.src.activities.main.fragments.home.interfaces.HomeApi
 import com.spectrum.spectrum.src.activities.main.fragments.home.models.JobGroup
-import com.spectrum.spectrum.src.activities.main.fragments.home.models.PageResponse
 import com.spectrum.spectrum.src.activities.main.fragments.home.models.Post
 import com.spectrum.spectrum.src.config.Constants.request_failed
 import com.spectrum.spectrum.src.config.Helpers.retrofit
 import com.spectrum.spectrum.src.models.PostEvent
+import com.spectrum.spectrum.src.models.RefreshEvent
 import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -76,6 +76,7 @@ class HomeViewModel: ViewModel() {
         if (editText.hasFocus()) {
             fragment.showKeyboard(editText, false)
             editText.clearFocus()
+            editText.text = null
         }
     }
 
@@ -113,7 +114,12 @@ class HomeViewModel: ViewModel() {
         fragment.findNavController().navigate(R.id.home_to_post, bundleOf("id" to id))
     }
 
-    private fun refresh(fragment: HomeFragment) {
+    fun proceedToSearch(fragment: HomeFragment, keyword: String) {
+        (fragment.activity as MainActivity).hideSearchDialog()
+        fragment.findNavController().navigate(R.id.home_to_search, bundleOf("keyword" to keyword))
+    }
+
+    fun refresh(fragment: HomeFragment) {
         mPage = 0
         mDataEnded = false
         mHottestPosts.clear()
@@ -183,6 +189,11 @@ class HomeViewModel: ViewModel() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun receivePostEvent(event: PostEvent) {
         mPostId = event.id
+        mShouldRefresh = true
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun receiveRefreshEvent(event: RefreshEvent) {
         mShouldRefresh = true
     }
 

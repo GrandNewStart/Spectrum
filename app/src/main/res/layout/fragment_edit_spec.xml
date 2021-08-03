@@ -23,13 +23,7 @@
             name="sex"
             type="Integer" />
         <variable
-            name="jobGroup1"
-            type="JobGroup" />
-        <variable
-            name="jobGroup2"
-            type="JobGroup" />
-        <variable
-            name="jobGroup3"
+            name="jobGroup"
             type="JobGroup" />
         <variable
             name="educations"
@@ -168,11 +162,12 @@
                         app:layout_constraintTop_toBottomOf="@id/age_title"
                         app:layout_constraintWidth_percent="0.4"
                         app:strokeColor="@color/spectrumSilver3"
-                        app:strokeWidth="1dp">
+                        app:strokeWidth="0.5dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@drawable/spinner"
                             android:onClick="@{()->viewModel.showAgePickerDialog(fragment)}">
 
                             <TextView
@@ -187,18 +182,8 @@
                                 android:textColor="@color/spectrumSilver3"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ImageView
-                                android:id="@+id/imageView"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginEnd="5dp"
-                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -222,7 +207,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginVertical="24dp"
                     android:background="@color/spectrumSilver3" />
 
@@ -298,7 +283,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginVertical="24dp"
                     android:background="@color/spectrumSilver3" />
 
@@ -343,59 +328,39 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/group_title"
                         app:strokeColor="@color/spectrumSilver3"
-                        app:strokeWidth="1dp">
+                        app:strokeWidth="0.5dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@drawable/spinner"
                             android:onClick="@{()->viewModel.showJobGroup(fragment)}">
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/group_text"
+                                edit_spec_job_group="@{jobGroup}"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="center_vertical"
                                 android:paddingStart="10dp"
                                 android:text="@string/select_your_job_group"
-                                android:textColor="#666970"
+                                android:textColor="@color/spectrumGray1"
                                 android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/group_arrow"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ImageView
-                                android:id="@+id/group_arrow"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginEnd="5dp"
-                                android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </com.google.android.material.card.MaterialCardView>
 
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/group_chips"
-                        edit_spec_job_group_1="@{jobGroup1}"
-                        edit_spec_job_group_2="@{jobGroup2}"
-                        edit_spec_job_group_3="@{jobGroup3}"
-                        edit_spec_fragment="@{fragment}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/group_card"/>
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginVertical="24dp"
                     android:background="@color/spectrumSilver3" />
 
@@ -442,7 +407,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginVertical="20dp"
                     android:background="@color/spectrumSilver3" />
 
@@ -489,7 +454,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginVertical="24dp"
                     android:background="@color/spectrumSilver3" />
 
@@ -536,7 +501,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginVertical="24dp"
                     android:background="@color/spectrumSilver3" />
 
@@ -565,8 +530,9 @@
                         android:layout_marginTop="16dp"
                         android:backgroundTint="@color/spectrumSilver3"
                         android:hint="@string/specs_placeholder"
+                        app:hintTextColor="@color/spectrumGray1"
                         app:boxStrokeColor="@color/spectrumSilver3"
-                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidth="0.5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -580,6 +546,7 @@
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="start"
                             android:inputType="textMultiLine"
+                            android:lineSpacingExtra="4dp"
                             android:maxLines="10"
                             android:text="@{otherSpecs}"
                             android:textColor="@color/black"

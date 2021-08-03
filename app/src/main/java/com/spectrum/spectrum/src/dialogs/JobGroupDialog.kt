@@ -23,10 +23,8 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
 
     private lateinit var mBinding: DialogJobGroupBinding
     private var mItems = ArrayList<JobGroup>()
-    private var onSaveListener: (first: JobGroup?, second: JobGroup?, third: JobGroup?)->Unit = {_,_,_->}
-    var mFirstItem: JobGroup? = null
-    var mSecondItem: JobGroup? = null
-    var mThirdItem: JobGroup? = null
+    private var onSaveListener: (item: JobGroup?)->Unit = {_->}
+    var mSelectedItem: JobGroup? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,19 +50,17 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
     }
 
     fun saveButtonAction() {
-        onSaveListener(mFirstItem, mSecondItem, mThirdItem)
+        onSaveListener(mSelectedItem)
         dismiss()
     }
 
-    fun setOnSaveListener(onSaveListener: (first: JobGroup?, second: JobGroup?, third: JobGroup?)->Unit): JobGroupDialog {
+    fun setOnSaveListener(onSaveListener: (item: JobGroup?)->Unit): JobGroupDialog {
         this.onSaveListener = onSaveListener
         return this
     }
 
-    fun setPreselectedItems(first: JobGroup?, second: JobGroup?, third: JobGroup?): JobGroupDialog {
-        mFirstItem = first
-        mSecondItem = second
-        mThirdItem = third
+    fun setPreselectedItem(item: JobGroup?): JobGroupDialog {
+        mSelectedItem = item
         return this
     }
 
@@ -93,7 +89,7 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
     }
 
     companion object {
-        val TAG = JobGroupDialog::class.java.simpleName
+        val TAG = JobGroupDialog::class.java.simpleName.toString()
     }
 
 }

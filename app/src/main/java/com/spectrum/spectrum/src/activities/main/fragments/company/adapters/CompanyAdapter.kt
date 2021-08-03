@@ -1,6 +1,10 @@
 package com.spectrum.spectrum.src.activities.main.fragments.company.adapters
 
+import android.annotation.SuppressLint
 import android.graphics.Rect
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,31 +33,39 @@ class CompanyAdapter(private val items: ArrayList<Company>, private val dir: Int
         this.recyclerView = recyclerView
         recyclerView.apply {
             if (dir == HORIZONTAL) {
-                layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        val pos = parent.getChildLayoutPosition(view)
-                        if (pos == 0) outRect.left = Helpers.dp2px(16)
-                        outRect.top = Helpers.dp2px(24)
-                        outRect.bottom = Helpers.dp2px(24)
-                        outRect.right = Helpers.dp2px(16)
-                    }
-                })
+                if (layoutManager == null) {
+                    layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
+                }
+                if (itemDecorationCount == 0) {
+                    addItemDecoration(object : RecyclerView.ItemDecoration() {
+                        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                            super.getItemOffsets(outRect, view, parent, state)
+                            val pos = parent.getChildLayoutPosition(view)
+                            if (pos == 0) outRect.left = Helpers.dp2px(16)
+                            outRect.top = Helpers.dp2px(24)
+                            outRect.bottom = Helpers.dp2px(24)
+                            outRect.right = Helpers.dp2px(16)
+                        }
+                    })
+                }
                 PagerSnapHelper().attachToRecyclerView(this)
             }
             if (dir == VERTICAL) {
-                layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        val pos = parent.getChildLayoutPosition(view)
-                        if (pos == 0) outRect.top = Helpers.dp2px(24)
-                        outRect.bottom = Helpers.dp2px(24)
-                        outRect.left = Helpers.dp2px(16)
-                        outRect.right = Helpers.dp2px(16)
-                    }
-                })
+                if (layoutManager == null) {
+                    layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
+                }
+                if (itemDecorationCount == 0) {
+                    addItemDecoration(object : RecyclerView.ItemDecoration() {
+                        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                            super.getItemOffsets(outRect, view, parent, state)
+                            val pos = parent.getChildLayoutPosition(view)
+                            if (pos == 0) outRect.top = Helpers.dp2px(24)
+                            outRect.bottom = Helpers.dp2px(24)
+                            outRect.left = Helpers.dp2px(16)
+                            outRect.right = Helpers.dp2px(16)
+                        }
+                    })
+                }
             }
         }
     }
@@ -70,17 +82,31 @@ class CompanyAdapter(private val items: ArrayList<Company>, private val dir: Int
         return ViewHolder(mBinding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mBinding.apply {
             items[position].let {
                 titleText.text = it.name
                 groupText.text = it.group
-                specCountText.text = "${it.specCount}개의 스펙"
+                val countText = it.specCount.toString()
+                val countTextWithSuffix = "${countText}개의 스펙"
+                val spannable = SpannableString(countTextWithSuffix).apply {
+                    val blue = specCountText.resources.getColor(R.color.spectrumBlue, null)
+                    setSpan(ForegroundColorSpan(blue), 0, countText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                }
+                specCountText.text = spannable
             }
         }
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun addNewItems(newItems: ArrayList<Company>) {
+        newItems.forEach {
+            items.add(it)
+            notifyItemInserted(items.size-1)
+        }
+    }
 
     fun proceedToCompanyInfo() {
         val fragment = recyclerView?.findFragment<CompanyFragment>()

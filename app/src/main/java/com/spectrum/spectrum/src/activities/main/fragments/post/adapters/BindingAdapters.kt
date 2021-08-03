@@ -1,29 +1,27 @@
 package com.spectrum.spectrum.src.activities.main.fragments.post.adapters
 
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.main.fragments.post.CommentChip
 import com.spectrum.spectrum.src.activities.main.fragments.post.PostViewModel
+import com.spectrum.spectrum.src.activities.main.fragments.post.models.Comment
 import com.spectrum.spectrum.src.activities.main.fragments.post.models.Education
 import com.spectrum.spectrum.src.activities.main.fragments.post.models.Experience
 import com.spectrum.spectrum.src.activities.main.fragments.post.models.License
-import com.spectrum.spectrum.src.models.Evaluation
+import com.spectrum.spectrum.src.config.Constants
 
 object BindingAdapters {
 
     @BindingAdapter("post_texts")
     @JvmStatic
     fun bindTextViews(textView: TextView, text: String?) {
-        textView.text = text
+        textView.text = text ?: Constants.no_entry
     }
 
     @BindingAdapter("post_user_info")
@@ -31,14 +29,15 @@ object BindingAdapters {
     fun bindUserInfoChipGroup(chipGroup: ChipGroup, items: ArrayList<String>?) {
         val userInfo = items ?: arrayListOf()
         chipGroup.apply {
+            removeAllViews()
             for (i in 0 until userInfo.size) {
                 val info = userInfo[i]
                 if (i == 0) {
                     Chip(context).apply {
                         setEnsureMinTouchTargetSize(false)
-                        setTextAppearance(R.style.ChipTextSmall)
+                        setTextAppearance(R.style.ChipTextBig)
                         setChipBackgroundColorResource(R.color.clear)
-                        setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                        setChipStrokeWidthResource(R.dimen.thin_stroke_width)
                         isClickable = false
                         if (info == "R") {
                             text = "취업준비"
@@ -46,11 +45,13 @@ object BindingAdapters {
                         }
                         if (info == "N") {
                             text = "n차합격"
-                            setChipStrokeColorResource(R.color.spectrumLightBlue)
+                            setChipStrokeColorResource(R.color.spectrumBlue)
+                            setTextColor(resources.getColor(R.color.spectrumBlue, null))
                         }
                         if (info == "F") {
                             text = "최종합격"
                             setChipStrokeColorResource(R.color.spectrumBlue)
+                            setTextColor(resources.getColor(R.color.spectrumBlue, null))
                         }
                         addView(this)
                     }
@@ -59,7 +60,7 @@ object BindingAdapters {
                     Chip(context).apply {
                         text = info
                         setEnsureMinTouchTargetSize(false)
-                        setTextAppearance(R.style.ChipTextSmall)
+                        setTextAppearance(R.style.ChipTextBig)
                         setChipBackgroundColorResource(R.color.spectrumSilver2)
                         isClickable = false
                         addView(this)
@@ -69,162 +70,204 @@ object BindingAdapters {
         }
     }
 
-    @BindingAdapter("post_educations")
+    @BindingAdapter("post_educations", "post_no_education_text")
     @JvmStatic
-    fun bindEducationList(recyclerView: RecyclerView, items: ArrayList<Education>?) {
+    fun bindEducationList(recyclerView: RecyclerView,
+                          items: ArrayList<Education>?,
+                          textView: TextView) {
         recyclerView.apply {
             items?.let { items ->
-                if (adapter == null) {
-                    adapter = EducationAdapter(items)
-                    return@apply
-                }
-                adapter?.notifyDataSetChanged()
+                adapter = EducationAdapter(items)
+                visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+                textView.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }
 
-    @BindingAdapter("post_experiences")
+    @BindingAdapter("post_experiences", "post_no_experience_text")
     @JvmStatic
-    fun bindExperienceList(recyclerView: RecyclerView, items: ArrayList<Experience>?) {
+    fun bindExperienceList(recyclerView: RecyclerView,
+                           items: ArrayList<Experience>?,
+                           textView: TextView) {
         recyclerView.apply {
             items?.let { items ->
-                if (adapter == null) {
-                    adapter = ExperienceAdapter(items)
-                    return@apply
-                }
-                adapter?.notifyDataSetChanged()
+                adapter = ExperienceAdapter(items)
+                visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+                textView.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }
 
-    @BindingAdapter("post_licenses")
+    @BindingAdapter("post_licenses", "post_no_license_text")
     @JvmStatic
-    fun bindCertificationList(recyclerView: RecyclerView, items: ArrayList<License>?) {
+    fun bindLicenseList(recyclerView: RecyclerView,
+                        items: ArrayList<License>?,
+                        textView: TextView) {
         recyclerView.apply {
             items?.let { items ->
-                if (adapter == null) {
-                    adapter = LicenseAdapter(items)
-                    return@apply
-                }
-                adapter?.notifyDataSetChanged()
+                adapter = LicenseAdapter(items)
+                visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+                textView.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }
 
-    @BindingAdapter("post_top_five_responses")
+    @BindingAdapter("post_top_five_responses", "post_no_top_five_text", requireAll = true)
     @JvmStatic
-    fun bindTopFiveResponses(recyclerView: RecyclerView, items: ArrayList<Evaluation>?) {
-        recyclerView.apply {
-            items?.let { items ->
-                if (adapter == null) {
-                    adapter = TopFiveAdapter(items)
-                    return@apply
-                }
-                adapter?.notifyDataSetChanged()
+    fun bindTopFiveResponses(recyclerView: RecyclerView, items: ArrayList<Comment>?, textView: TextView) {
+        val comments = items ?: return
+        for (i in 0 until comments.size) {
+            if (comments[i].count != 0) break
+            if (i == comments.size-1) {
+                textView.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+                return
             }
         }
+        textView.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
+        recyclerView.adapter = TopFiveAdapter(comments)
     }
 
 
-    @BindingAdapter("post_responses", "post_view_model", "post_post_button", requireAll = true)
+    @BindingAdapter(
+        "post_zero_chip_group",
+        "post_expand_button",
+        "post_non_zero",
+        "post_zero",
+        "post_view_model", requireAll = true)
     @JvmStatic
-    fun bindResponseChipGroup(chipGroup: ChipGroup, items: ArrayList<Evaluation>?, viewModel: PostViewModel, button: MaterialButton) {
-        chipGroup.apply {
-            val responses   = items ?: arrayListOf()
-            val blue        = resources.getColor(R.color.spectrumBlue, null)
-            val silver      = resources.getColor(R.color.spectrumSilver3, null)
-            val gray        = resources.getColor(R.color.spectrumGray3, null)
-
-            for (i in 0 until responses.size) {
-                val response = responses[i]
-
-                val chip = Chip(context, null, R.style.ResponseChip).apply {
-                    val drawable = ChipDrawable.createFromAttributes(context, null, 0, R.style.ResponseChip)
-                    setChipDrawable(drawable)
-                    if (response.count == 0) {
-                        text = response.name
-                        setTextColor(silver)
-                    }
-                    else {
-                        setTextColor(gray)
-                        val t = "${response.name} ${response.count}"
-                        val spannable = SpannableStringBuilder(t)
-                        spannable.setSpan(
-                            ForegroundColorSpan(blue),
-                            response.name.length,
-                            t.length,
-                            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                        )
-                        text = spannable
-                    }
-                    isClickable = true
-                    isCheckable = true
-                    isChecked = response.isSelected
-
-                    setOnCheckedChangeListener { _, isChecked ->
-                        if (checkedChipIds.size > 1) {
-                            if (isChecked) setChecked(false)
-                            return@setOnCheckedChangeListener
-                        }
-                        items?.let {
-                            if (isChecked) {
-                                it[i].count++
-                                it[i].isSelected = true
-                                when(chipGroup.id) {
-                                    R.id.edu_response_chip_group -> { viewModel.mEduResponse = response }
-                                    R.id.exp_response_chip_group -> { viewModel.mExpResponse = response }
-                                    R.id.cert_response_chip_group -> { viewModel.mCertResponse = response }
-                                    R.id.other_response_chip_group -> { viewModel.mOtherResponse = response }
-                                }
-                                viewModel.apply {
-                                    if (mEduResponse == null && mExpResponse == null && mCertResponse == null && mOtherResponse == null) {
-                                        button.visibility = View.GONE
-                                    }
-                                    else {
-                                        button.visibility = View.VISIBLE
-                                    }
-                                }
-                            }
-                            else {
-                                it[i].count--
-                                it[i].isSelected = false
-                                when(chipGroup.id) {
-                                    R.id.edu_response_chip_group -> { viewModel.mEduResponse = null }
-                                    R.id.exp_response_chip_group -> { viewModel.mExpResponse = null }
-                                    R.id.cert_response_chip_group -> { viewModel.mCertResponse = null }
-                                    R.id.other_response_chip_group -> { viewModel.mOtherResponse = null }
-                                }
-                                viewModel.apply {
-                                    if (mEduResponse == null && mExpResponse == null && mCertResponse == null && mOtherResponse == null) {
-                                        button.visibility = View.GONE
-                                    }
-                                    else {
-                                        button.visibility = View.VISIBLE
-                                    }
-                                }
-                            }
-
-                            if (it[i].count == 0) {
-                                setTextColor(silver)
-                                text = it[i].name
-                            }
-                            else {
-                                val t = "${response.name} ${response.count}"
-                                val spannable = SpannableStringBuilder(t)
-                                spannable.setSpan(
-                                    ForegroundColorSpan(blue),
-                                    response.name.length,
-                                    t.length,
-                                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-                                )
-                                setTextColor(gray)
-                                text = spannable
+    fun bindResponseChipGroup(c1: ChipGroup,
+                              c2: ChipGroup,
+                              button: ImageButton,
+                              nonZero: ArrayList<Comment>?,
+                              zero: ArrayList<Comment>?,
+                              viewModel: PostViewModel) {
+        val nonZero = nonZero ?: return
+        val zero = zero ?: return
+        c1.apply {
+            removeAllViews()
+            if (nonZero.isEmpty()) {
+                c2.visibility = View.GONE
+                button.visibility = View.GONE
+                zero.forEach { comment ->
+                    CommentChip(context, comment).apply {
+                        setOnClickListener {
+                            val selectedItem = loopItems(zero, comment)
+                            returnItem(selectedItem, c1, viewModel)
+                            for (i in 0 until zero.size) {
+                                (c1.getChildAt(i) as CommentChip).updateUI(zero[i])
                             }
                         }
+                        addView(this)
                     }
                 }
+                return
+            }
+            button.visibility = View.VISIBLE
+            nonZero.forEach { comment ->
+                CommentChip(context, comment).apply {
+                    setOnClickListener {
+                        val selectedItem1 = loopItems(nonZero, comment)
+                        val selectedItem2 = loopItems(zero, comment)
+                        if (selectedItem1 == null && selectedItem2 == null) {
+                            returnItem(null, c1, viewModel)
+                        }
+                        if (selectedItem1 != null) {
+                            returnItem(selectedItem1, c1, viewModel)
+                        }
+                        if (selectedItem2 != null) {
+                            returnItem(selectedItem2, c1, viewModel)
+                        }
+                        for (i in 0 until nonZero.size) {
+                            (c1.getChildAt(i) as CommentChip).updateUI(nonZero[i])
+                        }
+                        for (i in 0 until zero.size) {
+                            (c2.getChildAt(i) as CommentChip).updateUI(zero[i])
+                        }
+                    }
+                    addView(this)
+                }
+            }
+        }
+        c2.apply {
+            removeAllViews()
+            zero.forEach { comment ->
+                CommentChip(context, comment).apply {
+                    setOnClickListener {
+                        val selectedItem1 = loopItems(nonZero, comment)
+                        val selectedItem2 = loopItems(zero, comment)
+                        if (selectedItem1 == null && selectedItem2 == null) {
+                            returnItem(null, c1, viewModel)
+                        }
+                        if (selectedItem1 != null) {
+                            returnItem(selectedItem1, c1, viewModel)
+                        }
+                        if (selectedItem2 != null) {
+                            returnItem(selectedItem2, c1, viewModel)
+                        }
+                        for (i in 0 until nonZero.size) {
+                            (c1.getChildAt(i) as CommentChip).updateUI(nonZero[i])
+                        }
+                        for (i in 0 until zero.size) {
+                            (c2.getChildAt(i) as CommentChip).updateUI(zero[i])
+                        }
+                    }
+                    addView(this)
+                }
+            }
+        }
+    }
 
-                addView(chip)
+    private fun loopItems(items: ArrayList<Comment>, target: Comment): Comment? {
+        var result: Comment? = null
+        for (i in 0 until items.size) {
+            val item = items[i]
+            if (item.id == target.id) {
+                if (item.isSelected) {
+                    item.isSelected = false
+                    item.count--
+                    result = null
+                }
+                else {
+                    item.isSelected = true
+                    item.count++
+                    result = item
+                }
+            }
+            else {
+                if (item.isSelected) {
+                    item.isSelected = false
+                    item.count--
+                    result = null
+                }
+            }
+        }
+        return result
+    }
+
+    private fun returnItem(comment: Comment?, chipGroup: ChipGroup, viewModel: PostViewModel) {
+        when(chipGroup.id) {
+            R.id.edu_non_zero_comment_chip_group -> { viewModel.mEduComment.value = comment }
+            R.id.exp_non_zero_comment_chip_group -> { viewModel.mExpComment.value = comment }
+            R.id.lic_non_zero_comment_chip_group -> { viewModel.mLicComment.value = comment }
+            R.id.others_non_zero_comment_chip_group -> { viewModel.mOtherComment.value = comment }
+        }
+    }
+
+    @BindingAdapter("post_chip_group_to_expand")
+    @JvmStatic
+    fun bindExpandButton(button: ImageButton, chipGroup: ChipGroup) {
+        button.setOnClickListener {
+            if (chipGroup.visibility == View.VISIBLE) {
+                chipGroup.visibility = View.GONE
+                button.animate().setDuration(200).rotation(0f)
+                return@setOnClickListener
+            }
+            if (chipGroup.visibility == View.GONE) {
+                chipGroup.visibility = View.VISIBLE
+                button.animate().setDuration(200).rotation(180f)
+                return@setOnClickListener
             }
         }
     }

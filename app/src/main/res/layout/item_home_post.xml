@@ -56,10 +56,10 @@
                     home_post_item="@{post}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
                     android:text="06/07 16:25"
-                    android:textColor="@color/spectrumGray2"
-                    android:textSize="10sp" />
+                    android:textColor="@color/spectrumGray1"
+                    android:textSize="10sp"
+                    app:fontFamily="@font/roboto_thin" />
 
                 <ImageView
                     android:id="@+id/comment_image"
@@ -84,7 +84,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:layout_marginStart="8dp"
-                    android:src="@drawable/icon_book_mark" />
+                    android:src="@drawable/icon_mark_unselected" />
 
                 <TextView
                     android:id="@+id/mark_count_text"

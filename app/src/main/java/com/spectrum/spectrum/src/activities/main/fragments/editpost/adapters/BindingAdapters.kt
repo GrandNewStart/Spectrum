@@ -23,7 +23,7 @@ object BindingAdapters {
                 view.visibility = if (spec == null) View.VISIBLE else View.GONE
             }
             R.id.your_spec_text -> {
-                val text = "${spec?.username} 님의 스펙"
+                val text = "${spec?.username}님의 스펙"
                 (view as TextView).text = text
             }
             R.id.update_time_text -> {
@@ -89,20 +89,20 @@ object BindingAdapters {
         val category = post.category ?: return
 
         val statusList = arrayListOf("취업준비", "n차합격", "최종합격")
-        statusSpinner.adapter = ArrayAdapter(statusSpinner.context, android.R.layout.simple_dropdown_item_1line, statusList)
+        statusSpinner.adapter = ArrayAdapter(statusSpinner.context, R.layout.item_spinner, statusList)
 
         when(status.id) {
             // 취업준비
             "R"->{
                 statusSpinner.setSelection(0)
-                categorySpinner.adapter = ArrayAdapter(categorySpinner.context, android.R.layout.simple_dropdown_item_1line, arrayListOf("자유고민"))
+                categorySpinner.adapter = ArrayAdapter(categorySpinner.context, R.layout.item_spinner, arrayListOf("자유고민"))
                 // 자유고민
                 categorySpinner.setSelection(0)
             }
             // n차합격
             "N"->{
                 statusSpinner.setSelection(1)
-                categorySpinner.adapter = ArrayAdapter(categorySpinner.context, android.R.layout.simple_dropdown_item_1line, arrayListOf("자유고민", "자유후기"))
+                categorySpinner.adapter = ArrayAdapter(categorySpinner.context, R.layout.item_spinner, arrayListOf("자유고민", "자유후기"))
                 // 자유고민
                 if (category.id == "R") categorySpinner.setSelection(0)
                 // 자유후기
@@ -111,7 +111,7 @@ object BindingAdapters {
             // 최종함격
             "F"->{
                 statusSpinner.setSelection(2)
-                categorySpinner.adapter = ArrayAdapter(categorySpinner.context, android.R.layout.simple_dropdown_item_1line, arrayListOf("자유후기"))
+                categorySpinner.adapter = ArrayAdapter(categorySpinner.context, R.layout.item_spinner, arrayListOf("자유후기"))
                 // 자유후기
                 categorySpinner.setSelection(0)
             }
@@ -125,7 +125,7 @@ object BindingAdapters {
                     1 -> { items = arrayListOf("자유고민", "자유후기") }
                     2 -> { items = arrayListOf("자유후기") }
                 }
-                categorySpinner.adapter = ArrayAdapter(statusSpinner.context, android.R.layout.simple_dropdown_item_1line, items)
+                categorySpinner.adapter = ArrayAdapter(statusSpinner.context, R.layout.item_spinner, items)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }

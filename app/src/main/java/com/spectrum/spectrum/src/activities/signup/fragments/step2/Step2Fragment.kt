@@ -12,14 +12,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.orhanobut.logger.Logger
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.FragmentSignUpStep2Binding
 import com.spectrum.spectrum.src.activities.signup.interfaces.SignUpApi
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers.retrofit
 import com.spectrum.spectrum.src.customs.BaseFragment
-import kotlinx.android.synthetic.main.fragment_log_in_find_password.*
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.regex.Pattern
@@ -195,10 +193,6 @@ class Step2Fragment: BaseFragment() {
                 mBinding.next.isEnabled = (mEmailLiveData.value != null)
             }
         })
-        // TEST CODE START
-//        val bundle = bundleOf("email" to "hbjw123@naver.com", "password" to "ilikeit0801!")
-//        findNavController().navigate(R.id.step2_to_find_password, bundle)
-        // TEST CODE END
         return mBinding.root
     }
 
@@ -216,7 +210,7 @@ class Step2Fragment: BaseFragment() {
 
     fun nextButtonAction() {
         val bundle = bundleOf("email" to mEmailLiveData.value, "password" to mPasswordLiveData.value)
-        findNavController().navigate(R.id.step2_to_find_password, bundle)
+        findNavController().navigate(R.id.step2_to_step3, bundle)
     }
 
     private fun validateEmail(input: String): Boolean {

@@ -10,9 +10,6 @@
         <variable
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.myScrap.MyScrapViewModel" />
-        <variable
-            name="posts"
-            type="ArrayList&lt;Post&gt;" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +25,7 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/clear"
             android:onClick="@{()->viewModel.backButtonAction(fragment)}"
-            android:src="@drawable/icon_close"
+            android:src="@drawable/icon_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

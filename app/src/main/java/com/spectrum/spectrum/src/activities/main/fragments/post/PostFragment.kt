@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.FragmentPostBinding
+import com.spectrum.spectrum.src.activities.main.MainActivity
 import com.spectrum.spectrum.src.customs.BaseFragment
 
 class PostFragment: BaseFragment() {
@@ -40,7 +41,23 @@ class PostFragment: BaseFragment() {
         mViewModel.apply {
             bindViews(this@PostFragment)
         }
+        observeCommentSelection()
         return mBinding.root
+    }
+
+    private fun observeCommentSelection() {
+        mViewModel.apply {
+            mEduComment.observe(viewLifecycleOwner) {
+            mExpComment.observe(viewLifecycleOwner) {
+            mLicComment.observe(viewLifecycleOwner) {
+            mOtherComment.observe(viewLifecycleOwner) {
+                val myCommentsChanged = mViewModel.checkForCommentChanges()
+                mBinding.postResponsesButton.visibility = if (myCommentsChanged) View.VISIBLE else View.GONE
+            }
+            }
+            }
+            }
+        }
     }
 
 }

@@ -25,9 +25,7 @@ class CreateSpecViewModel: ViewModel() {
 
     var mAge: Int? = null
     var mSex: Int? = null
-    var mJobGroup1: JobGroup? = null
-    var mJobGroup2: JobGroup? = null
-    var mJobGroup3: JobGroup? = null
+    var mJobGroup: JobGroup? = null
     var mEducations = ObservableArrayList<Education>()
     var mExperiences = ObservableArrayList<Experience>()
     var mLicenses = ObservableArrayList<License>()
@@ -37,8 +35,7 @@ class CreateSpecViewModel: ViewModel() {
         fragment.mBinding.apply {
             age = mAge
             sex = mSex
-            jobGroup1 = mJobGroup1
-            jobGroup2 = mJobGroup2
+            jobGroup = mJobGroup
             educations = mEducations
             experiences = mExperiences
             licenses = mLicenses
@@ -51,14 +48,12 @@ class CreateSpecViewModel: ViewModel() {
     }
 
     fun saveButtonAction(fragment: CreateSpecFragment) {
-        if (mAge == null || mSex == null || mJobGroup1 == null) {
+        if (mAge == null || mSex == null || mJobGroup == null) {
             fragment.showToast(Constants.enter_required_fields)
             return
         }
         val jobGroupList = ArrayList<Int>().apply {
-            mJobGroup1?.let { add(it.id) }
-            mJobGroup2?.let { add(it.id) }
-            mJobGroup3?.let { add(it.id) }
+            mJobGroup?.let { add(it.id) }
         }
         val educationList = ArrayList<Education>().apply {
             mEducations.forEach { add(it) }
@@ -81,32 +76,14 @@ class CreateSpecViewModel: ViewModel() {
     }
 
     fun showJobGroup(fragment: CreateSpecFragment) {
-        var firstItem: JobGroup? = null
-        var secondItem: JobGroup? = null
-        var thirdItem: JobGroup? = null
-
-        mJobGroup1?.let { firstItem = JobGroup(it.id, it.name) }
-        mJobGroup2?.let { secondItem = JobGroup(it.id, it.name) }
-        mJobGroup3?.let { thirdItem = JobGroup(it.id, it.name) }
+        var jobGroup: JobGroup? = null
+        mJobGroup?.let { jobGroup = JobGroup(it.id, it.name) }
 
         JobGroupDialog(fragment.requireContext())
-            .setPreselectedItems(firstItem, secondItem, thirdItem)
-            .setOnSaveListener { first, second, third ->
-                first?.let {
-                    mJobGroup1 = JobGroup(it.id, it.name)
-                    mJobGroup2 = null
-                    mJobGroup3 = null
-                }
-                second?.let {
-                    mJobGroup2 = JobGroup(it.id, it.name)
-                    mJobGroup3 = null
-                }
-                third?.let {
-                    mJobGroup3 = JobGroup(it.id, it.name)
-                }
-                fragment.mBinding.jobGroup1 = mJobGroup1
-                fragment.mBinding.jobGroup2 = mJobGroup2
-                fragment.mBinding.jobGroup3 = mJobGroup3
+            .setPreselectedItem(jobGroup)
+            .setOnSaveListener { item ->
+                mJobGroup = item
+                fragment.mBinding.jobGroup = mJobGroup
             }
             .show()
     }

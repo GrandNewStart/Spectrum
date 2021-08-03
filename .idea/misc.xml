@@ -1,5 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/jinwo/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_dropdown_item_1line.xml" value="0.24234527687296417" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/checkbox.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/edit_text_base_line.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/edit_text_underline.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/ic_baseline_check_circle_24.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/ic_baseline_keyboard_arrow_up_24.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/ic_launcher_background.xml" value="0.252442996742671" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/spinner.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/drawable/spinner_background.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/activity_log_in.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/activity_main.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/activity_password.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/activity_sign_up.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_cerification.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_edit_profile.xml" value="0.11925675675675676" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_education.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_experience.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_grade_picker.xml" value="0.11925675675675676" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_home_job_group.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_job_group.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_license.xml" value="0.24473684210526317" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_option.xml" value="0.24234527687296417" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_progress.xml" value="0.24234527687296417" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/dialog_submit_spec.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_company.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_company_info.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_create_post.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_create_spec.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_edit_post.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_edit_spec.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_log_in_find_password.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_log_in_step1.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_log_in_step2.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_log_in_step3.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_my_comment.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_my_company.xml" value="0.24234527687296417" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_my_evaluation.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_my_page.xml" value="0.22" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_my_post.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_my_scrap.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_my_spec.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_password_step_1.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_password_step_2.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_password_step_3.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_post.xml" value="0.5512010113780025" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_search.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_search_company.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_search_post.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_search_spec.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_sign_up_step1.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_sign_up_step2.xml" value="0.32537688442211055" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_sign_up_step3.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/fragment_spec.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_certification.xml" value="0.4157119476268412" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_company_company.xml" value="0.3328964613368283" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_company_info_spec.xml" value="0.11925675675675676" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_education.xml" value="0.11925675675675676" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_experience.xml" value="0.11925675675675676" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_home_post.xml" value="1.0" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_main_post.xml" value="0.6666666666666666" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_my_comment_post.xml" value="0.5714285714285714" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_my_company_company.xml" value="0.6666666666666666" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_my_evaluation_post.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_my_post_post.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_my_scrap_post.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_notification.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_post_chip.xml" value="0.24473684210526317" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_post_top_five.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_search_company.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_search_post.xml" value="0.25135135135135134" />
+        <entry key="..\:/Users/jinwo/Documents/Personal/Spectrum/app/src/main/res/layout/item_spinner.xml" value="0.24234527687296417" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

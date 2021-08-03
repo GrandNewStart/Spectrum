@@ -34,8 +34,6 @@ class Step3Fragment: BaseFragment() {
     private var mAge: Int? = null
     private var mSex: Int? = null
     private var mJobGroup1: JobGroup? = null
-    private var mJobGroup2: JobGroup? = null
-    private var mJobGroup3: JobGroup? = null
     private var mEducations = ObservableArrayList<Education>()
     private var mExperiences = ObservableArrayList<Experience>()
     private var mLicenses = ObservableArrayList<License>()
@@ -79,12 +77,10 @@ class Step3Fragment: BaseFragment() {
             // 직군 설정
             findViewById<MaterialCardView>(R.id.group_card).setOnClickListener {
                 JobGroupDialog(context)
-                    .setPreselectedItems(mJobGroup1, mJobGroup2, mJobGroup3)
-                    .setOnSaveListener{ first, second, third ->
-                        mJobGroup1 = first
-                        mJobGroup2 = second
-                        mJobGroup3 = third
-                        bindChipGroup(findViewById(R.id.job_group_chip_group))
+                    .setPreselectedItem(mJobGroup1)
+                    .setOnSaveListener{ item ->
+                        mJobGroup1 = item
+                        findViewById<MaterialTextView>(R.id.group_text).text = item?.name ?: Constants.select_your_job_group
                     }
                     .show()
             }
@@ -95,7 +91,7 @@ class Step3Fragment: BaseFragment() {
                         mEducations.add(item)
                         findViewById<RecyclerView>(R.id.academic_recycler_view).apply {
                             visibility = if (mEducations.isEmpty()) View.GONE else View.VISIBLE
-                            adapter?.notifyDataSetChanged()
+                            adapter = EducationAdapter(mEducations)
                         }
                     }.show()
             }
@@ -109,7 +105,7 @@ class Step3Fragment: BaseFragment() {
                         mExperiences.add(item)
                         findViewById<RecyclerView>(R.id.experience_recycler_view).apply {
                             visibility = if (mExperiences.isEmpty()) View.GONE else View.VISIBLE
-                            adapter?.notifyDataSetChanged()
+                            adapter = ExperienceAdapter(mExperiences)
                         }
                     }.show()
             }
@@ -123,7 +119,7 @@ class Step3Fragment: BaseFragment() {
                         mLicenses.add(item)
                         findViewById<RecyclerView>(R.id.certification_recycler_view).apply {
                             visibility = if (mLicenses.isEmpty()) View.GONE else View.VISIBLE
-                            adapter?.notifyDataSetChanged()
+                            adapter = LicenseAdapter(mLicenses)
                         }
                     }.show()
             }
@@ -149,8 +145,6 @@ class Step3Fragment: BaseFragment() {
                 }
                 val jobGroupList = ArrayList<Int>().apply {
                     mJobGroup1?.let { add(it.id) }
-                    mJobGroup2?.let { add(it.id) }
-                    mJobGroup3?.let { add(it.id) }
                 }
                 (activity as LogInActivity).updateSpecs(mAge, mSex, jobGroupList, mEducations, mExperiences, mLicenses, mOtherSpecs)
             }
@@ -158,59 +152,4 @@ class Step3Fragment: BaseFragment() {
         return view
     }
 
-    private fun bindChipGroup(chipGroup: ChipGroup) {
-        chipGroup.apply {
-            removeAllViews()
-            if (mJobGroup1 == null) {
-                visibility = View.GONE
-                return@apply
-            }
-            visibility = View.VISIBLE
-            mJobGroup1?.let { group ->
-                createChip(group).apply {
-                    setOnCloseIconClickListener {
-                        mJobGroup1 = mJobGroup2
-                        mJobGroup2 = mJobGroup3
-                        mJobGroup3 = null
-                        bindChipGroup(chipGroup)
-                    }
-                    addView(this)
-                }
-            }
-            mJobGroup2?.let { group ->
-                createChip(group).apply {
-                    setOnCloseIconClickListener {
-                        mJobGroup2 = mJobGroup3
-                        mJobGroup3 = null
-                        bindChipGroup(chipGroup)
-                    }
-                    addView(this)
-                }
-            }
-            mJobGroup3?.let { group ->
-                createChip(group).apply {
-                    setOnCloseIconClickListener {
-                        mJobGroup3 = null
-                        bindChipGroup(chipGroup)
-                    }
-                    addView(this)
-                }
-            }
-        }
-    }
-
-    private fun createChip(jobGroup: JobGroup?): Chip {
-        return Chip(requireContext()).apply {
-            jobGroup?.let { group ->
-                setChipBackgroundColorResource(R.color.clear)
-                setChipStrokeColorResource(R.color.spectrumBlue)
-                setChipStrokeWidthResource(R.dimen.default_stroke_width)
-                setCloseIconResource(R.drawable.icon_close)
-                setCloseIconTintResource(R.color.spectrumBlue)
-                isCloseIconVisible = true
-                setEnsureMinTouchTargetSize(false)
-                text = group.name
-            }
-        }
-    }
 }

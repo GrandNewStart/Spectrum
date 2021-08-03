@@ -98,8 +98,8 @@ class JobGroupDialog(context: Context): Dialog(context, R.style.AppTheme) {
                     text = group.name
                     setEnsureMinTouchTargetSize(false)
                     setChipBackgroundColorResource(R.color.clear)
-                    setChipStrokeColorResource(R.color.spectrumGray1)
-                    setChipStrokeWidthResource(R.dimen.default_stroke_width)
+                    setChipStrokeColorResource(R.color.spectrumSilver3)
+                    setChipStrokeWidthResource(R.dimen.thin_stroke_width)
                     setTextAppearance(R.style.ChipTextBig)
                     chipMinHeight = dp2px(28).toFloat()
                     setOnClickListener {

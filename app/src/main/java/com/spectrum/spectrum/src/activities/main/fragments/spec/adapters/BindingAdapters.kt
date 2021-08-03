@@ -49,34 +49,34 @@ object BindingAdapters {
                 group.chipSpacingHorizontal = dp2px(8)
             }
             R.id.education_recycler_view -> {
+                view.visibility = if (spec.educations.isEmpty()) View.GONE else View.VISIBLE
                 (view as RecyclerView).apply {
-                    if (adapter == null) {
-                        adapter = EducationAdapter(spec.educations)
-                        return@apply
-                    }
-                    adapter?.notifyDataSetChanged()
+                    adapter = EducationAdapter(spec.educations)
                 }
             }
             R.id.experience_recycler_view -> {
+                view.visibility = if (spec.experiences.isEmpty()) View.GONE else View.VISIBLE
                 (view as RecyclerView).apply {
-                    if (adapter == null) {
-                        adapter = ExperienceAdapter(spec.experiences)
-                        return@apply
-                    }
-                    adapter?.notifyDataSetChanged()
+                    adapter = ExperienceAdapter(spec.experiences)
                 }
             }
             R.id.license_recycler_view -> {
+                view.visibility = if (spec.licenses.isEmpty()) View.GONE else View.VISIBLE
                 (view as RecyclerView).apply {
-                    if (adapter == null) {
-                        adapter = LicenseAdapter(spec.licenses)
-                        return@apply
-                    }
-                    adapter?.notifyDataSetChanged()
+                    adapter = LicenseAdapter(spec.licenses)
                 }
             }
             R.id.other_specs_text -> {
                 (view as TextView).text = spec.otherSpecs
+            }
+            R.id.no_education_text -> {
+                view.visibility = if (spec.educations.isEmpty()) View.VISIBLE else View.GONE
+            }
+            R.id.no_experience_text -> {
+                view.visibility = if (spec.experiences.isEmpty()) View.VISIBLE else View.GONE
+            }
+            R.id.no_license_text -> {
+                view.visibility = if (spec.licenses.isEmpty()) View.VISIBLE else View.GONE
             }
         }
     }

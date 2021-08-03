@@ -8,5 +8,23 @@
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.spectrum.spectrum.src.activities.main.fragments.notification.NotificationFragment"
-        android:label="Notification" />
+        android:label="Notification" >
+        <action
+            android:id="@+id/notification_to_post"
+            app:destination="@id/post"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+        <action
+            android:id="@+id/notification_to_company_info"
+            app:destination="@id/company_info"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <include app:graph="@navigation/post" />
+    <include app:graph="@navigation/company_info" />
 </navigation>

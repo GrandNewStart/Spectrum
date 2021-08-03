@@ -1,7 +1,6 @@
 package com.spectrum.spectrum.src.activities.main.fragments.createPost
 
 import android.util.Log
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -76,7 +75,7 @@ class CreatePostViewModel: ViewModel() {
             var jobStatus: String? = null
             when (typeSpinner.selectedItemPosition) {
                 0 -> {
-                    fragment.showToast(Constants.please_select_spec_sort)
+                    fragment.showToast(Constants.select_your_job_status)
                     return
                 }
                 1 -> { jobStatus = "R" }
@@ -87,7 +86,7 @@ class CreatePostViewModel: ViewModel() {
             var category: String? = null
             when (subTypeSpinner.selectedItemPosition) {
                 0 -> {
-                    fragment.showToast(Constants.please_select_category)
+                    fragment.showToast(Constants.select_category)
                     return
                 }
                 1 -> { category = "Q" }

@@ -27,7 +27,8 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/app_bar"
@@ -51,6 +52,7 @@
 
             <EditText
                 android:id="@+id/search_edit_text"
+                home_fragment="@{fragment}"
                 home_logo_button="@{appBarButton}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -106,7 +108,7 @@
                 app:cardElevation="0dp"
                 app:rippleColor="@color/clearGray"
                 app:strokeColor="#C5C7CC"
-                app:strokeWidth="1dp">
+                app:strokeWidth="0.5dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -126,33 +128,38 @@
                 android:layout_height="28dp"
                 android:layout_marginStart="8dp"
                 android:clickable="false"
-                android:fontFamily="@font/roboto_medium"
                 android:text="@string/all"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:chipBackgroundColor="@color/spectrumGray1"
-                app:chipMinTouchTargetSize="0dp"
-                app:chipStrokeColor="@color/spectrumGray1"
-                app:chipStrokeWidth="1dp" />
+                app:chipMinTouchTargetSize="0dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_1"
-                style="@style/BlueChip"
                 home_job_group_1="@{jobGroup1}"
                 home_job_group_2="@{jobGroup2}"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:layout_marginStart="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_medium"
+                app:chipBackgroundColor="@color/spectrumBlue"
+                app:ensureMinTouchTargetSize="false"
                 android:clickable="false" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_2"
-                style="@style/GreenChip"
                 home_job_group_1="@{jobGroup1}"
                 home_job_group_2="@{jobGroup2}"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:layout_marginStart="8dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_medium"
+                app:chipBackgroundColor="@color/spectrumGreen"
+                app:ensureMinTouchTargetSize="false"
                 android:clickable="false" />
 
         </LinearLayout>
@@ -185,7 +192,7 @@
                         android:layout_marginTop="28dp"
                         android:text="@string/hottest_spectrums"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -219,7 +226,7 @@
                         android:lines="1"
                         android:text="@string/latest_specturms"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

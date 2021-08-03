@@ -1,6 +1,5 @@
 package com.spectrum.spectrum.src.config
 
-import android.util.Log
 import com.spectrum.spectrum.src.config.Constants.TOKEN
 import com.spectrum.spectrum.src.config.Helpers.sharedPreferences
 import okhttp3.Interceptor

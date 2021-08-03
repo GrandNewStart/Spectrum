@@ -4,10 +4,12 @@ import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.main.fragments.post.PostFragment
 import com.spectrum.spectrum.src.activities.main.fragments.post.models.License
 import com.spectrum.spectrum.src.config.Helpers.dp2px
 
@@ -21,14 +23,18 @@ class LicenseAdapter(private val items: ArrayList<License>): RecyclerView.Adapte
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         recyclerView.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(object : RecyclerView.ItemDecoration() {
-                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                    super.getItemOffsets(outRect, view, parent, state)
-                    val pos = parent.getChildLayoutPosition(view)
-                    if (pos != 0) outRect.top += dp2px(8)
-                }
-            })
+            if (layoutManager == null) {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            }
+            if (itemDecorationCount == 0) {
+                addItemDecoration(object : RecyclerView.ItemDecoration() {
+                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                        super.getItemOffsets(outRect, view, parent, state)
+                        val pos = parent.getChildLayoutPosition(view)
+                        if (pos != 0) outRect.top += dp2px(8)
+                    }
+                })
+            }
         }
     }
 

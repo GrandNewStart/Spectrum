@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="java.util.ArrayList"/>
-        <import type="android.view.View.OnFocusChangeListener"/>
         <import type="com.spectrum.spectrum.src.models.Company"/>
         <import type="com.spectrum.spectrum.src.models.Industry"/>
         <variable
@@ -12,9 +11,6 @@
         <variable
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.company.CompanyViewModel" />
-        <variable
-            name="searchFocusListener"
-            type="OnFocusChangeListener" />
         <variable
             name="industries"
             type="ArrayList&lt;Industry&gt;" />
@@ -34,8 +30,9 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/action_bar_size"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
                 android:id="@+id/app_bar_button"
@@ -50,7 +47,8 @@
 
             <EditText
                 android:id="@+id/search_edit_text"
-                setOnFocusChangeListener="@{searchFocusListener}"
+                company_fragment="@{fragment}"
+                company_logo_button="@{appBarButton}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="24dp"
@@ -69,7 +67,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/app_bar_button"
-                app:layout_constraintTop_toTopOf="parent"  />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -84,6 +82,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
+            company_fragment="@{fragment}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,12 +95,22 @@
                 android:paddingBottom="48dp"
                 android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:background="#F9F9FB"
-                    company_industry_chips="@{industries}"
-                    android:paddingStart="8dp"
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="48dp" />
+                    android:layout_height="48dp"
+                    android:background="@color/spectrumSilver4"
+                    android:paddingStart="6.5dp"
+                    android:scrollbars="none">
+
+                    <com.google.android.material.chip.ChipGroup
+                        company_industry_chips="@{industries}"
+                        company_fragment="@{fragment}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:chipSpacing="6.5dp" />
+
+                </HorizontalScrollView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -120,30 +129,51 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <LinearLayout
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="24dp"-->
+<!--                        android:layout_marginTop="28dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" >-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/see_more"-->
+<!--                            android:textSize="12sp"-->
+<!--                            android:textColor="@color/spectrumGray1"-->
+<!--                            android:fontFamily="@font/roboto_medium"/>-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="24dp"-->
+<!--                            android:layout_height="24dp"-->
+<!--                            android:src="@drawable/icon_chevron_right"-->
+<!--                            app:tint="@color/spectrumSilver3" />-->
+
+<!--                    </LinearLayout>-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/see_more_button"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:layout_marginTop="28dp"
-                        android:layout_marginEnd="16dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
+                        android:background="@color/clear"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:padding="0dp"
+                        android:text="@string/see_more"
+                        android:textColor="@color/spectrumGray1"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="12sp"
+                        app:icon="@drawable/icon_chevron_right"
+                        app:iconGravity="textEnd"
+                        app:iconPadding="0dp"
+                        app:iconSize="24dp"
+                        app:iconTint="@color/spectrumSilver3"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/see_more"
-                            android:textSize="12sp"
-                            android:textColor="#666970"
-                            android:fontFamily="@font/roboto_medium"/>
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/icon_chevron_right" />
-
-                    </LinearLayout>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/my_interest_recycler_view"
@@ -165,7 +195,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/latest_text"
+                        android:id="@+id/company_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -180,7 +210,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/latest_recycler_view"
+                        android:id="@+id/company_recycler_view"
                         companies_vertical="@{companies}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -188,7 +218,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/latest_text" />
+                        app:layout_constraintTop_toBottomOf="@+id/company_text" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

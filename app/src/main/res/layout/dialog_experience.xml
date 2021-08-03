@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="dialog"
             type="com.spectrum.spectrum.src.dialogs.ExperienceDialog" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -127,13 +126,13 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/start_date_view"
                         experience_dialog="@{dialog}"
-                        experience_start_text="@{periodStartText}"
                         experience_end_text="@{null}"
+                        experience_start_text="@{periodStartText}"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginEnd="10dp"
-                        android:background="@drawable/spinner_background"
+                        android:background="@drawable/spinner"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/period_divider"
                         app:layout_constraintStart_toStartOf="parent"
@@ -147,23 +146,10 @@
                             android:layout_margin="8dp"
                             android:text="@string/start_date"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/period_start_drop"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageButton
-                            android:id="@+id/period_start_drop"
-                            experience_dialog="@{dialog}"
-                            experience_start_text="@{periodStartText}"
-                            experience_end_text="@{null}"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_margin="@dimen/default_margin"
-                            android:backgroundTint="@color/clear"
-                            android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -191,7 +177,7 @@
                         android:layout_height="48dp"
                         android:layout_marginTop="32dp"
                         android:layout_marginStart="10dp"
-                        android:background="@drawable/spinner_background"
+                        android:background="@drawable/spinner"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/period_divider"
@@ -205,22 +191,8 @@
                             android:layout_margin="8dp"
                             android:text="@string/end_date"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/period_end_drop"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/period_end_drop"
-                            experience_dialog="@{dialog}"
-                            experience_start_text="@{null}"
-                            experience_end_text="@{periodEndText}"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_margin="@dimen/default_margin"
-                            android:backgroundTint="@color/clear"
-                            android:src="@drawable/ic_baseline_arrow_drop_down_24"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

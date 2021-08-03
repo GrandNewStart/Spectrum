@@ -10,7 +10,7 @@ data class Spec(
     var updatedAt: String,
     @SerializedName("jobGroupDtos") var jobGroups: ArrayList<JobGroup>,
     var educations: ArrayList<Education>,
-    @SerializedName("expriences") var experiences: ArrayList<Experience>,
+    var experiences: ArrayList<Experience>,
     var licenses: ArrayList<License>,
     @SerializedName("etcs") var otherSpecs: ArrayList<OtherSpec>
 

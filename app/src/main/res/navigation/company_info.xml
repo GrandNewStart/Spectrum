@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/company_info"
+    app:startDestination="@id/companyInfoFragment">
+
+    <fragment
+        android:id="@+id/companyInfoFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoFragment"
+        android:label="CompanyInfo" >
+        <action
+            android:id="@+id/company_info_to_spec"
+            app:destination="@id/specFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/company_info_to_create_spec"
+            app:destination="@id/createSpecFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/specFragment"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.spec.SpecFragment"
+        android:label="Spec" />
+    <fragment
+        android:id="@+id/createSpecFragment3"
+        android:name="com.spectrum.spectrum.src.activities.main.fragments.createSpec.CreateSpecFragment"
+        android:label="CreateSpec" />
+
+</navigation>

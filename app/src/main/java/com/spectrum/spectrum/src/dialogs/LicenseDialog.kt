@@ -10,13 +10,14 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.spectrum.spectrum.R
-import com.spectrum.spectrum.databinding.DialogCerificationBinding
+import com.spectrum.spectrum.databinding.DialogLicenseBinding
+
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.models.License
 
 class LicenseDialog(context: Context): Dialog(context, R.style.AppTheme) {
 
-    private lateinit var mBinding: DialogCerificationBinding
+    private lateinit var mBinding: DialogLicenseBinding
     private var onSaveListener: (item: License)->Unit = {}
     var mName: String? = null
     var mScore: String? = null
@@ -24,7 +25,7 @@ class LicenseDialog(context: Context): Dialog(context, R.style.AppTheme) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = LayoutInflater.from(context)
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_cerification, null, false)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_license, null, false)
         mBinding.dialog = this
         setCanceledOnTouchOutside(false)
         window?.apply {

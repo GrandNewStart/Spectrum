@@ -7,6 +7,7 @@
     <color name="spectrumSilver1">#F6F6F6</color>
     <color name="spectrumSilver2">#EAEAEA</color>
     <color name="spectrumSilver3">#C5C7CC</color>
+    <color name="spectrumSilver4">#F9F9FB</color>
     <color name="spectrumGray1">#666970</color>
     <color name="spectrumGray2">#45474B</color>
     <color name="spectrumGray3">#252628</color>
@@ -14,5 +15,5 @@
     <color name="white">#FFFFFF</color>
     <color name="clear">#00FFFFFF</color>
 
-    <color name="clearGray">#20000000</color>
+    <color name="clearGray">#4D000000</color>
 </resources>

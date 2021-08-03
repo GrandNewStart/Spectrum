@@ -54,7 +54,7 @@
             android:gravity="center"
             android:onClick="@{()->dialog.saveButtonAction()}"
             android:text="@string/save"
-            android:textColor="@color/black"
+            android:textColor="@color/spectrumBlue"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -82,22 +82,10 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/select_three_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="@string/maximum_three_selection"
-                    android:textColor="#666970"
-                    android:textSize="12sp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/message_text" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chip_group"
@@ -110,7 +98,7 @@
                     android:layout_marginTop="72dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/select_three_text"/>
+                    app:layout_constraintTop_toBottomOf="@+id/message_text"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

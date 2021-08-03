@@ -2,23 +2,28 @@ package com.spectrum.spectrum.src.activities.main.fragments.companyInfo.dialogs
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.DialogSubmitSpecBinding
+import com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoFragment
 import com.spectrum.spectrum.src.activities.main.fragments.companyInfo.interfaces.CompanyInfoApi
 import com.spectrum.spectrum.src.config.Helpers.retrofit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SubmitSpecDialog(context: Context): Dialog(context, R.style.AppTheme) {
+class SubmitSpecDialog(private val fragment: CompanyInfoFragment): Dialog(fragment.requireContext(), R.style.AppTheme) {
 
     private lateinit var mBinding: DialogSubmitSpecBinding
     private var mOnDoneListener: (didEnter: Boolean)->Unit = {_->}
@@ -27,7 +32,15 @@ class SubmitSpecDialog(context: Context): Dialog(context, R.style.AppTheme) {
         super.onCreate(savedInstanceState)
         val inflater = LayoutInflater.from(context)
         mBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_submit_spec, null, false)
-        mBinding.dialog = this
+        mBinding.apply {
+            dialog = this@SubmitSpecDialog
+            val text = addSpecText.text.toString()
+            val spannable = SpannableString(text).apply {
+                val blue = addSpecText.resources.getColor(R.color.spectrumBlue, null)
+                setSpan(ForegroundColorSpan(blue), 0, 6, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+            }
+            addSpecText.text = spannable
+        }
         setCanceledOnTouchOutside(false)
         window?.apply {
             setBackgroundDrawable(ColorDrawable())
@@ -48,6 +61,9 @@ class SubmitSpecDialog(context: Context): Dialog(context, R.style.AppTheme) {
         CoroutineScope(Dispatchers.Main).launch {
             retrofit.create(CompanyInfoApi::class.java).getMySpec().apply {
                 if (isSuccess) {
+                    mBinding.specView.visibility = View.VISIBLE
+                    mBinding.doneButton.visibility = View.VISIBLE
+                    mBinding.addSpecView.visibility = View.GONE
                     mBinding.yourSpecText.text = "${result.username} 님의 스펙"
                     mBinding.updateTimeText.text = "${result.updatedAt} 업데이트됨"
                     mBinding.userInfoChipGroup.apply {
@@ -75,10 +91,19 @@ class SubmitSpecDialog(context: Context): Dialog(context, R.style.AppTheme) {
                             }
                         }
                     }
-                    return@launch
+                }
+                else {
+                    mBinding.specView.visibility = View.GONE
+                    mBinding.doneButton.visibility = View.GONE
+                    mBinding.addSpecView.visibility = View.VISIBLE
                 }
             }
         }
+    }
+
+    fun addSpecButton() {
+        fragment.findNavController().navigate(R.id.company_info_to_create_spec)
+        dismiss()
     }
 
     fun doneButtonAction() {
