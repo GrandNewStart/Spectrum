@@ -6,14 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.FragmentCompanyInfoBinding
+import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.customs.BaseFragment
 
 class CompanyInfoFragment: BaseFragment() {
 
     lateinit var mBinding: FragmentCompanyInfoBinding
     val mViewModel by viewModels<CompanyInfoViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.apply {
+            mViewModel.mCompanyId = getInt("id")
+        }
+        if (mViewModel.mCompanyId == null) {
+            showToast(Constants.request_failed)
+            findNavController().popBackStack()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         mViewModel.view?.let { return it }

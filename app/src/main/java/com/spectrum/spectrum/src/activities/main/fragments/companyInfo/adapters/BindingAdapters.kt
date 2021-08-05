@@ -1,10 +1,17 @@
 package com.spectrum.spectrum.src.activities.main.fragments.companyInfo.adapters
 
+import android.annotation.SuppressLint
+import android.graphics.Typeface
+import android.os.Build
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.TypefaceSpan
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.text.toSpannable
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +19,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
+import com.spectrum.spectrum.src.activities.main.fragments.companyInfo.models.Company
 import com.spectrum.spectrum.src.config.Constants
 import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.customs.CircleView
@@ -20,15 +28,52 @@ import com.spectrum.spectrum.src.models.Spec
 
 object BindingAdapters {
 
-    @BindingAdapter("company_info_is_favorite")
+    @SuppressLint("SetTextI18n")
+    @BindingAdapter("company_info_company")
     @JvmStatic
-    fun bindFavoriteViews(view: View, isFavorite: Boolean) {
-        when(view.id) {
+    fun bindViews(view: View, company: Company?) {
+        when (view.id) {
             R.id.favorite_button -> {
-                (view as ImageButton).setImageResource(if (isFavorite) R.drawable.icon_heart_fill else R.drawable.icon_heart_empty)
+                (view as ImageButton).apply {
+                    setImageResource(if (company?.isMine == "Y") R.drawable.icon_heart_fill else R.drawable.icon_heart_empty)
+                }
+            }
+            R.id.name_text -> {
+                (view as TextView).apply {
+                    text = company?.name
+                }
             }
             R.id.favorite_image -> {
-                (view as ImageView).setImageResource(if (isFavorite) R.drawable.icon_favorite_selected else R.drawable.icon_favorite_unselected)
+                (view as ImageView).apply {
+                    setImageResource(if (company?.isMine == "Y") R.drawable.icon_favorite_selected else R.drawable.icon_favorite_unselected)
+                }
+            }
+            R.id.industry_text -> {
+                (view as TextView).apply {
+                    text = company?.industry
+                }
+            }
+            R.id.spec_count_text -> {
+                (view as TextView).apply {
+                    text = "${company?.specCount}${Constants.spec_count_suffix}"
+                }
+            }
+            R.id.blurring_view -> {
+                view.visibility = if (company?.isMine == "Y") View.GONE else View.VISIBLE
+            }
+            R.id.blurring_text -> {
+                (view as TextView).apply {
+                    visibility = if (company?.isMine == "Y") View.GONE else View.VISIBLE
+                    text.toSpannable().apply {
+                        val blue = resources.getColor(R.color.spectrumBlue, null)
+                        val font = Typeface.createFromAsset(resources.assets, "roboto_bold.ttf")
+                        setSpan(ForegroundColorSpan(blue), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            setSpan(TypefaceSpan(font), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        }
+                        text = this
+                    }
+                }
             }
         }
     }
@@ -60,7 +105,7 @@ object BindingAdapters {
         spec?.let {
             when(view.id) {
                 R.id.title_text -> {
-                    val t = "${it.userName} ${Constants.spec_of}"
+                    val t = "${it.userName}${Constants.spec_of}"
                     (view as TextView).text = t
                 }
                 R.id.update_time_text -> {

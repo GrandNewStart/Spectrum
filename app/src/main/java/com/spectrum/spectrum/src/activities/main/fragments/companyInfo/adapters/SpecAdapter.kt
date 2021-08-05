@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.ItemCompanyInfoSpecBinding
+import com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment
+import com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoFragment
 import com.spectrum.spectrum.src.config.Helpers.dp2px
 import com.spectrum.spectrum.src.models.Spec
 
@@ -48,7 +50,11 @@ class SpecAdapter(private val items: ArrayList<Spec>): RecyclerView.Adapter<Spec
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mBinding.spec = items[position]
-        mBinding.fragment = mRecyclerView?.findFragment()
+        mBinding.root.setOnClickListener {
+            mRecyclerView?.findFragment<CompanyInfoFragment>()?.apply {
+                mViewModel.proceedToSpec(items[position].id , this)
+            }
+        }
     }
 
     override fun getItemCount(): Int = items.size

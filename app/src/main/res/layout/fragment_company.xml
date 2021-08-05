@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="java.util.ArrayList"/>
-        <import type="com.spectrum.spectrum.src.models.Company"/>
-        <import type="com.spectrum.spectrum.src.models.Industry"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.company.models.Company"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.company.models.Industry"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment" />
@@ -103,8 +103,8 @@
                     android:scrollbars="none">
 
                     <com.google.android.material.chip.ChipGroup
-                        company_industry_chips="@{industries}"
                         company_fragment="@{fragment}"
+                        company_industry_chips="@{industries}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -129,51 +129,32 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="24dp"-->
-<!--                        android:layout_marginTop="28dp"-->
-<!--                        android:layout_marginEnd="16dp"-->
-<!--                        android:orientation="horizontal"-->
-<!--                        android:gravity="center_vertical"-->
-<!--                        app:layout_constraintEnd_toEndOf="parent"-->
-<!--                        app:layout_constraintTop_toTopOf="parent" >-->
-
-<!--                        <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="@string/see_more"-->
-<!--                            android:textSize="12sp"-->
-<!--                            android:textColor="@color/spectrumGray1"-->
-<!--                            android:fontFamily="@font/roboto_medium"/>-->
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="24dp"-->
-<!--                            android:layout_height="24dp"-->
-<!--                            android:src="@drawable/icon_chevron_right"-->
-<!--                            app:tint="@color/spectrumSilver3" />-->
-
-<!--                    </LinearLayout>-->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/see_more_button"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:layout_marginTop="28dp"
-                        android:background="@color/clear"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp"
-                        android:padding="0dp"
-                        android:text="@string/see_more"
-                        android:textColor="@color/spectrumGray1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textSize="12sp"
-                        app:icon="@drawable/icon_chevron_right"
-                        app:iconGravity="textEnd"
-                        app:iconPadding="0dp"
-                        app:iconSize="24dp"
-                        app:iconTint="@color/spectrumSilver3"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center_vertical"
+                        android:onClick="@{()->viewModel.seeAllButtonAction(fragment)}"
+                        android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/see_more"
+                            android:textSize="12sp"
+                            android:textColor="@color/spectrumGray1"
+                            android:fontFamily="@font/roboto_medium"/>
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/icon_chevron_right"
+                            app:tint="@color/spectrumSilver3" />
+
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/my_interest_recycler_view"

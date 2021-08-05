@@ -16,7 +16,7 @@ interface HomeApi {
 
     @GET("/app/home/{page}")
     suspend fun getHomePage(@Path("page") page: Int,
-                            @Query("filter1") jobGroup1: Int,
-                            @Query("filter2") jobGroup2: Int): PageResponse
+                            @Query("filter1") jobGroup1: Int? = null,
+                            @Query("filter2") jobGroup2: Int? = null): PageResponse
 
 }

@@ -14,8 +14,9 @@ import com.google.android.material.chip.ChipGroup
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.src.activities.main.MainActivity
 import com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment
-import com.spectrum.spectrum.src.models.Company
-import com.spectrum.spectrum.src.models.Industry
+import com.spectrum.spectrum.src.activities.main.fragments.company.models.Company
+import com.spectrum.spectrum.src.activities.main.fragments.company.models.Industry
+import com.spectrum.spectrum.src.config.Constants
 
 object BindingAdapters {
 
@@ -84,14 +85,16 @@ object BindingAdapters {
         }
     }
 
-    @BindingAdapter("company_industry_chips", "company_fragment", requireAll = true)
+    @BindingAdapter("company_industry_chips", "company_fragment")
     @JvmStatic
-    fun bindIndustryChipGroup(chipGroup: ChipGroup, items: ArrayList<Industry>?, fragment: CompanyFragment) {
+    fun bindIndustryChipGroup(chipGroup: ChipGroup,
+                              items: ArrayList<Industry>?,
+                              fragment: CompanyFragment) {
         chipGroup.apply {
             removeAllViews()
             items?.forEach { industry ->
                 Chip(context).apply {
-                    text = industry.name
+                    text = industry.data
                     isClickable = true
                     setEnsureMinTouchTargetSize(false)
                     setTextAppearance(R.style.ChipTextBig)

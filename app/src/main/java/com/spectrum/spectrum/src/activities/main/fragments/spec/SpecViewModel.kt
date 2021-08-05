@@ -27,7 +27,7 @@ class SpecViewModel: ViewModel() {
             val exp = Experience("무슨 기업", "IT/인터넷", "사원", "0000.00.00", "0000.00.00")
             val experiences = arrayListOf(exp, exp, exp)
             val licences = arrayListOf(License("무슨 시험", "무슨 등급"), License("무슨 시험", "무슨 등급"))
-            mSpec = Spec("",
+            mSpec = Spec(0,
                 "https://lh3.googleusercontent.com/a-/AOh14Gh3kcrod_xVhGf7kUci563N0l7mAcWJv1EeBigXng=s288-p-rw-no",
                 "스펙킹",
                 "07/22 07:30에 업데이트 됨",

@@ -31,6 +31,7 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
                 responseCountText.text = "0"
                 markCountText.text = "0"
                 chipGroup.apply {
+                    removeAllViews()
                     Chip(context).apply {
                         text = post.jobStatus
                         setEnsureMinTouchTargetSize(false)
@@ -114,6 +115,13 @@ class PostAdapter(private val items: ArrayList<Post>): RecyclerView.Adapter<Post
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun addNewItems(newItems: ArrayList<Post>) {
+        newItems.forEach {
+            items.add(it)
+            notifyItemInserted(items.size - 1)
+        }
+    }
 
     fun proceedToPost(fragment: MyPostFragment, post: Post) {
         fragment.findNavController().navigate(R.id.my_post_to_post, bundleOf("id" to post.id))

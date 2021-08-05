@@ -66,11 +66,7 @@ object BindingAdapters {
     fun bindHottestPosts(recyclerView: RecyclerView, posts: ArrayList<Post>?) {
         val items = posts ?: return
         recyclerView.apply {
-            if (adapter == null) {
-                adapter = PostAdapter(items, PostAdapter.HORIZONTAL)
-                return@apply
-            }
-            adapter?.notifyDataSetChanged()
+            adapter = PostAdapter(items, PostAdapter.HORIZONTAL)
         }
     }
 
@@ -79,11 +75,7 @@ object BindingAdapters {
     fun bindLatestPosts(recyclerView: RecyclerView, posts: ArrayList<Post>?) {
         val items = posts ?: return
         recyclerView.apply {
-            if (adapter == null) {
-                adapter = PostAdapter(items, PostAdapter.VERTICAL)
-                return@apply
-            }
-            adapter?.notifyDataSetChanged()
+            adapter = PostAdapter(items, PostAdapter.VERTICAL)
         }
     }
 

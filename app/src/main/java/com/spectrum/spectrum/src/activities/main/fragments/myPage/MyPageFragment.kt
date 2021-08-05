@@ -27,7 +27,7 @@ class MyPageFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-
+            getUserInfo(this@MyPageFragment)
         }
         return mBinding.root
     }

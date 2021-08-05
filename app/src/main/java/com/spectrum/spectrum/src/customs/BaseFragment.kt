@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -35,6 +37,20 @@ open class BaseFragment: Fragment() {
         super.onCreate(savedInstanceState)
         TAG = javaClass.simpleName
         Log.d(TAG, "=== $TAG CREATED ===")
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(TAG, "=== $TAG VIEW CREATED ===")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        Log.d(TAG, "=== $TAG VIEW DESTROYED ===")
+        super.onDestroyView()
     }
 
     override fun onDestroy() {

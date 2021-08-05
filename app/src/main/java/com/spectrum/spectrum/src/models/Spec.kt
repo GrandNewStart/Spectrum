@@ -1,7 +1,7 @@
 package com.spectrum.spectrum.src.models
 
 data class Spec(
-    var id: String,
+    var id: Int,
     var userImage: String,
     var userName: String,
     var update: String,

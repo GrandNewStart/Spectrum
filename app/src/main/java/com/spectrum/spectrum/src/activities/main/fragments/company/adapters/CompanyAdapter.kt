@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
@@ -17,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.spectrum.spectrum.R
 import com.spectrum.spectrum.databinding.ItemCompanyCompanyBinding
 import com.spectrum.spectrum.src.activities.main.fragments.company.CompanyFragment
+import com.spectrum.spectrum.src.activities.main.fragments.company.models.Company
 import com.spectrum.spectrum.src.config.Constants.SCREEN_WIDTH
 import com.spectrum.spectrum.src.config.Helpers
-import com.spectrum.spectrum.src.models.Company
 
 class CompanyAdapter(private val items: ArrayList<Company>, private val dir: Int = 0): RecyclerView.Adapter<CompanyAdapter.ViewHolder>() {
 
@@ -35,6 +36,7 @@ class CompanyAdapter(private val items: ArrayList<Company>, private val dir: Int
             if (dir == HORIZONTAL) {
                 if (layoutManager == null) {
                     layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
+                    PagerSnapHelper().attachToRecyclerView(this)
                 }
                 if (itemDecorationCount == 0) {
                     addItemDecoration(object : RecyclerView.ItemDecoration() {
@@ -48,7 +50,6 @@ class CompanyAdapter(private val items: ArrayList<Company>, private val dir: Int
                         }
                     })
                 }
-                PagerSnapHelper().attachToRecyclerView(this)
             }
             if (dir == VERTICAL) {
                 if (layoutManager == null) {
@@ -85,16 +86,21 @@ class CompanyAdapter(private val items: ArrayList<Company>, private val dir: Int
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         mBinding.apply {
-            items[position].let {
-                titleText.text = it.name
-                groupText.text = it.group
-                val countText = it.specCount.toString()
+            items[position].let { company ->
+                titleText.text = company.name
+                groupText.text = company.industry
+                val countText = company.specCount.toString()
                 val countTextWithSuffix = "${countText}개의 스펙"
                 val spannable = SpannableString(countTextWithSuffix).apply {
                     val blue = specCountText.resources.getColor(R.color.spectrumBlue, null)
                     setSpan(ForegroundColorSpan(blue), 0, countText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
                 }
                 specCountText.text = spannable
+                root.setOnClickListener {
+                    recyclerView?.findFragment<CompanyFragment>()?.apply {
+                        findNavController().navigate(R.id.company_to_company_info, bundleOf("id" to company.id))
+                    }
+                }
             }
         }
     }
@@ -105,13 +111,6 @@ class CompanyAdapter(private val items: ArrayList<Company>, private val dir: Int
         newItems.forEach {
             items.add(it)
             notifyItemInserted(items.size-1)
-        }
-    }
-
-    fun proceedToCompanyInfo() {
-        val fragment = recyclerView?.findFragment<CompanyFragment>()
-        fragment?.apply {
-            findNavController().navigate(R.id.company_to_company_info)
         }
     }
 

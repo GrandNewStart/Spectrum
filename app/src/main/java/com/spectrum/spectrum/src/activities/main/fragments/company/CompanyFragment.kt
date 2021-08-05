@@ -27,7 +27,7 @@ class CompanyFragment: BaseFragment() {
             viewModel = mViewModel
         }
         mViewModel.apply {
-            bindViews(mBinding)
+            bindViews(this@CompanyFragment)
         }
         return mBinding.root
     }

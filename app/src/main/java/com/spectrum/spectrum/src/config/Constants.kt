@@ -52,6 +52,7 @@ object Constants {
     const val free_reviews_hint = "자유롭게 취업 후기를 적어주세요"
     const val spec_of = "님의 스펙"
     const val spec_updated = "스펙이 등록되었습니다"
+    const val spec_withdrawn = "스펙등록이 취소되었습니다"
     const val post_uploaded = "게시글이 등록되었습니다"
     const val select_your_job_status = "종류를 선택해주세요"
     const val select_category = "주제를 선택해주세요"
@@ -77,5 +78,7 @@ object Constants {
     const val edit_comment = "의견 수정하기"
     const val no_entry = "없음"
     const val company_info = "기업정보"
+    const val all = "전체"
+    const val spec_count_suffix = "개의 스펙트럼이 쌓여있습니다"
 
 }

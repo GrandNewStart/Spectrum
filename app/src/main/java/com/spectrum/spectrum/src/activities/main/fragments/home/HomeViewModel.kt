@@ -137,49 +137,23 @@ class HomeViewModel: ViewModel() {
         mIsLoading = true
 
         viewModelScope.launch {
-            mJobGroup1?.let { first -> mJobGroup2?.let { second ->
-                mService.getHomePage(mPage, first.id, second.id).apply {
-                    fragment.showProgressDialog(false)
-                    mIsLoading = false
-                    if (isSuccess) {
-                        Log.d(TAG, "---> HOME PAGE LOAD(${first.id},${second.id}) SUCCESS($mPage)")
-                        mPage++
-                        mDataEnded = result.isEmpty()
-                        (fragment.mBinding.latestRecyclerView.adapter as PostAdapter).addItems(result)
-                        return@launch
-                    }
-                    Log.d(TAG, "---> HOME PAGE LOAD(${first.id},${second.id}) FAILURE: $message")
-                    fragment.showToast(request_failed)
-                    return@launch
-                }
-            }}
-            mJobGroup1?.let { first ->
-                mService.getHomePage(mPage, first.id).apply {
-                    fragment.showProgressDialog(false)
-                    mIsLoading = false
-                    if (isSuccess) {
-                        Log.d(TAG, "---> HOME PAGE LOAD(${first.id}) SUCCESS($mPage)")
-                        mPage++
-                        mDataEnded = result.isEmpty()
-                        (fragment.mBinding.latestRecyclerView.adapter as PostAdapter).addItems(result)
-                        return@launch
-                    }
-                    Log.d(TAG, "---> HOME PAGE LOAD(${first.id}) FAILURE: $message")
-                    fragment.showToast(request_failed)
-                    return@launch
-                }
-            }
-            mService.getHomePage(mPage).apply {
+            val filter1 = mJobGroup1?.id
+            val filter2 = mJobGroup2?.id
+            mService.getHomePage(mPage, filter1, filter2).apply {
                 fragment.showProgressDialog(false)
                 mIsLoading = false
                 if (isSuccess) {
-                    Log.d(TAG, "---> HOME PAGE LOAD SUCCESS($mPage)")
+                    Log.d(TAG, "---> HOME PAGE LOAD($filter1,$filter2) SUCCESS($mPage)")
+                    if (result.isEmpty()) {
+                        mDataEnded = true
+                        return@launch
+                    }
                     mPage++
-                    mDataEnded = result.isEmpty()
+                    result.forEach { mLatestPosts.add(it) }
                     (fragment.mBinding.latestRecyclerView.adapter as PostAdapter).addItems(result)
                     return@launch
                 }
-                Log.d(TAG, "---> HOME PAGE LOAD FAILURE: $message")
+                Log.d(TAG, "---> HOME PAGE LOAD($filter1,$filter2) FAILURE: $message")
                 fragment.showToast(request_failed)
                 return@launch
             }

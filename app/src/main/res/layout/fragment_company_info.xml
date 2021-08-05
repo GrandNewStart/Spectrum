@@ -7,6 +7,7 @@
         <import type="java.util.ArrayList"/>
         <import type="com.spectrum.spectrum.src.models.Spec"/>
         <import type="com.spectrum.spectrum.src.models.Analysis"/>
+        <import type="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.models.Company"/>
         <variable
             name="fragment"
             type="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoFragment" />
@@ -14,11 +15,8 @@
             name="viewModel"
             type="com.spectrum.spectrum.src.activities.main.fragments.companyInfo.CompanyInfoViewModel" />
         <variable
-            name="companyName"
-            type="String" />
-        <variable
-            name="isFavorite"
-            type="Boolean" />
+            name="company"
+            type="Company" />
         <variable
             name="analysis1"
             type="Analysis" />
@@ -66,7 +64,7 @@
 
         <ImageButton
             android:id="@+id/favorite_button"
-            company_info_is_favorite="@{isFavorite}"
+            company_info_company="@{company}"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="16dp"
@@ -79,7 +77,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_view"
-            company_info_company_name="@{companyName}"
+            company_info_company_name="@{company.name}"
             company_info_title_text="@{titleText}"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -104,6 +102,7 @@
 
                     <TextView
                         android:id="@+id/name_text"
+                        company_info_company="@{company}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
@@ -115,9 +114,10 @@
 
                     <TextView
                         android:id="@+id/industry_text"
+                        company_info_company="@{company}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="4dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="IT/정보통신업"
                         android:textColor="#666970"
@@ -127,6 +127,7 @@
 
                     <TextView
                         android:id="@+id/spec_count_text"
+                        company_info_company="@{company}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
@@ -139,7 +140,8 @@
 
                     <ImageView
                         android:id="@+id/favorite_image"
-                        company_info_is_favorite="@{isFavorite}"
+                        android:onClick="@{()->viewModel.favoriteButtonAction(fragment)}"
+                        company_info_company="@{company}"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginVertical="4dp"
@@ -148,7 +150,8 @@
                         app:layout_constraintBottom_toBottomOf="@+id/name_text"
                         app:layout_constraintDimensionRatio="15:4"
                         app:layout_constraintStart_toEndOf="@+id/name_text"
-                        app:layout_constraintTop_toTopOf="@+id/name_text" />
+                        app:layout_constraintTop_toTopOf="@+id/name_text"
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -186,66 +189,67 @@
                             android:layout_height="0dp"
                             app:layout_constraintDimensionRatio="1:1"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/analysis_text">
 
-<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
-<!--                                android:id="@+id/circle_1"-->
-<!--                                company_info_analysis="@{analysis1}"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginEnd="8dp"-->
-<!--                                android:layout_marginBottom="8dp"-->
-<!--                                app:layout_constraintBottom_toTopOf="@+id/h_guide"-->
-<!--                                app:layout_constraintDimensionRatio="1:1"-->
-<!--                                app:layout_constraintEnd_toStartOf="@+id/v_guide" />-->
+                            <!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+                            <!--                                android:id="@+id/circle_1"-->
+                            <!--                                company_info_analysis="@{analysis1}"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginEnd="8dp"-->
+                            <!--                                android:layout_marginBottom="8dp"-->
+                            <!--                                app:layout_constraintBottom_toTopOf="@+id/h_guide"-->
+                            <!--                                app:layout_constraintDimensionRatio="1:1"-->
+                            <!--                                app:layout_constraintEnd_toStartOf="@+id/v_guide" />-->
 
-<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
-<!--                                android:id="@+id/circle_2"-->
-<!--                                company_info_analysis="@{analysis2}"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginStart="8dp"-->
-<!--                                android:layout_marginBottom="8dp"-->
-<!--                                app:layout_constraintBottom_toTopOf="@+id/h_guide"-->
-<!--                                app:layout_constraintDimensionRatio="1:1"-->
-<!--                                app:layout_constraintStart_toStartOf="@+id/v_guide" />-->
+                            <!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+                            <!--                                android:id="@+id/circle_2"-->
+                            <!--                                company_info_analysis="@{analysis2}"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginStart="8dp"-->
+                            <!--                                android:layout_marginBottom="8dp"-->
+                            <!--                                app:layout_constraintBottom_toTopOf="@+id/h_guide"-->
+                            <!--                                app:layout_constraintDimensionRatio="1:1"-->
+                            <!--                                app:layout_constraintStart_toStartOf="@+id/v_guide" />-->
 
-<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
-<!--                                android:id="@+id/circle_3"-->
-<!--                                company_info_analysis="@{analysis3}"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginTop="8dp"-->
-<!--                                android:layout_marginEnd="8dp"-->
-<!--                                app:layout_constraintDimensionRatio="1:1"-->
-<!--                                app:layout_constraintEnd_toStartOf="@+id/v_guide"-->
-<!--                                app:layout_constraintTop_toTopOf="@+id/h_guide" />-->
+                            <!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+                            <!--                                android:id="@+id/circle_3"-->
+                            <!--                                company_info_analysis="@{analysis3}"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="8dp"-->
+                            <!--                                android:layout_marginEnd="8dp"-->
+                            <!--                                app:layout_constraintDimensionRatio="1:1"-->
+                            <!--                                app:layout_constraintEnd_toStartOf="@+id/v_guide"-->
+                            <!--                                app:layout_constraintTop_toTopOf="@+id/h_guide" />-->
 
-<!--                            <com.spectrum.spectrum.src.customs.CircleView-->
-<!--                                android:id="@+id/circle_4"-->
-<!--                                company_info_analysis="@{analysis4}"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginStart="8dp"-->
-<!--                                android:layout_marginTop="8dp"-->
-<!--                                app:layout_constraintDimensionRatio="1:1"-->
-<!--                                app:layout_constraintStart_toStartOf="@+id/v_guide"-->
-<!--                                app:layout_constraintTop_toTopOf="@+id/h_guide" />-->
+                            <!--                            <com.spectrum.spectrum.src.customs.CircleView-->
+                            <!--                                android:id="@+id/circle_4"-->
+                            <!--                                company_info_analysis="@{analysis4}"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginStart="8dp"-->
+                            <!--                                android:layout_marginTop="8dp"-->
+                            <!--                                app:layout_constraintDimensionRatio="1:1"-->
+                            <!--                                app:layout_constraintStart_toStartOf="@+id/v_guide"-->
+                            <!--                                app:layout_constraintTop_toTopOf="@+id/h_guide" />-->
 
-<!--                            <androidx.constraintlayout.widget.Guideline-->
-<!--                                android:id="@+id/h_guide"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:orientation="horizontal"-->
-<!--                                app:layout_constraintGuide_percent="0.5" />-->
+                            <!--                            <androidx.constraintlayout.widget.Guideline-->
+                            <!--                                android:id="@+id/h_guide"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:orientation="horizontal"-->
+                            <!--                                app:layout_constraintGuide_percent="0.5" />-->
 
-<!--                            <androidx.constraintlayout.widget.Guideline-->
-<!--                                android:id="@+id/v_guide"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:orientation="vertical"-->
-<!--                                app:layout_constraintGuide_percent="0.5" />-->
+                            <!--                            <androidx.constraintlayout.widget.Guideline-->
+                            <!--                                android:id="@+id/v_guide"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:orientation="vertical"-->
+                            <!--                                app:layout_constraintGuide_percent="0.5" />-->
 
                             <TextView
                                 android:id="@+id/not_yet_text"
@@ -320,11 +324,11 @@
 
                     <com.github.mmin18.widget.RealtimeBlurView
                         android:id="@+id/blurring_view"
+                        company_info_company="@{company}"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:visibility="@{isFavorite ? View.GONE : View.VISIBLE}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -342,12 +346,12 @@
         <TextView
             android:id="@+id/blurring_text"
             style="@style/CustomTextView"
+            company_info_company="@{company}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:lineSpacingExtra="4dp"
             android:text="@string/add_to_interest_to_see_details"
-            android:visibility="@{isFavorite ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

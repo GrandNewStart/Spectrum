@@ -30,34 +30,42 @@ class PostAdapter(private val items: ArrayList<Post>, private val dir: Int = 0):
             mFragment = findFragment()
             mViewModel = mFragment.mViewModel
             if (dir == HORIZONTAL) {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        val pos = parent.getChildAdapterPosition(view)
-                        outRect.left = if (pos == 0) dp2px(15) else dp2px(24)
-                        outRect.top = dp2px(12)
-                        outRect.bottom = dp2px(16)
-                        items.let {
-                            if (pos == it.size-1) { outRect.right = dp2px(24) }
+                if (layoutManager == null) {
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    PagerSnapHelper().attachToRecyclerView(recyclerView)
+                }
+                if (itemDecorationCount == 0) {
+                    addItemDecoration(object : RecyclerView.ItemDecoration() {
+                        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                            super.getItemOffsets(outRect, view, parent, state)
+                            val pos = parent.getChildAdapterPosition(view)
+                            outRect.left = if (pos == 0) dp2px(15) else dp2px(24)
+                            outRect.top = dp2px(12)
+                            outRect.bottom = dp2px(16)
+                            items.let {
+                                if (pos == it.size-1) { outRect.right = dp2px(24) }
+                            }
                         }
-                    }
-                })
-                PagerSnapHelper().attachToRecyclerView(recyclerView)
+                    })
+                }
             }
             if (dir == VERTICAL) {
-                layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
-                addItemDecoration(object : RecyclerView.ItemDecoration() {
-                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                        super.getItemOffsets(outRect, view, parent, state)
-                        val vSpacing = dp2px(12)
-                        val hSpacing = dp2px(16)
-                        outRect.top = vSpacing
-                        outRect.bottom = vSpacing
-                        outRect.left = hSpacing
-                        outRect.right = hSpacing
-                    }
-                })
+                if (layoutManager == null) {
+                    layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.VERTICAL, false)
+                }
+                if (itemDecorationCount == 0) {
+                    addItemDecoration(object : RecyclerView.ItemDecoration() {
+                        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                            super.getItemOffsets(outRect, view, parent, state)
+                            val vSpacing = dp2px(12)
+                            val hSpacing = dp2px(16)
+                            outRect.top = vSpacing
+                            outRect.bottom = vSpacing
+                            outRect.left = hSpacing
+                            outRect.right = hSpacing
+                        }
+                    })
+                }
             }
         }
     }
